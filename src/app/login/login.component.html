@@ -1,0 +1,41 @@
+<div class="wrapper">
+    <img src="../../assets/image/wave.png" alt="" class="wave">
+    <!-- <a href="">link</a> -->
+    <div class="container">
+        <div class="image-phone">
+            <img src="../../assets/image/image_phone.svg" alt="">
+        </div>
+        <div class="form-login">
+            <div class="header">
+                <img src="../../assets/image/avatar.svg" alt="" class="avatar">
+                <h2>Welcome</h2>
+            </div>
+            <div class="content-form">
+                <form action="" (submit)="onSubmit(formLogin)" #formLogin="ngForm">
+                    <div class="input-account">
+                        <div class="input-data username ">
+                            <div class="icon icon-user">
+                                <i class="fa fa-user" aria-hidden="true"></i>
+                            </div>
+                            <div class="content">
+                                <h5>Username</h5>
+                                <input class="input" type="text" name="username" ngModel id="username">
+                            </div>
+                        </div>
+                        <div class="input-data password">
+                            <div class="icon icon-password">
+                                <i class="fa fa-lock" aria-hidden="true"></i>
+                            </div>
+                            <div class="content">
+                                <h5>Password</h5>
+                                <input class="input" type="password" name="password" ngModel>
+                            </div>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn-login" value="login">Login</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- <script src="../../assets/js/login.js"></script> -->

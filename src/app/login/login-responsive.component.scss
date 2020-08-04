@@ -1,0 +1,35 @@
+@media screen and (max-width: 1050px) {
+    .container {
+        grid-gap: 5em;
+    }
+}
+
+@media screen and (max-width: 1000px) {
+    .form-login {
+        width: 290px;
+        h2 {
+            font-size: 2.4em;
+            margin: 8px 0;
+        }
+    }
+    .image-phone {
+        img {
+            width: 400px !important;
+        }
+    }
+}
+
+@media screen and (max-width: 900px) {
+    .image-phone {
+        display: none !important;
+    }
+    .container {
+        grid-template-columns: 1fr;
+    }
+    .wave {
+        display: none;
+    }
+    .form-login {
+        justify-content: center !important;
+    }
+}
