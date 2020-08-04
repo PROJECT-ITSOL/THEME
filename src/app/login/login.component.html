@@ -11,7 +11,7 @@
                 <h2>Welcome</h2>
             </div>
             <div class="content-form">
-                <form action="">
+                <form action="" (submit)="onSubmit(formLogin)" #formLogin="ngForm">
                     <div class="input-account">
                         <div class="input-data username ">
                             <div class="icon icon-user">

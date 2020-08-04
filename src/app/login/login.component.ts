@@ -30,4 +30,8 @@ export class LoginComponent implements OnInit {
       });
     });
   }
+  onSubmit(event){
+    console.log(event);
+
+  }
 }
