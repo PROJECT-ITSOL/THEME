@@ -4,8 +4,9 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 const routes: Routes = [
-  {path:'loginAdmin',component:LoginComponent},
-  {path:'', redirectTo:'/loginAdmin',pathMatch:'full'}
+  {path:'loginAdmin',component:LoginComponent,canActivate:[]},
+  {path:'', redirectTo:'/loginAdmin',pathMatch:'full'},
+  {path:'homeAdmin',component: HomeComponent}
   // {path:'/admin/home',component:HomeComponent}
 ];
 

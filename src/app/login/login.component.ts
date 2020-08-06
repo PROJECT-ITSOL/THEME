@@ -1,4 +1,6 @@
+import { AuthenticationService } from './../service/authentication.service';
 import { Component, OnInit, Input } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -6,7 +8,10 @@ import { Component, OnInit, Input } from '@angular/core';
   styleUrls: ['./login.component.scss', './login-responsive.component.scss'],
 })
 export class LoginComponent implements OnInit {
-  constructor() {}
+  constructor(
+    private router: Router,
+    private loginService: AuthenticationService
+  ) {}
 
   ngOnInit(): void {
     this.eventInput();
@@ -31,7 +36,21 @@ export class LoginComponent implements OnInit {
     });
   }
   onSubmit(event){
-    console.log(event);
-
+    const username = event.value.username;
+    const password = event.value.password;
+    
+    // this.loginService.authenticate(username,password).toPromise()
+    // .then(res=>{
+    //   if(res!=null){
+    //     this.router.navigate(['/homeAdmin']);;
+    //   }else{
+    //     console.log('false');
+    //   }
+    // })
+    if(username === "abc" && password === "123"){
+      this.router.navigate(['/homeAdmin'])
+    }
   }
+
+  // check
 }
