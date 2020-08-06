@@ -1,3 +1,4 @@
+import { AuthenticationService } from './../service/authentication.service';
 import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
@@ -6,7 +7,10 @@ import { Component, OnInit, Input } from '@angular/core';
   styleUrls: ['./login.component.scss', './login-responsive.component.scss'],
 })
 export class LoginComponent implements OnInit {
-  constructor() {}
+
+  authReq:any;
+
+  constructor(private service: AuthenticationService) {}
 
   ngOnInit(): void {
     this.eventInput();
@@ -31,7 +35,15 @@ export class LoginComponent implements OnInit {
     });
   }
   onSubmit(event){
-    console.log(event);
+    this.authReq={
+      "username": event.value.username,
+      "password": event.value.password
+    }
+
+    let resToken = this.service.generateToken(this.authReq);
+    resToken.subscribe(data =>{
+      console.log(data);
+    })
 
   }
 }
