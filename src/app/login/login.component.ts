@@ -45,17 +45,17 @@ export class LoginComponent implements OnInit {
       "password": event.value.password
     }
 
-    let resToken = this.service.generateToken(this.authReq);
-    resToken.subscribe(data =>{
-      // localStorage.setItem("token",data | JsonPipe);
+    this.service.generateToken(this.authReq)
+    .toPromise()
+    .then(res=>{
+      localStorage.setItem("token",res.toString().substring(8,(res.toString().length-2)));
       this.router.navigate(['/homeAdmin']);
     })
-
   }
 
-  // accessAPI(token){
-  //   let response=this.service.welcomeToHome(token);
-  //   response.subscribe(data=>this.res=data);
-  // }
+  accessAPI(){
+    // let response=localStorage.getItem("token");
+    // this.service.isLoggedIn()
+  }
 
 }
