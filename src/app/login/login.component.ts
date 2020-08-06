@@ -1,6 +1,7 @@
 import { AuthenticationService } from './../service/authentication.service';
 import { Component, OnInit, Input } from '@angular/core';
 import { Router } from '@angular/router';
+import { JsonPipe } from '@angular/common';
 
 @Component({
   selector: 'app-login',
@@ -10,8 +11,10 @@ import { Router } from '@angular/router';
 export class LoginComponent implements OnInit {
 
   authReq:any;
+  res: any;
 
-  constructor(private service: AuthenticationService) {}
+  constructor(private service: AuthenticationService,
+    private router: Router) {}
 
   ngOnInit(): void {
     this.eventInput();
@@ -35,6 +38,7 @@ export class LoginComponent implements OnInit {
       });
     });
   }
+
   onSubmit(event){
     this.authReq={
       "username": event.value.username,
@@ -43,10 +47,15 @@ export class LoginComponent implements OnInit {
 
     let resToken = this.service.generateToken(this.authReq);
     resToken.subscribe(data =>{
-      console.log(data);
+      // localStorage.setItem("token",data | JsonPipe);
+      this.router.navigate(['/homeAdmin']);
     })
 
   }
 
-  // check
+  // accessAPI(token){
+  //   let response=this.service.welcomeToHome(token);
+  //   response.subscribe(data=>this.res=data);
+  // }
+
 }

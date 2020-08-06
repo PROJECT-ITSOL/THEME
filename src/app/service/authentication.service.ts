@@ -28,10 +28,9 @@ export class AuthenticationService {
     return this.http.post("http://localhost:8080/authenticate",req,{responseType: 'text' as 'json'});
   }
 
-  welcomeToHome(token){
-    let tokenStr = 'Bearer '+ token;
-    const headers= new HttpHeaders().set('Authorization',tokenStr);
-    return this.http.get("http://localhost:8080/",{headers,responseType: 'text' as 'json'});
-
-  }
+  // welcomeToHome(token){
+  //   let tokenStr = 'Bearer '+ token;
+  //   const headers= new HttpHeaders().set('Authorization',tokenStr);
+  //   return this.http.get("http://localhost:8080",{headers,responseType: 'text' as 'json'});
+  // }
 }
