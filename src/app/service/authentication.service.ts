@@ -24,6 +24,7 @@ export class AuthenticationService {
   isLoggedIn():boolean{
     const token=localStorage.getItem("token");
     let res=this.checkToken(token);
+    res.subscribe(data=>console.log(data))
     if(res.subscribe(data=>data.toString()==="success")){
       return true;
     }else{
