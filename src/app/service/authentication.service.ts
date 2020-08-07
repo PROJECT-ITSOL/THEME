@@ -7,17 +7,10 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 })
 export class AuthenticationService {
 
-  expiresAt: number;
-  userProfile: any;
-  accessToken: string;
-  authenticated: boolean;
 
+  checkAuth: string;
   constructor(private http: HttpClient) { }
 
-  // authenticate(username: string, password: string){
-  //   const url="http://localhost:8080/api/admin/" + username + "/" + password;
-  //   return this.http.get(url);
-  // }
   logout(){
     
   }
@@ -27,12 +20,21 @@ export class AuthenticationService {
   generateToken(req){
     return this.http.post("http://localhost:8080/authenticate",req,{responseType: 'text' as 'json'});
   }
+
   isLoggedIn():boolean{
     const token=localStorage.getItem("token");
-    if(token != null){
+    let res=this.checkToken(token);
+    if(res.subscribe(data=>data.toString()==="success")){
       return true;
     }else{
       return false;
     }
+  }
+
+  checkToken(token){
+    const url = "http://localhost:8080";
+    let tokenStr = "Bearer " + token;
+    const headers = new HttpHeaders().set("Authorization",tokenStr)
+    return this.http.get(url,{headers,responseType:'text' as 'json'})  
   }
 }
