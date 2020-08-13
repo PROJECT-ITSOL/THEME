@@ -92,6 +92,11 @@ a {
                 .menu-order {
                     display: none;
                     padding-left: 10px;
+                    // li {
+                    //     a {
+                    //         padding-left: 0 !important;
+                    //     }
+                    // }
                 }
                 &.active>ul {
                     display: block;

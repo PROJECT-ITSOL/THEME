@@ -1,3 +1,4 @@
+import { ProductImportComponent } from './order/product-import/product-import.component';
 import { StatisticalComponent } from './statistical/statistical.component';
 import { CommentComponent } from './comment/comment.component';
 import { CategoryComponent } from './category/category.component';
@@ -16,7 +17,6 @@ import { ProductOrderComponent } from './order/product-order/product-order.compo
 const routes: Routes = [
   { path: 'loginAdmin', component: LoginComponent },
   { path: '', redirectTo: '/loginAdmin', pathMatch: 'full' },
-  // {path:'homeAdmin',component: HomeComponent}
   {
     path: 'homeAdmin',
     component: HomeComponent,
@@ -28,11 +28,10 @@ const routes: Routes = [
       { path: 'product', component: ProductComponent },
       {
         path: 'order',
-        component: OrderComponent,
         children: [
           { path: '', redirectTo: 'list-order', pathMatch: 'full' },
           { path: 'list-order', component: ProductOrderComponent },
-          { path: 'product-import', component: ProductOrderComponent },
+          { path: 'product-import', component: ProductImportComponent },
           { path: 'product-return', component: ProductReturnComponent },
         ],
       },
@@ -41,7 +40,6 @@ const routes: Routes = [
       { path: 'statistical', component: StatisticalComponent}, 
     ],
   },
-  // {path:'/admin/home',component:HomeComponent}
 ];
 
 @NgModule({

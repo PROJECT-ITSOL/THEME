@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -9,7 +10,7 @@ export class HomeComponent implements OnInit {
   isSubMenu = false;
 
   isShowLogout = false;
-  constructor() {}
+  constructor(private router: Router) {}
 
   ngOnInit(): void {}
 
@@ -19,5 +20,9 @@ export class HomeComponent implements OnInit {
 
   showLogout() {
     this.isShowLogout = !this.isShowLogout;
+  }
+  logout(){
+    this.router.navigate(['/loginAdmin']);
+    localStorage.removeItem("token");
   }
 }

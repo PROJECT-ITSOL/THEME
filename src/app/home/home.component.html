@@ -27,47 +27,47 @@
                             <span>Sản phẩm</span>
                         </a>
                     </li>
-                    <li class="sub-menu" [ngClass]="{active:isSubMenu}" (click)="showMenuDrop()">
-                        <a class="order" routerLink="/homeAdmin/order" routerLinkActive="active">
-                            <i class="nav-icon fab fa-opencart" aria-hidden="true"></i>
+                    <li class="sub-menu" [ngClass]="{active:isSubMenu}">
+                        <a class="order " routerLink="/homeAdmin/order" routerLinkActive="active" (click)="showMenuDrop() ">
+                            <i class="nav-icon fab fa-opencart " aria-hidden="true "></i>
                             <span>đơn hàng</span>
                         </a>
-                        <ul class="menu menu-order" id="order">
+                        <ul class="menu menu-order " id="order ">
                             <li>
-                                <a routerLink="/homeAdmin/order/list-order">
-                                    <i class="nav-icon fas fa-box"></i>
+                                <a routerLink="/homeAdmin/order/list-order" routerLinkActive="active">
+                                    <i class="nav-icon fas fa-box "></i>
                                     <span>đơn đặt hàng</span>
                                 </a>
                             </li>
                             <li>
-                                <a routerLink="/homeAdmin/order/product-import">
-                                    <i class="nav-icon fab fa-accusoft"></i>
+                                <a routerLink="/homeAdmin/order/product-import" routerLinkActive="active">
+                                    <i class="nav-icon fab fa-accusoft "></i>
                                     <span>đơn nhập hàng</span>
                                 </a>
                             </li>
                             <li>
-                                <a routerLink="/homeAdmin/order/product-return">
-                                    <i class="nav-icon fas fa-exchange-alt"></i>
+                                <a routerLink="/homeAdmin/order/product-return" routerLinkActive="active">
+                                    <i class="nav-icon fas fa-exchange-alt "></i>
                                     <span>hàng trả về</span>
                                 </a>
                             </li>
                         </ul>
                     </li>
                     <li>
-                        <a routerLink="/homeAdmin/category" routerLinkActive="active">
-                            <i class="nav-icon fab fa-atlassian" aria-hidden="true"></i>
+                        <a routerLink="/homeAdmin/category" routerLinkActive="active ">
+                            <i class="nav-icon fab fa-atlassian " aria-hidden="true "></i>
                             <span>loại sản phẩm</span>
                         </a>
                     </li>
                     <li>
                         <a routerLink="/homeAdmin/comment" routerLinkActive="active">
-                            <i class="nav-icon fas fa-comments" aria-hidden="true"></i>
+                            <i class="nav-icon fas fa-comments " aria-hidden="true"></i>
                             <span>Comment</span>
                         </a>
                     </li>
                     <li>
                         <a routerLink="/homeAdmin/statistical" routerLinkActive="active">
-                            <i class="nav-icon fa fa-th" aria-hidden="true"></i>
+                            <i class="nav-icon fa fa-th " aria-hidden="true "></i>
                             <span>Thống kê</span>
                         </a>
                     </li>
@@ -76,32 +76,32 @@
             </nav>
         </div>
     </div>
-    <div class="col col-80 header-page">
-        <div class="header">
-            <div class="tools">
-                <div class="icon-bar">
-                    <i class="fas fa-bars"></i>
+    <div class="col col-80 header-page ">
+        <div class="header ">
+            <div class="tools ">
+                <div class="icon-bar ">
+                    <i class="fas fa-bars "></i>
                 </div>
-                <div class="search">
+                <div class="search ">
                     <form action="" #formSearch="ngForm" class="form-search">
-                        <input type="search" name="search" #search ngModel placeholder="Tìm kiếm...">
-                        <button class="icon-search">
-                            <i class="fas fa-search"></i>
+                        <input type="search " name="search " #search ngModel placeholder="Tìm kiếm... ">
+                        <button class="icon-search ">
+                            <i class="fas fa-search "></i>
                         </button>
                     </form>
                 </div>
 
             </div>
-            <div class="notify">
-                <div class="icon-admin" [ngClass]="{active:isShowLogout}" (click)="showLogout()">
-                    <img src="../../assets/image/avt.jpg" alt="">
-                    <div class="logout">
+            <div class="notify ">
+                <div class="icon-admin " [ngClass]="{active:isShowLogout}">
+                    <img src="../../assets/image/avt.jpg " alt="" (click)="showLogout()">
+                    <div class="logout" (click)="logout()">
                         <p>Đăng xuất</p>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="content-manager">
+        <div class="content-manager ">
             <router-outlet></router-outlet>
         </div>
     </div>
