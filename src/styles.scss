@@ -1,5 +1,41 @@
 /* You can add global styles to this file, and also import other style files */
 
 body {
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Josefin Sans', sans-serif !important;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.clearfix:after {
+    clear: both;
+    content: '';
+    display: block;
+}
+
+.col {
+    float: left;
+}
+
+.col-20 {
+    width: 20%;
+}
+
+.col-80 {
+    width: 80%;
+}
+
+div {
+    display: block;
+}
+
+a {
+    text-decoration: none !important;
+}
+
+.menu {
+    list-style: none;
 }

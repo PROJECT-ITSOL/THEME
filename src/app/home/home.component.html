@@ -1,108 +1,143 @@
-<div class="clearfix">
-    <div class="col col-20 navbar">
-        <div class="header">
-            <img src="../../assets/image/logo-icon.png" alt="">
-            <span>Admin</span>
-
+<input type="checkbox" id="check" class="checkbox">
+<div class="navbar-header">
+    <div class="logo w-25 float-left">
+        <img src="../../assets/image/logo.png" alt="" />
+        <span class="text-logo">ITSOL</span>
+    </div>
+    <div class="tools">
+        <div class="icon-bar">
+            <label for="check">
+                <i class="fas fa-bars"></i>
+            </label>
         </div>
-        <div class="slide-bar">
-            <nav>
-                <ul class="menu menu-nav-bar">
-
-                    <li>
-                        <a routerLink="/homeAdmin/customer" routerLinkActive="active">
-                            <i class="nav-icon fas fa-user-check" aria-hidden="true"></i>
-                            <span>khách hàng</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a routerLink="/homeAdmin/supplier" routerLinkActive="active">
-                            <i class="nav-icon fab fa-fort-awesome" aria-hidden="true"></i>
-                            <span>nhà cung cấp</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a routerLink="/homeAdmin/product" routerLinkActive="active">
-                            <i class="nav-icon fas fa-dumbbell" aria-hidden="true"></i>
-                            <span>Sản phẩm</span>
-                        </a>
-                    </li>
-                    <li class="sub-menu" [ngClass]="{active:isSubMenu}">
-                        <a class="order " routerLink="/homeAdmin/order" routerLinkActive="active" (click)="showMenuDrop() ">
-                            <i class="nav-icon fab fa-opencart " aria-hidden="true "></i>
-                            <span>đơn hàng</span>
-                        </a>
-                        <ul class="menu menu-order " id="order ">
-                            <li>
-                                <a routerLink="/homeAdmin/order/list-order" routerLinkActive="active">
-                                    <i class="nav-icon fas fa-box "></i>
-                                    <span>đơn đặt hàng</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a routerLink="/homeAdmin/order/product-import" routerLinkActive="active">
-                                    <i class="nav-icon fab fa-accusoft "></i>
-                                    <span>đơn nhập hàng</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a routerLink="/homeAdmin/order/product-return" routerLinkActive="active">
-                                    <i class="nav-icon fas fa-exchange-alt "></i>
-                                    <span>hàng trả về</span>
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a routerLink="/homeAdmin/category" routerLinkActive="active ">
-                            <i class="nav-icon fab fa-atlassian " aria-hidden="true "></i>
-                            <span>loại sản phẩm</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a routerLink="/homeAdmin/comment" routerLinkActive="active">
-                            <i class="nav-icon fas fa-comments " aria-hidden="true"></i>
-                            <span>Comment</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a routerLink="/homeAdmin/statistical" routerLinkActive="active">
-                            <i class="nav-icon fa fa-th " aria-hidden="true "></i>
-                            <span>Thống kê</span>
-                        </a>
-                    </li>
-
-                </ul>
-            </nav>
+        <div class="form">
+            <form action="" #formSearch="ngForm" class="form-search">
+                <input type="search" class="search" name="search " #search ngModel placeholder="Search" />
+                <button class="icon-search">
+          <i class="fas fa-search"></i>
+        </button>
+            </form>
         </div>
     </div>
-    <div class="col col-80 header-page ">
-        <div class="header ">
-            <div class="tools ">
-                <div class="icon-bar ">
-                    <i class="fas fa-bars "></i>
+    <div class="notify">
+        <ul class="nav">
+            <li class="nav-item">
+                <a href="#" class="nav-link active icon-bell">
+                    <i class="fas fa-bell"></i>
+                    <span class="badge badge-pill badge-danger">5</span>
+                </a>
+            </li>
+            <li class="nav-item dropdown">
+                <button class="btn dropdown-toggle" type="button" id="triggerId" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <img src="../../assets/image/avt.jpg" alt="" />
+          <span>Admin</span>
+        </button>
+                <div class="dropdown-menu dropdown-menu-right animate slideIn" aria-labelledby="triggerId">
+                    <a class="dropdown-item" href="#">
+                        <i class="fas fa-user"></i>
+                        <span>Profile</span>
+                    </a>
+                    <a class="dropdown-item" href="#">
+                        <i class="fas fa-wrench"></i>
+                        <span>Setting</span>
+                    </a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" style="color: red;" href="#">
+                        <i class="fas fa-power-off"></i>
+                        <span>Logout</span>
+                    </a>
                 </div>
-                <div class="search ">
-                    <form action="" #formSearch="ngForm" class="form-search">
-                        <input type="search " name="search " #search ngModel placeholder="Tìm kiếm... ">
-                        <button class="icon-search ">
-                            <i class="fas fa-search "></i>
-                        </button>
-                    </form>
-                </div>
+            </li>
 
-            </div>
-            <div class="notify ">
-                <div class="icon-admin " [ngClass]="{active:isShowLogout}">
-                    <img src="../../assets/image/avt.jpg " alt="" (click)="showLogout()">
-                    <div class="logout" (click)="logout()">
-                        <p>Đăng xuất</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="content-manager ">
-            <router-outlet></router-outlet>
-        </div>
+            <li class="nav-item">
+                <a href="#" class="nav-link">
+                    <i class="fas fa-cog"></i>
+                </a>
+            </li>
+        </ul>
     </div>
 </div>
+<!-- sidebar -->
+<div class="page-content">
+    <div class="sidebar-menu">
+        <ul class="sidebar w-25">
+            <li>
+                <a routerLink="/homeAdmin/customer" routerLinkActive="active">
+                    <i class="nav-icon fas fa-user-check" aria-hidden="true"></i>
+                    <span>khách hàng</span>
+                </a>
+            </li>
+            <li>
+                <a routerLink="/homeAdmin/supplier" routerLinkActive="active">
+                    <i class="nav-icon fab fa-fort-awesome" aria-hidden="true"></i>
+                    <span>nhà cung cấp</span>
+                </a>
+            </li>
+            <li>
+                <a routerLink="/homeAdmin/product" routerLinkActive="active">
+                    <i class="nav-icon fas fa-dumbbell" aria-hidden="true"></i>
+                    <span>Sản phẩm</span>
+                </a>
+            </li>
+            <li class="sub-menu" [ngClass]="{ active: isSubMenu }">
+                <a class="order" routerLink="/homeAdmin/order" routerLinkActive="active" (click)="showMenuDrop()">
+                    <i class="nav-icon fab fa-opencart" aria-hidden="true "></i>
+                    <span>đơn hàng</span>
+                </a>
+                <ul class="menu menu-order" id="order ">
+                    <li>
+                        <a routerLink="/homeAdmin/order/list-order" routerLinkActive="active">
+                            <i class="nav-icon fas fa-box"></i>
+                            <span>đơn đặt hàng</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a routerLink="/homeAdmin/order/product-import" routerLinkActive="active">
+                            <i class="nav-icon fab fa-accusoft"></i>
+                            <span>đơn nhập hàng</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a routerLink="/homeAdmin/order/product-return" routerLinkActive="active">
+                            <i class="nav-icon fas fa-exchange-alt"></i>
+                            <span>hàng trả về</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <a routerLink="/homeAdmin/category" routerLinkActive="active ">
+                    <i class="nav-icon fab fa-atlassian" aria-hidden="true "></i>
+                    <span>loại sản phẩm</span>
+                </a>
+            </li>
+            <li>
+                <a routerLink="/homeAdmin/comment" routerLinkActive="active">
+                    <i class="nav-icon fas fa-comments" aria-hidden="true"></i>
+                    <span>Comment</span>
+                </a>
+            </li>
+            <li>
+                <a routerLink="/homeAdmin/statistical" routerLinkActive="active">
+                    <i class="nav-icon fa fa-th" aria-hidden="true "></i>
+                    <span>Thống kê</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+    <div class="content">
+        <div class="header">
+            <nav class="breadcrumb">
+                <a class="breadcrumb-item" href="#">Home</a>
+                <span class="breadcrumb-item active">Customer</span>
+            </nav>
+        </div>
+        <router-outlet></router-outlet>
+        <div class="footer">
+            <span class="float-left">2020 &copy; TeamITSol</span>
+            <span class="float-right">Design By Team Xixon-Knight</span>
+        </div>
+    </div>
+
+</div>
+<!-- page-content -->
