@@ -1,0 +1,45 @@
+.content-header {
+    .card {
+        border: none;
+        &.border-left {
+            border-left-width: 4px !important;
+            .text {
+                font-size: 13px;
+            }
+        }
+    }
+}
+
+.dropdown {
+    .animate {
+        animation-duration: 0.3s;
+        animation-fill-mode: both;
+        &.slideIn {
+            animation-name: slide;
+        }
+        @keyframes slide {
+            0% {
+                transform: translateY(2rem);
+                opacity: 0;
+            }
+            100% {
+                transform: translateY(1.5rem);
+                opacity: 1;
+            }
+            0% {
+                transform: translateY(5rem);
+                opacity: 0;
+            }
+        }
+    }
+    .dropdown-menu {
+        right: 0 !important;
+        left: auto !important;
+        .dropdown-item {
+            color: #212529;
+            i {
+                margin-right: 10px !important;
+            }
+        }
+    }
+}

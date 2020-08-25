@@ -1,0 +1,292 @@
+<div class="container-fluid">
+    <div class="content-header">
+        <div class="row">
+            <div class="col-xl-3 col-md-6 mb-4">
+                <div class="card border-left border-primary shadow h-100 py-2">
+                    <div class="card-body">
+                        <div class="row no-gutters align-items-center">
+                            <div class="col">
+                                <div class="text font-weight-bold text-primary text-uppercase">
+                                    Earnings(Month)
+                                </div>
+                                <div class="h5 mb-0 font-weight-bold text-secondary">
+                                    $40.000
+                                </div>
+                            </div>
+                            <div class="col-auto">
+                                <i class="fas fa-address-card text-secondary"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-3 col-md-6 mb-4">
+                <div class="card border-left border-info shadow h-100 py-2">
+                    <div class="card-body">
+                        <div class="row no-gutters align-items-center">
+                            <div class="col">
+                                <div class="text font-weight-bold text-info text-uppercase">
+                                    Earnings(Month)
+                                </div>
+                                <div class="h5 mb-0 font-weight-bold text-secondary">
+                                    $40.000
+                                </div>
+                            </div>
+                            <div class="col-auto">
+                                <i class="fab fa-amazon-pay text-secondary"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-3 col-md-6 mb-4">
+                <div class="card border-left border-success shadow h-100 py-2">
+                    <div class="card-body">
+                        <div class="row no-gutters align-items-center">
+                            <div class="col">
+                                <div class="text font-weight-bold text-success text-uppercase">
+                                    Earnings(Month)
+                                </div>
+                                <div class="h5 mb-0 font-weight-bold text-secondary">
+                                    $40.000
+                                </div>
+                            </div>
+                            <div class="col-auto">
+                                <i class="fab fa-artstation text-secondary"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-3 col-md-6 mb-4">
+                <div class="card border-left border-danger shadow h-100 py-2">
+                    <div class="card-body">
+                        <div class="row no-gutters align-items-center">
+                            <div class="col">
+                                <div class="text font-weight-bold text-danger text-uppercase">
+                                    Earnings(Month)
+                                </div>
+                                <div class="h5 mb-0 font-weight-bold text-secondary">
+                                    $40.000
+                                </div>
+                            </div>
+                            <div class="col-auto">
+                                <i class="fab fa-audible text-secondary"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Content-Row -->
+    <div class="row">
+        <!-- Chart-Line -->
+        <div class="col-xl-8 col-lg-7">
+            <!-- card-header -->
+            <div class="card shadow mb-4">
+                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                    <!-- header -->
+                    <h6 class="m-0 font-weight-bold text-primary">Earning Overview</h6>
+                    <div class="dropdown">
+                        <span type="button" id="triggerId" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <i class="fas fa-ellipsis-v"></i>
+            </span>
+                        <div class="dropdown-menu dropdown-menu-right animate slideIn" aria-labelledby="triggerId">
+                            <h6 class="dropdown-header">Section header</h6>
+                            <a class="dropdown-item" href="#">Action</a>
+                            <a class="dropdown-item" href="#">Action</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="#">After divider action</a>
+                        </div>
+                    </div>
+                </div>
+                <!-- card body -->
+                <div class="card-body">
+                    <div class="chart-area">
+                        <canvas id="myAreaChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Pie-Chart -->
+        <div class="col-xl-4 col-lg-5">
+            <div class="card shadow mb-0">
+                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                    <!-- header -->
+                    <h6 class="m-0 font-weight-bold text-primary">Revenue Source</h6>
+                    <div class="dropdown">
+                        <span type="button" id="triggerId" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <i class="fas fa-ellipsis-v"></i>
+            </span>
+                        <div class="dropdown-menu dropdown-menu-right animate slideIn" aria-labelledby="triggerId">
+                            <h6 class="dropdown-header">Section header</h6>
+                            <a class="dropdown-item" href="#">Action</a>
+                            <a class="dropdown-item" href="#">Action</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="#">After divider action</a>
+                        </div>
+                    </div>
+                </div>
+                <!-- card body -->
+                <div class="card-body">
+                    <div class="chart-pie">
+                        <canvas id="myPieChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- content row -->
+    <div class="row">
+        <!-- content column -->
+        <div class="col-lg-6 mb-4">
+            <!-- project card -->
+            <div class="card shadow mb-4">
+                <!-- card header -->
+                <div class="card-header py-3">
+                    <h6 class="mb-0 font-weight-bold text-primary">Project</h6>
+                </div>
+                <!-- card body -->
+                <div class="card-body">
+                    <h4 class="small font-weight-bold text-secondary">
+                        Server Migration
+                        <span class="float-right">20%</span>
+                        <div class="progress mb-4 mt-2">
+                            <div class="progress-bar bg-danger" role="progressbar" style="width: 20%;" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                    </h4>
+                    <h4 class="small font-weight-bold text-secondary">
+                        Sales Tracking
+                        <span class="float-right">40%</span>
+                        <div class="progress mb-4 mt-2">
+                            <div class="progress-bar bg-warning" role="progressbar" style="width: 40%;" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                    </h4>
+                    <h4 class="small font-weight-bold text-secondary">
+                        Customer Database
+                        <span class="float-right">60%</span>
+                        <div class="progress mb-4 mt-2">
+                            <div class="progress-bar bg-primary" role="progressbar" style="width: 60%;" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                    </h4>
+                    <h4 class="small font-weight-bold text-secondary">
+                        Payout Details
+                        <span class="float-right">80%</span>
+                        <div class="progress mb-4 mt-2">
+                            <div class="progress-bar bg-info" role="progressbar" style="width: 80%;" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                    </h4>
+                    <h4 class="small font-weight-bold text-secondary">
+                        Account Setup
+                        <span class="float-right">100%</span>
+                        <div class="progress mb-4 mt-2">
+                            <div class="progress-bar bg-success" role="progressbar" style="width: 100%;" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                    </h4>
+                </div>
+            </div>
+
+            <!-- Color system -->
+            <div class="row">
+                <div class="col-lg-6 mb-4">
+                    <div class="card bg-primary text-white shadow">
+                        <div class="card-body">
+                            <span>Primary</span>
+                            <p class="small text-white-50">#4e73df</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 mb-4">
+                    <div class="card bg-success text-white shadow">
+                        <div class="card-body">
+                            <span>Success</span>
+                            <p class="small text-white-50">#1cc88a</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 mb-4">
+                    <div class="card bg-info text-white shadow">
+                        <div class="card-body">
+                            <span>Info</span>
+                            <p class="small text-white-50">#36b9cc</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 mb-4">
+                    <div class="card bg-warning text-white shadow">
+                        <div class="card-body">
+                            <span>Warning</span>
+                            <p class="small text-white-50">#t6c23e</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 mb-4">
+                    <div class="card bg-danger text-white shadow">
+                        <div class="card-body">
+                            <span>Danger</span>
+                            <p class="small text-white-50">#e74a3b</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 mb-4">
+                    <div class="card bg-secondary text-white shadow">
+                        <div class="card-body">
+                            <span>Secondary</span>
+                            <p class="small text-white-50">#858796</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 mb-4">
+                    <div class="card bg-light text-secondary shadow">
+                        <div class="card-body">
+                            <span>Light</span>
+                            <p class="small text-secondary">#f8f9fc</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 mb-4">
+                    <div class="card bg-dark text-white shadow">
+                        <div class="card-body">
+                            <span>Dark</span>
+                            <p class="small text-white-50">#5a5c69</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- end column -->
+        <div class="col-lg-6 mb-4">
+            <!-- Illustration Column -->
+            <div class="card shadow mb-4">
+                <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-primary">Illustration</h6>
+                </div>
+                <!-- card body -->
+                <div class="card-body">
+                    <div class="text-center">
+                        <img class="img-fluid px-3 px-sm-4 mt-3 mb-4" style="width: 25rem;" src="../../assets/image/desktop.svg" alt="">
+                    </div>
+                    <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quis dicta suscipit qui error possimus eius facere perspiciatis, at eveniet. Cupiditate aperiam at a excepturi quidem, quisquam id voluptatum temporibus assumenda.</p>
+                </div>
+            </div>
+            <!-- Development Approach -->
+            <div class="card shadow mb-4">
+                <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-primary">Development Approach</h6>
+                </div>
+                <div class="card-body">
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ad illum ratione aperiam rerum. Saepe a officia odit in temporibus itaque excepturi esse? Numquam blanditiis praesentium commodi magnam temporibus unde! Tenetur.</p>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ad illum ratione aperiam rerum. Saepe a officia odit in temporibus itaque excepturi esse? Numquam blanditiis praesentium commodi magnam temporibus unde! Tenetur.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- <div class="text-xs-center" id="progressId">Description</div>
+    <progress class="progress" value="" max="100" aria-describedby="progressId">
+      <div class="progress">
+        <span class="progress-bar" style="width: 25%;"></span>
+      </div>
+    </progress> -->

@@ -18,6 +18,7 @@ import { StatisticalComponent } from './statistical/statistical.component';
 import { ProductReturnComponent } from './order/product-return/product-return.component';
 import { ProductImportComponent } from './order/product-import/product-import.component';
 import { ProductOrderComponent } from './order/product-order/product-order.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,8 @@ import { ProductOrderComponent } from './order/product-order/product-order.compo
     StatisticalComponent,
     ProductReturnComponent,
     ProductImportComponent,
-    ProductOrderComponent
+    ProductOrderComponent,
+    DashboardComponent
   ],
   imports: [
     BrowserModule,
