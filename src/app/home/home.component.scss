@@ -39,7 +39,7 @@
 }
 
 #check:checked~* .tools {
-    left: -14%;
+    left: 4%;
 }
 
 .content {
@@ -86,9 +86,10 @@
         box-shadow: 5px 6px 7px #f2f4f6;
         padding-top: 10px;
         padding-bottom: 10px;
-        position: relative;
+        position: fixed;
         display: flex;
-        left: 0;
+        right: 0;
+        left: 18%;
         transition: all 0.5s;
         .icon-bar {
             margin-left: 15px;
