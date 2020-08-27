@@ -1,0 +1,44 @@
+.wrapper-comment {
+    border-radius: 5px;
+    padding: 40px;
+    background-color: white;
+    .table-title {
+        .text {
+            margin-top: 5px;
+            margin-left: 20px;
+            margin-bottom: -20px;
+            font-size: 35px;
+        }
+    }
+    form {
+        position: relative;
+        right: 0;
+        input {
+            padding-left: 40px;
+            border-radius: 25px;
+            padding-top: 10px;
+        }
+        button {
+            position: absolute;
+            left: 0;
+            vertical-align: middle;
+            outline: none !important;
+            border: none !important;
+            top: 4px;
+            i {
+                color: cyan;
+            }
+        }
+    }
+    table {
+        border: 1px solid rgb(212, 209, 209);
+        border-radius: 4px;
+        .image {
+            cursor: pointer;
+            width: 50%;
+        }
+        td {
+            vertical-align: middle;
+        }
+    }
+}

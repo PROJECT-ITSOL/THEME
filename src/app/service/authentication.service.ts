@@ -1,31 +1,30 @@
 import { Observable, of } from 'rxjs';
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import {catchError,map,tap} from 'rxjs/operators';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+import { catchError, map, tap } from 'rxjs/operators';
 import { error } from '@angular/compiler/src/util';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AuthenticationService {
-
+  private baseUrl = 'http://localhost:8080/';
 
   checkAuth: string;
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
-  logout(){
-    
-  }
-
+  logout() {}
 
   // jwt-client
-  generateToken(req){
-    return this.http.post("http://localhost:8080/authenticate",req,{responseType: 'text' as 'json'});
+  generateToken(req) {
+    return this.http.post('http://localhost:8080/authenticate', req, {
+      responseType: 'text' as 'json',
+    });
   }
 
-  isLoggedIn():boolean{
-    const token=localStorage.getItem("token");
-    let res=this.checkToken(token);
+  isLoggedIn(): boolean {
+    const token = localStorage.getItem('token');
+    // let res=this.checkToken(token);
     // res.subscribe(data=>console.log(data))
     // if(){
     //   return true;
@@ -35,17 +34,25 @@ export class AuthenticationService {
     return true;
   }
 
-  checkToken(token){
-    const url = "http://localhost:8080/api/home";
-    let tokenStr = "Bearer " + token;
-    const headers = new HttpHeaders().set("Authorization",tokenStr)
-    return this.http.get(url,{headers,responseType:'text' as 'json'}).pipe(
-      tap(
-        data=>console.log(JSON.stringify(data))
-      ),
-      catchError(
-        error=>of(console.log("error"))
-      )
-    ) 
+  // checkToken(token){
+  //   const url = "http://localhost:8080/api/home";
+  //   let tokenStr = "Bearer " + token;
+  //   const headers = new HttpHeaders().set("Authorization",tokenStr)
+  //   return this.http.get(url,{headers,responseType:'text' as 'json'}).pipe(
+  //     tap(
+  //       data=>console.log(JSON.stringify(data))
+  //     ),
+  //     catchError(
+  //       error=>of(console.log("error"))
+  //     )
+  //   )
+  // }
+
+  getListComment(page: number) {
+    return this.http.get(this.baseUrl + 'api/comment/getList?page=' + page);
+  }
+
+  delete(url: string) {
+    return this.http.delete(this.baseUrl + url);
   }
 }

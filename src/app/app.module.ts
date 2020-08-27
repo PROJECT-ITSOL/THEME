@@ -1,7 +1,9 @@
+import { AuthenticationService } from './service/authentication.service';
+import { HttpconfigInterceptor } from './httpconfig.interceptor';
 import { from } from 'rxjs';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import {HttpClientModule} from '@angular/common/http';
+import {HttpClientModule, HTTP_INTERCEPTORS} from '@angular/common/http';
 import {FormsModule} from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -43,7 +45,12 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     HttpClientModule,
     FormsModule
   ],
-  providers: [],
+  providers: [AuthenticationService,
+  {
+    provide:HTTP_INTERCEPTORS,
+    useClass:HttpconfigInterceptor,
+    multi:true
+  }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
