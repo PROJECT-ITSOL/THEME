@@ -1,3 +1,4 @@
+import { AuthenticationService } from './../service/authentication.service';
 import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 
@@ -10,9 +11,11 @@ export class HomeComponent implements OnInit {
   isSubMenu = false;
 
   isShowLogout = false;
-  constructor(private router: Router) {}
+  constructor(private router: Router, private service: AuthenticationService) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.isToken();
+  }
 
   showMenuDrop() {
     this.isSubMenu = !this.isSubMenu;
@@ -21,8 +24,12 @@ export class HomeComponent implements OnInit {
   showLogout() {
     this.isShowLogout = !this.isShowLogout;
   }
-  logout(){
+  logout() {
     this.router.navigate(['/loginAdmin']);
-    localStorage.removeItem("token");
+    localStorage.removeItem('token');
+  }
+  isToken(){
+    debugger
+    this.service.isLoggedIn().subscribe();
   }
 }

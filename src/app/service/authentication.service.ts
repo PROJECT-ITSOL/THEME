@@ -8,12 +8,9 @@ import { error } from '@angular/compiler/src/util';
   providedIn: 'root',
 })
 export class AuthenticationService {
-  private baseUrl = 'http://localhost:8080/';
+  private baseUrl = 'http://localhost:8080';
 
-  checkAuth: string;
   constructor(private http: HttpClient) {}
-
-  logout() {}
 
   // jwt-client
   generateToken(req) {
@@ -22,34 +19,14 @@ export class AuthenticationService {
     });
   }
 
-  isLoggedIn(): boolean {
-    const token = localStorage.getItem('token');
-    // let res=this.checkToken(token);
-    // res.subscribe(data=>console.log(data))
-    // if(){
-    //   return true;
-    // }else{
-    //   return false;
-    // }
-    return true;
+  isLoggedIn() {
+    // debugger
+    return this.http.get(this.baseUrl + '/api/home');
   }
 
-  // checkToken(token){
-  //   const url = "http://localhost:8080/api/home";
-  //   let tokenStr = "Bearer " + token;
-  //   const headers = new HttpHeaders().set("Authorization",tokenStr)
-  //   return this.http.get(url,{headers,responseType:'text' as 'json'}).pipe(
-  //     tap(
-  //       data=>console.log(JSON.stringify(data))
-  //     ),
-  //     catchError(
-  //       error=>of(console.log("error"))
-  //     )
-  //   )
-  // }
 
   getListComment(page: number) {
-    return this.http.get(this.baseUrl + 'api/comment/getList?page=' + page);
+    return this.http.get(this.baseUrl + '/api/comment/getList?page=' + page);
   }
 
   delete(url: string) {

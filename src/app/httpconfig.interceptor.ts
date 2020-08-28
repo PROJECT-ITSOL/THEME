@@ -1,3 +1,5 @@
+import { Router } from '@angular/router';
+import { error } from '@angular/compiler/src/util';
 import { Injectable } from '@angular/core';
 import {
   HttpRequest,
@@ -5,13 +7,14 @@ import {
   HttpEvent,
   HttpInterceptor,
   HttpResponse,
+  HttpErrorResponse,
 } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, throwError } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
 
 @Injectable()
 export class HttpconfigInterceptor implements HttpInterceptor {
-  constructor() {}
+  constructor(private router: Router) {}
 
   intercept(
     request: HttpRequest<unknown>,
@@ -38,6 +41,12 @@ export class HttpconfigInterceptor implements HttpInterceptor {
           console.log('event--->>>', event);
         }
         return event;
+      }),
+      catchError((error: HttpErrorResponse) => {
+        if(error['status']===403){
+          this.router.navigate(['/loginAdmin'])
+        }
+        return throwError(error);
       })
     );
   }
