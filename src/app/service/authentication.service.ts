@@ -24,12 +24,16 @@ export class AuthenticationService {
     return this.http.get(this.baseUrl + '/api/home');
   }
 
-
-  getListComment(page: number) {
-    return this.http.get(this.baseUrl + '/api/comment/getList?page=' + page);
+  getList(page: number, url: string) {
+    return this.http.get(this.baseUrl + url + page);
   }
 
   delete(url: string) {
     return this.http.delete(this.baseUrl + url);
+  }
+
+  // comment
+  getCommentById(url: string) {
+    return this.http.get(this.baseUrl + url);
   }
 }

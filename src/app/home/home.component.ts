@@ -29,7 +29,6 @@ export class HomeComponent implements OnInit {
     localStorage.removeItem('token');
   }
   isToken(){
-    debugger
     this.service.isLoggedIn().subscribe();
   }
 }
