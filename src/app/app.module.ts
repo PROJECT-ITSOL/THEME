@@ -18,6 +18,10 @@ import { StatisticalComponent } from './statistical/statistical.component';
 import { ProductReturnComponent } from './order/product-return/product-return.component';
 import { ProductImportComponent } from './order/product-import/product-import.component';
 import { ProductOrderComponent } from './order/product-order/product-order.component';
+import { ProductCreateComponent } from './product/product-add/product-create.component';
+import { ProductEditComponent } from './product/product-edit/product-edit.component';
+import { ProductDeleteComponent } from './product/product-delete/product-delete.component';
+import { ProductSeachComponent } from './product/product-seach/product-seach.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +37,11 @@ import { ProductOrderComponent } from './order/product-order/product-order.compo
     StatisticalComponent,
     ProductReturnComponent,
     ProductImportComponent,
-    ProductOrderComponent
+    ProductOrderComponent,
+    ProductCreateComponent,
+    ProductEditComponent,
+    ProductDeleteComponent,
+    ProductSeachComponent
   ],
   imports: [
     BrowserModule,
