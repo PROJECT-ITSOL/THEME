@@ -28,8 +28,16 @@ export class AuthenticationService {
     return this.http.get(this.baseUrl + url + page);
   }
 
+  getSearch(param: HttpParams, url: string) {
+    return this.http.get(this.baseUrl + url, { params: param });
+  }
+
   delete(url: string) {
     return this.http.delete(this.baseUrl + url);
+  }
+
+  update(url: string, data: any) {
+    return this.http.put(this.baseUrl + url, data);
   }
 
   // comment

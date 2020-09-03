@@ -18,15 +18,12 @@ export class CommentComponent implements OnInit {
   idDelete: number;
   urlImage: string;
   search: string;
-  // searchControl=new FormControl;
 
   constructor(private service: AuthenticationService) {}
 
   ngOnInit(): void {
     this.getComment();
-    // this.searchControl.valueChanges.subscribe(val=>{
-    //   console.log(val);
-    // })
+    
   }
 
   deleteCmt() {
@@ -47,7 +44,6 @@ export class CommentComponent implements OnInit {
     event.preventDefault();
     this.pageNo = i;
     this.getComment();
-    // console.log(this.listComment);
   }
 
   getComment() {
