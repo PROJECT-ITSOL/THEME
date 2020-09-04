@@ -27,6 +27,9 @@ export class CommentComponent implements OnInit {
     
   }
 
+  isActive(item){
+    return this.pageNo===item;
+  }
   deleteCmt() {
     let url = this.urlApiComment + 'delete/' + this.idDelete;
     this.service.delete(url).subscribe((data) => {

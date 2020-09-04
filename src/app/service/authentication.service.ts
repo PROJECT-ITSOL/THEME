@@ -25,7 +25,7 @@ export class AuthenticationService {
   }
 
   getList(param: HttpParams, url: string) {
-    return this.http.get(this.baseUrl + url,{params: param});
+    return this.http.get(this.baseUrl + url, { params: param });
   }
 
   getSearch(param: HttpParams, url: string) {
@@ -34,6 +34,10 @@ export class AuthenticationService {
 
   postAddNew(url: string, object: any) {
     return this.http.post(this.baseUrl + url, object);
+  }
+
+  putUpdate(url: string, object: any) {
+    return this.http.put(this.baseUrl + url, object);
   }
 
   delete(url: string) {

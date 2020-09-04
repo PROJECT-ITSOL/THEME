@@ -25,6 +25,9 @@ export class CategoryComponent implements OnInit {
     this.getCategory();
   }
 
+  isActive(item){
+    return this.pageNo===item;
+  }
   getCategory() {
     this.listCategory = new Array();
     // let url = this.urlCategory + '/list?pageNo=';
@@ -61,10 +64,23 @@ export class CategoryComponent implements OnInit {
   showEdit(data: Category) {
     this.categoryEdit = data;
     let url = this.urlCategory + '/update/' + this.categoryEdit.id;
-    console.log(this.categoryEdit);
+    console.log(this.categoryEdit.id);
   }
   onSubmit(form) {
-    console.log(form.value);
+    let url =this.urlCategory +"/update/"+this.categoryEdit.id;
+    let categoryUpdate= new Category();
+    categoryUpdate.id=this.categoryEdit.id;
+    categoryUpdate.name=form.value.name;
+    categoryUpdate.status=form.value.status;
+    this.service.putUpdate(url,categoryUpdate).subscribe(
+      data=>{
+        if(data['success']){
+          this.getCategory();
+        }else{
+          alert(data['message'])
+        }
+      }
+    );
   }
   addSubmit(form) {
     let url = this.urlCategory + "/addNew";

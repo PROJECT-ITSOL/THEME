@@ -9,4 +9,11 @@
             vertical-align: middle;
         }
     }
+    .pagination {
+        li {
+            &.active {
+                background-color: cyan;
+            }
+        }
+    }
 }

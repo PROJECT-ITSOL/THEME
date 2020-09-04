@@ -126,27 +126,26 @@
                     <form #formSave="ngForm">
                         <div class="form-group">
                             <label for="id">Enter Id Category</label>
-                            <input type="email" class="form-control" name="id" ngModel id="id" placeholder="Enter Id" value="{{categoryEdit.id}}">
+                            <input type="email" class="form-control" disabled name="id" [ngModel]="categoryEdit.id" id="id" placeholder="Enter Id" [value]="categoryEdit.id">
                             <!-- <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> -->
                         </div>
                         <div class="form-group">
                             <label for="nameCategory">Name</label>
-                            <input type="text" class="form-control" name="name" ngModel id="nameCategory" value="{{categoryEdit.name}}" placeholder="Name">
+                            <input type="text" class="form-control" name="name" [ngModel]="categoryEdit.name" id="nameCategory" [value]="categoryEdit.name" placeholder="Name">
                         </div>
                         <div class="form-group">
                             <div class="title">Status</div>
                             <div class="form-check-inline">
                                 <label class="form-check-label">
-                                    <input type="radio" class="form-check-input" value="true" [(ngModel)]="categoryEdit.status" name="status">Active
+                                    <input type="radio" class="form-check-input" [value]="true" [ngModel]="categoryEdit.status" [checked]="categoryEdit.status===true" name="status">Active
                                 </label>
                             </div>
                             <div class="form-check-inline">
                                 <label class="form-check-label">
-                                    <input type="radio" class="form-check-input" value="false" [(ngModel)]="categoryEdit.status" name="status">Disable
+                                    <input type="radio" class="form-check-input" [value]="false" [ngModel]="categoryEdit.status" [checked]="categoryEdit.status===false"  name="status">Disable
                                 </label>
                             </div>
                         </div>
-
                     </form>
                 </div>
                 <div class="modal-footer">
@@ -164,7 +163,7 @@
                     <span class="sr-only">Previous</span>
                 </a>
             </li> -->
-            <li class="page-item" *ngFor="let page of listPage; let i = index">
+            <li class="page-item" *ngFor="let page of listPage; let i = index" [ngClass]="{active:isActive(i)}">
                 <a class="page-link" href="#" (click)="setPage(i,$event)">{{i}}</a>
             </li>
 
