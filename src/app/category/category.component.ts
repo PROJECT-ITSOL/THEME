@@ -17,6 +17,7 @@ export class CategoryComponent implements OnInit {
   dataCategory: Array<any>;
   idDelete: string;
   categoryEdit = new Category();
+  isData:boolean = false;
 
   constructor(private service: AuthenticationService) {}
 
@@ -26,8 +27,10 @@ export class CategoryComponent implements OnInit {
 
   getCategory() {
     this.listCategory = new Array();
-    let url = this.urlCategory + '/list?pageNo=';
-    this.service.getList(this.pageNo, url).subscribe((data) => {
+    // let url = this.urlCategory + '/list?pageNo=';
+    let url = this.urlCategory + '/list';
+    let param=new HttpParams().append('pageNo',this.pageNo.toString());
+    this.service.getList(param, url).subscribe((data) => {
       this.listPage = new Array(data['totalPages']);
       this.dataCategory = data['content'];
       this.dataCategory.forEach((category) => {
@@ -58,36 +61,55 @@ export class CategoryComponent implements OnInit {
   showEdit(data: Category) {
     this.categoryEdit = data;
     let url = this.urlCategory + '/update/' + this.categoryEdit.id;
-    // this.service.update(url,this.categoryEdit);
     console.log(this.categoryEdit);
   }
   onSubmit(form) {
-    // debugger
     console.log(form.value);
   }
   addSubmit(form) {
-    console.log(form.value);
+    let url = this.urlCategory + "/addNew";
+
+    let category = new Category();
+    category.id=form.value.id;
+    category.name=form.value.name;
+
+    console.log(category);
+    this.service.postAddNew(url,category).subscribe(
+      data=>{
+        console.log(data['success']);
+        if(data['success']){
+          this.getCategory();
+        }else{
+          alert(data['message']);
+        }
+      }
+    )
+
   }
   searchSubmit(form) {
-    // console.log(form.value.search);
     let url = this.urlCategory + '/search';
     let param = new HttpParams()
           .append('keyword', form.value.search);
     this.service.getSearch(param, url).subscribe(
       (data) => {
-        console.log(data['data']['content']);
-        this.dataCategory=data['data']['content'];
-        this.listPage = [];
-        this.listPage=new Array(data['data']['totalPages']);
-        this.listCategory=[];
-        this.dataCategory.forEach(category=>{
-          let categoryEntity = new Category();
-          categoryEntity.id = category['idCategory'];
-          categoryEntity.name = category['name'];
-          categoryEntity.status = category['status'];
-          categoryEntity.products = category['listProduct'];
-          this.listCategory.push(categoryEntity);
-        })
+        if(data['success']){
+          this.dataCategory=data['data']['content'];
+          this.listPage = [];
+          this.listPage=new Array(data['data']['totalPages']);
+          this.listCategory=[];
+          this.dataCategory.forEach(category=>{
+            let categoryEntity = new Category();
+            categoryEntity.id = category['idCategory'];
+            categoryEntity.name = category['name'];
+            categoryEntity.status = category['status'];
+            categoryEntity.products = category['listProduct'];
+            this.listCategory.push(categoryEntity);
+          })
+        }else{
+          this.isData=true;
+          this.listCategory=[];
+        }
+       
       },
       (error) => {
         console.log(error.error);

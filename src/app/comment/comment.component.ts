@@ -3,6 +3,7 @@ import { Comment } from './../ultis/comment';
 import { AuthenticationService } from './../service/authentication.service';
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
+import { HttpParams } from '@angular/common/http';
 
 @Component({
   selector: 'app-comment',
@@ -48,8 +49,9 @@ export class CommentComponent implements OnInit {
 
   getComment() {
     this.listComment = new Array();
-    let url = this.urlApiComment + 'getList?page=';
-    this.service.getList(this.pageNo, url).subscribe(
+    let url = this.urlApiComment + 'getList';
+    let param=new HttpParams().append('pageNo',this.pageNo.toString());
+    this.service.getList(param, url).subscribe(
       (data) => {
         this.dataComment = data['content'];
         this.listPage = new Array(data['totalPages']);

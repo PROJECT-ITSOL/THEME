@@ -24,12 +24,16 @@ export class AuthenticationService {
     return this.http.get(this.baseUrl + '/api/home');
   }
 
-  getList(page: number, url: string) {
-    return this.http.get(this.baseUrl + url + page);
+  getList(param: HttpParams, url: string) {
+    return this.http.get(this.baseUrl + url,{params: param});
   }
 
   getSearch(param: HttpParams, url: string) {
     return this.http.get(this.baseUrl + url, { params: param });
+  }
+
+  postAddNew(url: string, object: any) {
+    return this.http.post(this.baseUrl + url, object);
   }
 
   delete(url: string) {
