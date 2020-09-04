@@ -1,6 +1,6 @@
 import { Product } from './product';
 export class Supplier{
-    id: string;
+    idSupplier: number;
     name: string;
     phoneNumber: string;
     address: string;
