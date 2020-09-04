@@ -1,6 +1,9 @@
+import { error } from '@angular/compiler/src/util';
 import { Comment } from './../ultis/comment';
 import { AuthenticationService } from './../service/authentication.service';
 import { Component, OnInit } from '@angular/core';
+import { FormControl } from '@angular/forms';
+import { HttpParams } from '@angular/common/http';
 
 @Component({
   selector: 'app-comment',
@@ -15,37 +18,43 @@ export class CommentComponent implements OnInit {
   urlApiComment = '/api/comment/';
   idDelete: number;
   urlImage: string;
+  search: string;
 
   constructor(private service: AuthenticationService) {}
 
   ngOnInit(): void {
     this.getComment();
+    
   }
 
+  isActive(item){
+    return this.pageNo===item;
+  }
   deleteCmt() {
-    let url = this.urlApiComment + '/delete/' + this.idDelete;
+    let url = this.urlApiComment + 'delete/' + this.idDelete;
     this.service.delete(url).subscribe((data) => {
       console.log(data['success']);
       this.getComment();
     });
   }
 
-  showDelete(id:number){
-    this.idDelete=id;
+  showDelete(id: number) {
+    this.idDelete = id;
   }
-  getImage(url: string){
-    this.urlImage=url;
+  getImage(url: string) {
+    this.urlImage = url;
   }
   setPage(i, event: any) {
     event.preventDefault();
     this.pageNo = i;
     this.getComment();
-    console.log(this.listComment);
   }
 
   getComment() {
     this.listComment = new Array();
-    this.service.getListComment(this.pageNo).subscribe(
+    let url = this.urlApiComment + 'getList';
+    let param=new HttpParams().append('pageNo',this.pageNo.toString());
+    this.service.getList(param, url).subscribe(
       (data) => {
         this.dataComment = data['content'];
         this.listPage = new Array(data['totalPages']);
@@ -61,5 +70,29 @@ export class CommentComponent implements OnInit {
         console.log(error);
       }
     );
+  }
+  onSubmit(searchForm) {
+    let value = '?keyword=' + searchForm.value.search;
+    let url = this.urlApiComment + 'search' + value;
+    this.service.getCommentById(url).subscribe(
+        (data) => {
+      this.dataComment = data['data']['content'];
+      // console.log(data['data']['totalPages']);
+      this.listPage = [];
+      this.listPage = new Array(data['data']['totalPages']);
+      console.log(this.listPage);
+      this.listComment = [];
+      this.dataComment.forEach((cmt) => {
+        let commentEntity = new Comment();
+        commentEntity.id = cmt['idComment'];
+        commentEntity.content = cmt['content'];
+        commentEntity.image = cmt['image'];
+        this.listComment.push(commentEntity);
+        console.log(this.listComment);
+      });
+    }),
+    (error)=>{
+      console.log(error);
+    }
   }
 }

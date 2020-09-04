@@ -1,0 +1,19 @@
+.wrapper-category {
+    border-radius: 5px;
+    padding: 40px;
+    background-color: white;
+    .table {
+        border: 1px solid rgb(212, 209, 209);
+        border-radius: 4px;
+        td {
+            vertical-align: middle;
+        }
+    }
+    .pagination {
+        li {
+            &.active {
+                background-color: cyan;
+            }
+        }
+    }
+}
