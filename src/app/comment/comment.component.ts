@@ -23,7 +23,7 @@ export class CommentComponent implements OnInit {
   }
 
   deleteCmt() {
-    let url = this.urlApiComment + '/delete/' + this.idDelete;
+    let url = this.urlApiComment + 'delete/' + this.idDelete;
     this.service.delete(url).subscribe((data) => {
       console.log(data['success']);
       this.getComment();
