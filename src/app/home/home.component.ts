@@ -29,7 +29,14 @@ export class HomeComponent implements OnInit {
     localStorage.removeItem('token');
   }
   isToken(){
+<<<<<<< HEAD
     // debugger
+=======
+<<<<<<< HEAD
+    // debuggers  
+=======
+>>>>>>> a58d90eeb048e617e01449fff7434692fe7aa940
+>>>>>>> 6611654061e23a8d9a085721dc100b299fd32485
     this.service.isLoggedIn().subscribe();
   }
 }

@@ -24,12 +24,33 @@ export class AuthenticationService {
     return this.http.get(this.baseUrl + '/api/home');
   }
 
+  getList(param: HttpParams, url: string) {
+    return this.http.get(this.baseUrl + url, { params: param });
+  }
 
-  getListComment(page: number) {
-    return this.http.get(this.baseUrl + '/api/comment/getList?page=' + page);
+  getSearch(param: HttpParams, url: string) {
+    return this.http.get(this.baseUrl + url, { params: param });
+  }
+
+  postAddNew(url: string, object: any) {
+    return this.http.post(this.baseUrl + url, object);
+  }
+
+  putUpdate(url: string, object: any) {
+    return this.http.put(this.baseUrl + url, object);
   }
 
   delete(url: string) {
     return this.http.delete(this.baseUrl + url);
   }
+
+  update(url: string, data: any) {
+    return this.http.put(this.baseUrl + url, data);
+  }
+
+  // comment
+  getCommentById(url: string) {
+    return this.http.get(this.baseUrl + url);
+  }
 }
+    

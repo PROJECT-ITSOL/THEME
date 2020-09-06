@@ -1,0 +1,28 @@
+#rightMenu {
+    position: absolute;
+    z-index: 2;
+}
+
+.logo {
+    height: 45px;
+    width: 45px;
+    margin-left: 20px;
+}
+
+.edit {
+    margin-right: 30px;
+}
+
+.delete {
+    color: red;
+    margin-left: 40px;
+}
+
+.card {
+    // position: absolute !important;
+    right: 0 !important;
+}
+
+.paging {
+    text-align: center;
+}
