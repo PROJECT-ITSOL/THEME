@@ -13,7 +13,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 
        constructor(private http: HttpClient){ }
         getListSupp(page:number): Observable<Supplier[]>{
-            return this.http.get<Supplier[]>(this.apiUrl+'/phanTrang?page='+page);
+            return this.http.get<Supplier[]>(this.apiUrl+'/list?page='+page);
         }
         
         getData(): Observable<Supplier[]> {
@@ -22,9 +22,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
         }
 
         addSupp(supp){
-            return this.http.post(this.apiUrl+'/addSupplier',supp,{
-                responseType: 'text' as 'json',
-              });
+            return this.http.post(this.apiUrl+'/addSupplier',supp);
         }
 
         editSupp(id,supplier){
@@ -37,8 +35,8 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
             return this.http.delete(this.apiUrl+'/delete?id='+id);
         }
 
-        search(key:string): Observable<Supplier[]>{
-            return this.http.get<Supplier[]>(this.apiUrl+'/search?name='+key);
+        search(key:string,page:number): Observable<Supplier[]>{
+            return this.http.get<Supplier[]>(this.apiUrl+'/search?name='+key+'&page='+page);
         }
 
         
