@@ -56,11 +56,15 @@ export class CommentComponent implements OnInit {
     let param=new HttpParams().append('pageNo',this.pageNo.toString());
     this.service.getList(param, url).subscribe(
       (data) => {
-        this.dataComment = data['content'];
-        this.listPage = new Array(data['totalPages']);
+        // console.log(data[])
+        this.dataComment = data['data']['content'];
+        this.listPage = new Array(data['data']['totalPages']);
+        // console.log()
         this.dataComment.forEach((cmt) => {
           let commentEntity = new Comment();
-          commentEntity.id = cmt['idComment'];
+          commentEntity.id = cmt['id'];
+          commentEntity.nameCustomer=cmt['nameCustomer'];
+          commentEntity.nameProduct=cmt['nameProduct'];
           commentEntity.content = cmt['content'];
           commentEntity.image = cmt['image'];
           this.listComment.push(commentEntity);
@@ -76,20 +80,25 @@ export class CommentComponent implements OnInit {
     let url = this.urlApiComment + 'search' + value;
     this.service.getCommentById(url).subscribe(
         (data) => {
-      this.dataComment = data['data']['content'];
-      // console.log(data['data']['totalPages']);
-      this.listPage = [];
-      this.listPage = new Array(data['data']['totalPages']);
-      console.log(this.listPage);
-      this.listComment = [];
-      this.dataComment.forEach((cmt) => {
-        let commentEntity = new Comment();
-        commentEntity.id = cmt['idComment'];
-        commentEntity.content = cmt['content'];
-        commentEntity.image = cmt['image'];
-        this.listComment.push(commentEntity);
-        console.log(this.listComment);
-      });
+          if(data['success']){
+            console.log("success");
+            this.dataComment = data['data']['content'];
+            this.listPage = [];
+            this.listPage = new Array(data['data']['totalPages']);
+            this.listComment = [];
+            this.dataComment.forEach((cmt) => {
+              let commentEntity = new Comment();
+              commentEntity.id = cmt['id'];
+              commentEntity.nameCustomer=cmt['nameCustomer'];
+              commentEntity.nameProduct=cmt['nameProduct'];
+              commentEntity.content = cmt['content'];
+              commentEntity.image = cmt['image'];
+              this.listComment.push(commentEntity);
+              console.log(this.listComment);
+            });
+          }else{
+            console.log("false");
+          }
     }),
     (error)=>{
       console.log(error);
