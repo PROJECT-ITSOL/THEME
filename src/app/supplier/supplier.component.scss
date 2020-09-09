@@ -1,0 +1,31 @@
+   .logo {
+       height: 45px;
+       width: 45px;
+       margin-left: 20px;
+   }
+   
+   .delete {
+       color: red;
+       margin-left: 40px;
+   }
+   
+   .card {
+       right: 0 !important;
+   }
+   
+   .paging {
+       text-align: center;
+   }
+   
+   a {
+       cursor: pointer;
+   }
+   
+   .action a i:hover {
+       color: chocolate;
+   }
+   
+   .validator {
+       margin-top: 0;
+       color: red;
+   }
