@@ -10,4 +10,7 @@ export class Product {
   amount: number;
   status: boolean;
   comments: Comment[];
+  idCategory: String;
+  idSupplier: String;
+  products: Product[];
 }

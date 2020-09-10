@@ -10,7 +10,7 @@ import { NgForm } from '@angular/forms';
   styleUrls: ['./supplier.component.scss']
 })
 export class SupplierComponent implements OnInit {
-  
+
   listSupp: Supplier[];
   page:number=0;
   pages:Array<number>;
@@ -24,31 +24,31 @@ export class SupplierComponent implements OnInit {
   message:string;
 
   constructor(private supplierService : SupplierService) { }
-    
+
   setPage(i,event:any){
     event.preventDefault();
     this.page = i;
     this.getSupp();
-  
+
   }
 
   showEdit(item:Supplier){
-    
+
     this.supplier=item;
     this.listProduct=item['products'];
     this.nameSupplier=item['name'];
     this.idDelete=item['idSupplier']
   }
 
- 
+
   ngOnInit(): void {
     this.getSupp();
-    
+
   }
    getSupp(){
     this.listSupp = new Array();
     this.supplierService.getListSupp(this.page).subscribe(res => {
-     
+
     this.dataSupp=res['content'];
     this.dataSupp.forEach((supp)=>{
       let supplier = new Supplier();
@@ -65,7 +65,7 @@ export class SupplierComponent implements OnInit {
     this.pages = new Array(res['totalPages']);
     this.totalSupp = (res['totalElements']);
     });
-   
+
 
   }
 
@@ -78,22 +78,22 @@ export class SupplierComponent implements OnInit {
       this.message=res['message'];
       location.reload();
        alert(res['message']);
-      
+
     });
   }
   edit(form:NgForm){
     console.log('Your form data : ',form.value);
     this.supplierService.editSupp(this.supplier['idSupplier'],form.value).subscribe(res => {
-      
+
       this.getSupp();
-     
+
     });
   }
 
   delete(){
     this.supplierService.delete(this.idDelete).subscribe(res =>{
       console.log(res);
-     
+
       alert(res['message']);
       this.getSupp();
     })
@@ -102,7 +102,7 @@ export class SupplierComponent implements OnInit {
   search(){
     this.listSupp=new Array();
     this.supplierService.search(this.keyword,this.page).subscribe(res =>{
-      
+
       this.dataSupp=res['content'];
       this.dataSupp.forEach((supp)=>{
         let supplier = new Supplier();
@@ -119,9 +119,9 @@ export class SupplierComponent implements OnInit {
       this.pages = new Array(res['totalPages']);
       this.totalSupp = (res['totalElements']);
       });
-     
-      
-    
+
+
+
   }
 
 

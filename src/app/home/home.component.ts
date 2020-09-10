@@ -21,26 +21,17 @@ export class HomeComponent implements OnInit {
     this.isSubMenu = !this.isSubMenu;
   }
 
+  // tslint:disable-next-line:typedef
   showLogout() {
     this.isShowLogout = !this.isShowLogout;
   }
+  // tslint:disable-next-line:typedef
   logout() {
     this.router.navigate(['/loginAdmin']);
     localStorage.removeItem('token');
   }
+  // tslint:disable-next-line:typedef
   isToken(){
-<<<<<<< HEAD
-<<<<<<< HEAD
-    // debugger
-=======
-<<<<<<< HEAD
-    // debuggers  
-=======
->>>>>>> a58d90eeb048e617e01449fff7434692fe7aa940
->>>>>>> 6611654061e23a8d9a085721dc100b299fd32485
-=======
-
->>>>>>> 8ba6c564f6037fb6b7f8ae28d3724349af901e48
     this.service.isLoggedIn().subscribe();
   }
 }
