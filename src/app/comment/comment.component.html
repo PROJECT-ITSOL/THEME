@@ -21,11 +21,13 @@
     <table class="table table-hover table-responsive justify-content-center table-borderless">
         <thead class="border-bottom">
             <tr>
-                <th class="">
+                <!-- <th class="">
                     <label for="check-all"></label>
                     <input type="checkbox" name="select-all" id="check-all" />
-                </th>
+                </th> -->
                 <th>Id</th>
+                <th>Name Customer</th>
+                <th>Name Product</th>
                 <th>Image</th>
                 <th>Content</th>
                 <th>Action</th>
@@ -33,8 +35,10 @@
         </thead>
         <tbody>
             <tr *ngFor="let comment of listComment">
-                <td><input type="checkbox" name="" id="" /></td>
+                <!-- <td><input type="checkbox" name="" id="" /></td> -->
                 <td>{{ comment.id }}</td>
+                <td>{{comment.nameCustomer}}</td>
+                <td>{{comment.nameProduct}}</td>
                 <td>
                     <!-- image -->
                     <img class="img-fluid image" data-toggle="modal" data-target="#modalImage" [src]="comment.image" (click)="getImage(comment.image)" alt="" />
@@ -46,10 +50,8 @@
                                     <img [src]="urlImage" alt="" />
                                 </div>
                                 <!-- footer -->
-                                <div class="modal -footer">
-                                    <button class="btn btn-danger" data-dismiss="modal">
-                    Close
-                  </button>
+                                <div class="modal-footer">
+                                    <button class="btn btn-danger" data-dismiss="modal">Close</button>
                                 </div>
                             </div>
                         </div>

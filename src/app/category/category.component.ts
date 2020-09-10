@@ -29,7 +29,7 @@ export class CategoryComponent implements OnInit {
     return this.pageNo===item;
   }
   getCategory() {
-    this.listCategory = new Array();
+    this.listCategory = new Array();  
     // let url = this.urlCategory + '/list?pageNo=';
     let url = this.urlCategory + '/list';
     let param=new HttpParams().append('pageNo',this.pageNo.toString());
