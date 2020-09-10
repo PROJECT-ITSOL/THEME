@@ -1,51 +1,56 @@
 import { Observable, of } from 'rxjs';
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import {catchError,map,tap} from 'rxjs/operators';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+import { catchError, map, tap } from 'rxjs/operators';
 import { error } from '@angular/compiler/src/util';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AuthenticationService {
+  private baseUrl = 'http://localhost:8080';
 
-
-  checkAuth: string;
-  constructor(private http: HttpClient) { }
-
-  logout(){
-    
-  }
-
+  constructor(private http: HttpClient) {}
 
   // jwt-client
-  generateToken(req){
-    return this.http.post("http://localhost:8080/authenticate",req,{responseType: 'text' as 'json'});
+  generateToken(req) {
+    return this.http.post('http://localhost:8080/authenticate', req, {
+      responseType: 'text' as 'json',
+    });
   }
 
-  isLoggedIn():boolean{
-    const token=localStorage.getItem("token");
-    let res=this.checkToken(token);
-    // res.subscribe(data=>console.log(data))
-    // if(){
-    //   return true;
-    // }else{
-    //   return false;
-    // }
-    return true;
+  isLoggedIn() {
+    // debugger
+    return this.http.get(this.baseUrl + '/api/home');
   }
 
-  checkToken(token){
-    const url = "http://localhost:8080/api/home";
-    let tokenStr = "Bearer " + token;
-    const headers = new HttpHeaders().set("Authorization",tokenStr)
-    return this.http.get(url,{headers,responseType:'text' as 'json'}).pipe(
-      tap(
-        data=>console.log(JSON.stringify(data))
-      ),
-      catchError(
-        error=>of(console.log("error"))
-      )
-    ) 
+  getList(param: HttpParams, url: string) {
+    return this.http.get(this.baseUrl + url, { params: param });
+  }
+
+  getSearch(param: HttpParams, url: string) {
+    return this.http.get(this.baseUrl + url, { params: param });
+  }
+
+  postAddNew(url: string, object: any) {
+    return this.http.post(this.baseUrl + url, object);
+  }
+
+  putUpdate(url: string, object: any) {
+    return this.http.put(this.baseUrl + url, object);
+  }
+
+  delete(url: string) {
+    return this.http.delete(this.baseUrl + url);
+  }
+
+  update(url: string, data: any) {
+    return this.http.put(this.baseUrl + url, data);
+  }
+
+  // comment
+  getCommentById(url: string) {
+    return this.http.get(this.baseUrl + url);
   }
 }
+    

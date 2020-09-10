@@ -44,18 +44,14 @@ export class LoginComponent implements OnInit {
       "username": event.value.username,
       "password": event.value.password
     }
-
-    this.service.generateToken(this.authReq)
-    .toPromise()
-    .then(res=>{
-      localStorage.setItem("token",res.toString().substring(8,(res.toString().length-2)));
+    localStorage.removeItem('token');
+    this.service.generateToken(this.authReq).subscribe(
+      data=>{
+        // console.log(data["jwt"]);
+        localStorage.setItem("token",data.toString().substring(8,(data.toString().length-2)));
       this.router.navigate(['/homeAdmin']);
-    })
-  }
-
-  accessAPI(){
-    // let response=localStorage.getItem("token");
-    // this.service.isLoggedIn()
+      }
+    )
   }
 
 }

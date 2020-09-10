@@ -1,8 +1,10 @@
+import { AuthenticationService } from './service/authentication.service';
+import { HttpconfigInterceptor } from './httpconfig.interceptor';
 import { from } from 'rxjs';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import {HttpClientModule} from '@angular/common/http';
-import {FormsModule} from '@angular/forms';
+import {HttpClientModule, HTTP_INTERCEPTORS} from '@angular/common/http';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -18,10 +20,14 @@ import { StatisticalComponent } from './statistical/statistical.component';
 import { ProductReturnComponent } from './order/product-return/product-return.component';
 import { ProductImportComponent } from './order/product-import/product-import.component';
 import { ProductOrderComponent } from './order/product-order/product-order.component';
+<<<<<<< HEAD
 import { ProductCreateComponent } from './product/product-add/product-create.component';
 import { ProductEditComponent } from './product/product-edit/product-edit.component';
 import { ProductDeleteComponent } from './product/product-delete/product-delete.component';
 import { ProductSeachComponent } from './product/product-seach/product-seach.component';
+=======
+import { DashboardComponent } from './dashboard/dashboard.component';
+>>>>>>> master
 
 @NgModule({
   declarations: [
@@ -38,18 +44,29 @@ import { ProductSeachComponent } from './product/product-seach/product-seach.com
     ProductReturnComponent,
     ProductImportComponent,
     ProductOrderComponent,
+<<<<<<< HEAD
     ProductCreateComponent,
     ProductEditComponent,
     ProductDeleteComponent,
     ProductSeachComponent
+=======
+    DashboardComponent
+>>>>>>> master
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule
   ],
-  providers: [],
+  providers: [AuthenticationService,
+    
+  {
+    provide:HTTP_INTERCEPTORS,
+    useClass:HttpconfigInterceptor,
+    multi:true
+  }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
