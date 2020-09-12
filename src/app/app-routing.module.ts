@@ -1,3 +1,4 @@
+import { ProductImportDetailComponent } from './order/product-import-detail/product-import-detail.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ProductImportComponent } from './order/product-import/product-import.component';
 import { StatisticalComponent } from './statistical/statistical.component';
@@ -19,9 +20,8 @@ const routes: Routes = [
   { path: 'loginAdmin', component: LoginComponent },
   { path: '', redirectTo: '/loginAdmin', pathMatch: 'full' },
   {
-    path: 'homeAdmin',
-    component: HomeComponent,
-    canActivate: [AuthGuard],
+    path: 'homeAdmin',  component: HomeComponent,
+    canActivate: [AuthGuard],   
     children: [
       { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
       { path: 'dashboard', component: DashboardComponent },
@@ -35,6 +35,7 @@ const routes: Routes = [
           { path: 'list-order', component: ProductOrderComponent },
           { path: 'product-import', component: ProductImportComponent },
           { path: 'product-return', component: ProductReturnComponent },
+          { path: 'product-import-detail',component: ProductImportDetailComponent }
         ],
       },
       { path: 'category', component: CategoryComponent },

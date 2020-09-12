@@ -1,1 +1,65 @@
-<p>product-import works!</p>
+<!-- Header -->
+<div class="header">
+    <nav class="breadcrumb">
+        <a class="breadcrumb-item" href="#">Home</a>
+        <span class="breadcrumb-item active" href="#">Bill Import</span>
+    </nav>
+    <div class="d-md-flex align-items-center bg-white p-3">
+        <h3 class="mb-0">Bill Import </h3>
+        <div class="ml-auto mt-3 mt-md-0">
+            <button type="button" class="btn btn-primary " data-toggle="modal" data-target="#addSupp">
+            <i  class="fas fa-plus font-14 mr-1 text-light"></i>
+            <span  class="ml-1 text-white font-weight-bold">Add </span>
+        </button>
+        </div>
+    </div>
+    <div class="d-md-flex align-items-center border-top bg-white p-3">
+        <div class="search"><input type="text" placeholder="Search.." [(ngModel)]="keyword" name="keyword">
+            <button class="btn" type="submit" (click)="searchBill()"><i class="fas fa-search" ></i></button>
+        </div>
+        <div class=" row ml-auto mt-3 mt-md-0">
+            <h5 class="mb-0 mr-1  font-weight-bold font-14"> Total Bill </h5>{{totalBill}}
+        </div>
+    </div>
+</div>
+
+<!-- Table -->
+<div class="table-data">
+    <table class="table bg-white">
+        <thead class="thead-light">
+            <tr>
+                <th>ID</th>
+                <th>Total Product</th>
+                <th>Total Price</th>
+                <th>Date</th>
+                <th>Supplier</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let item of listBillImport">
+                <td class="align-middle">{{item.idBillImport}}</td>
+                <td class="py-4"><span class="align-middle font-16">{{item.totalProduct}}</span></td>
+                <td class="align-middle">{{item.totalMoney}}</td>
+                <td class="align-middle ">{{item.date}}</td>
+                <td class="align-middle"> </td>
+                <td class="align-middle action"><a routerLink="/homeAdmin/order/product-import-detail" routerLinkActive="active" (click)="showEdit(item.idBillImport)">View</a>
+
+                    <a><i  class="fas fa-edit edit" >Edit</i></a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<!-- End table Supplier -->
+
+<!-- Paging -->
+<div class="paging">
+    <ul class="nav nav-pills justify-content-center ">
+        <li class="nav-item" *ngFor="let p of pages; let i=index">
+            <a class="nav-link " href="" (click)="setPage(i,$event)" [ngClass]="{'active':i==page}">{{i+1}}</a>
+        </li>
+    </ul>
+</div>
+<!-- End paging -->
