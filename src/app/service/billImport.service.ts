@@ -14,7 +14,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
        constructor(private http: HttpClient){ }
 
         getListBillByPage(page:number): Observable<BillImport[]>{
-            return this.http.get<BillImport[]>(this.apiUrl+'?page='+page);
+            return this.http.get<BillImport[]>(this.apiUrl+'/billPage?page='+page);
         }
         
     

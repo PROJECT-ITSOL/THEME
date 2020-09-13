@@ -14,7 +14,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
        constructor(private http: HttpClient){ }
 
         getByIdBill(id:string): Observable<BillImportDetail[]>{
-            return this.http.get<BillImportDetail[]>(this.apiUrl+'?id='+id);
+            return this.http.get<BillImportDetail[]>(this.apiUrl+'?idBillImport='+id);
         }
         
     

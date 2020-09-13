@@ -38,13 +38,12 @@
         </thead>
         <tbody>
             <tr *ngFor="let item of listBillImport">
-                <td class="align-middle">{{item.idBillImport}}</td>
+                <td class="align-middle py-4">{{item.idBillImport}}</td>
                 <td class="py-4"><span class="align-middle font-16">{{item.totalProduct}}</span></td>
-                <td class="align-middle">{{item.totalMoney}}</td>
-                <td class="align-middle ">{{item.date}}</td>
+                <td class="align-middle">{{item.totalMoney | currency:"VND":true}}</td>
+                <td class="align-middle ">{{item.createDate}}</td>
                 <td class="align-middle"> </td>
                 <td class="align-middle action"><a routerLink="/homeAdmin/order/product-import-detail" routerLinkActive="active" (click)="showEdit(item.idBillImport)">View</a>
-
                     <a><i  class="fas fa-edit edit" >Edit</i></a>
                 </td>
             </tr>

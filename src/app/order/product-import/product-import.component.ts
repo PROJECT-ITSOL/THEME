@@ -1,4 +1,4 @@
-
+import { BillImportDetail } from './../../ultis/billImportDetail';
 import { BillImport } from './../../ultis/billImport';
 import { BillImportService } from './../../service/billImport.service';
 import { Component, OnInit, Output,EventEmitter } from '@angular/core';
@@ -20,7 +20,8 @@ export class ProductImportComponent implements OnInit {
   totalBill:number;
   billImport:BillImport;
   idBillImport:string;
-  name:string='nam';
+  date:Date;
+
 
   constructor( private billImportService:BillImportService,
     private DataService: DataService
@@ -42,21 +43,24 @@ export class ProductImportComponent implements OnInit {
   getListBillImport(){
     this.listBillImport = new Array();
     this.billImportService.getListBillByPage(this.page).subscribe(res=>{
-      console.log(res);
-      this.dataListBill=res['content'];
+      
+       this.dataListBill=res['data']['content'];
+      console.log(this.dataListBill);
+
+
       this.dataListBill.forEach((bill)=>{
         let billImport = new BillImport();
         billImport.idBillImport=bill['idBillImport'];
-        billImport.creatDate=bill['creatDate'];
         billImport.totalProduct=bill['totalProduct'];
         billImport.totalMoney=bill['totalMoney'];
-        billImport.billImportDetail=bill['billImportDetail'];
+        billImport.createDate=bill['createDate']
+        billImport.billImportDetail=bill['billImportDetails'];
         this.listBillImport.push(billImport);
       });
       console.log(this.listBillImport);
-      this.pages = new Array(res['totalPages']);
-      console.log(this.pages);
-      this.totalBill = (res['totalElements']);
+      this.pages = new Array(res['data']['totalPages']);
+     
+      this.totalBill = (res['data']['totalElements']);
     });
 
   }
@@ -68,7 +72,7 @@ export class ProductImportComponent implements OnInit {
       this.dataListBill.forEach((bill)=>{
         let billImport = new BillImport();
         billImport.idBillImport=bill['idBillImport'];
-        billImport.creatDate=bill['creatDate'];
+        billImport.createDate=bill['createDate'];
         billImport.totalProduct=bill['totalProduct'];
         billImport.totalMoney=bill['totalMoney'];
         billImport.billImportDetail=bill['billImportDetail'];
@@ -76,7 +80,7 @@ export class ProductImportComponent implements OnInit {
       });
       console.log(this.listBillImport);
       this.pages = new Array(res['totalPages']);
-      this.totalBill = (res['totalElements']);
+      this.totalBill = res['data']['totalElements'];
       });
   }
 

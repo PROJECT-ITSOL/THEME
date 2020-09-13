@@ -6,7 +6,10 @@
     </nav>
     <div class="d-md-flex align-items-center bg-white p-3">
         <h3 class="mb-0">Bill Import </h3>
-
+        <div class=" row ml-auto mt-3 mt-md-0 action">
+            <a><i  class="fas fa-edit" >Edit</i></a>
+            <a><i  class="fas fa-trash-alt delete" ></i></a>
+        </div>
     </div>
 
     <!-- Table -->
@@ -29,14 +32,16 @@
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td class="align-middle"></td>
-                    <td class="py-4"><span class="align-middle font-16"></span></td>
-                    <td class="align-middle"></td>
-                    <td class="align-middle "></td>
-                    <td class="align-middle"> </td>
-                    <td class="align-middle action">
-                    </td>
+                <tr *ngFor="let item of listDetail">
+                    <td align="center" class="align-middle ">{{id}}</td>
+
+                    <td align="center" class="py-4"><span class="align-middle font-16">{{item.idProduct}}</span></td>
+                    <td align="center" class="align-middle">{{item.nameProduct}}</td>
+                    <td align="center" class="align-middle ">{{item.amount}}</td>
+                    <td align="center" class="align-middle">{{item.unitPrice}}</td>
+                    <td align="center" class="align-middle">{{item.totalPrice}}</td>
+
+
                 </tr>
             </tbody>
         </table>

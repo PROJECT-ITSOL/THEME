@@ -1,3 +1,4 @@
+import { BillImport } from './../ultis/billImport';
 import { Injectable } from '@angular/core';
 
 import { BehaviorSubject } from 'rxjs';
@@ -6,9 +7,17 @@ import { BehaviorSubject } from 'rxjs';
   providedIn: 'root'
 })
 export class DataService {
+
+ 
+  
+  
+
   messageSource = new BehaviorSubject<string>("default ");
   currentMessage = this.messageSource.asObservable();
   // có thể subcribe theo dõi thay đổi value của biến này thay cho messageSource
+
+ 
+  
 
   constructor() { }
  
