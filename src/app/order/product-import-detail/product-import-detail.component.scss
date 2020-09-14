@@ -1,0 +1,22 @@
+.table-data {
+    table {
+        tr {
+            #idBill {
+                width: 70px;
+            }
+            th {
+                text-align: center;
+                vertical-align: middle;
+            }
+        }
+    }
+}
+
+.delete {
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+.action a:hover {
+    color: darkgoldenrod;
+}

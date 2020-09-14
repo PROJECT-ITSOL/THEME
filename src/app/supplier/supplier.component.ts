@@ -102,7 +102,6 @@ export class SupplierComponent implements OnInit {
   search(){
     this.listSupp=new Array();
     this.supplierService.search(this.keyword,this.page).subscribe(res =>{
-      
       this.dataSupp=res['content'];
       this.dataSupp.forEach((supp)=>{
         let supplier = new Supplier();
@@ -119,9 +118,6 @@ export class SupplierComponent implements OnInit {
       this.pages = new Array(res['totalPages']);
       this.totalSupp = (res['totalElements']);
       });
-     
-      
-    
   }
 
 

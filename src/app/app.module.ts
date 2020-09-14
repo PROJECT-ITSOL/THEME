@@ -1,3 +1,4 @@
+import { SupplierService } from './service/supplier.service';
 import { AuthenticationService } from './service/authentication.service';
 import { HttpconfigInterceptor } from './httpconfig.interceptor';
 import { from } from 'rxjs';
@@ -21,6 +22,8 @@ import { ProductReturnComponent } from './order/product-return/product-return.co
 import { ProductImportComponent } from './order/product-import/product-import.component';
 import { ProductOrderComponent } from './order/product-order/product-order.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { ProductImportDetailComponent } from './order/product-import-detail/product-import-detail.component';
+
 
 @NgModule({
   declarations: [
@@ -37,7 +40,9 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     ProductReturnComponent,
     ProductImportComponent,
     ProductOrderComponent,
-    DashboardComponent
+    DashboardComponent,
+    ProductImportDetailComponent,
+    
   ],
   imports: [
     BrowserModule,
@@ -47,6 +52,11 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     ReactiveFormsModule
   ],
   providers: [AuthenticationService,
+              SupplierService,
+              
+              
+             
+    
   {
     provide:HTTP_INTERCEPTORS,
     useClass:HttpconfigInterceptor,

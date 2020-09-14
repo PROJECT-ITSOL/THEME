@@ -30,8 +30,9 @@
     <!-- Table Supplier -->
     <div class="table-data">
         <table class="table bg-white">
-            <thead class="thead-dark">
+            <thead class="thead-light">
                 <tr>
+                    <th>ID</th>
                     <th>Name</th>
                     <th>Logo</th>
                     <th>Phone Number</th>
@@ -43,13 +44,14 @@
             </thead>
             <tbody>
                 <tr *ngFor="let item of listSupp">
+                    <td class="align-middle">{{item.idSupplier}}</td>
                     <td class="py-4"><span class="align-middle  font-16">{{item.name}}</span></td>
                     <td><img alt="" class="rounded-circle mr-3 logo" src="{{item.logo}}"></td>
                     <td class="align-middle"><i class="fas fa-phone-alt"></i> {{item.phoneNumber}}
                     </td>
                     <td class="align-middle "><i class="fas fa-map-marker-alt"></i> {{item.address}}
                     </td>
-                    <td class="align-middle"><i class="" [ngClass]="{' far fa-smile':item.status==1,' fas fa-frown':item.status==0}"></i>
+                    <td class="align-middle"><i class=""></i>
                         <div *ngIf="item.status==1">Active</div>
                         <div *ngIf="item.status==0">Disable</div>
                     </td>
@@ -93,20 +95,20 @@
                     <div class="p-3 position-relative ps ps--active-y" style="height: 350px;">
                         <div class="row">
                             <div class="col-12 form-group">Name Supplier
-                                <input type="text" [(ngModel)]="supplier.name" name="name" class="form-control" required #name="ngModel">
+                                <input type="text" ngModel name="name" class="form-control" required #name="ngModel">
                                 <span class="col-12 validator" *ngIf="name.errors?.required && name.touched">Name is required</span></div>
 
-                            <div class="col-6 form-group">Adress<input type="text" [(ngModel)]="supplier.address" name="address" class="form-control" required #address="ngModel">
+                            <div class="col-6 form-group">Adress<input type="text" ngModel name="address" class="form-control" required #address="ngModel">
                                 <span class="col-12 validator" *ngIf="address.errors?.required && address.touched">Address is required</span></div>
 
                             <div class="col-3 form-group">Status
                                 <div class="row">
-                                    <div style="margin-right: 20px;"><input ngModel name="status" type="radio" value="true">True</div>
-                                    <div><input ngModel name="status" type="radio" value="false">False</div>
+                                    <div style="margin-right: 20px;"><input ngModel name="status" type="radio" [value]="true" required>True</div>
+                                    <div><input ngModel name="status" type="radio" value="false" required>False</div>
                                 </div>
                             </div>
 
-                            <div class="col-12 form-group ">Phone Number<input type="text" [(ngModel)]="supplier.phoneNumber" pattern="^[0-9 ]+$" name="phoneNumber" class="form-control " required #phoneNumber="ngModel">
+                            <div class="col-12 form-group ">Phone Number<input type="text" ngModel pattern="^[0-9 ]+$" name="phoneNumber" class="form-control " required #phoneNumber="ngModel">
                                 <span class="col-12 validator" *ngIf="phoneNumber.errors?.required && phoneNumber.touched">PhoneNumber is required</span>
                                 <span class="col-12 validator" *ngIf="phoneNumber.errors?.pattern && phoneNumber.touched">PhoneNumber is invalid</span>
                             </div>
@@ -168,7 +170,7 @@
                         <div class="row">
                             <div class="col-12 form-group"><label class="mb-0 "> Name Supplier
                                 </label><input [ngModel]="supplier.name" [value]="supplier.name" type="text" name="name" class="form-control"></div>
-                            <div class="col-6 form-group"><label class="mb-0">Phone Number</label><input [ngModel]="supplier.phoneNumber" value="phoneNumber" type="text" name="phoneNumber" class="form-control "></div>
+                            <div class="col-6 form-group"><label class="mb-0">Phone Number</label><input [ngModel]="supplier.phoneNumber" [value]="phoneNumber" type="text" name="phoneNumber" class="form-control "></div>
                             <div class="col-3 form-group"><label class="mb-0 ">Status</label>
                                 <div class="row">
                                     <div style="margin-right: 20px;"><input [ngModel]="supplier.status" [checked]="supplier.status===true" name="status" type="radio" [value]="true">True</div>

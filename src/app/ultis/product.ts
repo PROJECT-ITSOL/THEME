@@ -1,7 +1,7 @@
 export class Product {
   idProduct: string;
-  // idCategory: string;
-  // idSupplier: string;
+  idCategory: string;
+  idSupplier: string;
   name: string;
   price: number;
   image: string;
