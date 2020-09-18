@@ -36,6 +36,7 @@ export class CategoryComponent implements OnInit {
     this.service.getList(param, url).subscribe((data) => {
       this.listPage = new Array(data['totalPages']);
       this.dataCategory = data['content'];
+      
       this.dataCategory.forEach((category) => {
         let categoryEntity = new Category();
         categoryEntity.id = category['idCategory'];

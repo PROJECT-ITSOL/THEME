@@ -52,8 +52,8 @@
                     <td class="align-middle "><i class="fas fa-map-marker-alt"></i> {{item.address}}
                     </td>
                     <td class="align-middle"><i class=""></i>
-                        <div *ngIf="item.status==1">Active</div>
-                        <div *ngIf="item.status==0">Disable</div>
+                        <div *ngIf="item.status==true">Active</div>
+                        <div *ngIf="item.status==false">Disable</div>
                     </td>
                     <td class="align-middle action "><a data-toggle="modal" data-target="#product"><i class="fas fa-dumbbell" (click)="showEdit(item)"> Product</i></a>
                     </td>
@@ -225,9 +225,9 @@
                             <td class="align-middle"><i class="fas fa-money-bill-wave"></i> {{item.price}}
                             </td>
 
-                            <td class="align-middle"><i class="" [ngClass]="{' far fa-smile':item.status==1,' fas fa-frown':item.status==0}"></i>
-                                <div *ngIf="item.status==1">Còn hàng</div>
-                                <div *ngIf="item.status==0">Hết hàng</div>
+                            <td class="align-middle"><i class="" [ngClass]="{' far fa-smile':item.status==true,' fas fa-frown':item.status==false}"></i>
+                                <div *ngIf="item.status==true">Còn hàng</div>
+                                <div *ngIf="item.status==false">Hết hàng</div>
                             </td>
 
                         </tr>
