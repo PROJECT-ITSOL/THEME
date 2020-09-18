@@ -56,10 +56,8 @@ export class CommentComponent implements OnInit {
     let param=new HttpParams().append('pageNo',this.pageNo.toString());
     this.service.getList(param, url).subscribe(
       (data) => {
-        // console.log(data[])
         this.dataComment = data['data']['content'];
         this.listPage = new Array(data['data']['totalPages']);
-        // console.log()
         this.dataComment.forEach((cmt) => {
           let commentEntity = new Comment();
           commentEntity.id = cmt['id'];
@@ -81,7 +79,6 @@ export class CommentComponent implements OnInit {
     this.service.getCommentById(url).subscribe(
         (data) => {
           if(data['success']){
-            console.log("success");
             this.dataComment = data['data']['content'];
             this.listPage = [];
             this.listPage = new Array(data['data']['totalPages']);
@@ -94,7 +91,6 @@ export class CommentComponent implements OnInit {
               commentEntity.content = cmt['content'];
               commentEntity.image = cmt['image'];
               this.listComment.push(commentEntity);
-              console.log(this.listComment);
             });
           }else{
             console.log("false");
