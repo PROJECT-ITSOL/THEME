@@ -1,5 +1,5 @@
 import { Supplier } from './../ultis/supplier';
-import { Observable, of } from 'rxjs';
+import { observable, Observable, of } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
@@ -12,13 +12,22 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
       private apiUrl = "http://localhost:8080/api/supplier";
 
        constructor(private http: HttpClient){ }
+
+        getAll():Observable<Supplier[]>{
+            return this.http.get<Supplier[]>(this.apiUrl);
+        }
+
         getListSupp(page:number): Observable<Supplier[]>{
             return this.http.get<Supplier[]>(this.apiUrl+'/list?page='+page);
         }
         
         getData(): Observable<Supplier[]> {
             return this.http.get<Supplier[]>(this.apiUrl);  
+    
+        }
 
+        getSuppById(id:number) : Observable<Supplier>{
+            return this.http.get<Supplier>(this.apiUrl+'/'+id);
         }
 
         addSupp(supp){

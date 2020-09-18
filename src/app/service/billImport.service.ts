@@ -16,7 +16,11 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
         getListBillByPage(page:number): Observable<BillImport[]>{
             return this.http.get<BillImport[]>(this.apiUrl+'/billPage?page='+page);
         }
-        
+
+        getBillById(id:string):Observable<BillImport>{
+            return this.http.get<BillImport>(this.apiUrl+'/'+id);
+
+        }
     
 
         addBill(bill){
@@ -29,8 +33,8 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
               });
         }
 
-        delete(id){
-            return this.http.delete(this.apiUrl+'/delete'+id);
+        delete(id:string){
+            return this.http.delete(this.apiUrl+'/delete/'+id);
         }
 
         search(key:string,page:number): Observable<BillImport[]>{
