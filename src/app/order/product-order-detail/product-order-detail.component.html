@@ -1,0 +1,38 @@
+
+<a routerLink="/homeAdmin/order/list-order" routerLinkActive="active">Order</a> 
+<h2>idOrder: {{GanidOrder}}</h2>
+
+<!-- phan header  -->
+<div class="header">
+    <nav class="breadcrumb">
+        <a class="breadcrumb-item" href="#">Home</a>
+        <span class="breadcrumb-item active" href="#">Order/OrderDetail </span>
+    </nav>
+</div>
+
+<div id="header">
+    <div class="d-md-flex align-items-center bg-white p-3">
+        <h3 class="mb-0">OderDetail List</h3>
+        <div class="ml-auto mt-3 mt-md-0">
+            
+        </div>
+    </div>
+    
+    <div class="d-md-flex align-items-center border-top bg-white p-3">
+        <div class="search"><input type="text" placeholder="Search.." [(ngModel)]="keyword" name="keyword">
+            <button class="btn" type="submit" (click)="search()"><i class="fas fa-search" ></i></button>
+        </div>
+        <div class=" row ml-auto mt-3 mt-md-0">
+
+            <h5 class="mb-0 mr-1  font-weight-bold font-14"> Total Order: </h5>{{totalOrder}}
+
+
+        </div>
+    </div> 
+
+<!-- phan table  -->
+<!-- end table -->
+
+
+
+ 

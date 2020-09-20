@@ -23,6 +23,7 @@ import { ProductImportComponent } from './order/product-import/product-import.co
 import { ProductOrderComponent } from './order/product-order/product-order.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ProductImportDetailComponent } from './order/product-import-detail/product-import-detail.component';
+import { ProductOrderDetailComponent } from './order/product-order-detail/product-order-detail.component';
 
 
 @NgModule({
@@ -42,6 +43,7 @@ import { ProductImportDetailComponent } from './order/product-import-detail/prod
     ProductOrderComponent,
     DashboardComponent,
     ProductImportDetailComponent,
+    ProductOrderDetailComponent,
     
   ],
   imports: [
