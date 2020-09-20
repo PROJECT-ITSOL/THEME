@@ -7,15 +7,15 @@
     <div class="tools">
         <div class="icon-bar">
             <label for="check">
-        <i class="fas fa-bars"></i>d
-      </label>
+                <i class="fas fa-bars"></i>
+            </label>
         </div>
         <div class="form">
             <form action="" #formSearch="ngForm" class="form-search">
                 <input type="search" class="search" name="search " #search ngModel placeholder="Search" />
                 <button class="icon-search">
-          <i class="fas fa-search"></i>
-        </button>
+                    <i class="fas fa-search"></i>
+                </button>
             </form>
         </div>
         <div class="notify">
@@ -28,9 +28,9 @@
                 </li>
                 <li class="nav-item dropdown">
                     <button class="btn dropdown-toggle" type="button" id="triggerId" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            <img src="../../assets/image/avt.jpg" alt="" />
-            <span>Admin</span>
-          </button>
+                        <img src="../../assets/image/avt.jpg" alt="" />
+                        <span>Admin</span>
+                    </button>
                     <div class="dropdown-menu dropdown-menu-right animate slideIn" aria-labelledby="triggerId">
                         <a class="dropdown-item" href="#">
                             <i class="fas fa-user"></i>
@@ -88,8 +88,10 @@
             </li>
             <li class="sub-menu" [ngClass]="{ active: isSubMenu }">
                 <a class="order" routerLink="/homeAdmin/order" routerLinkActive="active" (click)="showMenuDrop()">
-                    <i class="nav-icon fab fa-opencart" aria-hidden="true "></i>
+                    <i class="nav-icon fab fa-opencart" aria-hidden="true"></i>
                     <span>đơn hàng</span>
+                    <i class="icon-down nav-icon fas fa-sort-down" id="icon"></i>
+
                 </a>
                 <ul class="menu menu-order" id="order ">
                     <li>

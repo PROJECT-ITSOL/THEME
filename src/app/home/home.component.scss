@@ -264,6 +264,7 @@
             }
             li {
                 a {
+                    position: relative;
                     transition: all 0.3s;
                     display: block;
                     padding: 15px;
@@ -279,6 +280,17 @@
                     }
                     &:hover {
                         background-color: #363c50;
+                    }
+                    .icon-down {
+                        position: absolute;
+                        top: 50%;
+                        right: 10px;
+                        width: 10px;
+                        transform: translateY(-50%);
+                        transition: all 0.3s;
+                        &.active {
+                            transform: rotate(-180deg);
+                        }
                     }
                 }
                 &.sub-menu {

@@ -19,6 +19,8 @@ export class HomeComponent implements OnInit {
 
   showMenuDrop() {
     this.isSubMenu = !this.isSubMenu;
+    const icon =document.getElementById('icon')
+    icon.classList.toggle('active')
   }
 
   showLogout() {
