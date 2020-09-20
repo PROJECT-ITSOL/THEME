@@ -284,10 +284,16 @@
                 &.sub-menu {
                     .menu-order {
                         position: static;
+                        display: none;
                         li {
                             a {
                                 padding-left: 40px;
                             }
+                        }
+                    }
+                    &.active {
+                        .menu-order {
+                            display: block;
                         }
                     }
                 }
