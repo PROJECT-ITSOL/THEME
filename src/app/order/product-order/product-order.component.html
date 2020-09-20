@@ -36,9 +36,11 @@
             <th>Id_Customer</th>
             <th>Create_day</th>
             <th>status</th>
-            <th>total_Money</th>
-            <th>showOrderDetail</th>
+            <!-- <th>total_Money</th> -->
             <th></th>
+            <th>showOrderDetail</th>
+            
+            <!-- <th></th> -->
             <th>delete</th>
         </tr>
     </thead>
@@ -46,22 +48,22 @@
         <tr *ngFor="let item of listOrder">
             <td>{{item.idOrder}}</td>
             <td>{{item.idCustomer}}</td>
-            <td>{{item.createDate}}</td>
+            <td>{{item.createDate|date}}</td>
             <td>{{item.status}}</td>
-            <td>{{item.totalMoney}}</td>
-            
-             
+             <!-- <td>{{item.totalMoney|currency:'VND'}}</td>  -->
+            <td></td>
+           
 <!--  -->
             <td>
                 <a routerLink="/homeAdmin/order/list-order-detail" routerLinkActive="active"
                 (click)="show(item.idOrder)">OrderDetail</a>
             </td>
 
-            <td class="align-middle action">
+            <!-- <td class="align-middle action">
                     <a data-toggle="modal" data-target="#edit" class="btn btn-primary ">
                         <i  class="fas fa-edit" (click)="showEdit(item)">action</i>
                     </a>
-            </td>
+            </td> -->
 
 
             <td>
@@ -133,6 +135,8 @@
       </div>
     </div>
   </div>
+
+  
 
  
   

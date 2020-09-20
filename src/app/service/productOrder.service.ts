@@ -58,8 +58,8 @@ export class ProductOrderService {
     // putUpdate(url: string, object: any) {
     //     return this.http.put(this.apiUrl + url, object);
     //   }
-    getOrderdetail(id) {
-        return this.http.get<OderDetail[]>(this.apiUrl + '/oderdetail?=' + id);
-    }
+    // getOrderdetail(id) {
+    //     return this.http.get<OderDetail[]>(this.apiUrl + '/oderdetail?=' + id);
+    // }
 
 }

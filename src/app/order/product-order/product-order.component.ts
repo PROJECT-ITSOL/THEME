@@ -32,6 +32,8 @@ export class ProductOrderComponent  implements OnInit {
   message:string;   // luu thong bao
   idDelete: string; // luu id xoa
   dataOrder: Array<any>; // lua doi tuong tam thoi
+  dataOrderDetail: Array<any>;
+  totalOrderDetail: number;
   totalOrder: number;
   order=new Order();    // khoi tao bien
   // bien page
@@ -56,17 +58,40 @@ export class ProductOrderComponent  implements OnInit {
     getOrder(){
       
         this.listOrder= new Array();
+        
         this.productOrderService.getListOrder(this.page).subscribe(res=>{
           this.dataOrder=res['content']; 
+          this.totalOrder=0;
+          
           this.dataOrder.forEach((order)=>{
                   let orderEntity = new Order();
+                 // listOrderDetail:OderDetail[] ;
                   orderEntity.idOrder=order['idOrder'];
                   orderEntity.idCustomer=order['idCustomer'];
                   orderEntity.createDate=order['createDate'];
                   orderEntity.status=order['status'];
-                  orderEntity.totalMoney=order['totalMoney'];
-                  orderEntity.orderDetail=order['listOrderDetail'];
-                  
+                    
+                  this.productOrderDetailService.getByIdProductOrderdetail(orderEntity.idOrder).subscribe(odl=>{
+                    this.listOrderDetail= new Array();
+                    this.dataOrderDetail=new Array();
+                    this.dataOrderDetail=res['content'];
+                    this.totalOrderDetail=0;
+                        this.dataOrderDetail.forEach((oderDetail)=>{
+                          let orderDetailEntity = new OderDetail();
+                                //  orderDetailEntity.idOrderDetail = oderDetail['idOrderDetail'];
+                                 // orderDetailEntity.idOrder = oderDetail['idOrder'];
+                                //  orderDetailEntity.idProduct = oderDetail['idProduct'];
+                               // orderDetailEntity.amount = oderDetail['amount'];
+                               // orderDetailEntity.product.price = oderDetail['product']['price'];
+                               // orderDetailEntity.product.name = oderDetail['product']['name'];
+                                //this.totalOrderDetail=this.totalOrderDetail+orderDetailEntity.price*orderDetailEntity.amount;
+                                  this.listOrderDetail.push(orderDetailEntity); 
+                        });
+                  });
+                 // orderEntity.totalMoney=order['totalMoney'];
+                  //orderEntity.orderDetail=order['listOrderDetail'];
+                 // orderEntity.orderDetail.
+               // orderEntity.totalMoney=orderEntity.totalMoney + this.totalOrderDetail;
                   this.listOrder.push(orderEntity);
           });
           console.log(this.listOrder);

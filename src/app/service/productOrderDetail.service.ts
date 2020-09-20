@@ -2,13 +2,17 @@ import { OderDetail } from "./../ultis/orderDetail";
 import { Observable } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Order } from '../ultis/order';
 
 @Injectable({ providedIn: 'root'}) export class ProductOrderDetailService {
-    private apiUrl= "http://localhost:8080/api/orderDetail";
+    private apiUrl= "http://localhost:8080/api/orderdetail";
 
     constructor(private http: HttpClient){}
         getByIdProductOrderdetail(id:string): Observable<OderDetail[]>{
             return this.http.get<OderDetail[]>(this.apiUrl+'?idOrder='+id);
+        }
+        getOrderById(id:string):Observable<Order[]>{
+            return this.http.get<Order[]>(this.apiUrl+'/'+id);
         }
 
         getData(): Observable<OderDetail[]> {
@@ -27,7 +31,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
         }
 
         delete(id){
-            return this.http.delete(this.apiUrl+'/delete?id='+id);
+            return this.http.delete(this.apiUrl+'/delete/'+id);
         }
 
         search(key:string,page:number): Observable<OderDetail[]>{
