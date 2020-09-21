@@ -16,26 +16,45 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
         getListBillByPage(page:number): Observable<BillImport[]>{
             return this.http.get<BillImport[]>(this.apiUrl+'/billPage?page='+page);
         }
-        
+
+        getBillById(id:string):Observable<BillImport>{
+            return this.http.get<BillImport>(this.apiUrl+'/'+id);
+
+        }
     
 
         addBill(bill){
             return this.http.post(this.apiUrl+'/addBillImport',bill);
         }
 
-        editSupp(id,billImport){
+        editBill(id,billImport){
             return this.http.put(this.apiUrl+'/update/'+id,billImport,{
                 responseType: 'text' as 'json',
               });
         }
 
-        delete(id){
-            return this.http.delete(this.apiUrl+'/delete'+id);
+        delete(id:string){
+            return this.http.delete(this.apiUrl+'/delete/'+id);
         }
 
         search(key:string,page:number): Observable<BillImport[]>{
             return this.http.get<BillImport[]>(this.apiUrl+'/search?keyWord='+key+'&page='+page);
         }
+
+        getByIdSupp(id:number,page:number): Observable<BillImport[]>{
+            return this.http.get<BillImport[]>(this.apiUrl+'/searchByIdSupp?idSupplier='+id+'&page='+page);
+        }
+
+        updateTotalPrice(id,billDetail){
+            return this.http.put(this.apiUrl+'/updateMoney/'+id,billDetail,{
+                responseType: 'text' as 'json',
+            });
+            
+        }
+
+        // updateBillImport(id:string){
+        //     return this.http.put(this.apiUrl+'/update/'+id);        
+        // }
 
         
 }

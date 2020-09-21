@@ -20,17 +20,17 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
     
 
         addBill(bill){
-            return this.http.post(this.apiUrl+'/addBillImport',bill);
+            return this.http.post(this.apiUrl+'/addNewBillDetail',bill);
         }
 
-        editSupp(id,billImport){
-            return this.http.put(this.apiUrl+'/update/'+id,billImport,{
+        editBillDetail(id,billDetail){
+            return this.http.put(this.apiUrl+'/update/'+id,billDetail,{
                 responseType: 'text' as 'json',
               });
         }
 
         delete(id){
-            return this.http.delete(this.apiUrl+'/delete'+id);
+            return this.http.delete(this.apiUrl+'/delete/'+id);
         }
 
         search(key:string,page:number): Observable<BillImportDetail[]>{

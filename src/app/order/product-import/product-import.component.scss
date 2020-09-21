@@ -1,3 +1,26 @@
 .edit {
     margin-left: 40px;
 }
+
+.removeBillDetail {
+    padding-top: 33px;
+}
+
+a {
+    cursor: pointer;
+}
+
+.validator {
+    color: red;
+}
+
+.fa-trash-alt {
+    margin-left: 20px;
+}
+
+td a {
+    color: black;
+     :hover {
+        color: chocolate;
+    }
+}

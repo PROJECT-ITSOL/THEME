@@ -29,7 +29,6 @@ export class LoginComponent implements OnInit {
         let parent = this.parentNode.parentNode;
         parent.classList.add('focus');
       });
-      console.log(input);
 
       input.addEventListener('blur', function () {
         let parent = this.parentNode.parentNode;

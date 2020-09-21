@@ -1,65 +1,75 @@
+
+
+
+
+
+<!-- phan header  -->
 <div class="header">
     <nav class="breadcrumb">
         <a class="breadcrumb-item" href="#">Home</a>
-        <span class="breadcrumb-item " routerLink="/homeAdmin/order/product-import" routerLinkActive="active">Bill Import</span>
-        <span class="breadcrumb-item active" routerLink="/homeAdmin/order/product-import-detail" routerLinkActive="active">Bill Import Detail</span>
+        <span class="breadcrumb-item active" href="#">Order/OrderDetail </span>
     </nav>
+</div>
+
+<div id="header">
     <div class="d-md-flex align-items-center bg-white p-3">
-        <h3 class="mb-0">Bill Import Detail: ID={{id}} </h3>
-        <div class=" row ml-auto mt-3 mt-md-0 action">
-            <a data-toggle="modal" data-target="#delete"><i  class="fas fa-trash-alt delete" ></i></a>
+        <h3 class="mb-0">OderDetail List</h3>
+        <div class="ml-auto mt-3 mt-md-0">
+            
         </div>
     </div>
+    
+    <div class="d-md-flex align-items-center border-top bg-white p-3">
+        <h4 class="text-primary"><a routerLink="/homeAdmin/order/list-order" routerLinkActive="active">Back_Order</a> </h4>
+        <div class=" row ml-auto mt-3 mt-md-0">
 
-    <!-- Table -->
-    <br class="table-data">
-    <table class="table bg-white">
-        <thead class="thead-light">
-            <tr>
-                <th rowspan="2" id="idBill">ID Bill </th>
-                <th rowspan="2">ID</th>
-                <th colspan="6">Product</th>
-                <th rowspan="2">Action</th>
+            <h5 class="mb-0 mr-1  font-weight-bold font-14"> so luong mat hang: </h5>{{totalOrderDetail}}
 
-            </tr>
-            <tr>
-                <th>ID Product</th>
-                <th>Name</th>
-                <th>Amount</th>
-                <th>Unit Price</th>
-                <th>Money</th>
-                <th>Supplier</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr *ngFor="let item of listDetail">
-                <td align="center" class="align-middle ">{{id}}</td>
-                <td align="center" class="py-4"><span class="align-middle font-16">{{item.id}}</span></td>
-                <td align="center" class="align-middle">{{item.idProduct}}</td>
-                <td align="center" class="align-middle">{{item.nameProduct}}</td>
-                <td align="center" class="align-middle ">{{item.amount}}</td>
-                <td align="center" class="align-middle">{{item.price | currency:"VND"}}</td>
-                <td align="center" class="align-middle">{{item.totalPrice | currency:"VND"}}</td>
-                <td align="center" class="align-middle">{{nameSupplier}}</td>
-                <td align="center" class="align-middle action">
-                    <a data-toggle="modal" data-target="#editBill" (click)="getItem(item)"><i  class="fas fa-edit" >Edit</i></a>
-                    <a data-toggle="modal" data-target="#deleteBillDetail" (click)="getItem(item)"><i  class="fas fa-trash-alt delete" ></i></a>
-                </td>
-            </tr>
 
-        </tbody>
-    </table>
-    <!-- End table Supplier -->
+        </div>
+    </div> 
 
-    <div type="button" class="btn btn-info" data-toggle="modal" data-target="#addBill">Add new product</div>
-    <div class=" align-items-center bg-bottom p-3 footer">
-        <h6>Total Bill Import Detail : {{totalBillImportDetail}}</h6>
-        <hr>
-        <h6>Total Product : {{totalProduct}}</h6>
-        <hr>
-        <h6> Total Price : {{totalMoney | currency:"VND":true}}</h6>
-    </div>
+<!-- phan table  -->
+<table class="table table-light table-data">
+    <thead class="thead-light">
+        <tr>
+            <th>id OderDetail</th>
+            <th>id product</th>
+            <th>id Order</th>
+            <th>Amount</th>
+            <th>Name Product</th>
+            <th>Price</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let item of listOrderDetail">
+            <td>{{item.idOrderDetail}}</td>
+            <td>{{item.idProduct}}</td>
+            <td>{{item.idOrder}}</td>
+            <td>{{item.amount}}</td>
+            <td>{{item.nameProduct}}</td>
+            <td>{{item.price|currency:"VND"}}</td>
+            <!-- <td>{{item.product.name}}</td>
+            <td>{{item.product.image}}</td>
+            <td>{{item.product.price}}</td> 
+        cho push API cua product-->
 
+        <td>
+            <a data-toggle="modal" data-target="#editOrderDetail" (click)="getItem(item)" (click)="setProduct()"><i  class="fas fa-edit" >Edit</i></a>
+        </td>
+        <td> 
+            <a data-toggle="modal" data-target="#deleteOrderDetail" (click)="getItem(item)"><i  class="fas fa-trash-alt delete" ></i></a>
+        </td>
+        </tr>
+    </tbody>
+    <tfoot>
+        <tr>
+            <!-- <th>#</th> -->
+        </tr>
+    </tfoot>
+</table>
+<!-- end table -->
+<h5 class="mb-0 mr-1  font-weight-bold font-14"> Tong tien: {{Tong |currency:"VND" }}</h5>
 
 
     <!-- Modal add -->
@@ -67,7 +77,7 @@
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">Add New Bill Import</h5>
+                    <h5 class="modal-title">Add New Order</h5>
                 </div>
                 <div class="modal-body">
                     <form #formAdd="ngForm" novalidate>
@@ -78,7 +88,7 @@
                             </div>
                             <div class="row">
                                 <div class=" col-4 form-group">
-                                    <label for="ChooseProduct">Choose Product</label>
+                                    <label for="ChooseProduct">Name Product</label>
                                     <select class="form-control " id="ChooseProduct" name="Product" [(ngModel)]="nameProduct" (change)="setProduct()">
                                     <option>Choose Product</option>
                                     <option *ngFor="let item of listProduct">{{item.name}}</option>                               
@@ -111,47 +121,47 @@
     </div>
     <!-- End modal add bill detail -->
 
-    <!-- Modal edit bill detail -->
-    <div class="modal fade bd-example-modal-lg " id="editBill" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <!-- model edit bill detail -->
+    <div class="modal fade bd-example-modal-lg " id="editOrderDetail" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">Edit Bill Import</h5>
+                    <h5 class="modal-title">Edit OrderTail</h5>
                 </div>
                 <div class="modal-body">
-                    <form #formEdit="ngForm" novalidate>
+                    <form #formAdd="ngForm" novalidate>
                         <div class="p-4 formAdd">
                             <div class="col-12 form-group">
-                                <label>Supplier</label>
+                                <label>Oderdetail</label>
                                 <input disabled type="text" disabled [(ngModel)]="nameSupplier" name="nameSupplier" class="form-control">
                             </div>
                             <div class="row">
                                 <div class=" col-4 form-group">
-                                    <label>Choose Product</label>
-                                    <select class="form-control " name="roduct" [ngModel]="billDetail.nameProduct" (change)="setProduct()">
-                                    <option>Choose Product</option>
+                                    <label>Product</label>
+                                    <select class="form-control " name="Product" [ngModel]="orderDetail.nameProduct" (change)="setProduct()">
+                                    <option>Product</option>
                                     <option *ngFor="let item of listProduct">{{item.name}}</option>                               
                                 </select>
                                 </div>
                                 <div class="col-2 form-group ">
                                     <label for="amount ">Amount</label>
-                                    <input type="number" pattern="^[0-9 ]+$" [(ngModel)]="billDetail.amount" name="amount" class="form-control" required #amount="ngModel">
+                                    <input type="number" pattern="^[0-9 ]+$" [(ngModel)]="orderDetail.amount" name="amount" class="form-control" required #amount="ngModel">
                                     <span class="col-6 validator" *ngIf="amount.errors?.required && amount.touched"> Required</span>
                                     <span class="col-6 validator" *ngIf="amount.errors?.pattern && amount.touched">Invalid</span>
                                 </div>
                                 <div class="col-3 form-group ">
                                     <label for="idProduct ">Id Product</label>
-                                    <input type="text" name="idProduct" class="form-control" [ngModel]="billDetail.idProduct" [(value)]="idProduct">
+                                    <input type="text" name="idProduct" class="form-control" [(ngModel)]="orderDetail.idProduct" [value]="orderDetail.idProduct">
                                 </div>
                                 <div class="col-2 form-group ">
-                                    <label for="price">Unit Price</label>
-                                    <input type="text" name="price" class="form-control" [ngModel]="billDetail.price" [(value)]="price">
+                                    <label for="price">Price</label>
+                                    <input type="text" name="price" class="form-control" [(ngModel)]="orderDetail.price" [value]="orderDetail.price">
                                 </div>
                             </div>
                         </div>
                         <div class="modal-footer ">
                             <button type="button " class="btn btn-outline-danger " data-dismiss="modal">Cancel</button>
-                            <button type="submit " class="btn btn-outline-primary " data-dismiss="modal" (click)="editDetail(formEdit)">Save</button>
+                            <button [disabled]="formAdd.invalid" type="submit " class="btn btn-outline-primary " data-dismiss="modal" (click)="addProduct(formAdd)">Send</button>
                         </div>
                     </form>
                 </div>
@@ -161,18 +171,19 @@
     <!-- End modal edit bill -->
 
     <!-- Modal delete bill import-->
-    <div class="modal fade" id="delete" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="deleteOrderDetail" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Delete BillImport</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Delete Order</h5>
                 </div>
                 <div class="modal-body">
-                    Are you sure to delete Bill :Id={{id}} ?
+                    Are you sure to delete ?
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Cancel</button>
-                    <button type="button" class="btn btn-outline-danger" data-dismiss="modal" (click)="deleteBill()" routerLink="/homeAdmin/order/product-import" routerLinkActive="active">Delete</button>
+                   
+                    <button type="button" class="btn btn-outline-danger" data-dismiss="modal" (click)="deleteOderDetail()" routerLink="/homeAdmin/order/list-order-detail" routerLinkActive="active">Delete</button>
                 </div>
             </div>
         </div>
@@ -194,9 +205,11 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Cancel</button>
-                    <button type="button" class="btn btn-outline-danger" data-dismiss="modal" (click)="deleteBillDetail()">Delete</button>
+                    <button type="button" class="btn btn-outline-danger" data-dismiss="modal" (click)="deleteOderDetail()">Delete</button>
                 </div>
             </div>
         </div>
     </div>
     <!-- End modal delete -->
+
+ 

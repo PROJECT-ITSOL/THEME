@@ -4,6 +4,9 @@
             #idBill {
                 width: 70px;
             }
+            .action a i:hover {
+                color: chocolate;
+            }
             th {
                 text-align: center;
                 vertical-align: middle;
@@ -19,4 +22,18 @@
 
 .action a:hover {
     color: darkgoldenrod;
+}
+
+a {
+    cursor: pointer;
+}
+
+.footer {
+    h6 {
+        font-weight: bold;
+    }
+}
+
+.breadcrumb-item {
+    cursor: pointer;
 }

@@ -15,6 +15,7 @@ import { LoginComponent } from './login/login.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { ProductOrderComponent } from './order/product-order/product-order.component';
+import { ProductOrderDetailComponent } from './order/product-order-detail/product-order-detail.component';
 
 const routes: Routes = [
   { path: 'loginAdmin', component: LoginComponent },
@@ -33,9 +34,10 @@ const routes: Routes = [
         children: [
           { path: '', redirectTo: 'list-order', pathMatch: 'full' },
           { path: 'list-order', component: ProductOrderComponent },
+          { path: 'list-order-detail', component: ProductOrderDetailComponent },
           { path: 'product-import', component: ProductImportComponent },
           { path: 'product-return', component: ProductReturnComponent },
-          { path: 'product-import-detail',component: ProductImportDetailComponent }
+          { path: 'product-import-detail/:id',component: ProductImportDetailComponent }
         ],
       },
       { path: 'category', component: CategoryComponent },
