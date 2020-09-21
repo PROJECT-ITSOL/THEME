@@ -1,1 +1,142 @@
-<p>product-order works!</p>
+
+
+<!-- header -->
+<div class="header">
+    <nav class="breadcrumb">
+        <a class="breadcrumb-item" href="#">Home</a>
+        <span class="breadcrumb-item active" href="#">Order</span>
+    </nav>
+</div>
+
+<div id="header">
+    <div class="d-md-flex align-items-center bg-white p-3">
+        <h3 class="mb-0">Oder List</h3>
+        <div class="ml-auto mt-3 mt-md-0">
+            
+        </div>
+    </div>
+    
+    <div class="d-md-flex align-items-center border-top bg-white p-3">
+        <div class="search"><input type="text" placeholder="Search.." [(ngModel)]="keyword" name="keyword">
+            <button class="btn" type="submit" (click)="search()"><i class="fas fa-search" ></i></button>
+        </div>
+        <div class=" row ml-auto mt-3 mt-md-0">
+
+            <h5 class="mb-0 mr-1  font-weight-bold font-14"> Total Order: </h5>{{totalOrder}}
+
+
+        </div>
+    </div> 
+<!-- Table Order -->
+
+ <table class="table table-light table-data">
+    <thead class="thead-light">
+        <tr>
+            <th>Id_Order</th>
+            <th>Id_Customer</th>
+            <th>Create_day</th>
+            <th>status</th>
+            <!-- <th>total_Money</th> -->
+            <th></th>
+            <th>showOrderDetail</th>
+            
+            <!-- <th></th> -->
+            <th>delete</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let item of listOrder">
+            <td>{{item.idOrder}}</td>
+            <td>{{item.idCustomer}}</td>
+            <td>{{item.createDate|date}}</td>
+            <td>{{item.status}}</td>
+             <!-- <td>{{item.totalMoney|currency:'VND'}}</td>  -->
+            <td></td>
+           
+<!--  -->
+            <td>
+                <a routerLink="/homeAdmin/order/list-order-detail" routerLinkActive="active"
+                (click)="show(item.idOrder)">OrderDetail</a>
+            </td>
+
+            <!-- <td class="align-middle action">
+                    <a data-toggle="modal" data-target="#edit" class="btn btn-primary ">
+                        <i  class="fas fa-edit" (click)="showEdit(item)">action</i>
+                    </a>
+            </td> -->
+
+
+            <td>
+                <button type="button" class="btn btn-primary " data-toggle="modal" data-target="#delete" (click)="showEdit(item)">
+                    <i class="far fa-trash-alt"></i></button>
+            </td>
+        </tr>
+    </tbody>
+    <tfoot>
+        <tr>
+            <th></th>
+        </tr>
+    </tfoot>
+</table> 
+<!-- End table -->
+<!-- paging -->
+<div class="paging">
+    <ul class="nav nav-pills justify-content-center ">
+        <!-- <li class="nav-item" *ngFor="let p of pages; let i=index">
+            <a class="nav-link " href="" (click)="setPage(i,$event)" [ngClass]="{'active':i==page}" *ngIf="expression">{{i}}</a>
+        </li> -->
+        <li>
+            <a class="nav-link " href="" (click)="setPage(i-2,$event)" [ngClass]="{'active':i-2==page}" *ngIf="i-2>=0">{{i-2}}</a> 
+        </li>
+        <li>
+            <a class="nav-link " href="" (click)="setPage(i-1,$event)" [ngClass]="{'active':i-1==page}" *ngIf="i-1>=0" >{{i-1}}</a> 
+        </li>
+        <li>
+            <a class="nav-link " href="" (click)="setPage(i,$event)" [ngClass]="{'active':i==page}" *ngIf="i>=0">{{i}}</a> 
+        </li>
+        <li>
+            <a class="nav-link " href="" (click)="setPage(i+1,$event)" [ngClass]="{'active':i+1==page}" *ngIf="i>=0">{{i+1}}</a> 
+        </li>
+        <li>
+            <a class="nav-link " href="" (click)="setPage(i+2,$event)" [ngClass]="{'active':i+2==page}" *ngIf="i>=0">{{i+2}}</a> 
+        </li>
+             
+        <li>
+            <a class="nav-link " href="" (click)="setPage(10,$event)" [ngClass]="{'active':10==page}" *ngIf="i+2<10">{{10}}</a> 
+        </li>
+        <li>
+            <a class="nav-link " href="" (click)="setPage(20,$event)" [ngClass]="{'active':20==page}" *ngIf="i+2<20">{{20}}</a>
+        </li>
+        <li>
+            <a class="nav-link " href="" (click)="setPage(30,$event)" [ngClass]="{'active':30==page}" *ngIf="i+2<30">{{30}}</a>
+        </li>
+        <li>
+            <a class="nav-link " href="" (click)="setPage(40,$event)" [ngClass]="{'active':40==page}" *ngIf="i+2<40">{{40}}</a>
+        </li>
+    </ul>
+</div>
+<!-- Modal delete -->
+<div class="modal fade" id="delete" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Xoá</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          ... ban thực sự muốn xoá 
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Huỷ</button>
+          <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="delete()">Xóa</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  
+
+ 
+  

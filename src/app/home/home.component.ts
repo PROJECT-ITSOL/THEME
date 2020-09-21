@@ -19,6 +19,8 @@ export class HomeComponent implements OnInit {
 
   showMenuDrop() {
     this.isSubMenu = !this.isSubMenu;
+    const icon =document.getElementById('icon')
+    icon.classList.toggle('active')
   }
 
   showLogout() {
@@ -29,7 +31,6 @@ export class HomeComponent implements OnInit {
     localStorage.removeItem('token');
   }
   isToken(){
-
     this.service.isLoggedIn().subscribe();
   }
 }

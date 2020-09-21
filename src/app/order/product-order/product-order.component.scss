@@ -1,0 +1,19 @@
+.wrapper-order{
+    border-radius:5px ;
+    padding: 30px;
+    background-color: azure;
+    .table{
+        border: 2px solid red;
+        border-radius: 5px;
+        td{
+            vertical-align: middle;
+        }
+    }
+    .pagination{
+        li{
+            &.active {
+                background-color: aqua;
+            }
+        }
+    }
+}
