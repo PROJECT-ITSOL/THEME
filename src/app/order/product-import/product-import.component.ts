@@ -26,7 +26,7 @@ export class ProductImportComponent implements OnInit  {
   pages:Array<number>;
   dataListBill:Array<any>;
   totalBill:number;
-  billImport:BillImport;
+  billImport= new BillImport();
   idBillImport:string;
   date:Date;
 
@@ -43,10 +43,6 @@ export class ProductImportComponent implements OnInit  {
   nameProduct:string;
 
 
-
-  
-
-
   constructor( private billImportService:BillImportService,
                 private DataService: DataService,
                 private SupplierService: SupplierService
@@ -55,14 +51,10 @@ export class ProductImportComponent implements OnInit  {
 
 
   ngOnInit(): void {
-    this.getListBillImport();
-   
-   
+    this.getListBillImport(); 
+    this.getSupplier();
   }
 
-  showEdit(message:string) {
-    this.DataService.changeMessage(message);
-  }
 
   setPage(i,event:any){
     event.preventDefault();
@@ -75,18 +67,15 @@ export class ProductImportComponent implements OnInit  {
     this.listBillImport = new Array();
     this.billImportService.getListBillByPage(this.page).subscribe(res=>{
        this.dataListBill=res['data']['content'];
-      console.log(this.dataListBill);
       this.dataListBill.forEach((bill)=>{
         let billImport = new BillImport();
         billImport.idBillImport=bill['idBillImport'];
-        // billImport.suppplier=bill['supplier'];
-        // billImport.nameSupplier=bill['supplier']['name'];
         billImport.totalProduct=bill['totalProduct'];
         billImport.totalMoney=bill['totalMoney'];
-        billImport.createDate=bill['createDate']
+        billImport.createDate=bill['createDate'];
+        billImport.nameSupplier=bill['supplierImport']['name'];
         this.listBillImport.push(billImport);
       });
-      console.log(this.listBillImport);
       this.pages = new Array(res['data']['totalPages']);
       this.totalBill = (res['data']['totalElements']);
     });
@@ -107,49 +96,45 @@ export class ProductImportComponent implements OnInit  {
         billImport.billImportDetail=bill['billImportDetail'];
         this.listBillImport.push(billImport);
       });
-      console.log(this.listBillImport);
       this.pages = new Array(res['totalPages']);
       this.totalBill = res['data']['totalElements'];
       });
   }
 
-  
-  
-   
-  
-
   getBillImport(bill:BillImport){
     this.billImport=bill;
-    console.log(bill);
     console.log(this.billImport);
-
-
   }
 
   addBill(form:NgForm){
-    console.log(form);
-    console.log('Your form data : ', form.value);
     let newBillImport = new BillImport;
       newBillImport.idBillImport=form.value.idBillImport;
       newBillImport.createDate=form.value.createDate;
       newBillImport.supplier=this.supplier;
-      console.log(this.supplier);
-      console.log(newBillImport);
-    this.billImportService.addBill(newBillImport).subscribe((res) => {
-      console.log(res);    
-       alert(res['message']);     
+      newBillImport.totalMoney=0;
+      newBillImport.totalProduct=0;
+      this.billImportService.addBill(newBillImport).subscribe((res) => { 
+      alert(res['message']);     
+      this.getListBillImport();
     });
-    location.reload();
+   
   }
 
+  editBill(form:NgForm){
+    let newBillImport = new BillImport;
+      newBillImport.idBillImport=form.value.idBillImport;
+      newBillImport.createDate=form.value.createDate;
+      this.billImportService.editBill(this.billImport.idBillImport,form.value).subscribe(res=>{
+
+      });
+  }
 
   setSupplier(){
-   
     this.listSupp.forEach(supp => {
       if (supp.name===this.nameSupplier) {
         this.supplier=supp;
         this.idSupplier=supp.idSupplier;
-        console.log(supp.idSupplier);
+
       } 
     });
   }
@@ -163,28 +148,14 @@ export class ProductImportComponent implements OnInit  {
         supplier.idSupplier=supp['idSupplier'];
         supplier.address=supp['address'];
         supplier.logo=supp['logo'];
-        supplier.name=supp['name'];
-        
+        supplier.name=supp['name'];      
         supplier.status=supp['status'];
         supplier.phoneNumber=supp['phoneNumber'];
         supplier.products=supp['productList'];
         this.listSupp.push(supplier);
        
       });
-      console.log(this.listSupp);
-      
-
     })
   }
-  
-   
-  
-    
-    
-  
-  
-  
-
-
 
 }

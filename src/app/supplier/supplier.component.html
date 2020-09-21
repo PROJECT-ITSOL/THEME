@@ -222,10 +222,10 @@
                         <tr *ngFor="let item of listProduct">
                             <td class="py-4"><span class="align-middle text-dark  font-16">{{item.name}}</span></td>
                             <td><img alt="" class="rounded-circle mr-3 logo" src="{{item.image}}"></td>
-                            <td class="align-middle"><i class="fas fa-money-bill-wave"></i> {{item.price}}
+                            <td class="align-middle"><i class="fas fa-money-bill-wave"></i> {{item.price | currency:"VND"}}
                             </td>
 
-                            <td class="align-middle"><i class="" [ngClass]="{' far fa-smile':item.status==1,' fas fa-frown':item.status==0}"></i>
+                            <td class="align-middle"><i class=""></i>
                                 <div *ngIf="item.status==1">Còn hàng</div>
                                 <div *ngIf="item.status==0">Hết hàng</div>
                             </td>

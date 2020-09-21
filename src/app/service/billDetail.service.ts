@@ -23,8 +23,8 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
             return this.http.post(this.apiUrl+'/addNewBillDetail',bill);
         }
 
-        editSupp(id,billImport){
-            return this.http.put(this.apiUrl+'/update/'+id,billImport,{
+        editBillDetail(id,billDetail){
+            return this.http.put(this.apiUrl+'/update/'+id,billDetail,{
                 responseType: 'text' as 'json',
               });
         }

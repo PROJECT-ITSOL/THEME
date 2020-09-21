@@ -61,7 +61,6 @@ export class SupplierComponent implements OnInit {
       supplier.products=supp['productList'];
       this.listSupp.push(supplier);
     });
-    console.log(this.listSupp);
     this.pages = new Array(res['totalPages']);
     this.totalSupp = (res['totalElements']);
     });
@@ -71,10 +70,7 @@ export class SupplierComponent implements OnInit {
 
 
   onSubmit(form:NgForm){
-    console.log(form);
-    console.log('Your form data : ', form.value);
     this.supplierService.addSupp(form.value).subscribe((res) => {
-      console.log(res);
       this.message=res['message'];
       location.reload();
        alert(res['message']);
@@ -82,18 +78,13 @@ export class SupplierComponent implements OnInit {
     });
   }
   edit(form:NgForm){
-    console.log('Your form data : ',form.value);
-    this.supplierService.editSupp(this.supplier['idSupplier'],form.value).subscribe(res => {
-      
-      this.getSupp();
-     
+    this.supplierService.editSupp(this.supplier['idSupplier'],form.value).subscribe(res => {    
+      this.getSupp(); 
     });
   }
 
   delete(){
     this.supplierService.delete(this.idDelete).subscribe(res =>{
-      console.log(res);
-     
       alert(res['message']);
       this.getSupp();
     })
@@ -114,11 +105,9 @@ export class SupplierComponent implements OnInit {
         supplier.products=supp['productList'];
         this.listSupp.push(supplier);
       });
-      console.log(this.listSupp);
       this.pages = new Array(res['totalPages']);
       this.totalSupp = (res['totalElements']);
       });
   }
-
 
 }

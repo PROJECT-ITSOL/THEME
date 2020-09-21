@@ -35,7 +35,7 @@ const routes: Routes = [
           { path: 'list-order', component: ProductOrderComponent },
           { path: 'product-import', component: ProductImportComponent },
           { path: 'product-return', component: ProductReturnComponent },
-          { path: 'product-import-detail',component: ProductImportDetailComponent }
+          { path: 'product-import-detail/:id',component: ProductImportDetailComponent }
         ],
       },
       { path: 'category', component: CategoryComponent },
