@@ -37,6 +37,7 @@ export class ProductOrderComponent  implements OnInit {
   totalOrder: number;
   order=new Order();    // khoi tao bien
   // bien page
+  status:string ="that bai";
   page: number =0;
   i: number =0;
   pages: Array<number>;
@@ -110,8 +111,10 @@ export class ProductOrderComponent  implements OnInit {
     showEdit(item: Order){
       this.editOrder=item;
       this.idDelete=item.idOrder;
+      this.status=item.status;
      // this.message=item.idOrder;
     }
+    
     show(message: string){
       this.productOrderService.changeMessage(message); // gan bien tri cho bien message trong service
     }
@@ -163,6 +166,11 @@ export class ProductOrderComponent  implements OnInit {
         this.getOrder();
       });
     }
+    // status=true;
+    // editStatus(item){
+    //   this.status=item;
+    //   //this.showEdit();
+    // }
 
 
 }
