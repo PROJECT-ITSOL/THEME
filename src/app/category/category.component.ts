@@ -26,10 +26,10 @@ export class CategoryComponent implements OnInit {
   }
 
   isActive(item){
-    return this.pageNo===item;
+    return this.pageNo ===item;
   }
   getCategory() {
-    this.listCategory = new Array();  
+    this.listCategory = new Array();
     // let url = this.urlCategory + '/list?pageNo=';
     let url = this.urlCategory + '/list';
     let param=new HttpParams().append('pageNo',this.pageNo.toString());
@@ -67,7 +67,7 @@ export class CategoryComponent implements OnInit {
     console.log(this.categoryEdit.id);
   }
   onSubmit(form) {
-    let url =this.urlCategory +"/update/"+this.categoryEdit.id;
+    let url = this.urlCategory + "/update/"+this.categoryEdit.id;
     let categoryUpdate= new Category();
     categoryUpdate.id=this.categoryEdit.id;
     categoryUpdate.name=form.value.name;
@@ -125,7 +125,7 @@ export class CategoryComponent implements OnInit {
           this.isData=true;
           this.listCategory=[];
         }
-       
+
       },
       (error) => {
         console.log(error.error);
