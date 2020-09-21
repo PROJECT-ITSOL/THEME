@@ -5,7 +5,7 @@ import { NgForm } from '@angular/forms';
 import { from } from 'rxjs';
 import { AuthenticationService } from 'src/app/service/authentication.service';
 import { ProductOrderService } from './../../service/productOrder.service';
-import { ProductOrderDetailService  } from "./../../service/productOrderDetail.service";
+import { ProductOrderDetailService } from "./../../service/productOrderDetail.service";
 
 import { Product } from './../../ultis/product';
 import { Order } from './../../ultis/order';
@@ -17,37 +17,31 @@ import { OrderComponent } from '../order.component';
   styleUrls: ['./product-order-detail.component.scss']
 })
 export class ProductOrderDetailComponent implements OnInit {
-  // @ViewChild(OrderComponent)
-  // myOrder: OrderComponent;
-  // OneOrder() {
-  //   console.log(this.myOrder)
-  //   }
- // @Input() fatherName: string;
- keyword: string='keyword';
- search(){}
- totalOrder: string='total';
- // private urlOrder = '/api/orderDetail';
+  keyword: string = 'keyword';
+  // search() { }
+  totalOrder: string = 'total';
+  // private urlOrder = '/api/orderDetail';
 
   listOrderDetail: OderDetail[];
   listProduct: Product[];
   dataOrderDetail: Array<any>;
   dataProduct: Array<any>;
-  orderDetail;
-  nameProduct:string;
+  orderDetail:OderDetail=new OderDetail();
+  nameProduct: string;
   Product;
   idProduct;
   price;
-  nameSupplier:string;
-  Tong:number=0;
+  nameSupplier: string;
+  Tong: number = 0;
   //
   page: number = 0;
   pages: Array<number>;
-  
+
   //
   totalOrderDetail: number;
 
   constructor(
-    private productOrderDetailService: ProductOrderDetailService ,
+    private productOrderDetailService: ProductOrderDetailService,
     private productOrderService: ProductOrderService,
     private productService: ProductOrderService,
 
@@ -55,86 +49,57 @@ export class ProductOrderDetailComponent implements OnInit {
 
   ngOnInit(): void {
     this.getMessage();
-   this.viewOrderDetail();
-   
-   //this.getToTal();
+    this.viewOrderDetail();
+
+    //this.getToTal();
   }
   // bien 
-  GanidOrder: string="chua gan duoc id";
+  GanidOrder: string = "chua gan duoc id";
   idDelete: string;
   nameDelete: string;
-  getDelete(item){
-    this.idDelete=item;
+  getDelete(item) {
+    this.idDelete = item;
   }
 
-  getMessage(){
-    this.productOrderService.currentMessage.subscribe(message =>{
+  getMessage() {
+    this.productOrderService.currentMessage.subscribe(message => {
       this.GanidOrder = message;
-      console.log(this.GanidOrder);
-    } );
+    });
   }
   // khai bao  Oder
- 
+
 
 
   viewOrderDetail() {
-    this.listOrderDetail = new Array();
+    this.Tong=0;
+    // this.listOrderDetail = new Array();
     this.productOrderDetailService.getByIdProductOrderdetail(this.GanidOrder).subscribe(res => {
-      this.dataOrderDetail = res;
-      console.log(res);
-      this.totalOrderDetail=0;
-      this.dataOrderDetail.forEach((ordertail) => {
-        
-        let orderDetailEntity = new OderDetail();
-        orderDetailEntity.idOrderDetail = ordertail['idOrderDetail'];
-        orderDetailEntity.idOrder = ordertail['idOrder'];
-        orderDetailEntity.idProduct = ordertail['idProduct'];
-        orderDetailEntity.amount = ordertail['amount'];
-       //orderDetailEntity.product.price = ordertail['product']['price'];
-       //orderDetailEntity.product.name = ordertail['product']['name'];
-       //
-      //  this.productOrderDetailService.getByIdProductOrderdetail(orderDetailEntity.idProduct).subscribe(odp=>{
-      //   // this.listProduct=new Array();
-      //     this.dataProduct=res['content'];
-      //     this.dataProduct.push((product)=>{
-      //       let productEntity=new Product;
-
-      //         productEntity.name=product['name'];
-      //         productEntity.image=product['image'];
-      //         productEntity.price=product['price'];
-              
-      //         orderDetailEntity.product=productEntity;
-      //     });
-      //   // orderDetailEntity.product.push(this.listProduct);
-      //  });
-                  // orderDetailEntity.product.nameProduct=ordertail['product']['name'];
-                  // orderDetailEntity.product.price=ordertail['product']['price'];
-                 // orderDetailEntity.product.idSupplier=ordertail['product']['idSupplier'];
-                  // cho API cua product//
-        this.listOrderDetail.push(orderDetailEntity);
-       //
-       this.Tong=this.Tong+orderDetailEntity.price*orderDetailEntity.amount;
-       // this.listOrderDetail.push(orderDetailEntity);
-        
-      });
-      this.totalOrderDetail=this.listOrderDetail.length;
-      console.log(this.listOrderDetail);
-      //this.pages = new Array(res['totalPages']);
-    // this.totalOrderDetail = (res['totalElements']);
+      this.dataOrderDetail = new Array();
+      this.dataOrderDetail=res['data'];
+      this.listOrderDetail=[];
+      this.dataOrderDetail.forEach(data=>{
+        let entity=new OderDetail();
+        entity.idOrderDetail=data['idOrderDetail']
+        entity.idOrder=data['idOrder']
+        entity.amount=data['amount']
+        entity.idProduct=data['productOrderDetail']['idProduct']
+        entity.nameProduct=data['productOrderDetail']['name']
+        entity.price=data['productOrderDetail']['price']
+        this.Tong+=entity.price * entity.amount;
+        // console.log(entity);
+        this.listOrderDetail.push(entity);
+        // console.log(data);
+      })
     });
-   // this.getItem(orderDetail);
-   this.setProduct();
-    
-
   }
 
-  delete(){ 
-    this.productOrderDetailService.delete(this.idDelete).subscribe(res =>{
+  delete() {
+    this.productOrderDetailService.delete(this.idDelete).subscribe(res => {
       console.log(res);
       alert(res['message']);
     });
-  
-  }  
+
+  }
   // ham tinh tong don hang
   // getToTal(){
   //   this.totalOrderDetail=0;
@@ -146,27 +111,27 @@ export class ProductOrderDetailComponent implements OnInit {
   //       this.or
   //   });
   // }
-  
-  getItem(orderDetail:OderDetail){
-    this.orderDetail=orderDetail;
-    console.log(orderDetail);
-    this.idDelete=orderDetail['id'];
-    this.nameDelete=orderDetail['nameProduct'];
 
-  }
+  // getItem(orderDetail: OderDetail) {
+  //   this.orderDetail = orderDetail;
+  //   console.log(orderDetail);
+  //   this.idDelete = orderDetail['id'];
+  //   this.nameDelete = orderDetail['nameProduct'];
+
+  // }
   // getTong(){
   //   this.productOrderDetailService.getByIdProductOrderdetail(this.idProduct).subscribe(res=>{
   //     this.o
   //   })
   // }
 
-  deleteOderDetail(){
+  deleteOderDetail() {
     let url = '/delete/' + this.idDelete;
-      this.productOrderService.delete(url).subscribe(res=>{
-        // console.log(res);
-        this.viewOrderDetail();
-        //alert(res['message']);
-      })
+    this.productOrderService.delete(url).subscribe(res => {
+      // console.log(res);
+      this.viewOrderDetail();
+      //alert(res['message']);
+    })
     // this.productOrderDetailService.delete(this.idDelete).subscribe(res =>{
     //   console.log(res);   
     //   alert(res['message']);
@@ -174,35 +139,29 @@ export class ProductOrderDetailComponent implements OnInit {
     // })
   }
 
-  setProduct(){
-    
-    this.listProduct.forEach(item => {
-      if (item.name==this.nameProduct) {
-        this.Product=item;
-        this.idProduct=item.idProduct;
-        this.price=item.price;      
-      }
-    });
+  setProduct(item) {
+    this.orderDetail=item;
+    console.log(this.orderDetail);
   }
 
+  // ham edit trong modal
+  addProduct(form: NgForm) {
 
-  addProduct(form:NgForm) {
-    
     console.log(form);
     console.log('Your form data : ', form.value);
     let newOrderDetail = new OderDetail;
-    newOrderDetail.amount=form.value.amount;
-    newOrderDetail.price=form.value.price;
-    newOrderDetail.idProduct=this.idProduct;
-    newOrderDetail.Order=this.orderDetail;
-      console.log(newOrderDetail);
-      this.productOrderDetailService.addOrderDetail(newOrderDetail).subscribe(res=>{
-      console.log(res);    
-      alert(res['message']);  
+    newOrderDetail.amount = form.value.amount;
+   // newOrderDetail.price = form.value.price;
+    newOrderDetail.idProduct = this.idProduct;
+    // newOrderDetail.Order = this.orderDetail;
+    console.log(newOrderDetail);
+    this.productOrderDetailService.addOrderDetail(newOrderDetail).subscribe(res => {
+      console.log(res);
+      alert(res['message']);
       this.viewOrderDetail();
     });
     this.viewOrderDetail();
   }
- 
-  
+
+
 }
