@@ -15,7 +15,7 @@
             </div>
         </div>
         <div class="d-md-flex align-items-center border-top bg-white p-3">
-            <div class="search"><input type="text" placeholder="Search.." [(ngModel)]="keyword" name="keyword">
+            <div class="search py-1"><input type="text" placeholder="Search.." [(ngModel)]="keyword" name="keyword">
                 <button class="btn" type="submit" (click)="searchBill()"><i class="fas fa-search" ></i></button>
             </div>
             <select class=" form-control col-3 py-1" [(ngModel)]="nameSupplier" name="nameSupplier" (change)="getBillBySupp()">
@@ -51,6 +51,7 @@
                     <td class="align-middle action">
                         <a [routerLink]="['//homeAdmin/order/product-import-detail', item.idBillImport]" routerLinkActive="active">View</a>
                         <a data-toggle="modal" data-target="#editBill" (click)="getBillImport(item)"><i class="fas fa-edit edit" >Edit</i></a>
+                        <a class="fas fa-trash-alt" [routerLink]="['//homeAdmin/order/product-import-detail', item.idBillImport]" routerLinkActive="active"></a>
                     </td>
                 </tr>
             </tbody>
