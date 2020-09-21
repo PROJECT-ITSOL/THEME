@@ -22,6 +22,8 @@ export class SupplierComponent implements OnInit {
   dataSupp:Array<any>;
   supplier=new Supplier();
   message:string;
+  status:string;
+  boolean:boolean;
 
   constructor(private supplierService : SupplierService) { }
     
@@ -108,6 +110,32 @@ export class SupplierComponent implements OnInit {
       this.pages = new Array(res['totalPages']);
       this.totalSupp = (res['totalElements']);
       });
+  }
+
+  getSuppByStatus(){
+    this.listSupp=new Array();
+    if (this.status=='Active') {
+        this.boolean=true;
+    } else {
+      this.boolean=false;      
+    }
+    this.supplierService.searchByStatus(this.boolean,this.page).subscribe(res =>{
+      this.dataSupp=res['content'];
+      this.dataSupp.forEach((supp)=>{
+        let supplier = new Supplier();
+        supplier.idSupplier=supp['idSupplier'];
+        supplier.address=supp['address'];
+        supplier.logo=supp['logo'];
+        supplier.name=supp['name'];
+        supplier.status=supp['status'];
+        supplier.phoneNumber=supp['phoneNumber'];
+        supplier.products=supp['productList'];
+        this.listSupp.push(supplier);
+      });
+      this.pages = new Array(res['totalPages']);
+      this.totalSupp = (res['totalElements']);
+      });
+
   }
 
 }
