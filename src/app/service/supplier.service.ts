@@ -48,6 +48,10 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
             return this.http.get<Supplier[]>(this.apiUrl+'/search?name='+key+'&page='+page);
         }
 
+        searchByStatus(status:boolean,page:number): Observable<Supplier[]>{
+            return this.http.get<Supplier[]>(this.apiUrl+'/status?status='+status+'&page='+page);
+        }
+
         
 }
   

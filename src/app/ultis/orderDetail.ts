@@ -6,9 +6,6 @@ export class OderDetail{
     idOrder: string;
     idProduct: string;
     amount: number;
-    product: Product;
-    nameProduct: string='chuaco';
-    price: number= 1000;
-    totalPice: number=0;
-    Order: Order;
+    nameProduct: string;
+    price: number;
 }
