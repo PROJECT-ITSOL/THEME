@@ -101,6 +101,30 @@ export class ProductImportComponent implements OnInit  {
       });
   }
 
+  getBillBySupp(){
+    this.listSupp.forEach(supp => {
+      if (supp.name===this.nameSupplier) {
+        this.supplier=supp;
+        this.idSupplier=supp.idSupplier;
+        this.listBillImport = new Array();
+        this.billImportService.getByIdSupp(this.idSupplier,this.page).subscribe(res=>{
+          this.dataListBill=res['data']['content'];
+          this.dataListBill.forEach((bill)=>{
+            let billImport = new BillImport();
+            billImport.idBillImport=bill['idBillImport'];
+            billImport.totalProduct=bill['totalProduct'];
+            billImport.totalMoney=bill['totalMoney'];
+            billImport.createDate=bill['createDate'];
+            billImport.nameSupplier=bill['supplierImport']['name'];
+            this.listBillImport.push(billImport);
+          });
+          this.pages = new Array(res['data']['totalPages']);
+          this.totalBill = (res['data']['totalElements']);
+        });
+      } 
+    });
+  }
+
   getBillImport(bill:BillImport){
     this.billImport=bill;
     console.log(this.billImport);
