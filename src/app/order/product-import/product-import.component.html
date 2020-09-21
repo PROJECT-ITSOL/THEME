@@ -42,7 +42,7 @@
                     <td class="align-middle py-4">{{item.idBillImport}}</td>
                     <td class="py-4"><span class="align-middle font-16">{{item.totalProduct}}</span></td>
                     <td class="align-middle">{{item.totalMoney | currency:"VND"}}</td>
-                    <td class="align-middle ">{{item.createDate}}</td>
+                    <td class="align-middle ">{{item.createDate |date }}</td>
                     <td class="align-middle">{{item.nameSupplier}}</td>
                     <td class="align-middle action">
                         <a [routerLink]="['//homeAdmin/order/product-import-detail', item.idBillImport]" routerLinkActive="active">View</a>
