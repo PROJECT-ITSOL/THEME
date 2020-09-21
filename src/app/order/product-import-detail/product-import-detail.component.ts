@@ -5,13 +5,12 @@ import { BillImportDetail } from './../../ultis/billImportDetail';
 import { from } from 'rxjs';
 
 import { BillImport } from './../../ultis/billImport';
-import { Component, OnInit, Input } from '@angular/core';
-import {ProductImportComponent} from './../product-import/product-import.component';
-import { identifierModuleUrl } from '@angular/compiler';
+import { Component, OnInit, Input, OnDestroy } from '@angular/core';
 import { DataService } from './../../service/data.service';
 import {BillDetailService} from './../../service/billDetail.service'
 import { BillImportService } from './../../service/billImport.service';
 import { Supplier } from './../../ultis/supplier';
+import { ActivatedRoute } from '@angular/router';
 
 
 
@@ -20,7 +19,7 @@ import { Supplier } from './../../ultis/supplier';
   templateUrl: './product-import-detail.component.html',
   styleUrls: ['./product-import-detail.component.scss']
 })
-export class ProductImportDetailComponent implements OnInit {
+export class ProductImportDetailComponent implements OnInit, OnDestroy {
   id:string;
   listDetail:BillImportDetail[];
   dataDetail:Array<any>;
@@ -37,7 +36,6 @@ export class ProductImportDetailComponent implements OnInit {
 
   idDelete:number;
   nameDelete:string;
-  // listSupp:Supplier[];
   supplier:Supplier;
   nameProduct:string;
   product:Product;
@@ -51,36 +49,44 @@ export class ProductImportDetailComponent implements OnInit {
   idProduct:string='';
   price:number=0;
 
-  constructor(private DataService: DataService,
+  constructor(
+    private route: ActivatedRoute,
+    private DataService: DataService,
               private BillDetailService : BillDetailService,
               private BillImportService : BillImportService,
               private SupplierService: SupplierService
-    ) { }
+    ) {
+      
+     }
+  ngOnDestroy(): void {
+    
+  }
 
   ngOnInit(): void {
-   this.getIdBillImport();
+    this.id = this.route.snapshot.paramMap.get('id');
    this.viewBill();
    this.getBillImport();
   
   }
-  getIdBillImport(){
-    this.DataService.currentMessage.subscribe(message =>{
-      this.id = message
-    } );
-    
-  }
+  
 
   getBillImport(){
     this.BillImportService.getBillById(this.id).subscribe(res=>{
       this.billImport=res;
-      console.log(this.billImport);
       this.createDate=res['createDate'];
       this.totalMoney=res['totalMoney'];
       this.totalProduct= res['totalProduct'];
-      this.idSupplier=res['idSupplier'];
+      this.nameSupplier = res['supplierImport']['name'];
+      this.supplier = res['supplierImport'];
+      this.listProduct = res['supplierImport']['productList'];
+    });    
+  }
 
-    });
-    
+  getItem(billDetail:BillImportDetail){
+    this.billDetail=billDetail;
+    this.idDelete=billDetail['id'];
+    this.nameDelete=billDetail['nameProduct'];
+
   }
 
   viewBill(){
@@ -104,39 +110,40 @@ export class ProductImportDetailComponent implements OnInit {
 
   deleteBill(){ 
     this.BillImportService.delete(this.id).subscribe(res =>{
-      console.log(res);
       alert(res['message']);
     });
   
   }
 
-  getItem(billDetail:BillImportDetail){
-    this.billDetail=billDetail;
-    console.log(billDetail);
-    this.idDelete=billDetail['id'];
-    this.nameDelete=billDetail['nameProduct'];
+  
+
+  editDetail(form:NgForm){
+    let newBillDetail = new BillImportDetail;
+    newBillDetail.amount=form.value.amount;
+    this.BillDetailService.editBillDetail(this.billDetail.id,newBillDetail).subscribe(res=>{
+      this.BillImportService.updateTotalPrice(this.id,this.billDetail).subscribe(res=>{   
+        this.viewBill();
+        this.getBillImport();
+      });
+    });
+   
 
   }
 
   deleteBillDetail(){
-    this.BillDetailService.delete(this.idDelete).subscribe(res =>{
-      console.log(res);   
+    this.BillDetailService.delete(this.idDelete).subscribe(res =>{ 
+      
       alert(res['message']);
-      this.viewBill();
-    })
+      this.BillImportService.updateTotalPrice(this.id,this.billDetail).subscribe(res=>{   
+        this.viewBill();
+        this.getBillImport();
+      });
+    });
+    
+    
   }
 
-  setSupplier(){
-    this.SupplierService.getSuppById(this.idSupplier).subscribe(res=>{
-      this.supplier=res;
-      this.nameSupplier = res["name"];
-      this.listProduct = res['productList'];
-    });
-        
-}
-
-  setProduct(){
-    
+  setProduct(){  
     this.listProduct.forEach(item => {
       if (item.name==this.nameProduct) {
         this.product=item;
@@ -148,21 +155,21 @@ export class ProductImportDetailComponent implements OnInit {
  
   
   addProduct(form:NgForm) {
-    
-    console.log(form);
-    console.log('Your form data : ', form.value);
     let newbillDetail = new BillImportDetail;
       newbillDetail.amount=form.value.amount;
       newbillDetail.price=form.value.price;
       newbillDetail.product=this.product;
       newbillDetail.billImport=this.billImport;
-      console.log(newbillDetail);
-      this.BillDetailService.addBill(newbillDetail).subscribe(res=>{
-      console.log(res);    
+      newbillDetail.totalPrice=(form.value.amount*form.value.price);
+      this.BillDetailService.addBill(newbillDetail).subscribe(res=>{ 
       alert(res['message']);  
-      this.viewBill();
-    });
-    this.viewBill();
+      this.BillImportService.updateTotalPrice(this.id,newbillDetail).subscribe(res=>{ 
+        // update thanh cong
+        this.viewBill();
+        this.getBillImport();  
+      });
+      
+    });  
   }
 
 

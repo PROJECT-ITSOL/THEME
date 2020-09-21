@@ -27,7 +27,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
             return this.http.post(this.apiUrl+'/addBillImport',bill);
         }
 
-        editSupp(id,billImport){
+        editBill(id,billImport){
             return this.http.put(this.apiUrl+'/update/'+id,billImport,{
                 responseType: 'text' as 'json',
               });
@@ -40,6 +40,17 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
         search(key:string,page:number): Observable<BillImport[]>{
             return this.http.get<BillImport[]>(this.apiUrl+'/search?keyWord='+key+'&page='+page);
         }
+
+        updateTotalPrice(id,billDetail){
+            return this.http.put(this.apiUrl+'/updateMoney/'+id,billDetail,{
+                responseType: 'text' as 'json',
+            });
+            
+        }
+
+        // updateBillImport(id:string){
+        //     return this.http.put(this.apiUrl+'/update/'+id);        
+        // }
 
         
 }
