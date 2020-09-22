@@ -33,6 +33,10 @@ export class ProductOrderService {
 
     }
 
+    getById(id:string){
+        return this.http.get(this.apiUrl+'/'+id);
+    }
+
     addOrder(order) {
         return this.http.post(this.apiUrl + '/addOrder', order);
     }
@@ -49,6 +53,11 @@ export class ProductOrderService {
 
     search(key: string, page: number): Observable<Order[]> {
         return this.http.get<Order[]>(this.apiUrl + '/search?name=' + key + '&page=' + page);
+    }
+
+
+    searchStatus(key: string): Observable<Order[]>{
+        return this.http.get<Order[]>(this.apiUrl+'/status?status='+key);
     }
     //
     // postAddNew(url: string, object: any) {

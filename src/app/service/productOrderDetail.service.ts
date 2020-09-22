@@ -31,8 +31,8 @@ import { Order } from '../ultis/order';
         });
     }
 
-    delete(id) {
-        return this.http.delete(this.apiUrl + '/delete/' + id);
+    delete(id:number) {
+        return this.http.delete(this.apiUrl + '/delete?id='+id);
     }
 
     search(key: string, page: number): Observable<OderDetail[]> {
