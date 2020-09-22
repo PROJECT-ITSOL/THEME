@@ -166,15 +166,7 @@ export class ProductReturnComponent implements OnInit {
   message: string;
   order: any;
   addProductReturn(form: NgForm) {
-    console.log(form.value);
-    // this.productOrderService.getById(form.value.idOrder).subscribe(res => {
-    //   this.order = res;
-    //   let productReturn = new ProductReturn;
-    //   productReturn.amount = form.value.amount;
-    //   productReturn.status = form.value.status;
-    //   console.log(this.order);
-    //   productReturn.orderFail = this.order;
-    //   console.log(productReturn);
+
       this.productReturnService.addProductReturn(form.value).subscribe((res) => {
         this.message = res['message'];
         // location.reload();

@@ -88,12 +88,6 @@ export class ProductOrderComponent implements OnInit {
             //this.totalOrderDetail=this.totalOrderDetail+orderDetailEntity.price*orderDetailEntity.amount;
             this.listOrderDetail.push(orderDetailEntity);
           });
-<<<<<<< HEAD
-          // console.log(this.listOrder);
-          this.pages = new Array(res['totalPages']);
-          this.totalOrder = (res['totalElements']);
-=======
->>>>>>> a08f1348979689368f5ec6f3b4d4c476832e4f6f
         });
         // orderEntity.totalMoney=order['totalMoney'];
         //orderEntity.orderDetail=order['listOrderDetail'];
