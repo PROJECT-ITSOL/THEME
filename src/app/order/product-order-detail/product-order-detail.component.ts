@@ -6,6 +6,7 @@ import { from } from 'rxjs';
 import { AuthenticationService } from 'src/app/service/authentication.service';
 import { ProductOrderService } from './../../service/productOrder.service';
 import { ProductOrderDetailService } from "./../../service/productOrderDetail.service";
+import { ActivatedRoute } from '@angular/router';
 
 import { Product } from './../../ultis/product';
 import { Order } from './../../ultis/order';
@@ -41,31 +42,36 @@ export class ProductOrderDetailComponent implements OnInit {
   totalOrderDetail: number;
 
   constructor(
+    private route: ActivatedRoute,
     private productOrderDetailService: ProductOrderDetailService,
     private productOrderService: ProductOrderService,
     private productService: ProductOrderService,
 
+
   ) { }
 
   ngOnInit(): void {
-    this.getMessage();
+    this.GanidOrder = this.route.snapshot.paramMap.get('id');
+    
     this.viewOrderDetail();
 
     //this.getToTal();
   }
   // bien 
-  GanidOrder: string = "chua gan duoc id";
-  idDelete: string;
+  GanidOrder: string;
+  idDelete: number;
   nameDelete: string;
   getDelete(item) {
-    this.idDelete = item;
+   
+    this.idDelete = item['idOrderDetail'];
+    console.log(this.idDelete);
   }
 
-  getMessage() {
-    this.productOrderService.currentMessage.subscribe(message => {
-      this.GanidOrder = message;
-    });
-  }
+  // getMessage() {
+  //   this.productOrderService.currentMessage.subscribe(message => {
+  //     this.GanidOrder = message;
+  //   });
+  // }
   // khai bao  Oder
 
 
@@ -97,6 +103,7 @@ export class ProductOrderDetailComponent implements OnInit {
     this.productOrderDetailService.delete(this.idDelete).subscribe(res => {
       console.log(res);
       alert(res['message']);
+      this.viewOrderDetail();
     });
 
   }
@@ -126,8 +133,8 @@ export class ProductOrderDetailComponent implements OnInit {
   // }
 
   deleteOderDetail() {
-    let url = '/delete/' + this.idDelete;
-    this.productOrderService.delete(url).subscribe(res => {
+    
+    this.productOrderDetailService.delete(this.idDelete).subscribe(res => {
       // console.log(res);
       this.viewOrderDetail();
       //alert(res['message']);
