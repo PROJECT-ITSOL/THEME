@@ -1,7 +1,7 @@
 export class Product {
   idProduct: string;
   idCategory: string;
-  idSupplier: string;
+  idSupplier: number;
   name: string;
   price: number;
   image: string;
@@ -10,4 +10,5 @@ export class Product {
   amount: number;
   status: boolean;
   comments: Comment[];
+  products: Product[];
 }

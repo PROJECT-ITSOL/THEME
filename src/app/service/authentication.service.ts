@@ -1,8 +1,5 @@
-import { Observable, of } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
-import { catchError, map, tap } from 'rxjs/operators';
-import { error } from '@angular/compiler/src/util';
 
 @Injectable({
   providedIn: 'root',
@@ -53,4 +50,3 @@ export class AuthenticationService {
     return this.http.get(this.baseUrl + url);
   }
 }
-    
