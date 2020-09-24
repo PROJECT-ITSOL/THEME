@@ -5,7 +5,7 @@ import { StatisticalComponent } from './statistical/statistical.component';
 import { CommentComponent } from './comment/comment.component';
 import { CategoryComponent } from './category/category.component';
 import { ProductReturnComponent } from './order/product-return/product-return.component';
-import { OrderComponent } from './order/order.component';
+// import { OrderComponent } from './order/order.component';
 import { ProductComponent } from './product/product.component';
 import { SupplierComponent } from './supplier/supplier.component';
 import { CustomerComponent } from './customer/customer.component';

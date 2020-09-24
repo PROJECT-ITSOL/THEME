@@ -14,7 +14,6 @@ import { HomeComponent } from './home/home.component';
 import { CustomerComponent } from './customer/customer.component';
 import { SupplierComponent } from './supplier/supplier.component';
 import { ProductComponent } from './product/product.component';
-import { OrderComponent } from './order/order.component';
 import { CategoryComponent } from './category/category.component';
 import { CommentComponent } from './comment/comment.component';
 import { StatisticalComponent } from './statistical/statistical.component';
@@ -34,7 +33,6 @@ import { ProductOrderDetailComponent } from './order/product-order-detail/produc
     CustomerComponent,
     SupplierComponent,
     ProductComponent,
-    OrderComponent,
     CategoryComponent,
     CommentComponent,
     StatisticalComponent,
