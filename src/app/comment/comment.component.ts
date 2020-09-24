@@ -176,7 +176,10 @@ export class CommentComponent implements OnInit {
             this.listComment.push(commentEntity);
           });
         } else {
-          console.log("false");
+          
+            // this.isData = true;
+            this.listComment = [];
+            this.listPage=[]
         }
       }),
       (error) => {
