@@ -83,6 +83,7 @@ export class ProductOrderDetailComponent implements OnInit {
       this.dataOrderDetail = new Array();
       this.dataOrderDetail=res['data'];
       this.listOrderDetail=[];
+      this.totalOrderDetail=0;
       this.dataOrderDetail.forEach(data=>{
         let entity=new OderDetail();
         entity.idOrderDetail=data['idOrderDetail']
@@ -96,6 +97,7 @@ export class ProductOrderDetailComponent implements OnInit {
         this.listOrderDetail.push(entity);
         // console.log(data);
       })
+      this.totalOrderDetail=this.listOrderDetail.length;
     });
   }
 

@@ -173,9 +173,7 @@ export class ProductReturnComponent implements OnInit {
         alert(res['message']);
 
       });
-    // });
 
-  
     }
 
 }
