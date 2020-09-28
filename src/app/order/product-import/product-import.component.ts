@@ -8,6 +8,7 @@ import { BillImport } from './../../ultis/billImport';
 import { BillImportService } from './../../service/billImport.service';
 import { Component, OnInit, Output,EventEmitter } from '@angular/core';
 import { DataService } from './../../service/data.service';
+import { ActivatedRoute,Router} from '@angular/router';
 
 
 
@@ -23,7 +24,7 @@ export class ProductImportComponent implements OnInit  {
   listBillImport:BillImport[];
   //variable paging
   page:number=0;
-  pages:Array<number>;
+  
   dataListBill:Array<any>;
   totalBill:number;
   billImport= new BillImport();
@@ -41,47 +42,80 @@ export class ProductImportComponent implements OnInit  {
 
   product:Product;
   nameProduct:string;
+  p:string='1';
 
 
   constructor( private billImportService:BillImportService,
                 private DataService: DataService,
-                private SupplierService: SupplierService
-    ) { } 
+                private SupplierService: SupplierService,
+                private route: ActivatedRoute,
+                 private router: Router )
+     { 
+      this.route.queryParams.subscribe(params => {
+        this.p = params['page'] || 0;
+      });
+
+    } 
 
 
 
   ngOnInit(): void {
-    this.getListBillImport(); 
+    this.getAllBill(); 
     this.getSupplier();
   }
 
 
-  setPage(i,event:any){
-    event.preventDefault();
-    this.page = i;
-    this.getListBillImport();
+  // setPage(i,event:any){
+  //   event.preventDefault();
+  //   this.page = i;
+  //   this.getListBillImport();
   
-  }
+  // }
 
-  getListBillImport(){
-    this.listBillImport = new Array();
-    this.billImportService.getListBillByPage(this.page).subscribe(res=>{
-       this.dataListBill=res['data']['content'];
-      this.dataListBill.forEach((bill)=>{
-        let billImport = new BillImport();
-        billImport.idBillImport=bill['idBillImport'];
-        billImport.totalProduct=bill['totalProduct'];
-        billImport.totalMoney=bill['totalMoney'];
-        billImport.createDate=bill['createDate'];
-        billImport.nameSupplier=bill['supplierImport']['name'];
-        this.listBillImport.push(billImport);
-      });
-      this.pages = new Array(res['data']['totalPages']);
-      this.totalBill = (res['data']['totalElements']);
+  // getListBillImport(){
+  //   this.listBillImport = new Array();
+  //   this.billImportService.getListBillByPage(this.page).subscribe(res=>{
+  //      this.dataListBill=res['data']['content'];
+  //     this.dataListBill.forEach((bill)=>{
+  //       let billImport = new BillImport();
+  //       billImport.idBillImport=bill['idBillImport'];
+  //       billImport.totalProduct=bill['totalProduct'];
+  //       billImport.totalMoney=bill['totalMoney'];
+  //       billImport.createDate=bill['createDate'];
+  //       billImport.nameSupplier=bill['supplierImport']['name'];
+  //       this.listBillImport.push(billImport);
+  //     });
+  //     this.pages = new Array(res['data']['totalPages']);
+  //     this.totalBill = (res['data']['totalElements']);
+  //   });
+
+  // }
+
+  getAllBill(){
+
+   this.listBillImport = new Array();
+  this.billImportService.getAllBill().subscribe(res=>{
+     this.dataListBill=res;
+    this.dataListBill.forEach((bill)=>{
+      let billImport = new BillImport();
+      billImport.idBillImport=bill['idBillImport'];
+      billImport.totalProduct=bill['totalProduct'];
+      billImport.totalMoney=bill['totalMoney'];
+      billImport.createDate=bill['createDate'];
+      billImport.nameSupplier=bill['supplierImport']['name'];
+      this.listBillImport.push(billImport);
+      
     });
+    console.log(this.listBillImport)
+    this.totalBill = this.dataListBill.length;
+    
+  });
 
-  }
+}
 
+pageChange(newPage: number) {
+  this.router.navigate(['/homeAdmin/order/product-import'], { queryParams: { page: newPage } });
+}
 
   searchBill(){
     this.listBillImport=new Array();
@@ -96,7 +130,7 @@ export class ProductImportComponent implements OnInit  {
         billImport.billImportDetail=bill['billImportDetail'];
         this.listBillImport.push(billImport);
       });
-      this.pages = new Array(res['totalPages']);
+     
       this.totalBill = res['data']['totalElements'];
       });
   }
@@ -118,7 +152,7 @@ export class ProductImportComponent implements OnInit  {
             billImport.nameSupplier=bill['supplierImport']['name'];
             this.listBillImport.push(billImport);
           });
-          this.pages = new Array(res['data']['totalPages']);
+         
           this.totalBill = (res['data']['totalElements']);
         });
       } 
@@ -139,7 +173,7 @@ export class ProductImportComponent implements OnInit  {
       newBillImport.totalProduct=0;
       this.billImportService.addBill(newBillImport).subscribe((res) => { 
       alert(res['message']);     
-      this.getListBillImport();
+      // this.getListBillImport();
     });
    
   }

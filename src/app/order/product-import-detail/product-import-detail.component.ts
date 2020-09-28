@@ -83,9 +83,18 @@ export class ProductImportDetailComponent implements OnInit, OnDestroy {
   }
 
   getItem(billDetail:BillImportDetail){
+    console.log(billDetail);
     this.billDetail=billDetail;
     this.idDelete=billDetail['id'];
     this.nameDelete=billDetail['nameProduct'];
+   
+    this.idProduct=billDetail.idProduct;
+    this.price=billDetail.price;
+    this.nameProduct=billDetail.nameProduct;
+    this.product=billDetail.product;
+    console.log(this.idProduct);
+    console.log(this.price);
+    console.log(this.product);
 
   }
 
@@ -115,11 +124,36 @@ export class ProductImportDetailComponent implements OnInit, OnDestroy {
   
   }
 
+  addProduct(form:NgForm) {
+    let newbillDetail = new BillImportDetail;
+      newbillDetail.amount=form.value.amount;
+      newbillDetail.price=form.value.price;
+      newbillDetail.product=this.product;
+      newbillDetail.billImport=this.billImport;
+      newbillDetail.totalPrice=(form.value.amount*form.value.price);
+      console.log(newbillDetail);
+      this.BillDetailService.addBill(newbillDetail).subscribe(res=>{ 
+      alert(res['message']);  
+      this.BillImportService.updateTotalPrice(this.id,newbillDetail).subscribe(res=>{ 
+        // update thanh cong
+        this.viewBill();
+        this.getBillImport();  
+      });
+      
+    });  
+  }
+
   
 
   editDetail(form:NgForm){
+    console.log(form.value);
     let newBillDetail = new BillImportDetail;
     newBillDetail.amount=form.value.amount;
+    newBillDetail.price=form.value.price;
+    newBillDetail.product=this.product;
+    newBillDetail.totalPrice=(form.value.amount*form.value.price);
+    
+    console.log(newBillDetail);
     this.BillDetailService.editBillDetail(this.billDetail.id,newBillDetail).subscribe(res=>{
       this.BillImportService.updateTotalPrice(this.id,this.billDetail).subscribe(res=>{   
         this.viewBill();
@@ -154,23 +188,7 @@ export class ProductImportDetailComponent implements OnInit, OnDestroy {
   }
  
   
-  addProduct(form:NgForm) {
-    let newbillDetail = new BillImportDetail;
-      newbillDetail.amount=form.value.amount;
-      newbillDetail.price=form.value.price;
-      newbillDetail.product=this.product;
-      newbillDetail.billImport=this.billImport;
-      newbillDetail.totalPrice=(form.value.amount*form.value.price);
-      this.BillDetailService.addBill(newbillDetail).subscribe(res=>{ 
-      alert(res['message']);  
-      this.BillImportService.updateTotalPrice(this.id,newbillDetail).subscribe(res=>{ 
-        // update thanh cong
-        this.viewBill();
-        this.getBillImport();  
-      });
-      
-    });  
-  }
+ 
 
 
 

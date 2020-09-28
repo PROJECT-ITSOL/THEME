@@ -21,7 +21,14 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
             return this.http.get<BillImport>(this.apiUrl+'/'+id);
 
         }
-    
+        
+        getByIdSupp(id:number,page:number): Observable<BillImport[]>{
+            return this.http.get<BillImport[]>(this.apiUrl+'/searchByIdSupp?idSupplier='+id+'&page='+page);
+        }
+
+        getAllBill(): Observable<BillImport[]>{
+            return this.http.get<BillImport[]>(this.apiUrl+'/all');
+        }
 
         addBill(bill){
             return this.http.post(this.apiUrl+'/addBillImport',bill);
@@ -41,9 +48,6 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
             return this.http.get<BillImport[]>(this.apiUrl+'/search?keyWord='+key+'&page='+page);
         }
 
-        getByIdSupp(id:number,page:number): Observable<BillImport[]>{
-            return this.http.get<BillImport[]>(this.apiUrl+'/searchByIdSupp?idSupplier='+id+'&page='+page);
-        }
 
         updateTotalPrice(id,billDetail){
             return this.http.put(this.apiUrl+'/updateMoney/'+id,billDetail,{

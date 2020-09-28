@@ -10,6 +10,9 @@
             th {
                 text-align: center;
                 vertical-align: middle;
+                p {
+                    text-align: center;
+                }
             }
         }
     }
@@ -36,4 +39,9 @@ a {
 
 .breadcrumb-item {
     cursor: pointer;
+}
+
+.validator {
+    color: red;
+    font-size: small;
 }

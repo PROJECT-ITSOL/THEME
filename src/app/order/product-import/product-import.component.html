@@ -42,11 +42,15 @@
                 </tr>
             </thead>
             <tbody>
-                <tr *ngFor="let item of listBillImport">
+                <tr *ngFor="let item of listBillImport | paginate: { itemsPerPage: 5, currentPage: p }">
                     <td class="align-middle py-4">{{item.idBillImport}}</td>
                     <td class="py-4"><span class="align-middle font-16">{{item.totalProduct}}</span></td>
                     <td class="align-middle">{{item.totalMoney | currency:"VND"}}</td>
+<<<<<<< HEAD
+                    <td class="align-middle ">{{item.createDate |date }}</td>
+=======
                     <td class="align-middle ">{{item.createDate | date }}</td>
+>>>>>>> 77bfceb1cbe44d446f478ba0cd225893a095ceda
                     <td class="align-middle">{{item.nameSupplier}}</td>
                     <td class="align-middle action">
                         <a [routerLink]="['//homeAdmin/order/product-import-detail', item.idBillImport]" routerLinkActive="active">View</a>
@@ -54,19 +58,13 @@
                         <a class="fas fa-trash-alt" [routerLink]="['//homeAdmin/order/product-import-detail', item.idBillImport]" routerLinkActive="active"></a>
                     </td>
                 </tr>
+                <pagination-controls (pageChange)="pageChange($event)" previousLabel="" nextLabel="" class="my-pagination"></pagination-controls>
+
             </tbody>
         </table>
     </div>
     <!-- End table Bill Import -->
-    <!-- Paging -->
-    <div class="paging">
-        <ul class="nav nav-pills justify-content-center ">
-            <li class="nav-item" *ngFor="let p of pages; let i=index">
-                <a class="nav-link " href="" (click)="setPage(i,$event)" [ngClass]="{'active':i==page}">{{i+1}}</a>
-            </li>
-        </ul>
-    </div>
-    <!-- End paging -->
+
     <!-- Modal add new bill import -->
     <div class="modal fade " id="addBill" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
@@ -80,8 +78,10 @@
                         <div class="p-3 position-relative ps ps--active-y" style="height: 250px;">
                             <div class="row">
                                 <div class="col-12 form-group">Id Bill Import
-                                    <input type="text" [(ngModel)]="idBillImport" name="idBillImport" class="form-control" required #id="ngModel">
-                                    <span class="col-12 validator" *ngIf="id.errors?.required && id.touched">Id is required</span></div>
+                                    <input type="text" [(ngModel)]="idBillImport" name="idBillImport" class="form-control" pattern="[a-zA-Z0-9]+" required #id="ngModel">
+                                    <span class="col-12 validator" *ngIf="id.errors?.required && id.touched">Id is required</span>
+                                    <span class="col-12 validator" *ngIf="id.errors?.pattern && id.touched">Id is invaild</span>
+                                </div>
                                 <div class="col-12 form-group">
                                     <label for="Choosesupplier">Choose supplier</label>
                                     <select class="form-control" id="Choosesupplier" [(ngModel)]="nameSupplier" name="nameSupplier" (change)="setSupplier()" required>
@@ -109,7 +109,6 @@
         </div>
     </div>
     <!-- End model add bill import -->
-
 
     <!-- Modal edit bill import -->
     <div class="modal fade " id="editBill" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">

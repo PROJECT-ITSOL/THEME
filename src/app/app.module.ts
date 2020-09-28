@@ -6,6 +6,12 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import {HttpClientModule, HTTP_INTERCEPTORS} from '@angular/common/http';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import { NgxPaginationModule } from 'ngx-pagination';
+import { AngularFireModule} from '@angular/fire';
+import {environment} from '../environments/environment';
+import { AngularFireStorageModule} from '@angular/fire/storage';
+import { AngularFireDatabaseModule} from '@angular/fire/database';
+
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -49,7 +55,12 @@ import { ProductOrderDetailComponent } from './order/product-order-detail/produc
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgxPaginationModule,
+    AngularFireModule.initializeApp(environment.firebaseConfig),
+    AngularFireStorageModule,
+    AngularFireDatabaseModule,
+    ReactiveFormsModule 
   ],
   providers: [AuthenticationService,
               SupplierService,

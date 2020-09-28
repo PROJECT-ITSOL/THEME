@@ -1,34 +1,33 @@
 <!-- Header -->
-<div class="header">
-    <nav class="breadcrumb">
-        <a class="breadcrumb-item" href="#">Home</a>
-        <span class="breadcrumb-item active" href="#">Supplier</span>
-    </nav>
-</div>
-<div id="header">
-    <div class="d-md-flex align-items-center bg-white p-3">
-        <h3 class="mb-0">Supplier List</h3>
-        <div class="ml-auto mt-3 mt-md-0">
-            <button type="button" class="btn btn-primary " data-toggle="modal" data-target="#addSupp">
+<div>
+    <div class="header">
+        <nav class="breadcrumb">
+            <a class="breadcrumb-item" href="#">Home</a>
+            <span class="breadcrumb-item active" href="#">Supplier</span>
+        </nav>
+
+        <div class="d-md-flex align-items-center bg-white p-3">
+            <a routerLink="/homeAdmin/supplier" routerLinkActive="active">
+                <h3 class="mb-0">Supplier List</h3>
+            </a>
+            <div class="ml-auto mt-3 mt-md-0">
+                <button type="button" class="btn btn-primary " data-toggle="modal" data-target="#addSupp">
                 <i class="fas fa-plus font-14 mr-1 text-light"></i>
                 <span class="ml-1 text-white font-weight-bold">Add Supplier</span>
             </button>
+            </div>
         </div>
-    </div>
-    <div class="d-md-flex align-items-center border-top bg-white p-3">
-        <div class="search"><input type="text" placeholder="Search.." [(ngModel)]="keyword" name="keyword">
-            <button class="btn" type="submit" (click)="search()"><i class="fas fa-search"></i></button>
-        </div>
-        <select class=" form-control col-3 py-1" [(ngModel)]="status" name="status" (change)="getSuppByStatus()">
-            <option value="Choose Status" selected >Choose Status</option>
-            <option value="Active">Active</option>
-            <option value="Disable">Disable</option>
+        <div class="d-md-flex align-items-center border-top bg-white p-3">
+            <div class="search"><input type="search" placeholder="Search.." [(ngModel)]="keyword" name="keyword">
+                <button class="btn" type="submit" (click)="search()"><i class="fas fa-search"></i></button>
+            </div>
+            <select class=" form-control col-3 py-1" [(ngModel)]="status" name="status" (change)="getSuppByStatus()">
+            <option >Choose Status</option>
+            <option *ngFor="let item of listStatus">{{item}}</option>    
         </select>
-        <div class=" row ml-auto mt-3 mt-md-0">
-
-            <h5 class="mb-0 mr-1  font-weight-bold font-14"> Total Supplier </h5>{{totalSupp}}
-
-
+            <div class=" row ml-auto mt-3 mt-md-0">
+                <h5 class="mb-0 mr-1  font-weight-bold font-14"> Total Supplier </h5>{{totalSupp}}
+            </div>
         </div>
     </div>
 
@@ -37,7 +36,7 @@
         <table class="table bg-white">
             <thead class="thead-light">
                 <tr>
-                    <th>ID</th>
+                    <th id="id">ID</th>
                     <th>Name</th>
                     <th>Logo</th>
                     <th>Phone Number</th>
@@ -48,7 +47,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr *ngFor="let item of listSupp">
+                <tr *ngFor="let item of listSupp | paginate: { itemsPerPage: 5, currentPage: p }">
                     <td class="align-middle">{{item.idSupplier}}</td>
                     <td class="py-4"><span class="align-middle  font-16">{{item.name}}</span></td>
                     <td><img alt="" class="rounded-circle mr-3 logo" src="{{item.logo}}"></td>
@@ -70,25 +69,12 @@
                                 (click)="showEdit(item)"></i></a>
                     </td>
                 </tr>
-
-
-
             </tbody>
         </table>
+        <pagination-controls (pageChange)="pageChange($event)" previousLabel="" nextLabel="" class="my-pagination"></pagination-controls>
     </div>
 </div>
 <!-- End table Supplier -->
-
-<!-- Paging -->
-<div class="paging">
-    <ul class="nav nav-pills justify-content-center ">
-        <li class="nav-item" *ngFor="let p of pages; let i=index">
-            <a class="nav-link " href="" (click)="setPage(i,$event)" [ngClass]="{'active':i==page}">{{i+1}}</a>
-        </li>
-
-    </ul>
-</div>
-<!-- End paging -->
 
 <!-- Modal add Supplier  -->
 <div class="modal fade " id="addSupp" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -98,7 +84,7 @@
                 <h5 class="modal-title">Add Supplier</h5>
             </div>
             <div class="modal-body">
-                <form (ngSubmit)="onSubmit(formAdd)" #formAdd="ngForm" novalidate>
+                <form #formAdd="ngForm" novalidate>
 
                     <div class="p-3 position-relative ps ps--active-y" style="height: 350px;">
                         <div class="row">
@@ -123,20 +109,18 @@
                                 <span class="col-12 validator" *ngIf="phoneNumber.errors?.pattern && phoneNumber.touched">PhoneNumber is
                                     invalid</span>
                             </div>
-                            <div class="input-group mb-3 col-12 form-group">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text" id="inputGroupFileAddon">Logo</span>
-                                </div>
-                                <div class="custom-file">
-                                    <input type="file" ngModel name="logo" class="custom-file-input" id="inputGroupFile02" aria-describedby="inputGroupFileAddon">
-                                    <label class="custom-file-label" for="inputGroupFile02">Choose file</label>
-                                </div>
+                            <div class="form-group col-8">
+                                <label>Select File</label>
+                                <input type="file" accept="image/*" id="file" class="form-control" name="logo" ngModel (change)="showPreview($event)">
+                            </div>
+                            <div class="text-center col-4">
+                                <img [src]="imgUrl" width="100px" height="100px">
                             </div>
                         </div>
                     </div>
                     <div class="modal-footer  ">
                         <button type="button" class="btn btn-outline-danger " data-dismiss="modal">Cancel</button>
-                        <button [disabled]="formAdd.invalid" type="submit" class="btn btn-outline-primary " data-dismiss="modal" (click)="(onSubmit(formAdd))">Add</button>
+                        <button [disabled]="formAdd.invalid" type="submit" class="btn btn-outline-primary " data-dismiss="modal" (click)="(add(formAdd))">Add</button>
                     </div>
                 </form>
             </div>
@@ -144,9 +128,7 @@
         </div>
     </div>
 </div>
-
 <!-- End modal add supplier -->
-
 
 <!-- Modal delete -->
 <div class="modal fade" id="delete" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -251,6 +233,7 @@
 
         </div>
     </div>
-</div>
 
-<!-- End modal product -->
+
+    <!-- End modal product -->
+</div>
