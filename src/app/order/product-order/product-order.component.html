@@ -1,5 +1,3 @@
-
-
 <!-- header -->
 <div class="header">
     <nav class="breadcrumb">
@@ -10,117 +8,118 @@
 
 <div id="header">
     <div class="d-md-flex align-items-center bg-white p-3">
-        <h3 class="mb-0"style="color: blue;">Oder List</h3>
+        <h3 class="mb-0" style="color: blue;">Oder List</h3>
         <div class="ml-auto mt-3 mt-md-0">
-            
+
         </div>
     </div>
-    
+
     <div class="d-md-flex align-items-center border-top bg-white p-3">
         <div class="search" style="color: blue;"><input type="text" placeholder="Search.." [(ngModel)]="keyword" name="keyword">
             <button class="btn" type="submit" (click)="search()" style="color: blue;"><i class="fas fa-search" style="color: blue;" ></i></button>
         </div>
         <div class=" row ml-auto mt-3 mt-md-0">
 
-            <h5 class="mb-0 mr-1  font-weight-bold font-14"style="color: blue;"> Total Order: </h5>{{totalOrder}}
+            <h5 class="mb-0 mr-1  font-weight-bold font-14" style="color: blue;"> Total Order: </h5>{{totalOrder}}
 
 
         </div>
-    </div> 
-<!-- Table Order -->
+    </div>
+    <!-- Table Order -->
 
-<th>
-    <!-- <label for="keyStatus">Select list (select one):</label>  -->
-     <select class="form-control" [(ngModel)]="keyStatus" (change)="searchStatus()" >
+    <th>
+        <!-- <label for="keyStatus">Select list (select one):</label>  -->
+        <select class="form-control" [(ngModel)]="keyStatus" (change)="searchStatus()">
         <option value="">xem tat ca</option>
-        <option value="Đang chờ" >Đang chờ</option>
-        <option value="Thành công">Thành công </option>
-        <option value="Thất bại">Thất bại</option>
+        <option  value="Đang chờ" >Đang chờ</option>
+        <option  value="Thành công">Thành công </option>
+        <option  value="Thất bại">Thất bại</option>
     
     </select>
-    
-</th>
-<th>
-    <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#addOrder"  >
+
+    </th>
+    <th>
+        <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#addOrder">
         Thêm Order</button>
-</th>
- <table class="table table-light table-data"style="text-align:center; b" >
-    <thead class="bg-primary text-white ">
-        <tr > 
-            <th>Id_Order</th>
-            <th>Id_Customer</th>
-            <th>Customer</th>
-            <th>Create_day</th>
-            <th>status</th>
-            <!-- <th>total_Money</th> -->
-            <th></th>
-            <th>showOrderDetail</th>
-            
-            <th>Edit</th>
-            <th>delete</th>
-        </tr>
-    </thead>
-    <tbody >
-        <tr *ngFor="let item of listOrder" style="color: rgb(55, 0, 255);" >
-            <td>{{item.idOrder}}</td>
-            <td>{{item.idCustomer}}</td>
-            <td>{{item.nameCustomer}}</td>
-            <td>{{item.createDate|date}}</td>
-            <td>{{item.status}}</td>
-             <!-- <td>{{item.totalMoney|currency:'VND'}}</td>  -->
-            <td></td>
-           
-<!--  -->
-            <td >
-                <a [routerLink]="['//homeAdmin/order/list-order-detail',item.idOrder]" routerLinkActive="active"
-                (click)="show(item.idOrder)"><i class="fas fa-clipboard  fa-2x"></i></a>
-            </td>
-            <td>
-                <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#editOrder" (click)="showEdit(item)" >
+    </th>
+    <table class="table table-light table-data" style="text-align:center; ">
+        <thead class="bg-primary text-white ">
+            <tr>
+                <th>Id_Order</th>
+                <th>Id_Customer</th>
+                <th>Customer</th>
+                <th>Create_day</th>
+                <th>status</th>
+                <!-- <th>total_Money</th> -->
+                <th></th>
+                <th>showOrderDetail</th>
+
+                <th>Edit</th>
+                <th>delete</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let item of listOrder" style="color: rgb(55, 0, 255);">
+                <td>{{item.idOrder}}</td>
+                <td>{{item.idCustomer}}</td>
+                <td>{{item.nameCustomer}}</td>
+                <td>{{item.createDate|date}}</td>
+                <td>{{item.status}}</td>
+                <!-- <td>{{item.totalMoney|currency:'VND'}}</td>  -->
+                <td></td>
+
+                <!--  -->
+                <td>
+                    <a [routerLink]="['//homeAdmin/order/list-order-detail',item.idOrder]" routerLinkActive="active" (click)="show(item.idOrder)"><i class="fas fa-clipboard  fa-2x"></i></a>
+                </td>
+                <td>
+                    <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#editOrder" (click)="showEdit(item)">
                     Edit</button>
-            </td>
-            <td>
-                <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#delete" (click)="showEdit(item)" >
+                </td>
+                <td>
+                    <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#delete" (click)="showEdit(item)">
                     <i class="far fa-trash-alt" ></i></button>
-            </td>
-        </tr>
-    </tbody>
-    <tfoot>
-        <tr>
-            <th></th>
-        </tr>
-    </tfoot>
-</table> 
-<!-- End table -->
-<!-- paging -->
-<div class="paging">
-    
-    <table class="nav nav-pills justify-content-center table-light ">
-      
-                <a class="nav-link "[routerLink]="['//homeAdmin/order/list-order',i-5]" (click)="setPage(i-5,$event)"  *ngIf="i-5>=0"><i class="fas fa-angle-double-left"></i></a> 
-                <a class="nav-link " [routerLink]="['//homeAdmin/order/list-order',i-1]" (click)="setPage(i-1,$event)"  *ngIf="i-1>=0"><i class="fas fa-angle-left"></i></a> 
-            
-            
-                <!-- <li class="nav-item" *ngFor="let p of pages; let i=index">
+                </td>
+            </tr>
+        </tbody>
+        <tfoot>
+            <tr>
+                <th></th>
+            </tr>
+        </tfoot>
+    </table>
+    <!-- End table -->
+    <!-- paging -->
+    <div class="paging">
+
+        <table class="nav nav-pills justify-content-center table-light ">
+
+            <a class="nav-link " [routerLink]="['//homeAdmin/order/list-order',i-5]" (click)="setPage(i-5,$event)" *ngIf="i-5>=0"><i class="fas fa-angle-double-left"></i></a>
+            <a class="nav-link " [routerLink]="['//homeAdmin/order/list-order',i-1]" (click)="setPage(i-1,$event)" *ngIf="i-1>=0"><i class="fas fa-angle-left"></i></a>
+
+
+            <!-- <li class="nav-item" *ngFor="let p of pages; let i=index">
                     <a class="nav-link " href="" (click)="setPage(i,$event)" [ngClass]="{'active':i==page}" *ngIf="expression">{{i}}</a>
                 </li> -->
-                <li>
-                    <a class="nav-link " [routerLink]="['//homeAdmin/order/list-order',i-2]" (click)="setPage(i-2,$event)"  *ngIf="i-2>=0">{{i-2}}</a> 
-                </li>
-                <li>
-                    <a class="nav-link " [routerLink]="['//homeAdmin/order/list-order',i-1]" (click)="setPage(i-1,$event)"  *ngIf="i-1>=0" >{{i-1}}</a> 
-                </li>
-                <li>
-                    <a class="nav-link " [routerLink]="['//homeAdmin/order/list-order',i]" (click)="setPage(i,$event)" [ngClass]="{'active':true}" *ngIf="i>=0">{{i}}</a> 
-                </li>
-                <li>
-                    <a class="nav-link " [routerLink]="['//homeAdmin/order/list-order',i+1]" (click)="setPage(i+1,$event)"  *ngIf="i+1>=0">{{i+1}}</a> 
-                </li>
-                <li>
-                    <a class="nav-link " [routerLink]="['//homeAdmin/order/list-order',i+2]" (click)="setPage(i+2,$event)"  *ngIf="i+2>=0">{{i+2}}</a> 
-                </li>
-                 <li><h1>    </h1></li>    
-                <!-- <li>
+            <li>
+                <a class="nav-link " [routerLink]="['//homeAdmin/order/list-order',i-2]" (click)="setPage(i-2,$event)" *ngIf="i-2>=0">{{i-2}}</a>
+            </li>
+            <li>
+                <a class="nav-link " [routerLink]="['//homeAdmin/order/list-order',i-1]" (click)="setPage(i-1,$event)" *ngIf="i-1>=0">{{i-1}}</a>
+            </li>
+            <li>
+                <a class="nav-link " [routerLink]="['//homeAdmin/order/list-order',i]" (click)="setPage(i,$event)" [ngClass]="{'active':true}" *ngIf="i>=0">{{i}}</a>
+            </li>
+            <li>
+                <a class="nav-link " [routerLink]="['//homeAdmin/order/list-order',i+1]" (click)="setPage(i+1,$event)" *ngIf="i+1>=0">{{i+1}}</a>
+            </li>
+            <li>
+                <a class="nav-link " [routerLink]="['//homeAdmin/order/list-order',i+2]" (click)="setPage(i+2,$event)" *ngIf="i+2>=0">{{i+2}}</a>
+            </li>
+            <li>
+                <h1> </h1>
+            </li>
+            <!-- <li>
                     <a class="nav-link " href="" (click)="setPage(10,$event)" [ngClass]="{'active':10==page}" *ngIf="i+2<10">{{10}}</a> 
                 </li>
                 <li>
@@ -129,131 +128,104 @@
                 <li>
                     <a class="nav-link " href="" (click)="setPage(30,$event)" [ngClass]="{'active':30==page}" *ngIf="i+2<30">{{30}}</a>
                 </li> -->
-               
-            
-            
-                <a class="nav-link " [routerLink]="['//homeAdmin/order/list-order',i+1]" (click)="setPage(i+1,$event)"  *ngIf="i+5<40"><i class="fas fa-angle-right"></i></a>  
-                <a class="nav-link " [routerLink]="['//homeAdmin/order/list-order',i+5]" (click)="setPage(i+5,$event)"  *ngIf="i+2<40"><i class="fas fa-angle-double-right"></i></a>               
-    </table>
-</div>
-<!-- Modal delete -->
-<div class="modal fade" id="delete" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Xoá</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+
+
+
+            <a class="nav-link " [routerLink]="['//homeAdmin/order/list-order',i+1]" (click)="setPage(i+1,$event)" *ngIf="i+5<40"><i class="fas fa-angle-right"></i></a>
+            <a class="nav-link " [routerLink]="['//homeAdmin/order/list-order',i+5]" (click)="setPage(i+5,$event)" *ngIf="i+2<40"><i class="fas fa-angle-double-right"></i></a>
+        </table>
+    </div>
+    <!-- Modal delete -->
+    <div class="modal fade" id="delete" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Xoá</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
-        </div>
-        <div class="modal-body">
-          ... ban thực sự muốn xoá 
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Huỷ</button>
-          <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="delete()">Xóa</button>
-        </div>
-      </div>
-    </div>
-  </div>
-<!-- Modal add -->
-<div class="modal fade " id="addOrder" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">Add Order</h5>
+                </div>
+                <div class="modal-body">
+                    ... ban thực sự muốn xoá
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Huỷ</button>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="delete()">Xóa</button>
+                </div>
             </div>
-            <div class="modal-body">
-                <form #formAdd="ngForm" novalidate>
+        </div>
+    </div>
+    <!-- Modal add -->
+    <div class="modal fade " id="addOrder" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Add Order</h5>
+                </div>
+                <div class="modal-body">
+                    <form #formAdd="ngForm" novalidate>
 
-                    <div class="p-3 position-relative ps ps--active-y" style="height: 250px;">
+                        <div class="p-3 position-relative ps ps--active-y" style="height: 250px;">
 
-                        
 
-                        <select ngModel="ten khach hang" >
-                            <option *ngFor="let item of listCustomer">{{item.name}}</option>
+
+                            <select>
+                            <option *ngFor="let item of listCustomer" [value]="item.name">{{item.name}}</option>
                         </select>
-                        <div class="row">
-                            <div class="col-12 form-group">Id Order
-                                <input type="text" [(ngModel)]="idOrder" name="idOrder" class="form-control" required #id="ngModel">
-                                <span class="col-12 validator" *ngIf="id.errors?.required && id.touched">Id is required</span></div>
-                            <div class="col-12 form-group">
-                                <label for="Choosesupplier">Choose name Customer</label>
-                                <select class="form-control" id="Choosesupplier" [(ngModel)]="nameCustomer" name="nameCustomer" (change)="setCustomer()" required>
+                            <div class="row">
+                                <div class="col-12 form-group">Id Order
+                                    <input type="text" [(ngModel)]="idOrder" name="idOrder" class="form-control" required #id="ngModel">
+                                    <span class="col-12 validator" *ngIf="id.errors?.required && id.touched">Id is required</span></div>
+                                <div class="col-12 form-group">
+                                    <label for="Choosesupplier">Choose name Customer</label>
+                                    <select class="form-control" id="Choosesupplier" [(ngModel)]="nameCustomer" name="nameCustomer" (change)="setCustomer()" required>
                                 <option>Choose Customer</option>
-                              <option *ngFor="let item of listCustomer">{{item.name}}</option>
+                              <option *ngFor="let item of listCustomer" [value]="item.name">{{item.name}}</option>
                         </select>
-                            </div>
+                                </div>
 
-                            
-                            <div class="form-group col-12">Date
-                                <input type="date" class="form-control" ngModel required name="createDate" #dateCreate="ngModel">
-                                <span class="col-12 validator" *ngIf="dateCreate.errors?.required && dateCreate.touched">Date is required</span>
+
+                                <div class="form-group col-12">Date
+                                    <input type="date" class="form-control" ngModel required name="createDate" #dateCreate="ngModel">
+                                    <span class="col-12 validator" *ngIf="dateCreate.errors?.required && dateCreate.touched">Date is required</span>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="modal-footer  ">
-                        <button type="button" class="btn btn-outline-danger " data-dismiss="modal">Cancel</button>
-                        <button [disabled]="formAdd.invalid" type="submit" class="btn btn-outline-primary " 
-                            data-dismiss="modal" (click)="(addOrder(formAdd))" 
-                                [routerLink]="['//homeAdmin/order/list-order-detail',idOrder]" routerLinkActive="active" >Add+</button> 
-                    </div>
-                </form>
+                        <div class="modal-footer  ">
+                            <button type="button" class="btn btn-outline-danger " data-dismiss="modal">Cancel</button>
+                            <button [disabled]="formAdd.invalid" type="submit" class="btn btn-outline-primary " data-dismiss="modal" (click)="(addOrder(formAdd))" [routerLink]="['//homeAdmin/order/list-order-detail',idOrder]" routerLinkActive="active">Add+</button>
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
     </div>
-</div>
 
-<!-- Modal edit Order -->
-<div class="modal fade " id="editOrder" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">Edit Order</h5>
-            </div>
-            <div class="modal-body">
-                <form #formEdit="ngForm" novalidate>
+    <!-- Modal edit Order -->
+    <div class="modal fade " id="editOrder" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Edit Order</h5>
+                </div>
+                <div class="modal-body">
+                    <form #formEdit="ngForm" novalidate>
 
-                    <select class="form-control" [(ngModel)]="editStatus" name="status" >
-                        <option value="">xem tat ca</option>
+                        <select class="form-control" [(ngModel)]="editStatus" name="status">
+                        <option  value="">xem tat ca</option>
                         <option value="Đang chờ" >Đang chờ</option>
                         <option value="Thành công">Thành công </option>
                         <option value="Thất bại">Thất bại</option>
                     
                     </select>
-                    <!-- <div class="p-3 position-relative ps ps--active-y" style="height: 250px;">
-                        <div class="row">
-                            <div class="col-12 form-group">Id Bill Import
-                                <input type="text" disabled [(ngModel)]="billImport.idBillImport" name="idBillImport" class="form-control" required #id="ngModel">
-                                <span class="col-12 validator" *ngIf="id.errors?.required && id.touched">Id is required</span></div>
-                            <div class="col-12 form-group">
-                                <label for="Choosesupplier1">Choose supplier</label>
-                                <select disabled class="form-control" id="Choosesupplier1" [(ngModel)]="billImport.nameSupplier" name="nameSupplier" (change)="setSupplier()" required>
-                                <option>Choose Supplier</option>
-                              <option *ngFor="let item of listSupp">{{item.name}}</option>
-                        </select>
-                            </div>
-
-                            <div class="form-group col-12">Date
-                                <input type="date" class="form-control" [(ngModel)]="billImport.createDate" required name="createDate" #dateCreate="ngModel">
-                                <span class="col-12 validator" *ngIf="dateCreate.errors?.required && dateCreate.touched">Date is required</span>
-                            </div>
+                        <div class="modal-footer  ">
+                            <button type="button" class="btn btn-outline-danger " data-dismiss="modal">Cancel</button>
+                            <button type="submit" class="btn btn-outline-primary " data-dismiss="modal" (click)="(editOrder(formEdit))">Save</button>
                         </div>
-                    </div> -->
-                    <div class="modal-footer  ">
-                        <button type="button" class="btn btn-outline-danger " data-dismiss="modal">Cancel</button>
-                        <button type="submit" class="btn btn-outline-primary " data-dismiss="modal" (click)="(editOrder(formEdit))">Save</button>
-                    </div>
-                </form>
+                    </form>
+                </div>
             </div>
         </div>
     </div>
-</div>
 
-<!-- End edit bill import -->
-
-
-  
-
- 
-  
+    <!-- End edit bill import -->
