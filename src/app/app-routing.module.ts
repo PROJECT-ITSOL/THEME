@@ -4,7 +4,11 @@ import { ProductImportComponent } from './order/product-import/product-import.co
 import { StatisticalComponent } from './statistical/statistical.component';
 import { CommentComponent } from './comment/comment.component';
 import { CategoryComponent } from './category/category.component';
+<<<<<<< HEAD
 import { ProductReturnComponent } from './order/product-return/product-return.component';
+=======
+// import { OrderComponent } from './order/order.component';
+>>>>>>> 5a7b203113294da98f86e74040fb9c3e1c395bb6
 import { ProductComponent } from './product/product.component';
 import { SupplierComponent } from './supplier/supplier.component';
 import { CustomerComponent } from './customer/customer.component';
@@ -31,6 +35,7 @@ const routes: Routes = [
       {
         path: 'order',
         children: [
+<<<<<<< HEAD
           { path: '', redirectTo: 'list-order', pathMatch: 'full' },
           { path: 'list-order', component: ProductOrderComponent },
           { path: 'list-order-detail', component: ProductOrderDetailComponent },
@@ -40,6 +45,14 @@ const routes: Routes = [
           { path: 'product-import', component: ProductImportComponent },
           { path: 'product-return', component: ProductReturnComponent },
           { path: 'product-import-detail/:id', component: ProductImportDetailComponent }
+=======
+          { path: '', redirectTo: 'product-import', pathMatch: 'full' },
+          // { path: 'list-order', component: ProductOrderComponent },
+          { path: 'list-order/:id', component: ProductOrderComponent },
+          { path: 'list-order-detail/:id', component: ProductOrderDetailComponent },
+          { path: 'product-import', component: ProductImportComponent },
+          { path: 'product-import-detail/:id',component: ProductImportDetailComponent }
+>>>>>>> 5a7b203113294da98f86e74040fb9c3e1c395bb6
         ],
       },
       { path: 'category', component: CategoryComponent },

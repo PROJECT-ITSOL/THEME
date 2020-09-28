@@ -9,19 +9,14 @@
 <div id="header">
     <div class="d-md-flex align-items-center bg-white p-3">
         <h3 class="mb-0">OderDetail List</h3>
-<<<<<<< HEAD
-        <div class="ml-auto mt-3 mt-md-0">
-            <a data-toggle="modal" data-target="#addOrderDetail"><i  class="fas fa-edit" (click)="setProduct()" >Add+</i></a>
-        </div>
-=======
         <!-- <div class="ml-auto mt-3 mt-md-0">
             <a data-toggle="modal" data-target="#editOrderDetail"><i  class="fas fa-edit" >Add+</i></a>
         </div> -->
->>>>>>> 306eb5d277911b2e973c4dd6bca9972407fde341
     </div>
 
     <div class="d-md-flex align-items-center border-top bg-white p-3">
-        <h4 class="text-primary"><a routerLink="/homeAdmin/order/list-order" routerLinkActive="active">Back_Order</a> </h4>
+        <h4 class="text-primary"><a routerLink="/homeAdmin/order/list-order" routerLinkActive="active">Back_Order</a>
+        </h4>
         <div class=" row ml-auto mt-3 mt-md-0">
 
             <h5 class="mb-0 mr-1  font-weight-bold font-14"> so luong mat hang: </h5>{{totalOrderDetail}}
@@ -55,22 +50,20 @@
                 <td>{{item.price | currency:"VND"}}</td>
                 <td>{{item.totalPrice | currency:"VND"}}</td>
 
-<<<<<<< HEAD
                 <td>
-                    <a data-toggle="modal" data-target="#editOrderDetail" (click)="setProductEdit(item)"><i  class="fas fa-edit" >Edit</i></a>
+                    <a data-toggle="modal" data-target="#editOrderDetail" (click)="setProductEdit(item)"><i
+                            class="fas fa-edit">Edit</i></a>
                 </td>
                 <td>
-                    <a class="mr-2" data-toggle="modal" data-target="#deleteOrderDetail" (click)="getDelete(item)"><i  class="fas fa-trash-alt delete" ></i></a>
-                    
-=======
-                <!-- <td>
+                    <a class="mr-2" data-toggle="modal" data-target="#deleteOrderDetail" (click)="getDelete(item)"><i
+                            class="fas fa-trash-alt delete"></i></a>
+                    <!-- <td>
                     <a data-toggle="modal" data-target="#editOrderDetail" (click)="setProduct(item)"><i  class="fas fa-edit" >Edit</i></a>
                 </td> -->
-                <td>
-                    <a class="mr-2" data-toggle="modal" data-target="#deleteOrderDetail"><i  class="fas fa-trash-alt delete" (click)="getDelete(item)"></i></a>
-
->>>>>>> 306eb5d277911b2e973c4dd6bca9972407fde341
-                </td>
+                    <!-- <td>
+                        <a class="mr-2" data-toggle="modal" data-target="#deleteOrderDetail"><i
+                            class="fas fa-trash-alt delete" (click)="getDelete(item)"></i></a>
+                    </td> -->
             </tr>
         </tbody>
         <tfoot>
@@ -100,15 +93,16 @@
                             <div class="row">
                                 <div class=" col-4 form-group">
                                     <label for="ChooseProduct">Name Product</label>
-                                    <select class="form-control " id="ChooseProduct"  [(ngModel)]="nameProduct"name="Product" (change)="setProduct()">
-                                    <option>Choose Product</option>
-                                    <option *ngFor="let item of listProduct">{{item.name}}</option>                               
-                                </select>
+                                    <select class="form-control " id="ChooseProduct" [(ngModel)]="nameProduct" name="Product" (change)="setProduct()">
+                                        <option>Choose Product</option>
+                                        <option *ngFor="let item of listProduct">{{item.name}}</option>
+                                    </select>
                                 </div>
                                 <div class="col-2 form-group ">
                                     <label for="amount ">Amount</label>
                                     <input type="number" min="1" pattern="^[0-9 ]+$" ngModel name="amount" class="form-control" required #amount="ngModel">
-                                    <span class="col-6 validator" *ngIf="amount.errors?.required && amount.touched"> Required</span>
+                                    <span class="col-6 validator" *ngIf="amount.errors?.required && amount.touched">
+                                        Required</span>
                                     <span class="col-6 validator" *ngIf="amount.errors?.pattern && amount.touched">Invalid</span>
                                 </div>
                                 <!-- <div class="col-3 form-group ">
@@ -133,7 +127,6 @@
     <!-- End modal add bill detail -->
 
     <!-- model edit bill detail -->
-<<<<<<< HEAD
     <div class="modal fade bd-example-modal-lg " id="editOrderDetail" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
@@ -159,7 +152,8 @@
                                 <div class="col-2 form-group ">
                                     <label for="amount ">Amount</label>
                                     <input type="number" min="1" pattern="^[0-9 ]+$" [(ngModel)]="orderDetail.amount" name="amount" class="form-control" required #amount="ngModel">
-                                    <span class="col-6 validator" *ngIf="amount.errors?.required && amount.touched"> Required</span>
+                                    <span class="col-6 validator" *ngIf="amount.errors?.required && amount.touched">
+                                        Required</span>
                                     <span class="col-6 validator" *ngIf="amount.errors?.pattern && amount.touched">Invalid</span>
                                 </div>
                                 <!-- <div class="col-3 form-group ">
@@ -174,7 +168,7 @@
                         </div>
                         <div class="modal-footer ">
                             <button type="button " class="btn btn-outline-danger " data-dismiss="modal">Cancel</button>
-                            <button  type="submit " class="btn btn-outline-primary " data-dismiss="modal" (click)="editOrderDetail(formEdit)">Send</button>
+                            <button type="submit " class="btn btn-outline-primary " data-dismiss="modal" (click)="editOrderDetail(formEdit)">Send</button>
                         </div>
                     </form>
                 </div>
@@ -182,9 +176,6 @@
         </div>
     </div>
     <!-- End modal edit bill -->
-=======
-
->>>>>>> 306eb5d277911b2e973c4dd6bca9972407fde341
 
     <!-- Modal delete bill import-->
     <div class="modal fade" id="deleteOrderDetail" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -205,5 +196,3 @@
         </div>
     </div>
     <!-- End modal delete -->
-
-
