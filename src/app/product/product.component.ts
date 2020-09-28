@@ -46,6 +46,7 @@ export class ProductComponent implements OnInit {
     let url = this.urlCategory + '/list';
     let param = new HttpParams().append('pageNo', this.pageNo.toString());
     this.service.getList(param, url).subscribe((data) => {
+      // console.log(data)
       this.listPage = new Array(data['totalPages']);
       this.dataCategory = data['content'];
       this.dataCategory.forEach((category) => {
@@ -79,7 +80,7 @@ export class ProductComponent implements OnInit {
       // this.pages = new Array(res['totalPages']);
       this.totalSupp = (res['totalElements']);
     });
-    console.log('######', this.listSupp);
+    // console.log('######', this.listSupp);
   }
 
   getProduct() {

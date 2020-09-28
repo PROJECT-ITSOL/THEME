@@ -15,7 +15,7 @@ import { ActivatedRoute } from '@angular/router';
 //import { Product } from './../../ultis/product';
 import { Order } from './../../ultis/order';
 import { OderDetail } from './../../ultis/orderDetail';
-import { OrderComponent } from '../order.component';
+// import { OrderComponent } from '../order.component';
 
 @Component({
   selector: 'app-product-return',
@@ -173,9 +173,7 @@ export class ProductReturnComponent implements OnInit {
         alert(res['message']);
 
       });
-    // });
 
-  
     }
 
 }

@@ -11,7 +11,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Product } from './../../ultis/product';
 import { Order } from './../../ultis/order';
 import { OderDetail } from './../../ultis/orderDetail';
-import { OrderComponent } from '../order.component';
+// import { OrderComponent } from '../order.component';
 @Component({
   selector: 'app-product-order-detail',
   templateUrl: './product-order-detail.component.html',
@@ -99,6 +99,7 @@ getProductAll(){
       this.dataOrderDetail = new Array();
       this.dataOrderDetail=res['data'];
       this.listOrderDetail=[];
+      this.totalOrderDetail=0;
       this.dataOrderDetail.forEach(data=>{
         let entity=new OderDetail();
         entity.idOrderDetail=data['idOrderDetail']
@@ -113,6 +114,7 @@ getProductAll(){
         this.listOrderDetail.push(entity);
         // console.log(data);
       })
+      this.totalOrderDetail=this.listOrderDetail.length;
     });
   }
    // bien 

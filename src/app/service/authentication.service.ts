@@ -52,4 +52,7 @@ export class AuthenticationService {
   getCommentById(url: string) {
     return this.http.get(this.baseUrl + url);
   }
+  getListNoParam(url: string){
+    return this.http.get(this.baseUrl + url)
+  }
 }

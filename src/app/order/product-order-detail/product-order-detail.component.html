@@ -9,9 +9,15 @@
 <div id="header">
     <div class="d-md-flex align-items-center bg-white p-3">
         <h3 class="mb-0">OderDetail List</h3>
+<<<<<<< HEAD
         <div class="ml-auto mt-3 mt-md-0">
             <a data-toggle="modal" data-target="#addOrderDetail"><i  class="fas fa-edit" (click)="setProduct()" >Add+</i></a>
         </div>
+=======
+        <!-- <div class="ml-auto mt-3 mt-md-0">
+            <a data-toggle="modal" data-target="#editOrderDetail"><i  class="fas fa-edit" >Add+</i></a>
+        </div> -->
+>>>>>>> 306eb5d277911b2e973c4dd6bca9972407fde341
     </div>
 
     <div class="d-md-flex align-items-center border-top bg-white p-3">
@@ -49,12 +55,21 @@
                 <td>{{item.price | currency:"VND"}}</td>
                 <td>{{item.totalPrice | currency:"VND"}}</td>
 
+<<<<<<< HEAD
                 <td>
                     <a data-toggle="modal" data-target="#editOrderDetail" (click)="setProductEdit(item)"><i  class="fas fa-edit" >Edit</i></a>
                 </td>
                 <td>
                     <a class="mr-2" data-toggle="modal" data-target="#deleteOrderDetail" (click)="getDelete(item)"><i  class="fas fa-trash-alt delete" ></i></a>
                     
+=======
+                <!-- <td>
+                    <a data-toggle="modal" data-target="#editOrderDetail" (click)="setProduct(item)"><i  class="fas fa-edit" >Edit</i></a>
+                </td> -->
+                <td>
+                    <a class="mr-2" data-toggle="modal" data-target="#deleteOrderDetail"><i  class="fas fa-trash-alt delete" (click)="getDelete(item)"></i></a>
+
+>>>>>>> 306eb5d277911b2e973c4dd6bca9972407fde341
                 </td>
             </tr>
         </tbody>
@@ -118,6 +133,7 @@
     <!-- End modal add bill detail -->
 
     <!-- model edit bill detail -->
+<<<<<<< HEAD
     <div class="modal fade bd-example-modal-lg " id="editOrderDetail" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
@@ -166,6 +182,9 @@
         </div>
     </div>
     <!-- End modal edit bill -->
+=======
+
+>>>>>>> 306eb5d277911b2e973c4dd6bca9972407fde341
 
     <!-- Modal delete bill import-->
     <div class="modal fade" id="deleteOrderDetail" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
