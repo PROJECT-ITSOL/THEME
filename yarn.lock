@@ -1823,6 +1823,11 @@ alphanum-sort@^1.0.0:
   resolved "https://registry.yarnpkg.com/alphanum-sort/-/alphanum-sort-1.0.2.tgz#97a1119649b211ad33691d9f9f486a8ec9fbe0a3"
   integrity sha1-l6ERlkmyEa0zaR2fn0hqjsn74KM=
 
+angular-utils-pagination@^0.11.1:
+  version "0.11.1"
+  resolved "https://registry.yarnpkg.com/angular-utils-pagination/-/angular-utils-pagination-0.11.1.tgz#efad7c8879beb30ad3d77707f93e3d0ef51f2c66"
+  integrity sha1-7618iHm+swrT13cH+T49DvUfLGY=
+
 angularfire2@^5.4.2:
   version "5.4.2"
   resolved "https://registry.yarnpkg.com/angularfire2/-/angularfire2-5.4.2.tgz#e6b7df3c070aaddba6f650abfdc4c89aec306f7a"
