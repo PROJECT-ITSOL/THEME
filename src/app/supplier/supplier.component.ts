@@ -3,6 +3,10 @@ import { Supplier } from './../ultis/supplier';
 import { SupplierService } from './../service/supplier.service';
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { ActivatedRoute, ActivationEnd, Router } from '@angular/router';
+import { finalize } from 'rxjs/operators';
+import { AngularFireStorage } from '@angular/fire/storage';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-supplier',
@@ -10,132 +14,179 @@ import { NgForm } from '@angular/forms';
   styleUrls: ['./supplier.component.scss']
 })
 export class SupplierComponent implements OnInit {
-  
+
   listSupp: Supplier[];
-  page:number=0;
-  pages:Array<number>;
-  totalSupp:number;
-  idDelete:number;
-  keyword:string;
-  listProduct:  Product[];
-  nameSupplier:string;
-  dataSupp:Array<any>;
-  supplier=new Supplier();
-  message:string;
-  status:string;
-  boolean:boolean;
+  page: number = 0;
+  pages: Array<number>;
+  totalSupp: number;
+  idDelete: number;
+  keyword: string;
+  listProduct: Product[];
+  nameSupplier: string;
+  dataSupp: Array<any>;
+  supplier = new Supplier();
+  message: string;
+  status: string;
+  boolean: boolean;
+  p: string;
+  listStatus: Array<string> = ['Active', 'Disable'];
+  formValue: any;
+  folderImage: string = 'folderImage';
 
-  constructor(private supplierService : SupplierService) { }
-    
-  setPage(i,event:any){
-    event.preventDefault();
-    this.page = i;
-    this.getSupp();
-  
+
+
+  imgUrl: string;
+  selectedImage: any = null;
+  isSubmited: boolean = false;
+
+
+  constructor(private supplierService: SupplierService,
+    private route: ActivatedRoute,
+    private router: Router,
+    private storage: AngularFireStorage) {
+    this.route.queryParams.subscribe(params => {
+      this.p = params['page'] || 0;
+    });
   }
 
-  showEdit(item:Supplier){
-    
-    this.supplier=item;
-    this.listProduct=item['products'];
-    this.nameSupplier=item['name'];
-    this.idDelete=item['idSupplier']
-  }
-
- 
   ngOnInit(): void {
-     this.getSupp();
-    
+    this.getAll();
+    this.resetForm();
   }
-   getSupp(){
+
+
+
+  getAll() {
     this.listSupp = new Array();
-    this.supplierService.getListSupp(this.page).subscribe(res => {
-     
-    this.dataSupp=res['content'];
-    this.dataSupp.forEach((supp)=>{
-      let supplier = new Supplier();
-      supplier.idSupplier=supp['idSupplier'];
-      supplier.address=supp['address'];
-      supplier.logo=supp['logo'];
-      supplier.name=supp['name'];
-      supplier.status=supp['status'];
-      supplier.phoneNumber=supp['phoneNumber'];
-      supplier.products=supp['productList'];
-      this.listSupp.push(supplier);
-    });
-    this.pages = new Array(res['totalPages']);
-    this.totalSupp = (res['totalElements']);
-    });
-   
-
-  }
-
-
-  onSubmit(form:NgForm){
-    this.supplierService.addSupp(form.value).subscribe((res) => {
-      this.message=res['message'];
-      location.reload();
-       alert(res['message']);
-      
-    });
-  }
-  edit(form:NgForm){
-    this.supplierService.editSupp(this.supplier['idSupplier'],form.value).subscribe(res => {    
-      this.getSupp(); 
+    this.supplierService.getAll().subscribe(res => {
+      this.dataSupp = res;
+      this.dataSupp.forEach((supp) => {
+        let supplier = new Supplier();
+        supplier.idSupplier = supp['idSupplier'];
+        supplier.address = supp['address'];
+        supplier.logo = supp['logo'];
+        supplier.name = supp['name'];
+        supplier.status = supp['status'];
+        supplier.phoneNumber = supp['phoneNumber'];
+        supplier.products = supp['productList'];
+        this.listSupp.push(supplier);
+      });
+      this.totalSupp = this.listSupp.length;
     });
   }
 
-  delete(){
-    this.supplierService.delete(this.idDelete).subscribe(res =>{
+  pageChange(newPage: number) {
+    this.router.navigate(['/homeAdmin/supplier'], { queryParams: { page: newPage } });
+  }
+
+  showEdit(item: Supplier) {
+    this.supplier = item;
+    this.listProduct = item['products'];
+    this.nameSupplier = item['name'];
+    this.idDelete = item['idSupplier']
+  }
+
+  add(form: NgForm) {
+    this.formValue = form.value
+    let newSupplier = new Supplier();
+    const urlImg = document.getElementById('file')
+    // console.log(urlImg.getAttribute("val"))
+    var filePath = `${this.folderImage}/${this.selectedImage.name.split('.').slice(0, -1).join('.')}_${new Date().getTime()}`;
+    const fileRef = this.storage.ref(filePath);
+    this.storage.upload(filePath, this.selectedImage).snapshotChanges().pipe(
+      finalize(() => {
+        fileRef.getDownloadURL().subscribe((url) => {
+          newSupplier.logo = url;
+          newSupplier.name = form.value.name;
+          newSupplier.address = form.value.address;
+          newSupplier.status = form.value.status;
+          newSupplier.phoneNumber = form.value.phoneNumber;
+          console.log(newSupplier);
+          this.supplierService.addSupp(newSupplier).subscribe((res) => {
+            this.message = res['message'];
+            // location.reload();
+            alert(res['message']);
+          });
+        })
+      })
+    ).subscribe();
+
+  }
+
+  edit(form: NgForm) {
+    this.supplierService.editSupp(this.supplier['idSupplier'], form.value).subscribe(res => {
+      this.getAll();
+    });
+  }
+
+  delete() {
+    this.supplierService.delete(this.idDelete).subscribe(res => {
       alert(res['message']);
-      this.getSupp();
+      this.getAll();
     })
   }
 
-  search(){
-    this.listSupp=new Array();
-    this.supplierService.search(this.keyword,this.page).subscribe(res =>{
-      this.dataSupp=res['content'];
-      this.dataSupp.forEach((supp)=>{
+  search() {
+    this.listSupp = new Array();
+    this.supplierService.search(this.keyword).subscribe(res => {
+      this.dataSupp = res;
+      this.dataSupp.forEach((supp) => {
         let supplier = new Supplier();
-        supplier.idSupplier=supp['idSupplier'];
-        supplier.address=supp['address'];
-        supplier.logo=supp['logo'];
-        supplier.name=supp['name'];
-        supplier.status=supp['status'];
-        supplier.phoneNumber=supp['phoneNumber'];
-        supplier.products=supp['productList'];
+        supplier.idSupplier = supp['idSupplier'];
+        supplier.address = supp['address'];
+        supplier.logo = supp['logo'];
+        supplier.name = supp['name'];
+        supplier.status = supp['status'];
+        supplier.phoneNumber = supp['phoneNumber'];
+        supplier.products = supp['productList'];
         this.listSupp.push(supplier);
       });
-      this.pages = new Array(res['totalPages']);
-      this.totalSupp = (res['totalElements']);
-      });
+      this.totalSupp = this.listSupp.length;
+    });
   }
 
-  getSuppByStatus(){
-    this.listSupp=new Array();
-    if (this.status=='Active') {
-        this.boolean=true;
+  getSuppByStatus() {
+    this.listSupp = new Array();
+    if (this.status == 'Active') {
+      this.boolean = true;
     } else {
-      this.boolean=false;      
+      this.boolean = false;
     }
-    this.supplierService.searchByStatus(this.boolean,this.page).subscribe(res =>{
-      this.dataSupp=res['content'];
-      this.dataSupp.forEach((supp)=>{
+    this.supplierService.searchByStatus(this.boolean, this.page).subscribe(res => {
+      this.dataSupp = res['content'];
+      this.dataSupp.forEach((supp) => {
         let supplier = new Supplier();
-        supplier.idSupplier=supp['idSupplier'];
-        supplier.address=supp['address'];
-        supplier.logo=supp['logo'];
-        supplier.name=supp['name'];
-        supplier.status=supp['status'];
-        supplier.phoneNumber=supp['phoneNumber'];
-        supplier.products=supp['productList'];
+        supplier.idSupplier = supp['idSupplier'];
+        supplier.address = supp['address'];
+        supplier.logo = supp['logo'];
+        supplier.name = supp['name'];
+        supplier.status = supp['status'];
+        supplier.phoneNumber = supp['phoneNumber'];
+        supplier.products = supp['productList'];
         this.listSupp.push(supplier);
       });
-      this.pages = new Array(res['totalPages']);
-      this.totalSupp = (res['totalElements']);
-      });
-
+      this.totalSupp = this.listSupp.length;
+    });
   }
 
+  showPreview(event: any) {
+    console.log(event.target.value)
+    if (event.target.files && event.target.files[0]) {
+      const reader = new FileReader();
+      reader.onload = (e: any) => this.imgUrl = e.target.result;
+      reader.readAsDataURL(event.target.files[0]);
+      this.selectedImage = event.target.files[0];
+    }
+    else {
+      this.imgUrl = '/assets/image/image.png';
+      this.selectedImage = null;
+    }
+  }
+
+  resetForm() {
+
+    this.imgUrl = '/assets/image/unnamed.png';
+    this.selectedImage = null;
+    this.isSubmited = false;
+  }
 }

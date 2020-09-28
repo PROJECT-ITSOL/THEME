@@ -44,8 +44,8 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
             return this.http.delete(this.apiUrl+'/delete?id='+id);
         }
 
-        search(key:string,page:number): Observable<Supplier[]>{
-            return this.http.get<Supplier[]>(this.apiUrl+'/search?name='+key+'&page='+page);
+        search(key:string): Observable<Supplier[]>{
+            return this.http.get<Supplier[]>(this.apiUrl+'/search?name='+key);
         }
 
         searchByStatus(status:boolean,page:number): Observable<Supplier[]>{

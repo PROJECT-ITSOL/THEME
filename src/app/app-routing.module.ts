@@ -35,7 +35,7 @@ const routes: Routes = [
           { path: '', redirectTo: 'list-order', pathMatch: 'full' },
           { path: 'list-order', component: ProductOrderComponent },
           { path: 'list-order-detail', component: ProductOrderDetailComponent },
-          { path: 'product-import', component: ProductImportComponent },
+          { path: 'product-import', component: ProductImportComponent},
           { path: 'product-return', component: ProductReturnComponent },
           { path: 'product-import-detail/:id',component: ProductImportDetailComponent }
         ],
