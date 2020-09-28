@@ -11,7 +11,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Product } from './../../ultis/product';
 import { Order } from './../../ultis/order';
 import { OderDetail } from './../../ultis/orderDetail';
-import { OrderComponent } from '../order.component';
+// import { OrderComponent } from '../order.component';
 @Component({
   selector: 'app-product-order-detail',
   templateUrl: './product-order-detail.component.html',
