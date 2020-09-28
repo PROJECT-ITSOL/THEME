@@ -24,7 +24,10 @@ export class AuthenticationService {
   getList(param: HttpParams, url: string) {
     return this.http.get(this.baseUrl + url, { params: param });
   }
-
+  // get all
+  getAll(url: string){
+    return this.http.get(this.baseUrl+ url);
+  }
   getSearch(param: HttpParams, url: string) {
     return this.http.get(this.baseUrl + url, { params: param });
   }
