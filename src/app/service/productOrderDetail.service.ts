@@ -8,6 +8,7 @@ import { Order } from '../ultis/order';
     private apiUrl = "http://localhost:8080/api/orderdetail";
 
     constructor(private http: HttpClient) { }
+    
     getByIdProductOrderdetail(id: string) {
         // return this.http.get(this.apiUrl + '/' + id);
         return this.http.get(this.apiUrl + '/' + id)
@@ -22,17 +23,16 @@ import { Order } from '../ultis/order';
     }
 
     addOrderDetail(orderDetail) {
-        return this.http.post(this.apiUrl + '/addOrder', orderDetail);
+        return this.http.post(this.apiUrl + '/addOrderDetail', orderDetail);
     }
 
     editOrderDetail(id, orderDetail) {
-        return this.http.put(this.apiUrl + '/update/' + id, orderDetail, {
-            responseType: 'text' as 'json',
-        });
+        return this.http.put(this.apiUrl + '/update/' + id, orderDetail
+        );
     }
 
-    delete(id) {
-        return this.http.delete(this.apiUrl + '/delete/' + id);
+    delete(id:number) {
+        return this.http.delete(this.apiUrl + '/delete?id='+id);
     }
 
     search(key: string, page: number): Observable<OderDetail[]> {

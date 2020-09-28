@@ -106,6 +106,7 @@ export class SupplierComponent implements OnInit {
             this.message = res['message'];
             // location.reload();
             alert(res['message']);
+            this.getAll();
           });
         })
       })

@@ -9,6 +9,15 @@
             margin-bottom: -20px;
             font-size: 35px;
         }
+        .form-group {
+            margin-bottom: 0 !important;
+        }
+        select {
+            width: 200px;
+            padding: 10px;
+            margin-left: 10px;
+            margin-top: 10px;
+        }
     }
     form {
         position: relative;

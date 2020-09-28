@@ -32,13 +32,18 @@ export class ProductOrderService {
         return this.http.get<Order[]>(this.apiUrl);
 
     }
+    // lay gia Order theo id order
+    getById(id:string){
+        return this.http.get(this.apiUrl+'/'+id);
+    }
 
     addOrder(order) {
         return this.http.post(this.apiUrl + '/addOrder', order);
     }
 
+    // thay doi status
     editOrder(id, order) {
-        return this.http.put(this.apiUrl + '/update/' + id, order, {
+        return this.http.put(this.apiUrl + '/updateStatus/' + id, order, {
             responseType: 'text' as 'json',
         });
     }
@@ -46,9 +51,21 @@ export class ProductOrderService {
     delete(url: string) {
         return this.http.delete(this.apiUrl + url);
     }
-
+// tim kiem theo id customer 
     search(key: string, page: number): Observable<Order[]> {
-        return this.http.get<Order[]>(this.apiUrl + '/search?name=' + key + '&page=' + page);
+        return this.http.get<Order[]>(this.apiUrl + '/searchCustomer?name=' + key + '&page=' + page);
+    }
+
+
+    searchStatus(status: string,page: number): Observable<Order[]>{
+        return this.http.get<Order[]>(this.apiUrl+'/status?status='+status+'&page='+page);
+    }
+
+    updateMoney(id){
+        return this.http.put(this.apiUrl + '/updateMoney/' +id, 
+        {
+            responseType: 'text' as 'json',
+        });
     }
     //
     // postAddNew(url: string, object: any) {

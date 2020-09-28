@@ -1,8 +1,5 @@
-import { Observable, of } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
-import { catchError, map, tap } from 'rxjs/operators';
-import { error } from '@angular/compiler/src/util';
 
 @Injectable({
   providedIn: 'root',
@@ -27,7 +24,10 @@ export class AuthenticationService {
   getList(param: HttpParams, url: string) {
     return this.http.get(this.baseUrl + url, { params: param });
   }
-
+  // get all
+  getAll(url: string){
+    return this.http.get(this.baseUrl+ url);
+  }
   getSearch(param: HttpParams, url: string) {
     return this.http.get(this.baseUrl + url, { params: param });
   }
@@ -52,5 +52,7 @@ export class AuthenticationService {
   getCommentById(url: string) {
     return this.http.get(this.baseUrl + url);
   }
+  getListNoParam(url: string){
+    return this.http.get(this.baseUrl + url)
+  }
 }
-    

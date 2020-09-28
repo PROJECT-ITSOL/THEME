@@ -11,32 +11,30 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CategoryComponent implements OnInit {
   private urlCategory = '/api/category';
-  private pageNo = 0;
-  listPage: Number[];
+  pageNo: number = 0;
+  listPage: Number[]=[];
   listCategory: Category[];
   dataCategory: Array<any>;
   idDelete: string;
   categoryEdit = new Category();
-  isData:boolean = false;
+  isData: boolean = false;
 
-  constructor(private service: AuthenticationService) {}
+  constructor(private service: AuthenticationService) { }
 
   ngOnInit(): void {
     this.getCategory();
   }
 
-  isActive(item){
-    return this.pageNo===item;
+  isActive(item) {
+    return this.pageNo === item;
   }
   getCategory() {
-    this.listCategory = new Array();  
-    // let url = this.urlCategory + '/list?pageNo=';
+    this.listCategory = new Array();
     let url = this.urlCategory + '/list';
-    let param=new HttpParams().append('pageNo',this.pageNo.toString());
+    let param = new HttpParams().append('pageNo', this.pageNo.toString());
     this.service.getList(param, url).subscribe((data) => {
       this.listPage = new Array(data['totalPages']);
       this.dataCategory = data['content'];
-      
       this.dataCategory.forEach((category) => {
         let categoryEntity = new Category();
         categoryEntity.id = category['idCategory'];
@@ -47,7 +45,7 @@ export class CategoryComponent implements OnInit {
       });
     });
   }
-  setPage(i: number) {
+  setPage(i: number,event) {
     event.preventDefault();
     this.pageNo = i;
     this.getCategory();
@@ -68,16 +66,16 @@ export class CategoryComponent implements OnInit {
     console.log(this.categoryEdit.id);
   }
   onSubmit(form) {
-    let url =this.urlCategory +"/update/"+this.categoryEdit.id;
-    let categoryUpdate= new Category();
-    categoryUpdate.id=this.categoryEdit.id;
-    categoryUpdate.name=form.value.name;
-    categoryUpdate.status=form.value.status;
-    this.service.putUpdate(url,categoryUpdate).subscribe(
-      data=>{
-        if(data['success']){
+    let url = this.urlCategory + "/update/" + this.categoryEdit.id;
+    let categoryUpdate = new Category();
+    categoryUpdate.id = this.categoryEdit.id;
+    categoryUpdate.name = form.value.name;
+    categoryUpdate.status = form.value.status;
+    this.service.putUpdate(url, categoryUpdate).subscribe(
+      data => {
+        if (data['success']) {
           this.getCategory();
-        }else{
+        } else {
           alert(data['message'])
         }
       }
@@ -87,16 +85,16 @@ export class CategoryComponent implements OnInit {
     let url = this.urlCategory + "/addNew";
 
     let category = new Category();
-    category.id=form.value.id;
-    category.name=form.value.name;
+    category.id = form.value.id;
+    category.name = form.value.name;
 
     console.log(category);
-    this.service.postAddNew(url,category).subscribe(
-      data=>{
+    this.service.postAddNew(url, category).subscribe(
+      data => {
         console.log(data['success']);
-        if(data['success']){
+        if (data['success']) {
           this.getCategory();
-        }else{
+        } else {
           alert(data['message']);
         }
       }
@@ -106,15 +104,15 @@ export class CategoryComponent implements OnInit {
   searchSubmit(form) {
     let url = this.urlCategory + '/search';
     let param = new HttpParams()
-          .append('keyword', form.value.search);
+      .append('keyword', form.value.search);
     this.service.getSearch(param, url).subscribe(
       (data) => {
-        if(data['success']){
-          this.dataCategory=data['data']['content'];
+        if (data['success']) {
+          this.dataCategory = data['data']['content'];
           this.listPage = [];
-          this.listPage=new Array(data['data']['totalPages']);
-          this.listCategory=[];
-          this.dataCategory.forEach(category=>{
+          this.listPage = new Array(data['data']['totalPages']);
+          this.listCategory = [];
+          this.dataCategory.forEach(category => {
             let categoryEntity = new Category();
             categoryEntity.id = category['idCategory'];
             categoryEntity.name = category['name'];
@@ -122,15 +120,25 @@ export class CategoryComponent implements OnInit {
             categoryEntity.products = category['listProduct'];
             this.listCategory.push(categoryEntity);
           })
-        }else{
-          this.isData=true;
-          this.listCategory=[];
+        } else {
+          this.isData = true;
+          this.listCategory = [];
         }
-       
+
       },
       (error) => {
         console.log(error.error);
       }
     );
+  }
+  setPlusPage(event) {
+    event.preventDefault()
+    this.pageNo++
+    this.getCategory()
+  }
+  setLessPage(event) {
+    event.preventDefault()
+    this.pageNo--
+    this.getCategory()
   }
 }

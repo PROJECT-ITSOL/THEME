@@ -1,1 +1,192 @@
-<p>customer works!</p>
+<div class="wrapper-customer">
+  <div class="header">
+    <div class="title">
+      <h2 class="font-weight-bold text-primary pl-3">Customer</h2>
+    </div>
+    <div class="row my-3">
+      <div class="col-sm-6 pl-3">
+        <div class="add">
+          <!-- Button trigger modal -->
+          <button class="btn btn-primary btn-circle pt-2 " data-toggle="modal" data-target="#modelAdd">
+            <i class="fas fa-plus"></i>
+          </button>
+
+          <!-- Modal -->
+          <div class="modal fade" id="modelAdd" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title">Add New Customer</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <form #formAdd="ngForm">
+                    <div class="form-group">
+                      <label for="id">Id Customer</label>
+                      <input type="text" class="form-control" name="id" ngModel id="id" placeholder="id">
+                    </div>
+                    <div class="form-group">
+                      <label for="name">Name</label>
+                      <input type="text" class="form-control" name="name" ngModel id="name" placeholder="name">
+                    </div>
+                    <div class="form-group">
+                      <label for="phoneNumber">PhoneNumber</label>
+                      <input type="text" class="form-control" name="phoneNumber" ngModel id="phoneNumber" placeholder="PhoneNumber">
+                    </div>
+                    <div class="form-group">
+                      <label for="address">Address</label>
+                      <input type="text" class="form-control" name="address" ngModel id="address" placeholder="Address">
+                    </div>
+                    <div class="form-group">
+                      <label for="email">Email</label>
+                      <input type="text" class="form-control" name="email" ngModel id="email" placeholder="Email">
+                    </div>
+                    <div class="form-group">
+                      <label for="amountBoom">AmountBoom</label>
+                      <input type="text" class="form-control" name="amountBoom" ngModel id="amountBoom" placeholder="AmountBoom">
+                    </div>
+                  </form>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                  <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="addSubmit(formAdd)">Save</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <form class="form-inline float-right" (submit)="searchSubmit(formSearch)" #formSearch="ngForm">
+          <div class="form-group">
+            <label for="search"></label>
+            <input type="search" name="search" id="search" ngModel class="form-control" placeholder="" aria-describedby="Search">
+          </div>
+          <button class="btn">
+            <i class="fas fa-search"></i>
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+  <table class="table justify-content-center  table-borderless">
+    <thead class="border-bottom">
+    <tr>
+      <th>Id</th>
+      <th>Name</th>
+      <th>PhoneNumber</th>
+      <th>Address</th>
+      <th>Email</th>
+      <th>AmountBoom</th>
+      <th>Status</th>
+      <th>Action</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let customer of listCustomer">
+      <td>{{customer.id}}</td>
+      <td>{{customer.name}}</td>
+      <td>{{customer.phoneNumber}}</td>
+      <td>{{customer.address}}</td>
+      <td>{{customer.email}}</td>
+      <td>{{customer.amountBoom}}</td>
+      <td>{{customer.status}}</td>
+      <td>
+        <!-- Button delete modal -->
+
+        <button type="button" class="btn btn-outline-danger mr-3" data-toggle="modal" data-target="#modelDelete" (click)="showDelete(customer.id)">Delete</button>
+
+        <!-- Modal -->
+        <div class="modal fade" id="modelDelete" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+              <div class="modal-body">
+                Delete Customer {{idDelete}}?
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal" (click)="delCustomer()">Delete</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Button Edit modal -->
+
+        <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#modelEdit" (click)="showEdit(customer)">Edit</button>
+
+      </td>
+    </tr>
+    </tbody>
+
+  </table>
+  <p *ngIf="isData">Not Found</p>
+  <!-- Modal Edit -->
+  <div class="modal fade" id="modelEdit" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Customer</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+
+          <form #formSave="ngForm">
+
+              <input type="email" class="form-control" name="idCustomer" [ngModel]="customerEdit.id" id="idCustomer" placeholder="Enter Id" [value]="customerEdit.id" hidden>
+
+            <div class="form-group">
+              <label for="nameCustomer">Name</label>
+              <input type="text" class="form-control" name="name" [ngModel]="customerEdit.name" id="nameCustomer" [value]="customerEdit.name" placeholder="Name">
+            </div>
+            <div class="form-group">
+              <label for="phoneNumberCustomer">PhoneNumber</label>
+              <input type="text" class="form-control" name="phoneNumber" [ngModel]="customerEdit.phoneNumber" id="phoneNumberCustomer" [value]="customerEdit.phoneNumber" placeholder="PhoneNumber">
+            </div>
+            <div class="form-group">
+              <label for="addressCustomer">Address</label>
+              <input type="text" class="form-control" name="address" [ngModel]="customerEdit.address" id="addressCustomer" [value]="customerEdit.address" placeholder="Address">
+            </div>
+            <div class="form-group">
+              <label for="emailCustomer">Email</label>
+              <input type="text" class="form-control" name="email" [ngModel]="customerEdit.email" id="emailCustomer" [value]="customerEdit.email" placeholder="Email">
+            </div>
+            <div class="form-group">
+              <label for="amountBoomCustomer">AmountBoom</label>
+              <input type="text" class="form-control" name="amountBoom" [ngModel]="customerEdit.amountBoom" id="amountBoomCustomer" [value]="customerEdit.amountBoom" placeholder="AmountBoom">
+            </div>
+            <div class="form-group">
+              <div class="title">Status</div>
+              <div class="form-check-inline">
+                <label class="form-check-label">
+                  <input type="radio" class="form-check-input" [value]="true" [ngModel]="customerEdit.status" [checked]="customerEdit.status===true" name="status">Active
+                </label>
+              </div>
+              <div class="form-check-inline">
+                <label class="form-check-label">
+                  <input type="radio" class="form-check-input" [value]="false" [ngModel]="customerEdit.status" [checked]="customerEdit.status===false"  name="status">Disable
+                </label>
+              </div>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="reset" class="btn btn-primary" data-dismiss="modal">Cancel</button>
+          <button type="button" class="btn btn-info" data-dismiss="modal" (click)="onSubmit(formSave)">Save</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <nav aria-label="Page navigation" *ngIf="listPage && !isData && listPage.length>1">
+    <ul class="pagination justify-content-center">
+      <li class="page-item" *ngFor="let page of listPage; let i = index" [ngClass]="{active:isActive(i)}">
+        <a class="page-link" href="#" (click)="setPage(i,$event)">{{i}}</a>
+      </li>
+    </ul>
+  </nav>
+</div>
+
