@@ -1,16 +1,15 @@
 import { SupplierService } from './service/supplier.service';
 import { AuthenticationService } from './service/authentication.service';
 import { HttpconfigInterceptor } from './httpconfig.interceptor';
-import { from } from 'rxjs';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import {HttpClientModule, HTTP_INTERCEPTORS} from '@angular/common/http';
-import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import { NgxPaginationModule } from 'ngx-pagination';
-import { AngularFireModule} from '@angular/fire';
-import {environment} from '../environments/environment';
-import { AngularFireStorageModule} from '@angular/fire/storage';
-import { AngularFireDatabaseModule} from '@angular/fire/database';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { NgxPaginationModule, PaginatePipe, PaginationControlsDirective } from 'ngx-pagination';
+import { AngularFireModule } from '@angular/fire';
+import { environment } from '../environments/environment';
+import { AngularFireStorageModule } from '@angular/fire/storage';
+import { AngularFireDatabaseModule } from '@angular/fire/database';
 
 
 import { AppRoutingModule } from './app-routing.module';
@@ -48,7 +47,7 @@ import { ProductOrderDetailComponent } from './order/product-order-detail/produc
     DashboardComponent,
     ProductImportDetailComponent,
     ProductOrderDetailComponent,
-    
+
   ],
   imports: [
     BrowserModule,
@@ -60,19 +59,16 @@ import { ProductOrderDetailComponent } from './order/product-order-detail/produc
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireStorageModule,
     AngularFireDatabaseModule,
-    ReactiveFormsModule 
+    ReactiveFormsModule,
   ],
   providers: [AuthenticationService,
-              SupplierService,
-              
-              
-             
+    SupplierService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: HttpconfigInterceptor,
+      multi: true
+    }],
     
-  {
-    provide:HTTP_INTERCEPTORS,
-    useClass:HttpconfigInterceptor,
-    multi:true
-  }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
