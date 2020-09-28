@@ -11,6 +11,7 @@ import {Customer} from '../ultis/customer';
 export class CustomerComponent implements OnInit {
   private urlCustomer = '/api/customer';
   private pageNo = 0;
+  totalCustomer: number;
   customerEdit = new Customer();
   listPage: Number[];
   listCustomer: Customer[];
@@ -45,6 +46,7 @@ export class CustomerComponent implements OnInit {
         customerEntity.comments = customer['listProduct'];
         this.listCustomer.push(customerEntity);
       });
+      this.totalCustomer = this.listCustomer.length;
     });
     console.log("this.listCustomer", this.listCustomer);
   }
@@ -147,5 +149,15 @@ export class CustomerComponent implements OnInit {
         console.log(error.error);
       }
     );
+  }
+  setPlusPage(event) {
+    event.preventDefault()
+    this.pageNo++
+    this.getCustomer();
+  }
+  setLessPage(event) {
+    event.preventDefault()
+    this.pageNo--
+    this.getCustomer();
   }
 }

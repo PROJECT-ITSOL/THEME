@@ -4,7 +4,6 @@ import { ProductImportComponent } from './order/product-import/product-import.co
 import { StatisticalComponent } from './statistical/statistical.component';
 import { CommentComponent } from './comment/comment.component';
 import { CategoryComponent } from './category/category.component';
-// import { OrderComponent } from './order/order.component';
 import { ProductComponent } from './product/product.component';
 import { SupplierComponent } from './supplier/supplier.component';
 import { CustomerComponent } from './customer/customer.component';
@@ -21,7 +20,7 @@ const routes: Routes = [
   { path: '', redirectTo: '/loginAdmin', pathMatch: 'full' },
   {
     path: 'homeAdmin',  component: HomeComponent,
-    canActivate: [AuthGuard],   
+    canActivate: [AuthGuard],
     children: [
       { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
       { path: 'dashboard', component: DashboardComponent },
@@ -31,12 +30,20 @@ const routes: Routes = [
       {
         path: 'order',
         children: [
-          { path: '', redirectTo: 'product-import', pathMatch: 'full' },
-          // { path: 'list-order', component: ProductOrderComponent },
+          { path: '', redirectTo: 'list-order', pathMatch: 'full' },
+          { path: 'list-order', component: ProductOrderComponent },
+          { path: 'list-order-detail', component: ProductOrderDetailComponent },
+          { path: 'product-import', component: ProductImportComponent},
           { path: 'list-order/:id', component: ProductOrderComponent },
           { path: 'list-order-detail/:id', component: ProductOrderDetailComponent },
           { path: 'product-import', component: ProductImportComponent },
-          { path: 'product-import-detail/:id',component: ProductImportDetailComponent }
+          { path: 'product-import-detail/:id', component: ProductImportDetailComponent },
+          { path: '', redirectTo: 'product-import', pathMatch: 'full' },
+          { path: 'list-order', component: ProductOrderComponent },
+          { path: 'list-order/:id', component: ProductOrderComponent },
+          { path: 'list-order-detail/:id', component: ProductOrderDetailComponent },
+          { path: 'product-import', component: ProductImportComponent },
+          { path: 'product-import-detail/:id', component: ProductImportDetailComponent }
         ],
       },
       { path: 'category', component: CategoryComponent },

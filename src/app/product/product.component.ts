@@ -234,4 +234,14 @@ export class ProductComponent implements OnInit {
       }
     );
   }
+  setPlusPage(event) {
+    event.preventDefault()
+    this.pageNo++
+    this.getProduct()
+  }
+  setLessPage(event) {
+    event.preventDefault()
+    this.pageNo--
+    this.getProduct()
+  }
 }
