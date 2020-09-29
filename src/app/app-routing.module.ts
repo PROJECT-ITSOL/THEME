@@ -30,20 +30,15 @@ const routes: Routes = [
       {
         path: 'order',
         children: [
-          { path: '', redirectTo: 'list-order', pathMatch: 'full' },
+          { path: '', redirectTo: 'product-import', pathMatch: 'full' },
           { path: 'list-order', component: ProductOrderComponent },
-          { path: 'list-order-detail', component: ProductOrderDetailComponent },
+    //     { path: 'list-order-detail', component: ProductOrderDetailComponent },
           { path: 'product-import', component: ProductImportComponent},
           { path: 'list-order/:id', component: ProductOrderComponent },
           { path: 'list-order-detail/:id', component: ProductOrderDetailComponent },
           { path: 'product-import', component: ProductImportComponent },
           { path: 'product-import-detail/:id', component: ProductImportDetailComponent },
-          { path: '', redirectTo: 'product-import', pathMatch: 'full' },
-          { path: 'list-order', component: ProductOrderComponent },
-          { path: 'list-order/:id', component: ProductOrderComponent },
-          { path: 'list-order-detail/:id', component: ProductOrderDetailComponent },
-          { path: 'product-import', component: ProductImportComponent },
-          { path: 'product-import-detail/:id', component: ProductImportDetailComponent }
+                     
         ],
       },
       { path: 'category', component: CategoryComponent },

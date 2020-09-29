@@ -59,9 +59,11 @@ export class ProductOrderDetailComponent implements OnInit {
 
   ngOnInit(): void {
     this.GanidOrder = this.route.snapshot.paramMap.get('id');
-    this.getProductAll();
-    this.viewOrderDetail();
 
+    
+    this.viewOrderDetail();
+    
+    this.getProductAll();
     //this.getToTal();
   }
  
@@ -129,7 +131,7 @@ getProductAll(){
       alert(res['message']);
       this.viewOrderDetail();
     });
-
+   // this.ngOnInit();
   }
 
   setProduct(){
@@ -144,16 +146,12 @@ getProductAll(){
 
   // ham  trong modal
   addProduct(form: NgForm) {
-
     console.log(form);
     console.log('Your form data : ', form.value);
     let newOrderDetail = new OderDetail;
-    newOrderDetail.amount = form.value.amount;
-   // newOrderDetail.price = form.value.price;
+    newOrderDetail.amount = form.value.amount; 
     newOrderDetail.idProduct = this.idProduct;
-    //newOrderDetail.product= this.Product;
     newOrderDetail.idOrder= this.GanidOrder;
-    // newOrderDetail.Order = this.orderDetail;
     newOrderDetail.totalPrice=form.value.amount*this.product.price;
     console.log(newOrderDetail);
     this.productOrderDetailService.addOrderDetail(newOrderDetail).subscribe(res => {

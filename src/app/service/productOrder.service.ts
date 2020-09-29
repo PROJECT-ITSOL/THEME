@@ -56,9 +56,9 @@ export class ProductOrderService {
     search(key: string, page: number): Observable<Order[]> {
         return this.http.get<Order[]>(this.apiUrl + '/searchCustomer?name=' + key + '&page=' + page);
     }
-
+// tim kiem 
     searchId(key: string): Observable<Order[]> {
-        return this.http.get<Order[]>(this.apiUrl + '/serch?keyword=' + key+'&pageNo='+0+'&pageSize='+8 );
+        return this.http.get<Order[]>(this.apiUrl + '/serch?keyword=' + key );
     }
 
 
