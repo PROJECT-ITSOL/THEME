@@ -25,7 +25,7 @@ export class ProductOrderService {
     //////
     constructor(private http: HttpClient) { }
     getListOrder(page: number): Observable<Order[]> {
-        return this.http.get<Order[]>(this.apiUrl + '/list?page=' + page);
+        return this.http.get<Order[]>(this.apiUrl + '/list?page=' + (page-1));
     }
 
     getData(): Observable<Order[]> {
@@ -51,14 +51,19 @@ export class ProductOrderService {
     delete(url: string) {
         return this.http.delete(this.apiUrl + url);
     }
+
 // tim kiem theo id customer 
     search(key: string, page: number): Observable<Order[]> {
         return this.http.get<Order[]>(this.apiUrl + '/searchCustomer?name=' + key + '&page=' + page);
     }
 
+    searchId(key: string): Observable<Order[]> {
+        return this.http.get<Order[]>(this.apiUrl + '/serch?keyword=' + key+'&pageNo='+0+'&pageSize='+8 );
+    }
+
 
     searchStatus(status: string,page: number): Observable<Order[]>{
-        return this.http.get<Order[]>(this.apiUrl+'/status?status='+status+'&page='+page);
+        return this.http.get<Order[]>(this.apiUrl+'/status?status='+status+'&page='+(page-1));
     }
 
     updateMoney(id){
