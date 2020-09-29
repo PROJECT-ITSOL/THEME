@@ -56,6 +56,10 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
             
         }
 
+        getData(month){
+            return this.http.get(this.apiUrl+'/thongKe?month='+month);
+        }
+
         // updateBillImport(id:string){
         //     return this.http.put(this.apiUrl+'/update/'+id);        
         // }

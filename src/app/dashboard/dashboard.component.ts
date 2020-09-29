@@ -2,13 +2,27 @@ import { from } from 'rxjs';
 import { Component, OnInit } from '@angular/core';
 import { Chart } from '../../../node_modules/chart.js';
 import { draw, generate } from 'patternomaly';
+import { BillImportService } from '../service/billImport.service';
+import { ChartDataSets, ChartOptions } from 'chart.js';
+import { Color, Label } from 'ng2-charts';
+
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss'],
 })
 export class DashboardComponent implements OnInit {
-  constructor() {}
+ 
+
+listTotalMoneyBillImport:Array<any>;
+listTotalproductBillImport:Array<any>;
+listTotalBillImport:Array<number>;
+dataBillImport:Array<any>;
+
+  constructor(  private billImportService:BillImportService) {
+    this.getDataBimmImport();
+    this.refreshData();
+  }
 
   ngOnInit(): void {
     var colors = [
@@ -25,69 +39,6 @@ export class DashboardComponent implements OnInit {
       datasets: [
         {
           data: [589, 445, 483, 503, 689, 692, 634],
-          backgroundColor: colors[1],
-          opacity:0.5,
-          borderColor: colors[0],
-          borderWidth: 4,
-          pointBackgroundColor: colors[0],
-        },
-      ],
-    };
-    var myChart = document.getElementById('myAreaChart');
-    if (myChart) {
-      new Chart(myChart, {
-        type: 'line',
-        data: chartData,
-        options: {
-          scales: {
-            xAxes: [
-              {
-                gridLines: {
-                  color: 'transparent',
-                  zeroLineColor: 'transparent',
-                },
-                
-              },
-            ],
-            yAxes: [
-              {
-                ticks: {
-                  beginAtZero: false,
-                },
-              },
-            ],
-          },
-
-          legend: {
-            display: false,
-          },
-        },
-      });
-    }
-
-    //test
-    var colors = [
-      '#1FDECF',
-      '#1FC6DE',
-      '#1FDE3A',
-      '#1FDE56',
-      '#F0845F',
-      '#F05F71',
-    ];
-    // LineChart
-    var chartData = {
-      labels: ['S', 'M', 'T', 'W', 'T', 'F', 'S'],
-      datasets: [
-        {
-          data: [589, 445, 483, 503, 689, 692, 634],
-          backgroundColor:'#FBFBEF' ,
-          opacity:0.5,
-          borderColor: colors[0],
-          borderWidth: 4,
-          pointBackgroundColor: colors[0],
-        },
-        {
-          data: [111, 222, 333, 444, 89, 555, 455],
           backgroundColor: colors[1],
           opacity:0.5,
           borderColor: colors[0],
@@ -128,7 +79,6 @@ export class DashboardComponent implements OnInit {
       });
     }
 
-
     // Pie Chart
 
     var donutOptions = {
@@ -158,4 +108,60 @@ export class DashboardComponent implements OnInit {
       });
     }
   }
+
+  
+  //BillImport
+  async getDataBimmImport(){
+    this.listTotalBillImport = new Array();
+    this.listTotalMoneyBillImport = new Array();
+    this.listTotalproductBillImport= new Array();
+      this.billImportService.getData(9).subscribe(res=>{
+        this.dataBillImport=res  as Object[];
+        console.log(res);
+        this.dataBillImport.forEach(element => {
+          let i:number = element['totalBill'];  
+          this.listTotalBillImport.push(i);
+          let k:number = element['totalProduct'];
+          this.listTotalproductBillImport.push(k);
+          let l:number = element['totalMoney'];
+          this.listTotalMoneyBillImport.push(l);
+        });
+        console.log(this.listTotalBillImport);
+      });    
+  }
+  
+  lineChartData: ChartDataSets[] = [
+    { data:  [28, 48, 40, 19, 86, 27, 90], label: ' Total Bill' },
+  ];
+  
+  lineChartData1: ChartDataSets[] = [
+    { data:  [28, 48, 40, 19, 86, 27, 90], label: ' Total Product' },
+  ];
+  
+  lineChartData2: ChartDataSets[] = [
+    { data:  [28, 48, 40, 19, 86, 27, 90], label: ' Total Money' },
+  ];
+
+  lineChartLabels: Label[] = ['January', 'February', 'March', 'April', 'May', 'June', 'July','Aug','Sep','Oct','Nov','Dec'];
+  lineChartOptions: ChartOptions = {
+    responsive: true
+  };
+  lineChartColors: Color[] = [
+    { // dark grey
+      backgroundColor: 'rgba(77,83,96,0.2)',
+      borderColor: 'rgba(77,83,96,1)',
+    }
+  ];
+  lineChartLegend = true;
+  lineChartType = 'line';
+  lineChartPlugins = [];
+  
+  refreshData() {
+    this.lineChartData[0].data = this.listTotalBillImport;
+    this.lineChartData1[0].data = this.listTotalproductBillImport;
+    this.lineChartData2[0].data = this.listTotalMoneyBillImport;
+  }
+  //End bill import
+
+  
 }

@@ -64,7 +64,7 @@ export class CommentComponent implements OnInit {
     let url = this.urlApiProduct + 'products'
     this.service.getListNoParam(url).subscribe(
       res => {
-        this.dataProduct = new Array()
+        this.dataProduct = new Array()  
         this.listProduct = []
         this.dataProduct = res as Object[]
         this.dataProduct.forEach(data => {
