@@ -8,26 +8,26 @@
 
 <div id="header">
     <div class="d-md-flex align-items-center bg-white p-3">
-        <h3 class="mb-0">OderDetail List</h3>
-        <!-- <div class="ml-auto mt-3 mt-md-0">
-            <a data-toggle="modal" data-target="#editOrderDetail"><i  class="fas fa-edit" >Add+</i></a>
-        </div> -->
+        <h3 class="mb-0" style="color: rgb(55, 0, 255);">OderDetail List</h3>
+        <div class="ml-auto mt-3 mt-md-0">
+            <a data-toggle="modal" data-target="#addOrderDetail" style="color: rgb(55, 0, 255);"><i  class="fas fa-edit" >Add+</i></a>
+        </div>
     </div>
 
     <div class="d-md-flex align-items-center border-top bg-white p-3">
-        <h4 class="text-primary"><a routerLink="/homeAdmin/order/list-order" routerLinkActive="active">Back_Order</a>
+        <h4 class="text-primary"><a routerLink="/homeAdmin/order/list-order" routerLinkActive="active"><i class="fas fa-long-arrow-alt-left fa-2x"></i></a>
         </h4>
-        <div class=" row ml-auto mt-3 mt-md-0">
+        <div class=" row ml-auto mt-3 mt-md-0" style="color: rgb(55, 0, 255);">
 
-            <h5 class="mb-0 mr-1  font-weight-bold font-14"> so luong mat hang: </h5>{{totalOrderDetail}}
+            <h5 class="mb-0 mr-1  font-weight-bold font-14" > total: </h5>{{totalOrderDetail}}
 
 
         </div>
     </div>
 
     <!-- phan table  -->
-    <table class="table table-light table-data">
-        <thead class="thead-light">
+    <table class="table table-light table-data" style="text-align:center; ">
+        <thead class="bg-primary text-white">
             <tr>
                 <th>id OderDetail</th>
                 <th>id product</th>
@@ -41,7 +41,7 @@
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let item of listOrderDetail">
+            <tr *ngFor="let item of listOrderDetail" style="color: rgb(55, 0, 255);">
                 <td>{{item.idOrderDetail}}</td>
                 <td>{{item.idProduct}}</td>
                 <td>{{item.idOrder}}</td>
@@ -73,7 +73,7 @@
         </tfoot>
     </table>
     <!-- end table -->
-    <h5 class="mb-0 mr-1  font-weight-bold font-14"> Tong tien: {{Tong |currency:"VND" }}</h5>
+    <h5 class="mb-0 mr-1  font-weight-bold font-14" style="color: rgb(55, 0, 255);"> Tong tien: {{Tong |currency:"VND" }}</h5>
 
 
     <!-- Modal add -->
