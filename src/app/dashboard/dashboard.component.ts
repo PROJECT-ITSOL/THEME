@@ -65,6 +65,70 @@ export class DashboardComponent implements OnInit {
       });
     }
 
+    //test
+    var colors = [
+      '#1FDECF',
+      '#1FC6DE',
+      '#1FDE3A',
+      '#1FDE56',
+      '#F0845F',
+      '#F05F71',
+    ];
+    // LineChart
+    var chartData = {
+      labels: ['S', 'M', 'T', 'W', 'T', 'F', 'S'],
+      datasets: [
+        {
+          data: [589, 445, 483, 503, 689, 692, 634],
+          backgroundColor:'#FBFBEF' ,
+          opacity:0.5,
+          borderColor: colors[0],
+          borderWidth: 4,
+          pointBackgroundColor: colors[0],
+        },
+        {
+          data: [111, 222, 333, 444, 89, 555, 455],
+          backgroundColor: colors[1],
+          opacity:0.5,
+          borderColor: colors[0],
+          borderWidth: 4,
+          pointBackgroundColor: colors[0],
+        },
+      ],
+    };
+    var myChart = document.getElementById('new');
+    if (myChart) {
+      new Chart(myChart, {
+        type: 'line',
+        data: chartData,
+        options: {
+          scales: {
+            xAxes: [
+              {
+                gridLines: {
+                  color: 'transparent',
+                  zeroLineColor: 'transparent',
+                },
+                
+              },
+            ],
+            yAxes: [
+              {
+                ticks: {
+                  beginAtZero: false,
+                },
+              },
+            ],
+          },
+
+          legend: {
+            display: false,
+          },
+        },
+      });
+    }
+
+
     // Pie Chart
 
     var donutOptions = {

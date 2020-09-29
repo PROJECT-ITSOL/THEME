@@ -46,11 +46,7 @@
                     <td class="align-middle py-4">{{item.idBillImport}}</td>
                     <td class="py-4"><span class="align-middle font-16">{{item.totalProduct}}</span></td>
                     <td class="align-middle">{{item.totalMoney | currency:"VND"}}</td>
-<<<<<<< HEAD
-                    <td class="align-middle ">{{item.createDate |date }}</td>
-=======
                     <td class="align-middle ">{{item.createDate | date }}</td>
->>>>>>> 77bfceb1cbe44d446f478ba0cd225893a095ceda
                     <td class="align-middle">{{item.nameSupplier}}</td>
                     <td class="align-middle action">
                         <a [routerLink]="['//homeAdmin/order/product-import-detail', item.idBillImport]" routerLinkActive="active">View</a>
@@ -59,7 +55,7 @@
                     </td>
                 </tr>
                 <pagination-controls (pageChange)="pageChange($event)" previousLabel="" nextLabel="" class="my-pagination"></pagination-controls>
-
+                <!-- <pagination-controls></pagination-controls> -->
             </tbody>
         </table>
     </div>
