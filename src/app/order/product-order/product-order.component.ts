@@ -1,17 +1,16 @@
-import { error } from '@angular/compiler/src/util';
-import { HttpParams } from '@angular/common/http';
-import { Order } from './../../ultis/order';
+import {HttpParams} from '@angular/common/http';
+import {Order} from './../../ultis/order';
 
-import { OderDetail } from './../../ultis/orderDetail';
-import { Product } from './../../ultis/product';
-import { Component, OnInit } from '@angular/core';
-import { NgForm } from '@angular/forms';
-import { from } from 'rxjs';
-import { AuthenticationService } from 'src/app/service/authentication.service';
-import { ProductOrderService } from './../../service/productOrder.service';
-import { ProductOrderDetailService } from "./../../service/productOrderDetail.service";
-import { ActivatedRoute } from '@angular/router';
-import { Customer } from "./../../ultis/customer";
+import {OderDetail} from './../../ultis/orderDetail';
+import {Product} from './../../ultis/product';
+import {Component, OnInit} from '@angular/core';
+import {NgForm} from '@angular/forms';
+import {AuthenticationService} from 'src/app/service/authentication.service';
+import {ProductOrderService} from './../../service/productOrder.service';
+import {ProductOrderDetailService} from './../../service/productOrderDetail.service';
+import {ActivatedRoute} from '@angular/router';
+import {Customer} from './../../ultis/customer';
+
 //import {  } from "./../../service";
 @Component({
   selector: 'app-product-order',
@@ -47,39 +46,39 @@ export class ProductOrderComponent implements OnInit {
   totalOrder: number;
   order = new Order();    // khoi tao bien
   // bien page
-  status: string = "that bai";
+  status: string = 'that bai';
   page: number = 0;
   i: number = 0;
-  idCustomer:number;
+  idCustomer: number;
   //t: string= this.i.toString();
   pages: Array<number>;
   keyStatus;
   idlink;
   idOrder: string;
-  
+
   constructor(
     private route: ActivatedRoute,
     private productOrderService: ProductOrderService,
     private productOrderDetailService: ProductOrderDetailService,
     private service: AuthenticationService,
-    
-    
-  ) { }
-
+  ) {
+  }
 
 
   //
   bien1 = 0;
   bien2 = 3;
+
   // loi goi dau
 
-  ngOnInit(): void { 
-    
-   this.i=parseInt(this.route.snapshot.paramMap.get('id'));
+  ngOnInit(): void {
+
+    this.i = parseInt(this.route.snapshot.paramMap.get('id'));
     this.getOrder();
     this.getCustomer();
-    
+
   }
+
   // lay danh sach customer
   getCustomer() {
     this.listCustomer = new Array();
@@ -102,8 +101,9 @@ export class ProductOrderComponent implements OnInit {
         this.listCustomer.push(customerEntity);
       });
     });
-    console.log("this.listCustomer", this.listCustomer);
+    console.log('this.listCustomer', this.listCustomer);
   }
+
   // lay ra ds Order
   getOrder() {
 
@@ -115,16 +115,16 @@ export class ProductOrderComponent implements OnInit {
       console.log(this.dataOrder);
 
       this.dataOrder.forEach((order) => {
-        let orderEntity = new Order();  
+        let orderEntity = new Order();
         orderEntity.idOrder = order['idOrder'];
         orderEntity.idCustomer = order['idCustomer'];
         orderEntity.createDate = order['createDate'];
         orderEntity.status = order['status'];
-        orderEntity.nameCustomer= order['customerOrder']['name'];
-        orderEntity.phoneCustomer=order['customerOrder']['phoneNumber'];
-        orderEntity.emailSuctomer=order['customerOrder']['email'];     
-        orderEntity.totalMoney=order['totalMoney'];
-        orderEntity.orderDetail=order['listOrderDetail'];      
+        orderEntity.nameCustomer = order['customerOrder']['name'];
+        orderEntity.phoneCustomer = order['customerOrder']['phoneNumber'];
+        orderEntity.emailSuctomer = order['customerOrder']['email'];
+        orderEntity.totalMoney = order['totalMoney'];
+        orderEntity.orderDetail = order['listOrderDetail'];
         this.listOrder.push(orderEntity);
       });
       console.log(this.listOrder);
@@ -132,24 +132,27 @@ export class ProductOrderComponent implements OnInit {
       this.totalOrder = (res['totalElements']);
     });
   }
-  
+
   // set 1 danh sach dang page
-  
+
   //
   setPage(i, event: any) {
     event.preventDefault();
     this.page = i;
     this.i = i;
-    this.page=parseInt(this.route.snapshot.paramMap.get('id'));
+    this.page = parseInt(this.route.snapshot.paramMap.get('id'));
     //this.getOrder();
     //
-    if(this.keyStatus=="Đang chờ"||this.keyStatus=="Thành công"||this.keyStatus=="Thất bại")
-    //     this.getOrder;
-    // else
-       this.searchStatus();
-       else
+    if (this.keyStatus == 'Đang chờ' || this.keyStatus == 'Thành công' || this.keyStatus == 'Thất bại')
+      //     this.getOrder;
+      // else
+    {
+      this.searchStatus();
+    } else {
       this.getOrder();
+    }
   }
+
   // gan bien
   showEdit(item: Order) {
     this.editOrderkey = item;
@@ -161,6 +164,7 @@ export class ProductOrderComponent implements OnInit {
   show(message: string) {
     this.productOrderService.changeMessage(message); // gan bien tri cho bien message trong service
   }
+
   // ham xoa doi tuong
   delete() {
     // console.log(this.idDelete);
@@ -169,71 +173,73 @@ export class ProductOrderComponent implements OnInit {
       // console.log(res);
       this.getOrder();
       //alert(res['message']);
-    })
+    });
     // this.getOrder();
   }
-  
-  // ham tim kiem 
+
+  // ham tim kiem
   search() {
     this.listOrder = new Array();
     this.productOrderService.search(this.keyword, this.page).subscribe(res => {
       this.dataOrder = res['content']; // lay tat ca
       this.dataOrder.forEach((order) => {
-        let orderEntity = new Order();  
+        let orderEntity = new Order();
         orderEntity.idOrder = order['idOrder'];
         orderEntity.idCustomer = order['idCustomer'];
         orderEntity.createDate = order['createDate'];
         orderEntity.status = order['status'];
-        orderEntity.nameCustomer= order['customerOrder']['name'];
-        orderEntity.phoneCustomer=order['customerOrder']['phoneNumber'];
-        orderEntity.emailSuctomer=order['customerOrder']['email'];     
-        orderEntity.totalMoney=order['totalMoney'];
-        orderEntity.orderDetail=order['listOrderDetail'];      
+        orderEntity.nameCustomer = order['customerOrder']['name'];
+        orderEntity.phoneCustomer = order['customerOrder']['phoneNumber'];
+        orderEntity.emailSuctomer = order['customerOrder']['email'];
+        orderEntity.totalMoney = order['totalMoney'];
+        orderEntity.orderDetail = order['listOrderDetail'];
         this.listOrder.push(orderEntity);
-      })
+      });
       console.log(this.listOrder);
       this.pages = new Array(res['totalElement']);
     });
   }
-  //-------------------
-  
 
-  setCustomer(){
-    this.listCustomer.forEach(cus=>{
-      if(cus.name===this.nameCustomer){
-        this.customer=cus;
-        this.idCustomer=cus.id;
+  //-------------------
+
+
+  setCustomer() {
+    this.listCustomer.forEach(cus => {
+      if (cus.name === this.nameCustomer) {
+        this.customer = cus;
+        this.idCustomer = cus.id;
       }
-    })
+    });
   }
-  
+
   searchStatus() {
     this.listOrder = new Array();
     this.totalOrderDetail = 0;
-    this.productOrderService.searchStatus(this.keyStatus,this.page).subscribe(res => {
+    this.productOrderService.searchStatus(this.keyStatus, this.page).subscribe(res => {
       this.dataOrder = new Array();
       this.dataOrder = res['content']; // lay tat ca
       // console.log(res)
       this.dataOrder.forEach((order) => {
-        let orderEntity = new Order();  
+        let orderEntity = new Order();
         orderEntity.idOrder = order['idOrder'];
         orderEntity.idCustomer = order['idCustomer'];
         orderEntity.createDate = order['createDate'];
         orderEntity.status = order['status'];
-        orderEntity.nameCustomer= order['customerOrder']['name'];
-        orderEntity.phoneCustomer=order['customerOrder']['phoneNumber'];
-        orderEntity.emailSuctomer=order['customerOrder']['email'];     
-        orderEntity.totalMoney=order['totalMoney'];
-        orderEntity.orderDetail=order['listOrderDetail'];      
+        orderEntity.nameCustomer = order['customerOrder']['name'];
+        orderEntity.phoneCustomer = order['customerOrder']['phoneNumber'];
+        orderEntity.emailSuctomer = order['customerOrder']['email'];
+        orderEntity.totalMoney = order['totalMoney'];
+        orderEntity.orderDetail = order['listOrderDetail'];
         this.listOrder.push(orderEntity);
-      })
+      });
       console.log(this.listOrder);
       this.pages = new Array(res['totalElement']);
       this.totalOrderDetail = (res['totalElements']);
     });
   }
+
   // tim kiem theo name khach hang
-  // tim kiem ds đơn hàng trong ngày, trong tháng, trong 1 khoảng thời gian 
+  // tim kiem ds đơn hàng trong ngày, trong tháng, trong 1 khoảng thời gian
   // tong tien ban hang trong ngay
   // tong tien ban hang trong thang
   // tao bieu do
@@ -249,24 +255,26 @@ export class ProductOrderComponent implements OnInit {
       alert(res['message']);
     });
   }
+
   //
-  addOrder(form:NgForm){
+  addOrder(form: NgForm) {
     console.log(form.value);
-    let newOrder =new Order;
-    newOrder.idOrder=form.value.idOrder;
-    newOrder.nameCustomer=form.value.nameCustomer;
-    newOrder.createDate=form.value.createDate;
-    newOrder.idCustomer=this.customer.id;
-    newOrder.totalMoney=0;
+    let newOrder = new Order;
+    newOrder.idOrder = form.value.idOrder;
+    newOrder.nameCustomer = form.value.nameCustomer;
+    newOrder.createDate = form.value.createDate;
+    newOrder.idCustomer = this.customer.id;
+    newOrder.totalMoney = 0;
     console.log(newOrder);
 
 
-    this.productOrderService.addOrder(newOrder).subscribe((res)=>{
+    this.productOrderService.addOrder(newOrder).subscribe((res) => {
       alert(res['message']);
       this.getOrder();
     });
 
   }
+
   // editform
   // editOrder(form:NgForm){
   //   console.log(form.value);
@@ -287,14 +295,13 @@ export class ProductOrderComponent implements OnInit {
   //ham edit doi tuong
   editOrder(form: NgForm) {
     console.log('Your form data: ', form.value);
-    let newOrder= this.editOrderkey;
-    newOrder.status=form.value.status;
+    let newOrder = this.editOrderkey;
+    newOrder.status = form.value.status;
     console.log(newOrder);
     this.productOrderService.editOrder(newOrder.idOrder, form.value).subscribe(res => {
       this.getOrder();
     });
   }
-  
 
 
 }
