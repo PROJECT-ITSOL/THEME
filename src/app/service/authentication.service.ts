@@ -55,4 +55,5 @@ export class AuthenticationService {
   getListNoParam(url: string){
     return this.http.get(this.baseUrl + url)
   }
+  
 }
