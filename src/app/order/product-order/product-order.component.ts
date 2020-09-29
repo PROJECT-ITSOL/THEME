@@ -32,7 +32,7 @@ export class ProductOrderComponent implements OnInit {
   nameCustomer;
   listPage: Number[];
   dataCustomer: Array<any>;
-  private pageNo = 0;
+  private pageNo = 1;
   editStatus;
 
   // list khoi tao bien (bien thay doi )
@@ -47,12 +47,13 @@ export class ProductOrderComponent implements OnInit {
   order = new Order();    // khoi tao bien
   // bien page
   status: string = 'that bai';
-  page: number = 0;
-  i: number = 0;
+  page: number = 1;
+  i: number = 1;
   idCustomer: number;
   //t: string= this.i.toString();
   pages: Array<number>;
   keyStatus;
+  
   idlink;
   idOrder: string;
 
@@ -134,6 +135,8 @@ export class ProductOrderComponent implements OnInit {
   }
 
   // set 1 danh sach dang page
+  // set status
+  setStatus(){}
 
   //
   setPage(i, event: any) {
@@ -180,7 +183,7 @@ export class ProductOrderComponent implements OnInit {
   // ham tim kiem
   search() {
     this.listOrder = new Array();
-    this.productOrderService.search(this.keyword, this.page).subscribe(res => {
+    this.productOrderService.search(this.keyword,0).subscribe(res => {
       this.dataOrder = res['content']; // lay tat ca
       this.dataOrder.forEach((order) => {
         let orderEntity = new Order();
@@ -213,9 +216,10 @@ export class ProductOrderComponent implements OnInit {
   }
 
   searchStatus() {
+    
     this.listOrder = new Array();
     this.totalOrderDetail = 0;
-    this.productOrderService.searchStatus(this.keyStatus, this.page).subscribe(res => {
+    this.productOrderService.searchStatus(this.keyStatus, this.i).subscribe(res => {
       this.dataOrder = new Array();
       this.dataOrder = res['content']; // lay tat ca
       // console.log(res)
@@ -297,6 +301,7 @@ export class ProductOrderComponent implements OnInit {
     console.log('Your form data: ', form.value);
     let newOrder = this.editOrderkey;
     newOrder.status = form.value.status;
+    newOrder.createDate= form.value.createDate;
     console.log(newOrder);
     this.productOrderService.editOrder(newOrder.idOrder, form.value).subscribe(res => {
       this.getOrder();
