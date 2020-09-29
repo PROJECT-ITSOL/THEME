@@ -33,8 +33,6 @@ export class SupplierComponent implements OnInit {
   formValue: any;
   folderImage: string = 'folderImage';
 
-
-
   imgUrl: string;
   selectedImage: any = null;
   isSubmited: boolean = false;
@@ -90,7 +88,6 @@ export class SupplierComponent implements OnInit {
     this.formValue = form.value
     let newSupplier = new Supplier();
     const urlImg = document.getElementById('file')
-    // console.log(urlImg.getAttribute("val"))
     var filePath = `${this.folderImage}/${this.selectedImage.name.split('.').slice(0, -1).join('.')}_${new Date().getTime()}`;
     const fileRef = this.storage.ref(filePath);
     this.storage.upload(filePath, this.selectedImage).snapshotChanges().pipe(
@@ -107,6 +104,7 @@ export class SupplierComponent implements OnInit {
             // location.reload();
             alert(res['message']);
             this.getAll();
+            form.reset();
           });
         })
       })
@@ -146,15 +144,18 @@ export class SupplierComponent implements OnInit {
     });
   }
 
-  getSuppByStatus() {
+  getSuppByStatus(event) {
     this.listSupp = new Array();
+    this.status=event.target.value;
+    
     if (this.status == 'Active') {
       this.boolean = true;
     } else {
       this.boolean = false;
     }
-    this.supplierService.searchByStatus(this.boolean, this.page).subscribe(res => {
-      this.dataSupp = res['content'];
+    
+    this.supplierService.searchByStatus(this.boolean).subscribe(res => {
+      this.dataSupp = res;
       this.dataSupp.forEach((supp) => {
         let supplier = new Supplier();
         supplier.idSupplier = supp['idSupplier'];

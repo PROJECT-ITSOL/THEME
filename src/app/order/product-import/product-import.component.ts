@@ -174,6 +174,7 @@ pageChange(newPage: number) {
       this.billImportService.addBill(newBillImport).subscribe((res) => { 
       alert(res['message']);     
       // this.getListBillImport();
+      form.reset();
     });
    
   }

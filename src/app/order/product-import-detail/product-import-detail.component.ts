@@ -1,4 +1,5 @@
 import { SupplierService } from './../../service/supplier.service';
+import { ProductService } from './../../service/product.service';
 import { NgForm } from '@angular/forms';
 import { Product } from './../../ultis/product';
 import { BillImportDetail } from './../../ultis/billImportDetail';
@@ -54,7 +55,8 @@ export class ProductImportDetailComponent implements OnInit, OnDestroy {
     private DataService: DataService,
               private BillDetailService : BillDetailService,
               private BillImportService : BillImportService,
-              private SupplierService: SupplierService
+              private SupplierService: SupplierService,
+              private ProductService : ProductService
     ) {
       
      }
@@ -125,21 +127,24 @@ export class ProductImportDetailComponent implements OnInit, OnDestroy {
   }
 
   addProduct(form:NgForm) {
+    console.log(form.value);
     let newbillDetail = new BillImportDetail;
       newbillDetail.amount=form.value.amount;
-      newbillDetail.price=form.value.price;
+      newbillDetail.price=this.price;
       newbillDetail.product=this.product;
       newbillDetail.billImport=this.billImport;
-      newbillDetail.totalPrice=(form.value.amount*form.value.price);
+      newbillDetail.totalPrice=form.value.amount*this.price;
       console.log(newbillDetail);
       this.BillDetailService.addBill(newbillDetail).subscribe(res=>{ 
       alert(res['message']);  
-      this.BillImportService.updateTotalPrice(this.id,newbillDetail).subscribe(res=>{ 
-        // update thanh cong
+      this.BillImportService.updateTotalPrice(this.id,newbillDetail).subscribe(response=>{ 
         this.viewBill();
         this.getBillImport();  
       });
-      
+      this.ProductService.updateAmount(this.idProduct,newbillDetail).subscribe(res=>{
+      });
+      form.reset();
+     
     });  
   }
 
@@ -159,6 +164,8 @@ export class ProductImportDetailComponent implements OnInit, OnDestroy {
         this.viewBill();
         this.getBillImport();
       });
+      this.ProductService.updateAmount(this.idProduct,newBillDetail).subscribe(res=>{
+      });
     });
    
 
@@ -171,6 +178,8 @@ export class ProductImportDetailComponent implements OnInit, OnDestroy {
       this.BillImportService.updateTotalPrice(this.id,this.billDetail).subscribe(res=>{   
         this.viewBill();
         this.getBillImport();
+      });
+      this.ProductService.updateAmount(this.idProduct,this.billDetail).subscribe(res=>{
       });
     });
     
@@ -185,6 +194,11 @@ export class ProductImportDetailComponent implements OnInit, OnDestroy {
         this.price=item.price;      
       }
     });
+  }
+
+  reset(){
+    
+    
   }
  
   
