@@ -7,6 +7,7 @@ import { AuthenticationService } from 'src/app/service/authentication.service';
 import { ProductOrderService } from './../../service/productOrder.service';
 import { ProductOrderDetailService } from "./../../service/productOrderDetail.service";
 import { ActivatedRoute } from '@angular/router';
+import { ProductService } from './../../service/product.service';
 
 import { Product } from './../../ultis/product';
 import { Order } from './../../ultis/order';
@@ -51,7 +52,7 @@ export class ProductOrderDetailComponent implements OnInit {
     private route: ActivatedRoute,
     private productOrderDetailService: ProductOrderDetailService,
     private productOrderService: ProductOrderService,
-    private productService: ProductOrderService,
+    private productService: ProductService,
     private service: AuthenticationService
 
 
@@ -59,9 +60,11 @@ export class ProductOrderDetailComponent implements OnInit {
 
   ngOnInit(): void {
     this.GanidOrder = this.route.snapshot.paramMap.get('id');
-    this.getProductAll();
-    this.viewOrderDetail();
 
+    
+    this.viewOrderDetail();
+    
+    this.getProductAll();
     //this.getToTal();
   }
  
@@ -129,6 +132,9 @@ getProductAll(){
       alert(res['message']);
       this.viewOrderDetail();
     });
+   // this.ngOnInit();
+   this.productOrderService.updateMoney(this.GanidOrder).subscribe(odr=>{});
+   this.productService.updateAmount(this.idProduct,this.orderDetail).subscribe(odr=>{});
 
   }
 
@@ -144,24 +150,25 @@ getProductAll(){
 
   // ham  trong modal
   addProduct(form: NgForm) {
-
     console.log(form);
     console.log('Your form data : ', form.value);
     let newOrderDetail = new OderDetail;
-    newOrderDetail.amount = form.value.amount;
-   // newOrderDetail.price = form.value.price;
+    newOrderDetail.amount = form.value.amount; 
     newOrderDetail.idProduct = this.idProduct;
-    //newOrderDetail.product= this.Product;
     newOrderDetail.idOrder= this.GanidOrder;
-    // newOrderDetail.Order = this.orderDetail;
     newOrderDetail.totalPrice=form.value.amount*this.product.price;
     console.log(newOrderDetail);
     this.productOrderDetailService.addOrderDetail(newOrderDetail).subscribe(res => {
       console.log(res);
       alert(res['message']);
-      this.viewOrderDetail();
+      form.reset();
+     this.viewOrderDetail();
+     this.productOrderService.updateMoney(this.GanidOrder).subscribe(odr=>{});
+     this.productService.updateAmount(this.idProduct,newOrderDetail).subscribe(odr=>{});
     });
-    this.viewOrderDetail();
+   // this.viewOrderDetail();
+  
+    
   }
 
 // getMessage() {
@@ -181,7 +188,8 @@ getProductAll(){
     });
     this.orderDetail=item;
     console.log(this.orderDetail);
-  
+    
+    
   }
   editOrderDetail(form: NgForm){
   
@@ -196,6 +204,8 @@ getProductAll(){
       console.log(res);
       alert(res['message']);
       this.viewOrderDetail();
+      this.productOrderService.updateMoney(this.GanidOrder).subscribe(odr=>{});
+      this.productService.updateAmount(this.idProduct,editOrderDetail).subscribe(odr=>{});
     });
   }
 

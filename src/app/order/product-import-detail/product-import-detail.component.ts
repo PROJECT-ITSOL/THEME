@@ -122,6 +122,8 @@ export class ProductImportDetailComponent implements OnInit, OnDestroy {
   deleteBill(){ 
     this.BillImportService.delete(this.id).subscribe(res =>{
       alert(res['message']);
+      this.ProductService.updateAmount(this.idProduct,this.billDetail).subscribe(res=>{
+      });
     });
   
   }

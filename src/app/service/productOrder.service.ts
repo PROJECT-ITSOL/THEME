@@ -56,9 +56,9 @@ export class ProductOrderService {
     search(key: string, page: number): Observable<Order[]> {
         return this.http.get<Order[]>(this.apiUrl + '/searchCustomer?name=' + key + '&page=' + page);
     }
-
+// tim kiem 
     searchId(key: string): Observable<Order[]> {
-        return this.http.get<Order[]>(this.apiUrl + '/serch?keyword=' + key+'&pageNo='+0+'&pageSize='+8 );
+        return this.http.get<Order[]>(this.apiUrl + '/serch?keyword=' + key );
     }
 
 
@@ -74,7 +74,7 @@ export class ProductOrderService {
     }
     //
     // postAddNew(url: string, object: any) {
-    //     return this.http.post(this.apiUrl + url, object);
+    //     return this.http.post(this.apiUrl S+ url, object);
     //   }
     // //
     // putUpdate(url: string, object: any) {
@@ -83,5 +83,7 @@ export class ProductOrderService {
     // getOrderdetail(id) {
     //     return this.http.get<OderDetail[]>(this.apiUrl + '/oderdetail?=' + id);
     // }
-
+    getDataOrder(year){
+        return this.http.get(this.apiUrl+'/thongKe?year='+year);
+    }
 }
