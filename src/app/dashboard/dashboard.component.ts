@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { Chart } from '../../../node_modules/chart.js';
 import { draw, generate } from 'patternomaly';
 import { BillImportService } from '../service/billImport.service';
+import { ProductOrderService } from '../service/productOrder.service';
 import { ChartDataSets, ChartOptions } from 'chart.js';
 import { Color, Label } from 'ng2-charts';
 
@@ -13,15 +14,22 @@ import { Color, Label } from 'ng2-charts';
 })
 export class DashboardComponent implements OnInit {
  
-
+// bill import
 listTotalMoneyBillImport:Array<any>;
 listTotalproductBillImport:Array<any>;
 listTotalBillImport:Array<number>;
 dataBillImport:Array<any>;
-
-  constructor(  private billImportService:BillImportService) {
+// order
+listTotalOrder: Array<any>;
+listTotalMoneyOrder: Array<any>;
+  constructor(  private billImportService:BillImportService,
+                private productOrderService:ProductOrderService,
+      ) {
     this.getDataBimmImport();
     this.refreshData();
+
+    this.getDataOrder();
+    this.refreshDataOrder();
   }
 
   ngOnInit(): void {
@@ -108,7 +116,7 @@ dataBillImport:Array<any>;
       });
     }
   }
-
+  
   
   //BillImport
   async getDataBimmImport(){
@@ -117,7 +125,7 @@ dataBillImport:Array<any>;
     this.listTotalproductBillImport= new Array();
       this.billImportService.getData(9).subscribe(res=>{
         this.dataBillImport=res  as Object[];
-        console.log(res);
+        //console.log(res);
         this.dataBillImport.forEach(element => {
           let i:number = element['totalBill'];  
           this.listTotalBillImport.push(i);
@@ -131,7 +139,7 @@ dataBillImport:Array<any>;
   }
   
   lineChartData: ChartDataSets[] = [
-    { data:  [28, 48, 40, 19, 86, 27, 90], label: ' Total Bill' },
+    { data:  [28, 48, 40, 19, 86, 27, 90], label: ' Total order' },
   ];
   
   lineChartData1: ChartDataSets[] = [
@@ -148,7 +156,7 @@ dataBillImport:Array<any>;
   };
   lineChartColors: Color[] = [
     { // dark grey
-      backgroundColor: 'rgba(77,83,96,0.2)',
+      backgroundColor: 'rgba(215, 51, 172, 0.7)',
       borderColor: 'rgba(77,83,96,1)',
     }
   ];
@@ -162,6 +170,60 @@ dataBillImport:Array<any>;
     this.lineChartData2[0].data = this.listTotalMoneyBillImport;
   }
   //End bill import
+
+  
+  // order
+  async getDataOrder(){
+    this.listTotalOrder = new Array();
+    this.listTotalMoneyOrder = new Array();
+    //this.listTotalproductBillImport= new Array();
+      this.productOrderService.getDataOrder(9).subscribe(res=>{
+        this.dataBillImport=res  as Object[];
+        console.log(res);
+        this.dataBillImport.forEach(element => {
+          let i:number = element['totalOrder'];  
+          this.listTotalOrder.push(i);
+          // let k:number = element['totalProduct'];
+          // this.listTotalproductBillImport.push(k);
+          let l:number = element['totalMoney'];
+          this.listTotalMoneyOrder.push(l);
+        });
+        console.log(this.listTotalOrder);
+      });    
+  }
+  
+  lineChartDataOrder: ChartDataSets[] = [
+    { data:  [28, 48, 40, 19, 86, 27, 90], label: ' Total order' },
+  ];
+  
+  // lineChartData1: ChartDataSets[] = [
+  //   { data:  [28, 48, 40, 19, 86, 27, 90], label: ' Total Product' },
+  // ];
+  
+  lineChartData2Order: ChartDataSets[] = [
+    { data:  [28, 48, 40, 19, 86, 27, 90], label: ' Total Money' },
+  ];
+
+  lineChartLabelsOrder: Label[] = ['January', 'February', 'March', 'April', 'May', 'June', 'July','Aug','Sep','Oct','Nov','Dec'];
+  lineChartOptionsOrder: ChartOptions = {
+    responsive: true
+  };
+  lineChartColorsOrder: Color[] = [
+    { // dark grey
+      backgroundColor: 'rgba(255, 0, 52, 0.6))',
+      borderColor: 'rgba(255, 0, 52, 0.6)',
+    }
+  ];
+  lineChartLegendOrder = true;
+  lineChartTypeOrder = 'line';
+  lineChartPluginsOrder = [];
+  
+  refreshDataOrder() {
+    this.lineChartDataOrder[0].data = this.listTotalOrder;
+    //this.lineChartData1[0].data = this.listTotalproductBillImport;
+    this.lineChartData2Order[0].data = this.listTotalMoneyOrder;
+  }
+
 
   
 }

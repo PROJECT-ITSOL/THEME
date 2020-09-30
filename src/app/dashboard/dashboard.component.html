@@ -183,7 +183,45 @@
     </div>
 
     <!-- end test -->
-
+    <!-- order -->
+    <div class="col-xl-12 col-lg-12">
+        <!-- card-header -->
+        <div class="card shadow mb-4">
+            <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                <!-- header -->
+                <h6 class="m-0 font-weight-bold text-primary">Order</h6>
+                <div class="dropdown">
+                    <span type="button" id="triggerId" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <i class="fas fa-ellipsis-v"></i>
+        </span>
+                    <div class="dropdown-menu dropdown-menu-right animate slideIn" aria-labelledby="triggerId">
+                        <h6 class="dropdown-header">Section header</h6>
+                        <a class="dropdown-item" href="#">Action</a>
+                        <a class="dropdown-item" href="#">Action</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="#">After divider action</a>
+                    </div>
+                </div>
+            </div>
+            <!-- card body -->
+            <div class="row">
+                <div class="card-body " style="height: 300px; width:400px;">
+                    <div class="chartjs-container">
+                        <canvas baseChart [datasets]="lineChartDataOrder" [labels]="lineChartLabels" [options]="lineChartOptions" [colors]="lineChartColorsOrder" [legend]="lineChartLegend" [chartType]="lineChartType" [plugins]="lineChartPlugins">
+                    </canvas>
+                    </div>
+                </div>
+               
+                <div class="card-body" style="height: 300px; width:400px;">
+                    <div class="chartjs-container" >
+                        <canvas baseChart [datasets]="lineChartData2Order" [labels]="lineChartLabels" [options]="lineChartOptions" [colors]="lineChartColorsOrder" [legend]="lineChartLegend" [chartType]="lineChartType" [plugins]="lineChartPlugins">
+                    </canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- order end -->
     <!-- content row -->
     <div class="row">
         <!-- content column -->

@@ -7,6 +7,7 @@ import { AuthenticationService } from 'src/app/service/authentication.service';
 import { ProductOrderService } from './../../service/productOrder.service';
 import { ProductOrderDetailService } from "./../../service/productOrderDetail.service";
 import { ActivatedRoute } from '@angular/router';
+import { ProductService } from './../../service/product.service';
 
 import { Product } from './../../ultis/product';
 import { Order } from './../../ultis/order';
@@ -51,7 +52,7 @@ export class ProductOrderDetailComponent implements OnInit {
     private route: ActivatedRoute,
     private productOrderDetailService: ProductOrderDetailService,
     private productOrderService: ProductOrderService,
-    private productService: ProductOrderService,
+    private productService: ProductService,
     private service: AuthenticationService
 
 
@@ -132,6 +133,9 @@ getProductAll(){
       this.viewOrderDetail();
     });
    // this.ngOnInit();
+   this.productOrderService.updateMoney(this.GanidOrder).subscribe(odr=>{});
+   this.productService.updateAmount(this.idProduct,this.orderDetail).subscribe(odr=>{});
+
   }
 
   setProduct(){
@@ -157,9 +161,14 @@ getProductAll(){
     this.productOrderDetailService.addOrderDetail(newOrderDetail).subscribe(res => {
       console.log(res);
       alert(res['message']);
-      this.viewOrderDetail();
+      form.reset();
+     this.viewOrderDetail();
+     this.productOrderService.updateMoney(this.GanidOrder).subscribe(odr=>{});
+     this.productService.updateAmount(this.idProduct,newOrderDetail).subscribe(odr=>{});
     });
-    this.viewOrderDetail();
+   // this.viewOrderDetail();
+  
+    
   }
 
 // getMessage() {
@@ -179,7 +188,8 @@ getProductAll(){
     });
     this.orderDetail=item;
     console.log(this.orderDetail);
-  
+    
+    
   }
   editOrderDetail(form: NgForm){
   
@@ -194,6 +204,8 @@ getProductAll(){
       console.log(res);
       alert(res['message']);
       this.viewOrderDetail();
+      this.productOrderService.updateMoney(this.GanidOrder).subscribe(odr=>{});
+      this.productService.updateAmount(this.idProduct,editOrderDetail).subscribe(odr=>{});
     });
   }
 

@@ -31,7 +31,7 @@ const routes: Routes = [
         path: 'order',
         children: [
           { path: '', redirectTo: 'product-import', pathMatch: 'full' },
-          { path: 'list-order', component: ProductOrderComponent },
+         // { path: 'list-order', component: ProductOrderComponent },
     //     { path: 'list-order-detail', component: ProductOrderDetailComponent },
           { path: 'product-import', component: ProductImportComponent},
           { path: 'list-order/:id', component: ProductOrderComponent },

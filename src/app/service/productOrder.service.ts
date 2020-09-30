@@ -74,7 +74,7 @@ export class ProductOrderService {
     }
     //
     // postAddNew(url: string, object: any) {
-    //     return this.http.post(this.apiUrl + url, object);
+    //     return this.http.post(this.apiUrl S+ url, object);
     //   }
     // //
     // putUpdate(url: string, object: any) {
@@ -83,5 +83,7 @@ export class ProductOrderService {
     // getOrderdetail(id) {
     //     return this.http.get<OderDetail[]>(this.apiUrl + '/oderdetail?=' + id);
     // }
-
+    getDataOrder(year){
+        return this.http.get(this.apiUrl+'/thongKe?year='+year);
+    }
 }
