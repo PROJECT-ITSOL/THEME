@@ -115,7 +115,7 @@ dataBillImport:Array<any>;
     this.listTotalBillImport = new Array();
     this.listTotalMoneyBillImport = new Array();
     this.listTotalproductBillImport= new Array();
-      this.billImportService.getData(9).subscribe(res=>{
+      this.billImportService.getData(this.year).subscribe(res=>{
         this.dataBillImport=res  as Object[];
         console.log(res);
         this.dataBillImport.forEach(element => {
@@ -130,18 +130,17 @@ dataBillImport:Array<any>;
       });    
   }
   
+  listYear = [2020,2019,2018];
+  year:number=2020;
   lineChartData: ChartDataSets[] = [
-    { data:  [28, 48, 40, 19, 86, 27, 90], label: ' Total Bill' },
+    { data:  [], label: ' Total Bill' },
   ];
-  
   lineChartData1: ChartDataSets[] = [
-    { data:  [28, 48, 40, 19, 86, 27, 90], label: ' Total Product' },
+    { data:  [], label: ' Total Product' },
   ];
-  
   lineChartData2: ChartDataSets[] = [
-    { data:  [28, 48, 40, 19, 86, 27, 90], label: ' Total Money' },
+    { data:  [], label: ' Total Money' },
   ];
-
   lineChartLabels: Label[] = ['January', 'February', 'March', 'April', 'May', 'June', 'July','Aug','Sep','Oct','Nov','Dec'];
   lineChartOptions: ChartOptions = {
     responsive: true
@@ -152,14 +151,32 @@ dataBillImport:Array<any>;
       borderColor: 'rgba(77,83,96,1)',
     }
   ];
+  lineChartColors1: Color[] = [
+    { // red
+      backgroundColor: 'rgba(255,0,0,0.3)',
+      borderColor: 'red',
+    }
+  ];
+  lineChartColors2: Color[] = [
+    { // red
+      backgroundColor: 'rgba(0, 255, 0, 0.2)',
+      borderColor: 'green',
+    }
+  ];
   lineChartLegend = true;
   lineChartType = 'line';
   lineChartPlugins = [];
-  
+
   refreshData() {
     this.lineChartData[0].data = this.listTotalBillImport;
     this.lineChartData1[0].data = this.listTotalproductBillImport;
     this.lineChartData2[0].data = this.listTotalMoneyBillImport;
+  }
+
+  setYear(event){
+    this.year=event.target.value;
+    this.getDataBimmImport();
+    this.refreshData();
   }
   //End bill import
 
