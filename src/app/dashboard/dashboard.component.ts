@@ -165,6 +165,22 @@ export class DashboardComponent implements OnInit {
   async getDataBimmImport() {
     this.listTotalBillImport = new Array();
     this.listTotalMoneyBillImport = new Array();
+<<<<<<< HEAD
+    this.listTotalproductBillImport= new Array();
+      this.billImportService.getData(this.year).subscribe(res=>{
+        this.dataBillImport=res  as Object[];
+        //console.log(res);
+        this.dataBillImport.forEach(element => {
+          let i:number = element['totalBill'];  
+          this.listTotalBillImport.push(i);
+          let k:number = element['totalProduct'];
+          this.listTotalproductBillImport.push(k);
+          let l:number = element['totalMoney'];
+          this.listTotalMoneyBillImport.push(l);
+        });
+       
+      });    
+=======
     this.listTotalproductBillImport = new Array();
     this.billImportService.getData(this.year).subscribe(res => {
       this.dataBillImport = res as Object[];
@@ -179,6 +195,7 @@ export class DashboardComponent implements OnInit {
       });
       console.log(this.listTotalBillImport);
     });
+>>>>>>> 34cd68761198c66d8ae2250cc84ea1037e8caaeb
   }
 
   listYear = [2020, 2019, 2018];
@@ -198,13 +215,13 @@ export class DashboardComponent implements OnInit {
   };
   lineChartColors: Color[] = [
     { // dark grey
-      backgroundColor: 'rgba(215, 51, 172, 0.7)',
+      backgroundColor: 'rgba(77,83,96,0.2)',
       borderColor: 'rgba(77,83,96,1)',
     }
   ];
   lineChartColors1: Color[] = [
     { // red
-      backgroundColor: 'rgba(255,0,0,0.3)',
+      backgroundColor: 'rgba(255,0,0,0.2)',
       borderColor: 'red',
     }
   ];
