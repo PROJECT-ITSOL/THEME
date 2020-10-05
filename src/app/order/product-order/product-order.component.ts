@@ -36,7 +36,7 @@ export class ProductOrderComponent implements OnInit {
   editStatus;
 
   // list khoi tao bien (bien thay doi )
-  editOrderkey: Order;
+  editOrderkey: Order = new Order();
   keyword: string;  // dung de tim kiem
   message: string;   // luu thong bao
   idDelete: string; // luu id xoa
@@ -45,6 +45,7 @@ export class ProductOrderComponent implements OnInit {
   totalOrderDetail: number;
   totalOrder: number;
   order = new Order();    // khoi tao bien
+  orderEdit= new Order();
   // bien page
   status: string = 'that bai';
   page: number = 1;
@@ -159,6 +160,7 @@ export class ProductOrderComponent implements OnInit {
   // gan bien
   showEdit(item: Order) {
     this.editOrderkey = item;
+    // console.log(this.editOrderkey.status)
     this.idDelete = item.idOrder;
     this.status = item.status;
     // this.message=item.idOrder;
