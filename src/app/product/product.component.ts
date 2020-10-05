@@ -17,6 +17,7 @@ export class ProductComponent implements OnInit {
   private pageNo = 0;
   listPage: Number[]=[];
   totalSupp: number;
+  totalProduct: number;
   listProduct: Product[];
   listCategory: Category[];
   listSupp: Supplier[];
@@ -34,6 +35,7 @@ export class ProductComponent implements OnInit {
     this.getProduct();
     this.getCategory();
     this.getSupp();
+    this.getTotalProduct();
   }
 
   isActive(item) {
@@ -82,7 +84,15 @@ export class ProductComponent implements OnInit {
     });
     // console.log('######', this.listSupp);
   }
-
+  getTotalProduct() {
+    let url = '/api/product/totalProduct';
+    this.service.getTotalProduct(url).subscribe(
+      res => {
+        this.totalProduct = res['data'];
+      }
+    );
+    this.totalProduct = this.listProduct.length;
+  }
   getProduct() {
     this.listProduct = new Array();
     // let url = this.urlProduct + '/list?pageNo=';
