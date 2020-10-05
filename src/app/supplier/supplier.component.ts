@@ -151,7 +151,7 @@ export class SupplierComponent implements OnInit {
             // location.reload();
             alert('Success');
             this.getAll();
-            form.reset();
+           
           });
         })
       })
