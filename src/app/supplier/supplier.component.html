@@ -23,7 +23,7 @@
             </div>
 
             <select class="form-control col-3 py-1" name="status" id="status" (change)="getSuppByStatus($event)">
-                    <option selected value="">Select status</option>
+                    <option selected  hidden value="">Select status</option>
                      <option *ngFor="let item of listStatus" [value]="item">{{item}}</option>    
             </select>
 
