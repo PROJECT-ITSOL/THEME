@@ -1,9 +1,7 @@
 import { HttpParams } from '@angular/common/http';
 import { AuthenticationService } from 'src/app/service/authentication.service';
-import { from } from 'rxjs';
 import { Component, OnInit } from '@angular/core';
 import { Chart } from '../../../node_modules/chart.js';
-import { draw, generate } from 'patternomaly';
 import { BillImportService } from '../service/billImport.service';
 import { ProductOrderService } from '../service/productOrder.service';
 import { ChartDataSets, ChartOptions } from 'chart.js';
@@ -67,7 +65,7 @@ export class DashboardComponent implements OnInit {
   ngOnInit(): void {
     this.getTotalCategory()
     this.getStatistical()
-    this.getStatisticalCustomer()
+    // this.getStatisticalCustomer()
     this.getTotalCustomer()
     this.getTotalProduct()
   }
@@ -117,10 +115,6 @@ export class DashboardComponent implements OnInit {
     paint.update()
   }
 
-
-
-
-
   getStatistical() {
     let url = '/api/comment/statistical'
     // this.years=new
@@ -152,7 +146,6 @@ export class DashboardComponent implements OnInit {
           this.dataComment.push(e)
         })
         this.paintChart()
-        console.log(list)
       }
     )
   }
@@ -183,25 +176,41 @@ export class DashboardComponent implements OnInit {
         this.paintChart()
       }
     )
+  // getStatisticalCustomer() {
+  //   let url = '/api/customer/statistical'
+  //   // this.years=new
+  //   this.service.getStatisticalNoParam(url).subscribe(
+  //     res => {
+  //       let list = new Array()
+  //       list = res['data']['data']
+  //       this.monthNow = res['data']['monthNow']
+  //       this.months = res['data']['months']
+  //       this.years = res['data']['years']
+  //       list.forEach(data => {
+  //         this.dataComment.push(data)
+  //       })
+  //       this.paintChart()
+  //     }
+  //   )
 
-  }
-  setYearsCustomer(event, year: number) {
-    event.preventDefault()
-    let url = "/api/customer/statistical"
-    const param = new HttpParams().append("year", year.toString())
-    this.service.getStatistical(url, param).subscribe(
-      res => {
-        let list = new Array()
-        this.dataCustomer = []
-        list = res['data']['data']
-        list.forEach(e => {
-          this.dataCustomer.push(e);
-        });
-        this.paintChart();
-        console.log(list);
-      }
-    );
-  }
+  // }
+  // setYearsCustomer(event, year: number) {
+  //   event.preventDefault()
+  //   let url = "/api/customer/statistical"
+  //   const param = new HttpParams().append("year", year.toString())
+  //   this.service.getStatistical(url, param).subscribe(
+  //     res => {
+  //       let list = new Array()
+  //       this.dataCustomer = []
+  //       list = res['data']['data']
+  //       list.forEach(e => {
+  //         this.dataCustomer.push(e);
+  //       });
+  //       this.paintChart();
+  //       console.log(list);
+  //     }
+  //   );
+  // }
   getTotalCustomer() {
     let url = "/api/customer/totalCustomer"
     this.service.getTotalCustomer(url).subscribe(
@@ -349,7 +358,4 @@ export class DashboardComponent implements OnInit {
     this.lineChartDataOrder[0].data = this.listTotalOrder;
     this.lineChartData2Order[0].data = this.listTotalMoneyOrder;
   }
-
-
-
 }

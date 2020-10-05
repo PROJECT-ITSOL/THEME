@@ -66,18 +66,28 @@
     <nav aria-label="Page navigation" *ngIf="listPage.length>1">
         <ul class="pagination justify-content-center">
             <li class="page-item" [ngClass]="pageNo===0 ? 'disabled':''">
+                <a class="page-link" href="#" aria-label="Previous" (click)="setFirstPage($event)">
+                    <span aria-hidden="true">First</span>
+                </a>
+            </li>
+            <li class="page-item" [ngClass]="pageNo===0 ? 'disabled':''">
                 <a class="page-link" href="#" aria-label="Previous" (click)="setLessPage($event)">
                     <span aria-hidden="true">&laquo;</span>
                     <span class="sr-only">Previous</span>
                 </a>
             </li>
-            <li class="page-item " *ngFor="let p of listPage; let i = index" [ngClass]="{active:isActive(i)}">
-                <a class="page-link" href="#" (click)="setPage(i, $event)">{{ i+1 }}</a>
+            <li class="page-item " *ngFor="let p of listPage; " [ngClass]="{active:isActive(p-1)}">
+                <a class="page-link" href="#" (click)="setPage(p-1, $event)">{{ p }}</a>
             </li>
-            <li class="page-item" [ngClass]="pageNo===listPage.length-1 ? 'disabled':''">
+            <li class="page-item" [ngClass]="pageNo===total-1 ? 'disabled':''">
                 <a class="page-link" href="#" aria-label="Next" (click)="setPlusPage($event)">
                     <span aria-hidden="true">&raquo;</span>
                     <span class="sr-only">Next</span>
+                </a>
+            </li>
+            <li class="page-item" [ngClass]="pageNo===total-1 ? 'disabled':''">
+                <a class="page-link" href="#" aria-label="Next" (click)="setLastPage($event)">
+                    <span aria-hidden="true">Last</span>
                 </a>
             </li>
         </ul>

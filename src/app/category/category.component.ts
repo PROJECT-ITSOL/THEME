@@ -84,6 +84,7 @@ export class CategoryComponent implements OnInit {
   addSubmit(form) {
     let url = this.urlCategory + "/addNew";
 
+    console.log(form)
     let category = new Category();
     category.id = form.value.id;
     category.name = form.value.name;

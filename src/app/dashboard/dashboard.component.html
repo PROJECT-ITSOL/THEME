@@ -20,54 +20,18 @@
                     </div>
                 </div>
             </div>
-          <div class="col-xl-3 col-md-6 mb-4">
-            <div class="card border-left border-primary shadow h-100 py-2">
-              <div class="card-body">
-                <div class="row no-gutters align-items-center">
-                  <div class="col">
-                    <div class="text font-weight-bold text-primary text-uppercase">
-                      Product
-                    </div>
-                    <div class="h5 mb-0 font-weight-bold text-secondary">
-                      Total: {{totalProduct}}
-                    </div>
-                  </div>
-                  <div class="col-auto">
-                    <i class="fab fa-atlassian text-secondary"></i>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-xl-3 col-md-6 mb-4">
-            <div class="card border-left border-primary shadow h-100 py-2">
-              <div class="card-body">
-                <div class="row no-gutters align-items-center">
-                  <div class="col">
-                    <div class="text font-weight-bold text-primary text-uppercase">
-                      Customer
-                    </div>
-                    <div class="h5 mb-0 font-weight-bold text-secondary">
-                      Total: {{totalCustomer}}
-                    </div>
-                  </div>
-                  <div class="col-auto">
-                    <i class="fab fa-atlassian text-secondary"></i>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+
+
             <div class="col-xl-3 col-md-6 mb-4">
                 <div class="card border-left border-info shadow h-100 py-2">
                     <div class="card-body">
                         <div class="row no-gutters align-items-center">
                             <div class="col">
                                 <div class="text font-weight-bold text-info text-uppercase">
-                                    Earnings(Month)
+                                    Product
                                 </div>
                                 <div class="h5 mb-0 font-weight-bold text-secondary">
-                                    $40.000
+                                    Total: {{totalProduct}}
                                 </div>
                             </div>
                             <div class="col-auto">
@@ -83,10 +47,10 @@
                         <div class="row no-gutters align-items-center">
                             <div class="col">
                                 <div class="text font-weight-bold text-success text-uppercase">
-                                    Earnings(Month)
+                                    Customer
                                 </div>
                                 <div class="h5 mb-0 font-weight-bold text-secondary">
-                                    $40.000
+                                    Total: {{totalCustomer}}
                                 </div>
                             </div>
                             <div class="col-auto">
@@ -139,29 +103,26 @@
             </div>
         </div>
     </div>
-<!--Customer-->
-  <!-- card-header -->
-  <div class="card shadow mb-4">
-    <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-      <!-- header -->
-      <h6 class="m-0 font-weight-bold text-primary">Customer</h6>
-      <div class="dropdown">
+
+    <!-- <div class="card shadow mb-4">
+        <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+            <h6 class="m-0 font-weight-bold text-primary">Customer</h6>
+            <div class="dropdown">
                 <span type="button" id="triggerId" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <i class="fas fa-ellipsis-v"></i>
                         </span>
-        <div class="dropdown-menu dropdown-menu-right animate slideIn" aria-labelledby="triggerId">
-          <h6 class="dropdown-header">Years</h6>
-          <a class="dropdown-item" (click)="setYears($event,year)" *ngFor="let year of years" href="#">{{year}}</a>
+                <div class="dropdown-menu dropdown-menu-right animate slideIn" aria-labelledby="triggerId">
+                    <h6 class="dropdown-header">Years</h6>
+                    <a class="dropdown-item" (click)="setYears($event,year)" *ngFor="let year of years" href="#">{{year}}</a>
+                </div>
+            </div>
         </div>
-      </div>
-    </div>
-    <!-- card body -->
-    <div class="card-body">
-      <div class="chart-area">
-        <canvas id="myAreaChart"></canvas>
-      </div>
-    </div>
-  </div>
+        <div class="card-body">
+            <div class="chart-area">
+                <canvas id="myAreaChart"></canvas>
+            </div>
+        </div>
+    </div> -->
 
     <!-- bill import -->
     <div class="col-xl-12 col-lg-11">
