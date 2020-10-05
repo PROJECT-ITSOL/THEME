@@ -131,7 +131,7 @@ export class SupplierComponent implements OnInit {
   }
 
   edit(form: NgForm) {
-   this.formValue = form.value
+    this.formValue = form.value
     let newSupplier = new Supplier();
     const urlImg = document.getElementById('file');
     if (this.selectedImage !=null){
@@ -146,10 +146,10 @@ export class SupplierComponent implements OnInit {
           newSupplier.status = form.value.status;
           newSupplier.phoneNumber = form.value.phoneNumber;
           console.log(newSupplier);
-          this.supplierService.addSupp(newSupplier).subscribe((res) => {
+          this.supplierService.editSupp(this.idDelete,newSupplier).subscribe((res) => {
             this.message = res['message'];
             // location.reload();
-            alert(res['message']);
+            alert('Success');
             this.getAll();
             form.reset();
           });
@@ -171,7 +171,6 @@ export class SupplierComponent implements OnInit {
           });
 
         }
-   
   }
 
   delete() {
