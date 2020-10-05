@@ -17,6 +17,7 @@ import { Color, Label } from 'ng2-charts';
 export class DashboardComponent implements OnInit {
   months: string[] = []
   dataComment: number[] = []
+  dataCustomer: number[] = []
   years: number[] = []
   monthNow: number = 0
   totalCategory: number = 0
@@ -64,6 +65,7 @@ export class DashboardComponent implements OnInit {
   ngOnInit(): void {
     this.getTotalCategory()
     this.getStatistical()
+    this.getStatisticalCustomer()
   }
 
   paintChart() {
@@ -117,7 +119,7 @@ export class DashboardComponent implements OnInit {
 
   getStatistical() {
     let url = '/api/comment/statistical'
-    // this.years=new 
+    // this.years=new
     this.service.getStatisticalNoParam(url).subscribe(
       res => {
         let list = new Array()
@@ -126,7 +128,7 @@ export class DashboardComponent implements OnInit {
         this.months = res['data']['months']
         this.years = res['data']['years']
         list.forEach(data => {
-          this.dataComment.push(data)
+          this.dataCustomer.push(data)
         })
         this.paintChart()
       }
@@ -160,6 +162,42 @@ export class DashboardComponent implements OnInit {
     )
   }
 
+  //Customer
+  getStatisticalCustomer() {
+    let url = '/api/customer/statistical'
+    // this.years=new
+    this.service.getStatisticalNoParam(url).subscribe(
+      res => {
+        let list = new Array()
+        list = res['data']['data']
+        this.monthNow = res['data']['monthNow']
+        this.months = res['data']['months']
+        this.years = res['data']['years']
+        list.forEach(data => {
+          this.dataComment.push(data)
+        })
+        this.paintChart()
+      }
+    )
+
+  }
+  setYearsCustomer(event, year: number) {
+    event.preventDefault()
+    let url = "/api/customer/statistical"
+    const param = new HttpParams().append("year", year.toString())
+    this.service.getStatistical(url, param).subscribe(
+      res => {
+        let list = new Array()
+        this.dataCustomer = []
+        list = res['data']['data']
+        list.forEach(e => {
+          this.dataCustomer.push(e);
+        });
+        this.paintChart();
+        console.log(list);
+      }
+    );
+  }
 
   //BillImport
   async getDataBimmImport() {

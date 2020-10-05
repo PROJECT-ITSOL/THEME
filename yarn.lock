@@ -1449,6 +1449,13 @@
     semver "7.3.2"
     semver-intersect "1.4.0"
 
+"@types/chart.js@^2.9.24":
+  version "2.9.24"
+  resolved "https://registry.yarnpkg.com/@types/chart.js/-/chart.js-2.9.24.tgz#f044fde90c928cb054e2ea582eb68d9945d84bc6"
+  integrity sha512-AQI7X+ow3SaONl44JrHoL/5B+lCsJyG31UHZ5RP98Uh15hI/zjEkDsAb4EIm4P9TGfNhZLXw/nMc5w0u10+/fQ==
+  dependencies:
+    moment "^2.10.2"
+
 "@types/color-name@^1.1.1":
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/@types/color-name/-/color-name-1.1.1.tgz#1c1261bbeaa10a8055bbc5d8ab84b7b2afc846a0"
@@ -5768,6 +5775,11 @@ locate-path@^5.0.0:
   dependencies:
     p-locate "^4.1.0"
 
+lodash-es@^4.17.15:
+  version "4.17.15"
+  resolved "https://registry.yarnpkg.com/lodash-es/-/lodash-es-4.17.15.tgz#21bd96839354412f23d7a10340e5eac6ee455d78"
+  integrity sha512-rlrc3yU3+JNOpZ9zj5pQtxnx2THmvRykwL4Xlxoa8I9lHBlVbbyPhgyPMioxVZ4NqyxaVVtaJnzsyOidQIhyyQ==
+
 lodash.camelcase@^4.3.0:
   version "4.3.0"
   resolved "https://registry.yarnpkg.com/lodash.camelcase/-/lodash.camelcase-4.3.0.tgz#b28aa6288a2b9fc651035c7711f65ab6190331a6"
@@ -6249,6 +6261,15 @@ next-tick@~1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/next-tick/-/next-tick-1.0.0.tgz#ca86d1fe8828169b0120208e3dc8424b9db8342c"
   integrity sha1-yobR/ogoFpsBICCOPchCS524NCw=
+
+ng2-charts@^2.4.2:
+  version "2.4.2"
+  resolved "https://registry.yarnpkg.com/ng2-charts/-/ng2-charts-2.4.2.tgz#6b2d0a1a66911247c2e8c3d8602ba9aa7339bf22"
+  integrity sha512-mY3C2uKCaApHCQizS2YxEOqQ7sSZZLxdV6N1uM9u/VvUgVtYvlPtdcXbKpN52ak93ZE22I73DiLWVDnDNG4/AQ==
+  dependencies:
+    "@types/chart.js" "^2.9.24"
+    lodash-es "^4.17.15"
+    tslib "^2.0.0"
 
 ng2-file-upload@^1.4.0:
   version "1.4.0"
