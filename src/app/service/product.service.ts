@@ -16,5 +16,11 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
         return this.http.put(this.apiUrl+'/updateAmountImport/'+id,billImportDetail,{
             responseType: 'text' as 'json',
           });
-    }
+
+        }
+
+        getId(id){
+          return this.http.get(this.apiUrl+'/'+id);
+        }
+
   }

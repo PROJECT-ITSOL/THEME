@@ -32,6 +32,7 @@ export class ProductOrderDetailComponent implements OnInit {
   nameProduct: string;
   priceProduct:number;
   product:Product= new Product();
+  productabc: Product=new Product();
   idProduct;
   price;
   nameSupplier: string;
@@ -158,6 +159,9 @@ getProductAll(){
     newOrderDetail.idOrder= this.GanidOrder;
     newOrderDetail.totalPrice=form.value.amount*this.product.price;
     console.log(newOrderDetail);
+    this.productService.getId(newOrderDetail.idProduct).subscribe(res=>{
+      console.log(res)
+    });
     this.productOrderDetailService.addOrderDetail(newOrderDetail).subscribe(res => {
       console.log(res);
       alert(res['message']);

@@ -115,6 +115,8 @@ export class ProductComponent implements OnInit {
         productEntity.status = product['status'];
         productEntity.products = product['listProduct'];
         this.listProduct.push(productEntity);
+      // console.log(this.listPage)
+
       });
     });
   }

@@ -112,12 +112,14 @@
                                 <span class="col-12 validator" *ngIf="phoneNumber.errors?.pattern && phoneNumber.touched">PhoneNumber is
                                     invalid</span>
                             </div>
-                            <div class="form-group col-8">
-                                <label>Select File</label>
-                                <input type="file" accept="image/*" id="file" class="form-control" name="logo" ngModel (change)="showPreview($event)">
-                            </div>
-                            <div class="text-center col-4">
-                                <img [src]="imgUrl" width="100px" height="100px">
+                            <div class="form-group  d-flex flex-row align-items-center w-100">
+                                <div class="select-img w-75">
+                                    <label>Select File</label>
+                                    <input type="file" accept="image/*" id="file" class="form-control" name="logo" ngModel (change)="showPreview($event)">
+                                </div>
+                                <div class="text-center w-25">
+                                    <img [src]="imgUrl" width="100px" height="100px">
+                                </div>
                             </div>
                         </div>
                     </div>
