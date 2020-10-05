@@ -160,16 +160,26 @@ getProductAll(){
     newOrderDetail.totalPrice=form.value.amount*this.product.price;
     console.log(newOrderDetail);
     this.productService.getId(newOrderDetail.idProduct).subscribe(res=>{
-      console.log(res)
+      this.productabc.amount=res['amount'];
+      // alert(res['message']);
+      // this.productabc= 
+      if(newOrderDetail.amount<this.productabc.amount){
+        this.productOrderDetailService.addOrderDetail(newOrderDetail).subscribe(res => {
+          console.log(res);
+          // alert(res['message']);
+          form.reset();
+         this.viewOrderDetail();
+         this.productOrderService.updateMoney(this.GanidOrder).subscribe(odr=>{});
+         this.productService.updateAmount(this.idProduct,newOrderDetail).subscribe(odr=>{});
+        });
+      }
+      else {
+        // console.log("")
+        alert("so luong nhap qua lon ");
+      }
     });
-    this.productOrderDetailService.addOrderDetail(newOrderDetail).subscribe(res => {
-      console.log(res);
-      alert(res['message']);
-      form.reset();
-     this.viewOrderDetail();
-     this.productOrderService.updateMoney(this.GanidOrder).subscribe(odr=>{});
-     this.productService.updateAmount(this.idProduct,newOrderDetail).subscribe(odr=>{});
-    });
+    
+   
    // this.viewOrderDetail();
   
     
