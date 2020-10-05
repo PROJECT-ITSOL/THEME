@@ -314,7 +314,7 @@ export class DashboardComponent implements OnInit {
 
 
   // order
-  async getDataOrder() {
+  async getDataOrder(){
     this.listTotalOrder = new Array();
     this.listTotalMoneyOrder = new Array();
     //this.listTotalproductBillImport= new Array();
