@@ -17,9 +17,12 @@ import { Color, Label } from 'ng2-charts';
 export class DashboardComponent implements OnInit {
   months: string[] = []
   dataComment: number[] = []
+  dataCustomer: number[] = []
   years: number[] = []
   monthNow: number = 0
   totalCategory: number = 0
+  totalCustomer: number = 0
+  totalProduct: number = 0
   // bill import
   listTotalMoneyBillImport: Array<any>;
   listTotalproductBillImport: Array<any>;
@@ -64,6 +67,9 @@ export class DashboardComponent implements OnInit {
   ngOnInit(): void {
     this.getTotalCategory()
     this.getStatistical()
+    // this.getStatisticalCustomer()
+    this.getTotalCustomer()
+    this.getTotalProduct()
   }
 
   paintChart() {
@@ -117,7 +123,7 @@ export class DashboardComponent implements OnInit {
 
   getStatistical() {
     let url = '/api/comment/statistical'
-    // this.years=new 
+    // this.years=new
     this.service.getStatisticalNoParam(url).subscribe(
       res => {
         let list = new Array()
@@ -146,7 +152,6 @@ export class DashboardComponent implements OnInit {
           this.dataComment.push(e)
         })
         this.paintChart()
-        console.log(list)
       }
     )
   }
@@ -160,11 +165,77 @@ export class DashboardComponent implements OnInit {
     )
   }
 
+  //Customer
+  // getStatisticalCustomer() {
+  //   let url = '/api/customer/statistical'
+  //   // this.years=new
+  //   this.service.getStatisticalNoParam(url).subscribe(
+  //     res => {
+  //       let list = new Array()
+  //       list = res['data']['data']
+  //       this.monthNow = res['data']['monthNow']
+  //       this.months = res['data']['months']
+  //       this.years = res['data']['years']
+  //       list.forEach(data => {
+  //         this.dataComment.push(data)
+  //       })
+  //       this.paintChart()
+  //     }
+  //   )
 
+  // }
+  // setYearsCustomer(event, year: number) {
+  //   event.preventDefault()
+  //   let url = "/api/customer/statistical"
+  //   const param = new HttpParams().append("year", year.toString())
+  //   this.service.getStatistical(url, param).subscribe(
+  //     res => {
+  //       let list = new Array()
+  //       this.dataCustomer = []
+  //       list = res['data']['data']
+  //       list.forEach(e => {
+  //         this.dataCustomer.push(e);
+  //       });
+  //       this.paintChart();
+  //       console.log(list);
+  //     }
+  //   );
+  // }
+  getTotalCustomer() {
+    let url = "/api/customer/totalCustomer"
+    this.service.getTotalCustomer(url).subscribe(
+      res => {
+        this.totalCustomer = res['data']
+      }
+    )
+  }
+  //Product
+  getTotalProduct() {
+    let url = "/api/product/totalProduct"
+    this.service.getTotalProduct(url).subscribe(
+      res => {
+        this.totalProduct = res['data']
+      }
+    )
+  }
   //BillImport
   async getDataBimmImport() {
     this.listTotalBillImport = new Array();
     this.listTotalMoneyBillImport = new Array();
+    this.listTotalproductBillImport= new Array();
+      this.billImportService.getData(this.year).subscribe(res=>{
+        this.dataBillImport=res  as Object[];
+        //console.log(res);
+        this.dataBillImport.forEach(element => {
+          let i:number = element['totalBill'];
+          this.listTotalBillImport.push(i);
+          let k:number = element['totalProduct'];
+          this.listTotalproductBillImport.push(k);
+          let l:number = element['totalMoney'];
+          this.listTotalMoneyBillImport.push(l);
+        });
+
+      });
     this.listTotalproductBillImport = new Array();
     this.billImportService.getData(this.year).subscribe(res => {
       this.dataBillImport = res as Object[];

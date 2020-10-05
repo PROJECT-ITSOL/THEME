@@ -66,5 +66,12 @@ export class AuthenticationService {
   getTotalCategory(url:string){
     return this.http.get(this.baseUrl + url)
   }
-
+  //customer
+  getTotalCustomer(url:string){
+    return this.http.get(this.baseUrl + url)
+  }
+  //product
+  getTotalProduct(url:string){
+    return this.http.get(this.baseUrl + url)
+  }
 }
