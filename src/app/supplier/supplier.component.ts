@@ -131,9 +131,46 @@ export class SupplierComponent implements OnInit {
   }
 
   edit(form: NgForm) {
-    this.supplierService.editSupp(this.supplier['idSupplier'], form.value).subscribe(res => {
-      this.getAll();
-    });
+    this.formValue = form.value
+    let newSupplier = new Supplier();
+    const urlImg = document.getElementById('file');
+    if (this.selectedImage !=null){
+    var filePath = `${this.folderImage}/${this.selectedImage.name.split('.').slice(0, -1).join('.')}_${new Date().getTime()}`;
+    const fileRef = this.storage.ref(filePath);
+    this.storage.upload(filePath, this.selectedImage).snapshotChanges().pipe(
+      finalize(() => {
+        fileRef.getDownloadURL().subscribe((url) => {
+          newSupplier.logo = url;
+          newSupplier.name = form.value.name;
+          newSupplier.address = form.value.address;
+          newSupplier.status = form.value.status;
+          newSupplier.phoneNumber = form.value.phoneNumber;
+          console.log(newSupplier);
+          this.supplierService.editSupp(this.idDelete,newSupplier).subscribe((res) => {
+            this.message = res['message'];
+            // location.reload();
+            alert('Success');
+            this.getAll();
+           
+          });
+        })
+      })
+    ).subscribe();
+    } else {
+          newSupplier.logo = '/assets/image/unnamed.png' ;
+          newSupplier.name = form.value.name;
+          newSupplier.address = form.value.address;
+          newSupplier.status = form.value.status;
+          newSupplier.phoneNumber = form.value.phoneNumber;
+          console.log(newSupplier);
+          this.supplierService.editSupp(this.idDelete,newSupplier).subscribe((res) => {
+            this.message = res['message'];
+            // location.reload();
+            alert('Success');
+            this.getAll();
+          });
+
+        }
   }
 
   delete() {
