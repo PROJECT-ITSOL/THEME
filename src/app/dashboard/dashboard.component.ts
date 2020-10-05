@@ -134,7 +134,7 @@ listTotalMoneyOrder: Array<any>;
           let l:number = element['totalMoney'];
           this.listTotalMoneyBillImport.push(l);
         });
-        console.log(this.listTotalBillImport);
+       
       });    
   }
   
@@ -155,13 +155,13 @@ listTotalMoneyOrder: Array<any>;
   };
   lineChartColors: Color[] = [
     { // dark grey
-      backgroundColor: 'rgba(215, 51, 172, 0.7)',
+      backgroundColor: 'rgba(77,83,96,0.2)',
       borderColor: 'rgba(77,83,96,1)',
     }
   ];
   lineChartColors1: Color[] = [
     { // red
-      backgroundColor: 'rgba(255,0,0,0.3)',
+      backgroundColor: 'rgba(255,0,0,0.2)',
       borderColor: 'red',
     }
   ];
