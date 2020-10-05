@@ -19,7 +19,7 @@
                 <button class="btn" type="submit" (click)="searchBill()"><i class="fas fa-search"></i></button>
             </div>
             <select class=" form-control col-3 py-1" [(ngModel)]="nameSupplier" name="nameSupplier" (change)="getBillBySupp()">
-                <option> Choose Supplier</option>
+                <option hidden> Choose Supplier</option>
                 <option *ngFor="let item of listSupp">{{item.name}}</option>
             </select>
 
@@ -83,7 +83,7 @@
                                 <div class="col-12 form-group">
                                     <label for="Choosesupplier">Choose supplier</label>
                                     <select class="form-control" id="Choosesupplier" [(ngModel)]="nameSupplier" name="nameSupplier" (change)="setSupplier()" required>
-                                        <option>Choose Supplier</option>
+                                        <option hidden>Choose Supplier</option>
                                         <option *ngFor="let item of listSupp">{{item.name}}</option>
                                     </select>
                                 </div>
@@ -128,7 +128,7 @@
                                 <div class="col-12 form-group">
                                     <label for="Choosesupplier1">Choose supplier</label>
                                     <select disabled class="form-control" id="Choosesupplier1" [(ngModel)]="billImport.nameSupplier" name="nameSupplier" (change)="setSupplier()" required>
-                                        <option>Choose Supplier</option>
+                                        <option hidden>Choose Supplier</option>
                                         <option *ngFor="let item of listSupp">{{item.name}}</option>
                                     </select>
                                 </div>
