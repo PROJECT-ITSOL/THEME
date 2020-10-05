@@ -132,7 +132,7 @@ export class DashboardComponent implements OnInit {
         this.months = res['data']['months']
         this.years = res['data']['years']
         list.forEach(data => {
-          this.dataCustomer.push(data)
+          this.dataComment.push(data)
         })
         this.paintChart()
       }
@@ -178,7 +178,7 @@ export class DashboardComponent implements OnInit {
         this.months = res['data']['months']
         this.years = res['data']['years']
         list.forEach(data => {
-          this.dataComment.push(data)
+          this.dataCustomer.push(data)
         })
         this.paintChart()
       }
