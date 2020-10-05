@@ -134,6 +134,7 @@ export class SupplierComponent implements OnInit {
    this.formValue = form.value
     let newSupplier = new Supplier();
     const urlImg = document.getElementById('file');
+    if (this.selectedImage !=null){
     var filePath = `${this.folderImage}/${this.selectedImage.name.split('.').slice(0, -1).join('.')}_${new Date().getTime()}`;
     const fileRef = this.storage.ref(filePath);
     this.storage.upload(filePath, this.selectedImage).snapshotChanges().pipe(
@@ -145,17 +146,31 @@ export class SupplierComponent implements OnInit {
           newSupplier.status = form.value.status;
           newSupplier.phoneNumber = form.value.phoneNumber;
           console.log(newSupplier);
-          this.supplierService.editSupp(this.idDelete,newSupplier).subscribe((res) => {
+          this.supplierService.addSupp(newSupplier).subscribe((res) => {
             this.message = res['message'];
             // location.reload();
-           
+            alert(res['message']);
             this.getAll();
-            
+            form.reset();
           });
         })
       })
     ).subscribe();
-      this.getAll();
+    } else {
+          newSupplier.logo = '/assets/image/unnamed.png' ;
+          newSupplier.name = form.value.name;
+          newSupplier.address = form.value.address;
+          newSupplier.status = form.value.status;
+          newSupplier.phoneNumber = form.value.phoneNumber;
+          console.log(newSupplier);
+          this.supplierService.editSupp(this.idDelete,newSupplier).subscribe((res) => {
+            this.message = res['message'];
+            // location.reload();
+            alert('Success');
+            this.getAll();
+          });
+
+        }
    
   }
 
