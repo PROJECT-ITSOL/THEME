@@ -22,7 +22,6 @@ import { SupplierComponent } from './supplier/supplier.component';
 import { ProductComponent } from './product/product.component';
 import { CategoryComponent } from './category/category.component';
 import { CommentComponent } from './comment/comment.component';
-import { StatisticalComponent } from './statistical/statistical.component';
 import { ProductImportComponent } from './order/product-import/product-import.component';
 import { ProductOrderComponent } from './order/product-order/product-order.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
@@ -40,7 +39,6 @@ import { ProductOrderDetailComponent } from './order/product-order-detail/produc
     ProductComponent,
     CategoryComponent,
     CommentComponent,
-    StatisticalComponent,
     ProductImportComponent,
     ProductOrderComponent,
     DashboardComponent,

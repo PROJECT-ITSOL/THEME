@@ -15,7 +15,7 @@ export class ProductComponent implements OnInit {
   private urlProduct = '/api/product';
   private urlCategory = '/api/category';
   private pageNo = 0;
-  listPage: Number[];
+  listPage: Number[]=[];
   totalSupp: number;
   listProduct: Product[];
   listCategory: Category[];

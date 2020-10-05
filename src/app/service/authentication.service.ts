@@ -7,7 +7,7 @@ import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 export class AuthenticationService {
   private baseUrl = 'http://localhost:8080';
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   // jwt-client
   generateToken(req) {
@@ -25,8 +25,8 @@ export class AuthenticationService {
     return this.http.get(this.baseUrl + url, { params: param });
   }
   // get all
-  getAll(url: string){
-    return this.http.get(this.baseUrl+ url);
+  getAll(url: string) {
+    return this.http.get(this.baseUrl + url);
   }
   getSearch(param: HttpParams, url: string) {
     return this.http.get(this.baseUrl + url, { params: param });
@@ -52,7 +52,19 @@ export class AuthenticationService {
   getCommentById(url: string) {
     return this.http.get(this.baseUrl + url);
   }
-  getListNoParam(url: string){
+  getListNoParam(url: string) {
     return this.http.get(this.baseUrl + url)
   }
+  getStatistical(url: string, param: HttpParams) {
+    return this.http.get(this.baseUrl + url, { params: param })
+  }
+  getStatisticalNoParam(url: string) {
+    return this.http.get(this.baseUrl + url)
+  }
+
+  // category
+  getTotalCategory(url:string){
+    return this.http.get(this.baseUrl + url)
+  }
+
 }

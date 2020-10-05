@@ -222,8 +222,8 @@
                             </td>
 
                             <td class="align-middle"><i class=""></i>
-                                <div *ngIf="item.status==1">Còn hàng</div>
-                                <div *ngIf="item.status==0">Hết hàng</div>
+                                <div *ngIf="item.status===true">Còn hàng</div>
+                                <div *ngIf="item.status==false">Hết hàng</div>
                             </td>
 
                         </tr>

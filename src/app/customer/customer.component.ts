@@ -13,7 +13,7 @@ export class CustomerComponent implements OnInit {
   private pageNo = 0;
   totalCustomer: number;
   customerEdit = new Customer();
-  listPage: Number[];
+  listPage: Number[]=[];
   listCustomer: Customer[];
   dataCustomer: Array<any>;
   idDelete: number;

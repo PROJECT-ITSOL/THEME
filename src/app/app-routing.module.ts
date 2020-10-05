@@ -1,7 +1,6 @@
 import { ProductImportDetailComponent } from './order/product-import-detail/product-import-detail.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ProductImportComponent } from './order/product-import/product-import.component';
-import { StatisticalComponent } from './statistical/statistical.component';
 import { CommentComponent } from './comment/comment.component';
 import { CategoryComponent } from './category/category.component';
 import { ProductComponent } from './product/product.component';
@@ -43,7 +42,6 @@ const routes: Routes = [
       },
       { path: 'category', component: CategoryComponent },
       { path: 'comment', component: CommentComponent },
-      { path: 'statistical', component: StatisticalComponent },
     ],
   },
 ];

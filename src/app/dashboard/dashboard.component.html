@@ -7,14 +7,14 @@
                         <div class="row no-gutters align-items-center">
                             <div class="col">
                                 <div class="text font-weight-bold text-primary text-uppercase">
-                                    Earnings(Month)
+                                    Category
                                 </div>
                                 <div class="h5 mb-0 font-weight-bold text-secondary">
-                                    $40.000
+                                    Total: {{totalCategory}}
                                 </div>
                             </div>
                             <div class="col-auto">
-                                <i class="fas fa-address-card text-secondary"></i>
+                                <i class="fab fa-atlassian text-secondary"></i>
                             </div>
                         </div>
                     </div>
@@ -79,61 +79,25 @@
             </div>
         </div>
     </div>
-    <!-- Content-Row -->
-    <div class="row">
-        <!-- Chart-Line -->
-        <div class="col-xl-8 col-lg-7">
-            <!-- card-header -->
-            <div class="card shadow mb-4">
-                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                    <!-- header -->
-                    <h6 class="m-0 font-weight-bold text-primary">Earning Overview</h6>
-                    <div class="dropdown">
-                        <span type="button" id="triggerId" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              <i class="fas fa-ellipsis-v"></i>
-            </span>
-                        <div class="dropdown-menu dropdown-menu-right animate slideIn" aria-labelledby="triggerId">
-                            <h6 class="dropdown-header">Section header</h6>
-                            <a class="dropdown-item" href="#">Action</a>
-                            <a class="dropdown-item" href="#">Action</a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="#">After divider action</a>
-                        </div>
-                    </div>
-                </div>
-                <!-- card body -->
-                <div class="card-body">
-                    <div class="chart-area">
-                        <canvas id="myAreaChart"></canvas>
-                    </div>
+    <!-- card-header -->
+    <div class="card shadow mb-4">
+        <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+            <!-- header -->
+            <h6 class="m-0 font-weight-bold text-primary">Comment</h6>
+            <div class="dropdown">
+                <span type="button" id="triggerId" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="fas fa-ellipsis-v"></i>
+                        </span>
+                <div class="dropdown-menu dropdown-menu-right animate slideIn" aria-labelledby="triggerId">
+                    <h6 class="dropdown-header">Years</h6>
+                    <a class="dropdown-item" (click)="setYears($event,year)" *ngFor="let year of years" href="#">{{year}}</a>
                 </div>
             </div>
         </div>
-        <!-- Pie-Chart -->
-        <div class="col-xl-4 col-lg-5">
-            <div class="card shadow mb-0">
-                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                    <!-- header -->
-                    <h6 class="m-0 font-weight-bold text-primary">Revenue Source</h6>
-                    <div class="dropdown">
-                        <span type="button" id="triggerId" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              <i class="fas fa-ellipsis-v"></i>
-            </span>
-                        <div class="dropdown-menu dropdown-menu-right animate slideIn" aria-labelledby="triggerId">
-                            <h6 class="dropdown-header">Section header</h6>
-                            <a class="dropdown-item" href="#">Action</a>
-                            <a class="dropdown-item" href="#">Action</a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="#">After divider action</a>
-                        </div>
-                    </div>
-                </div>
-                <!-- card body -->
-                <div class="card-body">
-                    <div class="chart-pie">
-                        <canvas id="myPieChart"></canvas>
-                    </div>
-                </div>
+        <!-- card body -->
+        <div class="card-body">
+            <div class="chart-area">
+                <canvas id="myAreaChart"></canvas>
             </div>
         </div>
     </div>
