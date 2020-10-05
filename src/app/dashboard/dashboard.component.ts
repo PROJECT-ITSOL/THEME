@@ -21,6 +21,8 @@ export class DashboardComponent implements OnInit {
   years: number[] = []
   monthNow: number = 0
   totalCategory: number = 0
+  totalCustomer: number = 0
+  totalProduct: number = 0
   // bill import
   listTotalMoneyBillImport: Array<any>;
   listTotalproductBillImport: Array<any>;
@@ -66,6 +68,8 @@ export class DashboardComponent implements OnInit {
     this.getTotalCategory()
     this.getStatistical()
     this.getStatisticalCustomer()
+    this.getTotalCustomer()
+    this.getTotalProduct()
   }
 
   paintChart() {
@@ -198,7 +202,23 @@ export class DashboardComponent implements OnInit {
       }
     );
   }
-
+  getTotalCustomer() {
+    let url = "/api/customer/totalCustomer"
+    this.service.getTotalCustomer(url).subscribe(
+      res => {
+        this.totalCustomer = res['data']
+      }
+    )
+  }
+  //Product
+  getTotalProduct() {
+    let url = "/api/product/totalProduct"
+    this.service.getTotalProduct(url).subscribe(
+      res => {
+        this.totalProduct = res['data']
+      }
+    )
+  }
   //BillImport
   async getDataBimmImport() {
     this.listTotalBillImport = new Array();
