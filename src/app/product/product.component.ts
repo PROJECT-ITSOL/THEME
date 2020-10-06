@@ -78,8 +78,6 @@ export class ProductComponent implements OnInit {
         supplier.products = supp['productList'];
         this.listSupp.push(supplier);
       });
-      console.log(this.listSupp);
-      // this.pages = new Array(res['totalPages']);
       this.totalSupp = (res['totalElements']);
     });
     // console.log('######', this.listSupp);
