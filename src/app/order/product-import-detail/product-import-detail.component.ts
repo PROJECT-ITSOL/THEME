@@ -132,6 +132,9 @@ export class ProductImportDetailComponent implements OnInit, OnDestroy {
     console.log(form.value);
     let newbillDetail = new BillImportDetail;
       newbillDetail.amount=form.value.amount;
+      if (newbillDetail.amount==0){
+        alert('Amount invalid');
+      } else {
       newbillDetail.price=this.price;
       newbillDetail.product=this.product;
       newbillDetail.billImport=this.billImport;
@@ -149,13 +152,16 @@ export class ProductImportDetailComponent implements OnInit, OnDestroy {
      
     });  
   }
+  }
 
   
-
   editDetail(form:NgForm){
     console.log(form.value);
     let newBillDetail = new BillImportDetail;
     newBillDetail.amount=form.value.amount;
+    if (newBillDetail.amount==0){
+      alert('Amount invalid');
+    } else {
     newBillDetail.price=form.value.price;
     newBillDetail.product=this.product;
     newBillDetail.totalPrice=(form.value.amount*form.value.price);
@@ -169,7 +175,7 @@ export class ProductImportDetailComponent implements OnInit, OnDestroy {
       this.ProductService.updateAmount(this.idProduct,newBillDetail).subscribe(res=>{
       });
     });
-   
+  }
 
   }
 

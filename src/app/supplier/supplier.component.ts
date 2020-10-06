@@ -240,6 +240,20 @@ export class SupplierComponent implements OnInit {
     }
   }
 
+  showPreviewEdit(event: any) {
+    console.log(event.target.value)
+    if (event.target.files && event.target.files[0]) {
+      const reader = new FileReader();
+      reader.onload = (e: any) => this.supplier.logo = e.target.result;
+      reader.readAsDataURL(event.target.files[0]);
+      this.selectedImage = event.target.files[0];
+    }
+    else {
+      this.imgUrl = '/assets/image/image.png';
+      this.selectedImage = null;
+    }
+  }
+
   resetForm() {
 
     this.imgUrl = '/assets/image/unnamed.png';
