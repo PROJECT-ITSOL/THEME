@@ -131,7 +131,7 @@ pageChange(newPage: number) {
         this.listBillImport.push(billImport);
       });
      
-      this.totalBill = res['data']['totalElements'];
+      
       });
   }
 

@@ -14,7 +14,7 @@ export class HomeComponent implements OnInit {
   constructor(private router: Router, private service: AuthenticationService) {}
 
   ngOnInit(): void {
-    this.isToken();
+    // this.isToken();
   }
 
   showMenuDrop() {
@@ -30,7 +30,7 @@ export class HomeComponent implements OnInit {
     this.router.navigate(['/loginAdmin']);
     localStorage.removeItem('token');
   }
-  isToken(){
-    this.service.isLoggedIn().subscribe();
-  }
+  // isToken(){
+  //   this.service.isLoggedIn().subscribe();
+  // }
 }
