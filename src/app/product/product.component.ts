@@ -14,7 +14,7 @@ import {SupplierService} from '../service/supplier.service';
 export class ProductComponent implements OnInit {
   private urlProduct = '/api/product';
   private urlCategory = '/api/category';
-  private pageNo = 0;
+   pageNo = 0;
   listPage: Number[]=[];
   totalSupp: number;
   totalProduct: number;

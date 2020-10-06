@@ -44,6 +44,7 @@ export class LoginComponent implements OnInit {
       "username": event.value.username,
       "password": event.value.password
     }
+    // console.log(this.authReq)
     localStorage.removeItem('token');
     this.service.generateToken(this.authReq).subscribe(
       data=>{
