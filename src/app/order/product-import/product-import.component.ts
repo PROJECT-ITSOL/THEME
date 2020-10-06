@@ -1,4 +1,4 @@
-import { Product } from './../../ultis/product';
+  import { Product } from './../../ultis/product';
 import { Supplier } from './../../ultis/supplier';
 import { SupplierService } from './../../service/supplier.service';
 import { Test } from '../../ultis/test';

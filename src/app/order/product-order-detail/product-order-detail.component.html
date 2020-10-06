@@ -87,8 +87,18 @@
                     <form #formAdd="ngForm" novalidate>
                         <div class="p-4 formAdd">
                             <div class="col-12 form-group">
-                                <label for="price ">product</label>
-                                <input disabled type="text" id="price" disabled [(ngModel)]="nameProduct" name="nameProduct" class="form-control">
+                                <th>
+                                    <label for="price ">product</label>
+                                <input disabled type="text" id="price" disabled [(ngModel)]="product.name" name="nameProduct" class="form-control">
+                                </th>
+                                <th>
+                                    <label for="price ">Tong du</label>
+                                    <input disabled type="text" id="price" disabled [(ngModel)]="product.amount" name="amountProduct" class="form-control">
+                                </th>
+                                <th>
+                                    <label for="price ">Price</label>
+                                    <input disabled type="text" id="price" disabled [(ngModel)]="product.price" name="priceProduct" class="form-control">
+                                </th>
                             </div>
                             <div class="row">
                                 <div class=" col-4 form-group">
@@ -137,9 +147,23 @@
                     <form #formEdit="ngForm" novalidate>
                         <div class="p-4 formAdd">
                             <div class="col-12 form-group">
+                                <th>
+                                    <label for="price ">product</label>
+                                <input disabled type="text" id="price" disabled [(ngModel)]="productabc.name" name="nameProduct" class="form-control">
+                                </th>
+                                <th>
+                                    <label for="price ">Tong du</label>
+                                    <input disabled type="text" id="price" disabled [(ngModel)]="productabc.amount" name="amountProduct" class="form-control">
+                                </th>
+                                <th>
+                                    <label for="price ">Price</label>
+                                    <input disabled type="text" id="price" disabled [(ngModel)]="productabc.price" name="priceProduct" class="form-control">
+                                </th>
+                            </div>
+                            <!-- <div class="col-12 form-group">
                                 <label>Oderdetail</label>
                                 <input disabled type="text" disabled [(ngModel)]="nameSupplier" name="nameSupplier" class="form-control">
-                            </div>
+                            </div> -->
                             <div class="row">
                                 <div class=" col-4 form-group">
                                     <label>Product</label>
@@ -190,7 +214,7 @@
                 <div class="modal-footer">
                     <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Cancel</button>
 
-                    <button type="button" class="btn btn-outline-danger" data-dismiss="modal" (click)="delete()" routerLink="/homeAdmin/order/list-order-detail" routerLinkActive="active">Delete</button>
+                    <button type="button" class="btn btn-outline-danger" data-dismiss="modal" (click)="delete()" [routerLink]="['//homeAdmin/order/list-order-detail',GanidOrder]" routerLinkActive="active">Delete</button>
                 </div>
             </div>
         </div>

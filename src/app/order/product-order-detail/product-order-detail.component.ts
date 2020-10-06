@@ -72,12 +72,14 @@ export class ProductOrderDetailComponent implements OnInit {
 //
 getProductAll(){
   this.listProduct=new Array();
-  let url ='/api/product/list';
+  //let url ='/api/product/list';
   
-  let param = new HttpParams().append('pageNo', this.pageNo.toString());
-    this.service.getList(param, url).subscribe((data) => {
-      this.listPage = new Array(data['totalPages']);
-      this.dataProduct = data['content'];
+  //let param = new HttpParams().append('pageNo', this.pageNo.toString());
+   // this.service.getList(param, url).subscribe((data) => {
+     this.productService.getAllList().subscribe((data) => {
+    // this.listPage = new Array(data['totalPages']);
+      this.dataProduct = data as object[];
+      console.log(this.dataProduct);
       this.dataProduct.forEach((product) => {
         let productEntity = new Product();
         productEntity.idProduct = product['idProduct'];
@@ -85,12 +87,12 @@ getProductAll(){
         productEntity.idSupplier = product['idSupplier'];
         productEntity.name = product['name'];
         productEntity.price = product['price'];
-        productEntity.image = product['image'];
-        productEntity.content = product['content'];
-        productEntity.favorite = product['favorite'];
+        // productEntity.image = product['image'];
+        // productEntity.content = product['content'];
+        // productEntity.favorite = product['favorite'];
         productEntity.amount = product['amount'];
         productEntity.status = product['status'];
-        productEntity.products = product['listProduct'];
+       // productEntity.products = product['listProduct'];
         this.listProduct.push(productEntity);
       });
   });
@@ -109,6 +111,7 @@ getProductAll(){
         entity.idOrderDetail=data['idOrderDetail']
         entity.idOrder=data['idOrder']
         entity.amount=data['amount']
+      //  entity.amountProduct=data['productOrderDetailt']['amount'];
         entity.totalPrice=data['totalPrice']
         entity.idProduct=data['productOrderDetail']['idProduct']
         entity.nameProduct=data['productOrderDetail']['name']
@@ -125,28 +128,27 @@ getProductAll(){
   
    getDelete(item) {
     this.idDelete = item['idOrderDetail'];
+    this.idProduct= item['idProduct'];
+    
     console.log(this.idDelete);
   }
+
+
   delete() {
     this.productOrderDetailService.delete(this.idDelete).subscribe(res => {
       console.log(res);
       alert(res['message']);
       this.viewOrderDetail();
+      this.productOrderService.updateMoney(this.GanidOrder).subscribe(odr=>{});
+   this.productService.updateAmount(this.idProduct,this.orderDetail).subscribe(odr=>{
+    this.getProductAll();
+   });
     });
    // this.ngOnInit();
-   this.productOrderService.updateMoney(this.GanidOrder).subscribe(odr=>{});
-   this.productService.updateAmount(this.idProduct,this.orderDetail).subscribe(odr=>{});
+   
 
   }
 
-  setProduct(){
-    this.listProduct.forEach(cus=>{
-      if(cus.name===this.nameProduct){
-        this.product=cus;
-        this.idProduct=cus.idProduct;
-      }
-    })
-  }
   
 
   // ham  trong modal
@@ -167,16 +169,21 @@ getProductAll(){
         this.productOrderDetailService.addOrderDetail(newOrderDetail).subscribe(res => {
           console.log(res);
           // alert(res['message']);
-          form.reset();
+          // form.reset();
          this.viewOrderDetail();
          this.productOrderService.updateMoney(this.GanidOrder).subscribe(odr=>{});
-         this.productService.updateAmount(this.idProduct,newOrderDetail).subscribe(odr=>{});
+         this.productService.updateAmount(this.idProduct,newOrderDetail).subscribe(odr=>{
+          this.getProductAll();
+         });
+        
+         form.reset();
         });
       }
       else {
         // console.log("")
         alert("so luong nhap qua lon ");
       }
+      
     });
     
    
@@ -190,11 +197,21 @@ getProductAll(){
   //     this.GanidOrder = message;
   //   });
   // }
+  
+  setProduct(){
+    this.listProduct.forEach(cus=>{
+      if(cus.name===this.nameProduct){
+        this.product=cus;
+        this.idProduct=cus.idProduct;
+      }
+    })
+  }
   // khai bao  Oder
   setProductEdit(item) {
     this.listProduct.forEach(element => {
-      if(element.name===item){
-        this.product=element;
+      if(element.name==item.nameProduct){
+       // this.product=element;
+        this.productabc=element;
        
       }
 
@@ -213,14 +230,24 @@ getProductAll(){
     editOrderDetail.totalPrice=form.value.amount*this.orderDetail.price;
 
     console.log(editOrderDetail);
-
-    this.productOrderDetailService.editOrderDetail(this.orderDetail.idOrderDetail,editOrderDetail).subscribe(res => {
-      console.log(res);
-      alert(res['message']);
-      this.viewOrderDetail();
-      this.productOrderService.updateMoney(this.GanidOrder).subscribe(odr=>{});
-      this.productService.updateAmount(this.idProduct,editOrderDetail).subscribe(odr=>{});
+    this.productService.getId(editOrderDetail.idProduct).subscribe(res=>{
+      this.product.amount=res['amount'];
+      if (editOrderDetail.amount<this.product.amount) {
+        this.productOrderDetailService.editOrderDetail(this.orderDetail.idOrderDetail,editOrderDetail).subscribe(res => {
+          console.log(res);
+          alert(res['message']);
+          this.viewOrderDetail();
+          this.productOrderService.updateMoney(this.GanidOrder).subscribe(odr=>{});
+          this.productService.updateAmount(this.idProduct,editOrderDetail).subscribe(odr=>{
+            this.getProductAll();
+          });
+          form.reset();
+        });
+      } else {
+        alert("so luong nhap qua lon ");
+      }
     });
+    
   }
 
 }
