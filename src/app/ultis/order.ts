@@ -4,7 +4,8 @@ import { OderDetail } from "./orderDetail";
 export class Order {
     idOrder: string;
     idCustomer: number;
-    createDate: Date;
+   createDate: Date;
+  // createDate:string;
     status: string;
     
     customer: Customer;
