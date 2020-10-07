@@ -36,7 +36,7 @@ export class ProductOrderComponent implements OnInit {
   editStatus;
 
   // list khoi tao bien (bien thay doi )
-  editOrderkey: Order;
+  editOrderkey: Order = new Order();
   keyword: string;  // dung de tim kiem
   message: string;   // luu thong bao
   idDelete: string; // luu id xoa
@@ -45,6 +45,7 @@ export class ProductOrderComponent implements OnInit {
   totalOrderDetail: number;
   totalOrder: number;
   order = new Order();    // khoi tao bien
+  orderEdit= new Order();
   // bien page
   status: string = 'that bai';
   page: number = 1;
@@ -102,7 +103,6 @@ export class ProductOrderComponent implements OnInit {
         this.listCustomer.push(customerEntity);
       });
     });
-    console.log('this.listCustomer', this.listCustomer);
   }
 
   // lay ra ds Order
@@ -113,7 +113,6 @@ export class ProductOrderComponent implements OnInit {
     this.productOrderService.getListOrder(this.page).subscribe(res => {
       this.dataOrder = res['content'];
       this.totalOrder = 0;
-      console.log(this.dataOrder);
 
       this.dataOrder.forEach((order) => {
         let orderEntity = new Order();
@@ -128,7 +127,6 @@ export class ProductOrderComponent implements OnInit {
         orderEntity.orderDetail = order['listOrderDetail'];
         this.listOrder.push(orderEntity);
       });
-      console.log(this.listOrder);
       this.pages = new Array(res['totalPages']);
       this.totalOrder = (res['totalElements']);
     });
@@ -159,6 +157,7 @@ export class ProductOrderComponent implements OnInit {
   // gan bien
   showEdit(item: Order) {
     this.editOrderkey = item;
+    // console.log(this.editOrderkey.status)
     this.idDelete = item.idOrder;
     this.status = item.status;
     // this.message=item.idOrder;
@@ -198,7 +197,6 @@ export class ProductOrderComponent implements OnInit {
         orderEntity.orderDetail = order['listOrderDetail'];
         this.listOrder.push(orderEntity);
       });
-      console.log(this.listOrder);
       this.pages = new Array(res['totalElement']);
     });
   }

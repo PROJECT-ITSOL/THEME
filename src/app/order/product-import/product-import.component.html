@@ -19,8 +19,12 @@
                 <button class="btn" type="submit" (click)="searchBill()"><i class="fas fa-search"></i></button>
             </div>
             <select class=" form-control col-3 py-1" [(ngModel)]="nameSupplier" name="nameSupplier" (change)="getBillBySupp()">
+<<<<<<< HEAD
                 <option selected hidden> Choose Supplier</option>
                 <option [value]="0">Tất cả</option>
+=======
+                <option hidden> Choose Supplier</option>
+>>>>>>> c3461351745b811b152efa1791e7c226f842a8dd
                 <option *ngFor="let item of listSupp">{{item.name}}</option>
             </select>
             <select class=" form-control col-3 py-1" name="month" (change)="getBillByMonth($event)">
@@ -89,7 +93,11 @@
                                 <div class="col-12 form-group">
                                     <label for="Choosesupplier">Choose supplier</label>
                                     <select class="form-control" id="Choosesupplier" [(ngModel)]="nameSupplier" name="nameSupplier" (change)="setSupplier()" required>
+<<<<<<< HEAD
                                         <option hidden >Choose Supplier</option>
+=======
+                                        <option hidden>Choose Supplier</option>
+>>>>>>> c3461351745b811b152efa1791e7c226f842a8dd
                                         <option *ngFor="let item of listSupp">{{item.name}}</option>
                                     </select>
                                 </div>
@@ -134,7 +142,7 @@
                                 <div class="col-12 form-group">
                                     <label for="Choosesupplier1">Choose supplier</label>
                                     <select disabled class="form-control" id="Choosesupplier1" [(ngModel)]="billImport.nameSupplier" name="nameSupplier" (change)="setSupplier()" required>
-                                        <option>Choose Supplier</option>
+                                        <option hidden>Choose Supplier</option>
                                         <option *ngFor="let item of listSupp">{{item.name}}</option>
                                     </select>
                                 </div>

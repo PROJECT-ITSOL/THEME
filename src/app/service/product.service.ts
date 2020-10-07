@@ -12,9 +12,20 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
       private apiUrl = "http://localhost:8080/api/product";
 
        constructor(private http: HttpClient){ }
+
+       
        updateAmount(id,billImportDetail){
         return this.http.put(this.apiUrl+'/updateAmountImport/'+id,billImportDetail,{
             responseType: 'text' as 'json',
           });
-    }
+
+        }
+
+        getId(id){
+          return this.http.get(this.apiUrl+'/'+id);
+        }
+        getAllList(){
+          return this.http.get(this.apiUrl+'/allProduct');
+        }
+
   }

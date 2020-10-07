@@ -78,7 +78,7 @@
                 <td>{{item.nameCustomer}}</td>
                 <td>{{item.createDate|date}}</td>
                 <td>{{item.status}}</td>
-                <td>{{item.totalMoney|currency:'VND'}}</td> 
+                <td>{{item.totalMoney|currency:'VND'}}</td>
                 <td></td>
 
                 <!--  -->
@@ -188,7 +188,8 @@
                         </div>
                         <div class="modal-footer  ">
                             <button type="button" class="btn btn-outline-danger " data-dismiss="modal">Cancel</button>
-                            <button [disabled]="formAdd.invalid" type="submit" class="btn btn-outline-primary " data-dismiss="modal" (click)="(addOrder(formAdd))" [routerLink]="['//homeAdmin/order/list-order-detail',idOrder]" routerLinkActive="active">Add+</button>
+                            <button [disabled]="formAdd.invalid" type="submit" class="btn btn-outline-primary " 
+                                    data-dismiss="modal" (click)="(addOrder(formAdd))" [routerLink]="['//homeAdmin/order/list-order-detail',idOrder]" routerLinkActive="active">Add+</button>
                         </div>
                     </form>
                 </div>
@@ -206,18 +207,28 @@
                 <div class="modal-body">
                     <form #formEdit="ngForm" novalidate>
                         status
-                        <select class="form-control" [(ngModel)]="editStatus" name="status"> 
+                        <select class="form-control" [(ngModel)]="editOrderkey.status" name="status"> 
                         <!-- <option  value="">xem tat ca</option> -->
-                        <option value="Đang chờ" >Đang chờ</option>
-                        <option value="Thành công">Thành công </option>
-                        <option value="Thất bại">Thất bại</option>
+                        <option [selected]="editOrderkey.status==='đang chờ'" value="đang chờ" >Đang chờ</option>
+                        <option [selected]="editOrderkey.status==='Thành công'" value="Thành công">Thành công </option>
+                        <option [selected]="editOrderkey.status==='Thất bại'" value="Thất bại">Thất bại</option>
+                        <!-- <option [selected]="editOrderkey.status==='Thất bại'" value="Thất bại">Thất bại</option> -->
                     
                     </select>
 
-                        <div class="form-group col-12">Date
-                            <input type="date" class="form-control" ngModel required name="createDate" #dateCreate="ngModel">
+                        <!-- <div class="form-group col-12">Date
+                                <p></p>
+                            <input type="text" class="form-control" ngModel [value]=" editOrderkey.createDate | date" required name="createDate" >
                             <span class="col-12 validator" *ngIf="dateCreate.errors?.required && dateCreate.touched">Date is required</span>
+                            <p>{{editOrderkey.createDate | date}}</p>
+                        </div> -->
+                        <div class="form-group col-12">Date old: {{editOrderkey.createDate|date}}
+                            <input type="date" class="form-control" [(ngModel)] ="editOrderkey.createDate" required name="createDate" #dateCreate="ngModel">
+                            <span class="col-12 validator" *ngIf="dateCreate.errors?.required && dateCreate.touched">Date is
+                                required</span>
                         </div>
+
+
                         <div class="modal-footer  ">
                             <button type="button" class="btn btn-outline-danger " data-dismiss="modal">Cancel</button>
                             <button type="submit" class="btn btn-outline-primary " data-dismiss="modal" (click)="(editOrder(formEdit))">Save</button>

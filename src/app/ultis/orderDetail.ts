@@ -6,6 +6,7 @@ export class OderDetail{
     idOrder: string;
     idProduct: string;
     amount: number;
+    amountProduct: number;
     nameProduct: string;
     price: number;
     product: Product;

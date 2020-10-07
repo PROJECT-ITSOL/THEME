@@ -1,4 +1,4 @@
-import { Product } from './../../ultis/product';
+  import { Product } from './../../ultis/product';
 import { Supplier } from './../../ultis/supplier';
 import { SupplierService } from './../../service/supplier.service';
 import { Test } from '../../ultis/test';
@@ -135,7 +135,11 @@ pageChange(newPage: number) {
         this.listBillImport.push(billImport);
       });
      
+<<<<<<< HEAD
       this.totalBill = this.listBillImport.length;
+=======
+      
+>>>>>>> c3461351745b811b152efa1791e7c226f842a8dd
       });
     }else{
       this.getAllBill();

@@ -28,10 +28,11 @@ export class ProductOrderDetailComponent implements OnInit {
   listProduct: Product[];
   dataOrderDetail: Array<any>;
   dataProduct: Array<any>;
-  orderDetail:OderDetail=new OderDetail();
+  orderDetail: OderDetail = new OderDetail();
   nameProduct: string;
-  priceProduct:number;
-  product:Product= new Product();
+  priceProduct: number;
+  product: Product = new Product();
+  productabc: Product = new Product();
   idProduct;
   price;
   nameSupplier: string;
@@ -39,7 +40,7 @@ export class ProductOrderDetailComponent implements OnInit {
   //
   page: number = 0;
   pages: Array<number>;
-  pageNo=0;
+  pageNo = 0;
   GanidOrder: string;
   idDelete: number;
   nameDelete: string;
@@ -61,22 +62,23 @@ export class ProductOrderDetailComponent implements OnInit {
   ngOnInit(): void {
     this.GanidOrder = this.route.snapshot.paramMap.get('id');
 
-    
+
     this.viewOrderDetail();
-    
+
     this.getProductAll();
     //this.getToTal();
   }
- 
-//
-getProductAll(){
-  this.listProduct=new Array();
-  let url ='/api/product/list';
-  
-  let param = new HttpParams().append('pageNo', this.pageNo.toString());
-    this.service.getList(param, url).subscribe((data) => {
-      this.listPage = new Array(data['totalPages']);
-      this.dataProduct = data['content'];
+
+  //
+  getProductAll() {
+    this.listProduct = new Array();
+    //let url ='/api/product/list';
+
+    //let param = new HttpParams().append('pageNo', this.pageNo.toString());
+    // this.service.getList(param, url).subscribe((data) => {
+    this.productService.getAllList().subscribe((data) => {
+      // this.listPage = new Array(data['totalPages']);
+      this.dataProduct = data as object[];
       this.dataProduct.forEach((product) => {
         let productEntity = new Product();
         productEntity.idProduct = product['idProduct'];
@@ -84,129 +86,157 @@ getProductAll(){
         productEntity.idSupplier = product['idSupplier'];
         productEntity.name = product['name'];
         productEntity.price = product['price'];
-        productEntity.image = product['image'];
-        productEntity.content = product['content'];
-        productEntity.favorite = product['favorite'];
+        // productEntity.image = product['image'];
+        // productEntity.content = product['content'];
+        // productEntity.favorite = product['favorite'];
         productEntity.amount = product['amount'];
         productEntity.status = product['status'];
-        productEntity.products = product['listProduct'];
+        // productEntity.products = product['listProduct'];
         this.listProduct.push(productEntity);
       });
-  });
-}
+    });
+  }
 
   viewOrderDetail() {
-    this.Tong=0;
-   this.listOrderDetail = new Array();
+    this.Tong = 0;
+    this.listOrderDetail = new Array();
     this.productOrderDetailService.getByIdProductOrderdetail(this.GanidOrder).subscribe(res => {
       this.dataOrderDetail = new Array();
-      this.dataOrderDetail=res['data'];
-      this.listOrderDetail=[];
-      this.totalOrderDetail=0;
-      this.dataOrderDetail.forEach(data=>{
-        let entity=new OderDetail();
-        entity.idOrderDetail=data['idOrderDetail']
-        entity.idOrder=data['idOrder']
-        entity.amount=data['amount']
-        entity.totalPrice=data['totalPrice']
-        entity.idProduct=data['productOrderDetail']['idProduct']
-        entity.nameProduct=data['productOrderDetail']['name']
-        entity.price=data['productOrderDetail']['price']
-        this.Tong+=entity.price * entity.amount;
+      this.dataOrderDetail = res['data'];
+      this.listOrderDetail = [];
+      this.totalOrderDetail = 0;
+      this.dataOrderDetail.forEach(data => {
+        let entity = new OderDetail();
+        entity.idOrderDetail = data['idOrderDetail']
+        entity.idOrder = data['idOrder']
+        entity.amount = data['amount']
+        //  entity.amountProduct=data['productOrderDetailt']['amount'];
+        entity.totalPrice = data['totalPrice']
+        entity.idProduct = data['productOrderDetail']['idProduct']
+        entity.nameProduct = data['productOrderDetail']['name']
+        entity.price = data['productOrderDetail']['price']
+        this.Tong += entity.price * entity.amount;
         // console.log(entity);
         this.listOrderDetail.push(entity);
         // console.log(data);
       })
-      this.totalOrderDetail=this.listOrderDetail.length;
+      this.totalOrderDetail = this.listOrderDetail.length;
     });
   }
-   // bien 
-  
-   getDelete(item) {
+  // bien 
+
+  getDelete(item) {
     this.idDelete = item['idOrderDetail'];
-    console.log(this.idDelete);
+    this.idProduct = item['idProduct'];
+
   }
+
+
   delete() {
     this.productOrderDetailService.delete(this.idDelete).subscribe(res => {
-      console.log(res);
       alert(res['message']);
       this.viewOrderDetail();
+      this.productOrderService.updateMoney(this.GanidOrder).subscribe(odr => { });
+      this.productService.updateAmount(this.idProduct, this.orderDetail).subscribe(odr => {
+        this.getProductAll();
+      });
     });
-   // this.ngOnInit();
-   this.productOrderService.updateMoney(this.GanidOrder).subscribe(odr=>{});
-   this.productService.updateAmount(this.idProduct,this.orderDetail).subscribe(odr=>{});
+    // this.ngOnInit();
+
 
   }
 
-  setProduct(){
-    this.listProduct.forEach(cus=>{
-      if(cus.name===this.nameProduct){
-        this.product=cus;
-        this.idProduct=cus.idProduct;
-      }
-    })
-  }
-  
+
 
   // ham  trong modal
   addProduct(form: NgForm) {
-    console.log(form);
-    console.log('Your form data : ', form.value);
     let newOrderDetail = new OderDetail;
-    newOrderDetail.amount = form.value.amount; 
+    newOrderDetail.amount = form.value.amountAdd;
     newOrderDetail.idProduct = this.idProduct;
-    newOrderDetail.idOrder= this.GanidOrder;
-    newOrderDetail.totalPrice=form.value.amount*this.product.price;
-    console.log(newOrderDetail);
-    this.productOrderDetailService.addOrderDetail(newOrderDetail).subscribe(res => {
-      console.log(res);
-      alert(res['message']);
-      form.reset();
-     this.viewOrderDetail();
-     this.productOrderService.updateMoney(this.GanidOrder).subscribe(odr=>{});
-     this.productService.updateAmount(this.idProduct,newOrderDetail).subscribe(odr=>{});
+    newOrderDetail.idOrder = this.GanidOrder;
+    newOrderDetail.totalPrice = form.value.amount * this.product.price;
+    this.productService.getId(newOrderDetail.idProduct).subscribe(res => {
+      this.productabc.amount = res['amount'];
+      if (newOrderDetail.amount < this.productabc.amount) {
+        this.productOrderDetailService.addOrderDetail(newOrderDetail).subscribe(res => {
+          this.viewOrderDetail();
+          this.productOrderService.updateMoney(this.GanidOrder).subscribe(odr => { });
+          this.productService.updateAmount(this.idProduct, newOrderDetail).subscribe(odr => {
+            this.getProductAll();
+          });
+
+          form.reset();
+        });
+      }
+      else {
+        // console.log("")
+        alert("so luong nhap qua lon ");
+      }
+
     });
-   // this.viewOrderDetail();
-  
-    
+
+
+    // this.viewOrderDetail();
+
+
   }
 
-// getMessage() {
+  // getMessage() {
   //   this.productOrderService.currentMessage.subscribe(message => {
   //     this.GanidOrder = message;
   //   });
   // }
+
+  setProduct() {
+    this.listProduct.forEach(cus => {
+      if (cus.name === this.nameProduct) {
+        this.product = cus;
+        this.idProduct = cus.idProduct;
+      }
+    })
+  }
   // khai bao  Oder
   setProductEdit(item) {
     this.listProduct.forEach(element => {
-      if(element.name===item){
-        this.product=element;
-       
+      if (element.name == item.nameProduct) {
+        // this.product=element;
+        this.productabc = element;
+
       }
 
-      
+
     });
-    this.orderDetail=item;
+    this.orderDetail = item;
     console.log(this.orderDetail);
-    
-    
+
+
   }
-  editOrderDetail(form: NgForm){
-  
+  editOrderDetail(form: NgForm) {
+
     console.log('Your form data : ', form.value);
     let editOrderDetail = this.orderDetail;
-    editOrderDetail.amount=form.value.amount;
-    editOrderDetail.totalPrice=form.value.amount*this.orderDetail.price;
+    editOrderDetail.amount = form.value.amount;
+    editOrderDetail.totalPrice = form.value.amount * this.orderDetail.price;
 
     console.log(editOrderDetail);
-
-    this.productOrderDetailService.editOrderDetail(this.orderDetail.idOrderDetail,editOrderDetail).subscribe(res => {
-      console.log(res);
-      alert(res['message']);
-      this.viewOrderDetail();
-      this.productOrderService.updateMoney(this.GanidOrder).subscribe(odr=>{});
-      this.productService.updateAmount(this.idProduct,editOrderDetail).subscribe(odr=>{});
+    this.productService.getId(editOrderDetail.idProduct).subscribe(res => {
+      this.product.amount = res['amount'];
+      if (editOrderDetail.amount < this.product.amount) {
+        this.productOrderDetailService.editOrderDetail(this.orderDetail.idOrderDetail, editOrderDetail).subscribe(res => {
+          console.log(res);
+          alert(res['message']);
+          this.viewOrderDetail();
+          this.productOrderService.updateMoney(this.GanidOrder).subscribe(odr => { });
+          this.productService.updateAmount(this.idProduct, editOrderDetail).subscribe(odr => {
+            this.getProductAll();
+          });
+          form.reset();
+        });
+      } else {
+        alert("so luong nhap qua lon ");
+      }
     });
+
   }
 
 }

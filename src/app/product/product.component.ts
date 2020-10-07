@@ -14,9 +14,10 @@ import {SupplierService} from '../service/supplier.service';
 export class ProductComponent implements OnInit {
   private urlProduct = '/api/product';
   private urlCategory = '/api/category';
-  private pageNo = 0;
+   pageNo = 0;
   listPage: Number[]=[];
   totalSupp: number;
+  totalProduct: number;
   listProduct: Product[];
   listCategory: Category[];
   listSupp: Supplier[];
@@ -34,6 +35,7 @@ export class ProductComponent implements OnInit {
     this.getProduct();
     this.getCategory();
     this.getSupp();
+    this.getTotalProduct();
   }
 
   isActive(item) {
@@ -76,13 +78,19 @@ export class ProductComponent implements OnInit {
         supplier.products = supp['productList'];
         this.listSupp.push(supplier);
       });
-      console.log(this.listSupp);
-      // this.pages = new Array(res['totalPages']);
       this.totalSupp = (res['totalElements']);
     });
     // console.log('######', this.listSupp);
   }
-
+  getTotalProduct() {
+    let url = '/api/product/totalProduct';
+    this.service.getTotalProduct(url).subscribe(
+      res => {
+        this.totalProduct = res['data'];
+      }
+    );
+    this.totalProduct = this.listProduct.length;
+  }
   getProduct() {
     this.listProduct = new Array();
     // let url = this.urlProduct + '/list?pageNo=';
@@ -105,6 +113,8 @@ export class ProductComponent implements OnInit {
         productEntity.status = product['status'];
         productEntity.products = product['listProduct'];
         this.listProduct.push(productEntity);
+      // console.log(this.listPage)
+
       });
     });
   }

@@ -22,9 +22,19 @@ export class CustomerComponent implements OnInit {
 
   ngOnInit(): void {
     this.getCustomer();
+    this.getTotalCustomer()
   }
   isActive(item){
     return this.pageNo === item;
+  }
+  getTotalCustomer() {
+    let url = '/api/customer/totalCustomer';
+    this.service.getTotalCustomer(url).subscribe(
+      res => {
+        this.totalCustomer = res['data'];
+      }
+    );
+    this.totalCustomer = this.listCustomer.length;
   }
   getCustomer() {
     this.listCustomer = new Array();
@@ -46,7 +56,7 @@ export class CustomerComponent implements OnInit {
         customerEntity.comments = customer['listProduct'];
         this.listCustomer.push(customerEntity);
       });
-      this.totalCustomer = this.listCustomer.length;
+      // this.totalCustomer = this.listCustomer.length;
     });
     console.log("this.listCustomer", this.listCustomer);
   }

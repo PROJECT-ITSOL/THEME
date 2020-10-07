@@ -13,7 +13,7 @@ import { HttpParams } from '@angular/common/http';
 })
 export class CommentComponent implements OnInit {
   pageNo: number = 0;
-  listPage: Number[] = [];
+  listPage: number[] = []
   listComment: Comment[];
   dataComment: Array<any>;
   dataProduct: Array<any>;
@@ -27,14 +27,49 @@ export class CommentComponent implements OnInit {
   listCustomer: string[]
   nameProduct: string = ""
   nameCustomer: string = ""
+  total: number
+  range: number = 5
+  min = 1
+  max = 5
+  // maxPage
+  constructor(private service: AuthenticationService) {
 
-  constructor(private service: AuthenticationService) { }
+  }
 
   ngOnInit(): void {
     this.getComment();
     this.getListProduct();
     this.getListNameCustomer();
 
+  }
+
+  configListPage() {
+    // debugger
+    this.listPage = []
+    for (let i = this.min; i <= this.max; i++) {
+      this.listPage.push(i)
+    }
+
+  }
+
+  page() {
+    // debugger
+    if (this.range > this.total) {
+      this.min = 1
+      this.max = this.total
+    } else {
+      if (this.pageNo > (this.total - this.range / 2)) {
+        this.min = this.total - this.range
+        this.max = this.total
+      } else if (this.pageNo < this.range / 2) {
+        this.min = 1
+        this.max = 5
+      } else {
+        this.min = this.pageNo - Math.floor(this.range / 2)
+        this.max = this.pageNo + Math.floor(this.range / 2)
+      }
+    }
+    this.configListPage()
   }
 
   isActive(item) {
@@ -57,6 +92,7 @@ export class CommentComponent implements OnInit {
   setPage(i, event: any) {
     event.preventDefault();
     this.pageNo = i;
+    this.page()
     this.getComment();
   }
 
@@ -64,7 +100,7 @@ export class CommentComponent implements OnInit {
     let url = this.urlApiProduct + 'products'
     this.service.getListNoParam(url).subscribe(
       res => {
-        this.dataProduct = new Array()  
+        this.dataProduct = new Array()
         this.listProduct = []
         this.dataProduct = res as Object[]
         this.dataProduct.forEach(data => {
@@ -101,12 +137,13 @@ export class CommentComponent implements OnInit {
     let url = this.urlApiComment + 'getList';
     let param = new HttpParams().append("nameProduct", this.nameProduct)
       .append("nameCustomer", this.nameCustomer)
+    // .append("pageNo",this.pageNo.toString())
     this.service.getList(param, url).subscribe(
       res => {
+        console.log(res)
         if (res['success']) {
           this.dataComment = res['data']['content'];
-          this.listPage = [];
-          this.listPage = new Array(res['data']['totalPages']);
+          this.total = res['data']['totalPages'];
           this.listComment = [];
           this.dataComment.forEach((cmt) => {
             let commentEntity = new Comment();
@@ -118,7 +155,8 @@ export class CommentComponent implements OnInit {
             commentEntity.createDate = cmt['createDate'];
             this.listComment.push(commentEntity);
           });
-          console.log(this.listComment)
+          this.page()
+          // console.log(this.listComment)
         } else {
           console.log("false");
         }
@@ -132,12 +170,14 @@ export class CommentComponent implements OnInit {
   getComment() {
     this.listComment = new Array();
     let url = this.urlApiComment + 'getList';
-    let param = new HttpParams().append('pageNo', (this.pageNo).toString());
+    let param = new HttpParams().append('pageNo', (this.pageNo).toString())
+      .append("nameProduct", this.nameProduct)
+      .append("nameCustomer", this.nameCustomer);
     this.service.getList(param, url).subscribe(
       (data) => {
         if (data['success']) {
           this.dataComment = data['data']['content'];
-          this.listPage = new Array(data['data']['totalPages']);
+          this.total = data['data']['totalPages'];
           this.dataComment.forEach((cmt) => {
             let commentEntity = new Comment();
             commentEntity.id = cmt['id'];
@@ -149,6 +189,8 @@ export class CommentComponent implements OnInit {
             this.listComment.push(commentEntity);
           });
         }
+        this.configListPage()
+
       },
       (error) => {
         console.log(error);
@@ -162,8 +204,7 @@ export class CommentComponent implements OnInit {
       (data) => {
         if (data['success']) {
           this.dataComment = data['data']['content'];
-          this.listPage = [];
-          this.listPage = new Array(data['data']['totalPages']);
+          this.total = data['data']['totalPages'];
           this.listComment = [];
           this.dataComment.forEach((cmt) => {
             let commentEntity = new Comment();
@@ -175,11 +216,12 @@ export class CommentComponent implements OnInit {
             commentEntity.createDate = cmt['createDate'];
             this.listComment.push(commentEntity);
           });
+          this.page()
         } else {
-          
-            // this.isData = true;
-            this.listComment = [];
-            this.listPage=[]
+
+          // this.isData = true;
+          this.listComment = [];
+          this.listPage = []
         }
       }),
       (error) => {
@@ -189,11 +231,27 @@ export class CommentComponent implements OnInit {
   setPlusPage(event) {
     event.preventDefault()
     this.pageNo++
+    this.page()
     this.getComment()
   }
   setLessPage(event) {
     event.preventDefault()
     this.pageNo--
+    this.page()
+
+    this.getComment()
+  }
+  setFirstPage(event) {
+    event.preventDefault()
+    this.pageNo = 0
+    this.page()
+
+    this.getComment()
+  }
+  setLastPage(event) {
+    event.preventDefault()
+    this.pageNo = this.total - 1
+    this.page()
     this.getComment()
   }
 }
