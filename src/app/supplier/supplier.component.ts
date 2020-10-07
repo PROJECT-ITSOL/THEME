@@ -131,9 +131,47 @@ export class SupplierComponent implements OnInit {
   }
 
   edit(form: NgForm) {
-    this.supplierService.editSupp(this.supplier['idSupplier'], form.value).subscribe(res => {
-      this.getAll();
-    });
+    this.formValue = form.value
+    let newSupplier = new Supplier();
+    const urlImg = document.getElementById('file');
+    if (this.selectedImage !=null){
+    var filePath = `${this.folderImage}/${this.selectedImage.name.split('.').slice(0, -1).join('.')}_${new Date().getTime()}`;
+    const fileRef = this.storage.ref(filePath);
+    this.storage.upload(filePath, this.selectedImage).snapshotChanges().pipe(
+      finalize(() => {
+        fileRef.getDownloadURL().subscribe((url) => {
+          newSupplier.logo = url;
+          newSupplier.name = form.value.name;
+          newSupplier.address = form.value.address;
+          newSupplier.status = form.value.status;
+          newSupplier.phoneNumber = form.value.phoneNumber;
+          console.log(newSupplier);
+          this.supplierService.editSupp(this.idDelete,newSupplier).subscribe((res) => {
+            this.message = res['message'];
+            // location.reload();
+            alert('Success');
+            this.getAll();
+           
+          });
+        })
+      })
+    ).subscribe();
+    } else {
+          newSupplier.logo = '/assets/image/unnamed.png' ;
+          newSupplier.name = form.value.name;
+          newSupplier.address = form.value.address;
+          newSupplier.status = form.value.status;
+          newSupplier.phoneNumber = form.value.phoneNumber;
+          console.log(newSupplier);
+          this.supplierService.editSupp(this.idDelete,newSupplier).subscribe((res) => {
+            this.message = res['message'];
+            // location.reload();
+            alert('Success');
+            this.getAll();
+          });
+
+        }
+   
   }
 
   delete() {
@@ -165,6 +203,7 @@ export class SupplierComponent implements OnInit {
   getSuppByStatus(event) {
     this.listSupp = new Array();
     this.status=event.target.value;
+    if(this.status!='0'){
     
     if (this.status == 'Active') {
       this.boolean = true;
@@ -187,6 +226,9 @@ export class SupplierComponent implements OnInit {
       });
       this.totalSupp = this.listSupp.length;
     });
+  }else{
+    this.getAll();
+  }
   }
 
   showPreview(event: any) {
@@ -194,6 +236,19 @@ export class SupplierComponent implements OnInit {
     if (event.target.files && event.target.files[0]) {
       const reader = new FileReader();
       reader.onload = (e: any) => this.imgUrl = e.target.result;
+      reader.readAsDataURL(event.target.files[0]);
+      this.selectedImage = event.target.files[0];
+    }
+    else {
+      this.imgUrl = '/assets/image/image.png';
+      this.selectedImage = null;
+    }
+  }
+  showPreviewEdit(event: any) {
+    console.log(event.target.value)
+    if (event.target.files && event.target.files[0]) {
+      const reader = new FileReader();
+      reader.onload = (e: any) => this.supplier.logo = e.target.result;
       reader.readAsDataURL(event.target.files[0]);
       this.selectedImage = event.target.files[0];
     }

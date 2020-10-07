@@ -132,6 +132,9 @@ export class ProductImportDetailComponent implements OnInit, OnDestroy {
     console.log(form.value);
     let newbillDetail = new BillImportDetail;
       newbillDetail.amount=form.value.amount;
+      if (newbillDetail.amount==0){
+        alert('Amount invalid');  
+      } else {
       newbillDetail.price=this.price;
       newbillDetail.product=this.product;
       newbillDetail.billImport=this.billImport;
@@ -148,6 +151,7 @@ export class ProductImportDetailComponent implements OnInit, OnDestroy {
       form.reset();
      
     });  
+  }
   }
 
   

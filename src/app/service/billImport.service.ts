@@ -44,8 +44,12 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
             return this.http.delete(this.apiUrl+'/delete/'+id);
         }
 
-        search(key:string,page:number): Observable<BillImport[]>{
-            return this.http.get<BillImport[]>(this.apiUrl+'/search?keyWord='+key+'&page='+page);
+        search(key:string): Observable<BillImport[]>{
+            return this.http.get<BillImport[]>(this.apiUrl+'/search?keyWord='+key);
+        }
+
+        searchMonth(month:number): Observable<BillImport[]>{
+            return this.http.get<BillImport[]>(this.apiUrl+'/searchMonth?month='+month);
         }
 
 
