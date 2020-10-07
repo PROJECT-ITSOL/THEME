@@ -237,8 +237,6 @@ export class DashboardComponent implements OnInit {
   getDataBillImport() {
     this.listTotalBillImport = new Array();
     this.listTotalMoneyBillImport = new Array();
-<<<<<<< HEAD
-=======
     this.listTotalproductBillImport = new Array();
     this.billImportService.getData(this.year).subscribe(res => {
       this.dataBillImport = res as Object[];
@@ -253,7 +251,6 @@ export class DashboardComponent implements OnInit {
       });
 
     });
->>>>>>> c3461351745b811b152efa1791e7c226f842a8dd
     this.listTotalproductBillImport = new Array();
     this.billImportService.getData(this.year).subscribe(res => {
       this.dataBillImport = res as Object[];
@@ -268,10 +265,6 @@ export class DashboardComponent implements OnInit {
       });
       console.log(this.listTotalBillImport);
     });
-<<<<<<< HEAD
-
-=======
->>>>>>> c3461351745b811b152efa1791e7c226f842a8dd
   }
 
   listYear = [2020, 2019, 2018];

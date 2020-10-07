@@ -135,11 +135,8 @@ pageChange(newPage: number) {
         this.listBillImport.push(billImport);
       });
      
-<<<<<<< HEAD
+
       this.totalBill = this.listBillImport.length;
-=======
-      
->>>>>>> c3461351745b811b152efa1791e7c226f842a8dd
       });
     }else{
       this.getAllBill();

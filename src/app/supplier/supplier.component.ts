@@ -171,10 +171,6 @@ export class SupplierComponent implements OnInit {
           });
 
         }
-<<<<<<< HEAD
-   
-=======
->>>>>>> c3461351745b811b152efa1791e7c226f842a8dd
   }
 
   delete() {
@@ -247,7 +243,7 @@ export class SupplierComponent implements OnInit {
       this.selectedImage = null;
     }
   }
-  showPreviewEdit(event: any) {
+  showPreviewEdit(event:any) {
     console.log(event.target.value)
     if (event.target.files && event.target.files[0]) {
       const reader = new FileReader();
@@ -261,19 +257,7 @@ export class SupplierComponent implements OnInit {
     }
   }
 
-  showPreviewEdit(event: any) {
-    console.log(event.target.value)
-    if (event.target.files && event.target.files[0]) {
-      const reader = new FileReader();
-      reader.onload = (e: any) => this.supplier.logo = e.target.result;
-      reader.readAsDataURL(event.target.files[0]);
-      this.selectedImage = event.target.files[0];
-    }
-    else {
-      this.imgUrl = '/assets/image/image.png';
-      this.selectedImage = null;
-    }
-  }
+  
 
   resetForm() {
 

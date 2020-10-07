@@ -133,11 +133,7 @@ export class ProductImportDetailComponent implements OnInit, OnDestroy {
     let newbillDetail = new BillImportDetail;
       newbillDetail.amount=form.value.amount;
       if (newbillDetail.amount==0){
-<<<<<<< HEAD
-        alert('Amount invalid');  
-=======
         alert('Amount invalid');
->>>>>>> c3461351745b811b152efa1791e7c226f842a8dd
       } else {
       newbillDetail.price=this.price;
       newbillDetail.product=this.product;

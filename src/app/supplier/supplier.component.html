@@ -179,7 +179,6 @@
                                     invalid</span></div>
                             <div class="col-3 form-group"><label class="mb-0 ">Status</label>
                                 <div class="row">
-<<<<<<< HEAD
                                     <div style="margin-right: 20px;"><input [ngModel]="supplier.status" [checked]="supplier.status===true" name="status" type="radio" [value]="true" required>Active</div>
                                     <div><input [ngModel]="supplier.status" name="status" type="radio" [value]="false" [checked]="supplier.status===false" required>Disable</div>
                                 </div>
@@ -190,18 +189,6 @@
                             <div class="form-group col-8">
                                 <label for="file">Select File</label>
                                 <input type="file" accept="image/*" id="file" class="form-control" name="logo" [(ngModel)]="supplier.logo" (change)="showPreviewEdit($event)">
-=======
-                                    <div style="margin-right: 20px;"><input [ngModel]="supplier.status" [checked]="supplier.status===true" name="status" type="radio" [value]="true" required>True</div>
-                                    <div><input [ngModel]="supplier.status" name="status" type="radio" [value]="false" [checked]="supplier.status===false" required>False</div>
-                                </div>
-                            </div>
-
-                            <div class="col-12 form-group "><label class="mb-0 text-dark ">Address</label><input [ngModel]="supplier.address" [value]="supplier.address" type="text" name="address" class="form-control" required #address="ngModel"></div>
-
-                            <div class="form-group col-8">
-                                <label>Select File</label>
-                                <input type="file" accept="image/*" id="file" class="form-control" name="logo" ngModel (change)="showPreviewEdit($event)" required>
->>>>>>> c3461351745b811b152efa1791e7c226f842a8dd
                             </div>
                             <div class="text-center col-4">
                                 <img [src]="supplier.logo" width="100px" height="100px">
