@@ -3,7 +3,7 @@ import { Product } from './product';
 //import { Product } from './product';
 export class OderDetail{
     idOrderDetail: number;
-    idOrder: string;
+    idOrder: number;
     idProduct: string;
     amount: number;
     amountProduct: number;
