@@ -15,12 +15,23 @@
             </div>
         </div>
         <div class="d-md-flex align-items-center border-top bg-white p-3">
-            <div class="search py-1"><input type="search" placeholder="Search.." [(ngModel)]="keyword" name="keyword">
+            <div><input class="search py-1" type="search" placeholder="Search.." [(ngModel)]="keyword" name="keyword">
                 <button class="btn" type="submit" (click)="searchBill()"><i class="fas fa-search"></i></button>
             </div>
-            <select class=" form-control col-3 py-1" [(ngModel)]="nameSupplier" name="nameSupplier" (change)="getBillBySupp()">
-                <option hidden> Choose Supplier</option>
+            <!-- <select class=" form-control col-3 py-1" [(ngModel)]="nameSupplier" name="nameSupplier" (change)="getBillBySupp()">
+                <option selected hidden> Choose Supplier</option>
+                <option [value]="0">Tất cả</option>
                 <option *ngFor="let item of listSupp">{{item.name}}</option>
+            </select> -->
+            <div class="col-3">
+                <ng-select [(ngModel)]="nameSupplier" placeholder="Choose Supplier" (change)="getBillBySupp()">
+                    <ng-option *ngFor="let item of listSupp" [value]="item.name">{{item.name}}</ng-option>
+                </ng-select>
+            </div>
+            <select class=" form-control col-2 py-1" name="month" (change)="getBillByMonth($event)">
+                <option selected  hidden> Choose Month</option>
+                <option [value]="0">All</option>
+                <option *ngFor="let item of listMonth" [value]="item.value"> {{item.name}}</option>
             </select>
 
             <div class=" row ml-auto mt-3 mt-md-0">
@@ -33,7 +44,7 @@
         <table class="table bg-white">
             <thead class="thead-light">
                 <tr>
-                    <th>ID</th>
+                    <th>Bill</th>
                     <th>Total Product</th>
                     <th>Total Price</th>
                     <th>Date</th>
@@ -43,16 +54,16 @@
             </thead>
             <tbody>
                 <tr *ngFor="let item of listBillImport | paginate: { itemsPerPage: 5, currentPage: p }">
-                    <td class="align-middle py-4">{{item.idBillImport}}</td>
+                    <td class="align-middle py-4">{{item.idCode}}</td>
                     <td class="py-4"><span class="align-middle font-16">{{item.totalProduct}}</span></td>
                     <td class="align-middle">{{item.totalMoney | currency:"VND"}}</td>
                     <td class="align-middle ">{{item.createDate | date }}</td>
                     <td class="align-middle">{{item.nameSupplier}}</td>
                     <td class="align-middle action">
                         <a [routerLink]="['//homeAdmin/order/product-import-detail', item.idBillImport]" routerLinkActive="active">View</a>
-                        <a data-toggle="modal" data-target="#editBill" (click)="getBillImport(item)"><i
-                                class="fas fa-edit edit">Edit</i></a>
-                        <a class="fas fa-trash-alt" [routerLink]="['//homeAdmin/order/product-import-detail', item.idBillImport]" routerLinkActive="active"></a>
+                        <a class="action" data-toggle="modal" data-target="#editBill" (click)="getBillImport(item)">
+                                Edit</a>
+                        <a class="action" [routerLink]="['//homeAdmin/order/product-import-detail', item.idBillImport]" routerLinkActive="active">Delete</a>
                     </td>
                 </tr>
                 <pagination-controls (pageChange)="pageChange($event)" previousLabel="" nextLabel="" class="my-pagination"></pagination-controls>
@@ -73,19 +84,10 @@
 
                         <div class="p-3 position-relative ps ps--active-y" style="height: 250px;">
                             <div class="row">
-                                <div class="col-12 form-group">Id Bill Import
-                                    <input type="text" [(ngModel)]="idBillImport" name="idBillImport" class="form-control" pattern="[a-zA-Z0-9]+" required #id="ngModel">
-                                    <span class="col-12 validator" *ngIf="id.errors?.required && id.touched">Id is
-                                        required</span>
-                                    <span class="col-12 validator" *ngIf="id.errors?.pattern && id.touched">Id is
-                                        invaild</span>
-                                </div>
                                 <div class="col-12 form-group">
-                                    <label for="Choosesupplier">Choose supplier</label>
-                                    <select class="form-control" id="Choosesupplier" [(ngModel)]="nameSupplier" name="nameSupplier" (change)="setSupplier()" required>
-                                        <option hidden>Choose Supplier</option>
-                                        <option *ngFor="let item of listSupp">{{item.name}}</option>
-                                    </select>
+                                    <ng-select id="Choosesupplier" [(ngModel)]="nameSupplier" placeholder="Choose Supplier" name="nameSupplier" (change)="setSupplier()" required>
+                                        <ng-option *ngFor="let item of listSupp" [value]="item.name">{{item.name}}</ng-option>
+                                    </ng-select>
                                 </div>
 
                                 <div>
@@ -100,7 +102,7 @@
                         </div>
                         <div class="modal-footer  ">
                             <button type="button" class="btn btn-outline-danger " data-dismiss="modal">Cancel</button>
-                            <button [disabled]="formAdd.invalid" type="submit" class="btn btn-outline-primary " data-dismiss="modal" (click)="(addBill(formAdd))" [routerLink]="['//homeAdmin/order/product-import-detail',idBillImport]" routerLinkActive="active">Add</button>
+                            <button [disabled]="formAdd.invalid" type="submit" class="btn btn-outline-primary " data-dismiss="modal" (click)="(addBill(formAdd))" data-toggle="modal" data-target="#message">Add</button>
                         </div>
                     </form>
                 </div>
@@ -108,6 +110,31 @@
         </div>
     </div>
     <!-- End model add bill import -->
+
+
+    <!-- Model message -->
+
+    <div class="modal fade" id="message" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+
+
+
+
+                </div>
+                <div class="modal-body">
+                    {{message}}
+                </div>
+                <div class="modal-footer">
+
+                    <button type="button" class="btn btn-primary" data-dismiss="modal" [routerLink]="['//homeAdmin/order/product-import-detail',idBillImport]" routerLinkActive="active">Next</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End modal messsge -->
+
 
     <!-- Modal edit bill import -->
     <div class="modal fade " id="editBill" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">

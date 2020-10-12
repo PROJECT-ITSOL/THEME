@@ -6,7 +6,7 @@
             <span class="breadcrumb-item active" routerLink="/homeAdmin/order/product-import-detail" routerLinkActive="active">Bill Import Detail</span>
         </nav>
         <div class="d-md-flex align-items-center bg-white p-3">
-            <h3 class="mb-0">Bill Import : ID={{id}} </h3>
+            <h3 class="mb-0">Bill Import : ID={{idCode}} </h3>
             <div class=" row ml-auto mt-3 mt-md-0 action">
                 <a data-toggle="modal" data-target="#delete"><i  class="fas fa-trash-alt delete" ></i></a>
             </div>
@@ -35,7 +35,7 @@
         </thead>
         <tbody>
             <tr *ngFor="let item of listDetail">
-                <td class="align-middle ">{{id}}</td>
+                <td class="align-middle ">{{idCode}}</td>
                 <td class="py-4"><span class="align-middle font-16">{{item.id}}</span></td>
                 <td class="align-middle">{{item.idProduct}}</td>
                 <td class="align-middle">{{item.nameProduct}}</td>
@@ -44,11 +44,10 @@
                 <td class="align-middle">{{item.totalPrice | currency:"VND"}}</td>
                 <td class="align-middle">{{nameSupplier}}</td>
                 <td class="align-middle action">
-                    <a data-toggle="modal" data-target="#editBill" (click)="getItem(item)"><i  class="fas fa-edit" >Edit</i></a>
-                    <a data-toggle="modal" data-target="#deleteBillDetail" (click)="getItem(item)"><i  class="fas fa-trash-alt delete" ></i></a>
+                    <a data-toggle="modal" data-target="#editBill" (click)="getItem(item)">Edit</a>
+                    <a class="delete" data-toggle="modal" data-target="#deleteBillDetail" (click)="getItem(item)">Delete</a>
                 </td>
             </tr>
-
         </tbody>
     </table>
     <!-- End table Supplier -->
@@ -137,9 +136,10 @@
                                 </div>
                                 <div class="col-2 form-group ">
                                     <label for="amount ">Amount</label>
-                                    <input type="number" min="1" pattern="^[0-9 ]+$" [(ngModel)]="billDetail.amount" name="amount" class="form-control" required #amount="ngModel">
+                                    <input type="number" min="1" pattern="^[0-9 ]+$" [ngModel]="billDetail.amount" name="amount" class="form-control" required #amount="ngModel">
                                     <span class="col-6 validator" *ngIf="amount.errors?.required && amount.touched"> Required</span>
                                     <span class="col-6 validator" *ngIf="amount.errors?.pattern && amount.touched">Invalid</span>
+
                                 </div>
                                 <div class="col-3 form-group ">
                                     <label for="idProduct ">Id Product</label>
@@ -180,9 +180,6 @@
         </div>
     </div>
     <!-- End modal delete -->
-
-
-
 
     <!-- Modal delete bill import detail -->
     <div class="modal fade" id="deleteBillDetail" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">

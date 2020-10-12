@@ -143,7 +143,6 @@ export class ProductOrderComponent implements OnInit {
     this.productOrderService.getListOrder(this.page).subscribe(res => {
       this.dataOrder = res['content'];
       this.totalOrder = 0;
-      console.log(this.dataOrder);
 
       this.dataOrder.forEach((order) => {
         let orderEntity = new Order();
@@ -158,7 +157,6 @@ export class ProductOrderComponent implements OnInit {
         orderEntity.orderDetail = order['listOrderDetail'];
         this.listOrder.push(orderEntity);
       });
-      console.log(this.listOrder);
       this.pages = new Array(res['totalPages']);
       this.totalOrder = (res['totalElements']);
     });
@@ -228,7 +226,6 @@ export class ProductOrderComponent implements OnInit {
         orderEntity.orderDetail = order['listOrderDetail'];
         this.listOrder.push(orderEntity);
       });
-      console.log(this.listOrder);
       this.pages = new Array(res['totalElement']);
     });
   }

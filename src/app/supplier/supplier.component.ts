@@ -61,6 +61,7 @@ export class SupplierComponent implements OnInit {
       this.dataSupp.forEach((supp) => {
         let supplier = new Supplier();
         supplier.idSupplier = supp['idSupplier'];
+        supplier.idCode=supp['idCode'];
         supplier.address = supp['address'];
         supplier.logo = supp['logo'];
         supplier.name = supp['name'];
@@ -202,6 +203,7 @@ export class SupplierComponent implements OnInit {
   getSuppByStatus(event) {
     this.listSupp = new Array();
     this.status=event.target.value;
+    if(this.status!='0'){
     
     if (this.status == 'Active') {
       this.boolean = true;
@@ -224,6 +226,9 @@ export class SupplierComponent implements OnInit {
       });
       this.totalSupp = this.listSupp.length;
     });
+  }else{
+    this.getAll();
+  }
   }
 
   showPreview(event: any) {
@@ -239,6 +244,21 @@ export class SupplierComponent implements OnInit {
       this.selectedImage = null;
     }
   }
+  showPreviewEdit(event:any) {
+    console.log(event.target.value)
+    if (event.target.files && event.target.files[0]) {
+      const reader = new FileReader();
+      reader.onload = (e: any) => this.supplier.logo = e.target.result;
+      reader.readAsDataURL(event.target.files[0]);
+      this.selectedImage = event.target.files[0];
+    }
+    else {
+      this.imgUrl = '/assets/image/image.png';
+      this.selectedImage = null;
+    }
+  }
+
+  
 
   resetForm() {
 

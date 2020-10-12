@@ -3,7 +3,8 @@ import { Supplier } from './supplier';
 import { BillImportDetail } from './billImportDetail';
 
 export class BillImport{
-    idBillImport:string;
+    idBillImport:number;
+    idCode:string;
     totalProduct:number;
     totalMoney:number;
     createDate:string;

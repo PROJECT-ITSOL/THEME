@@ -11,7 +11,10 @@ import { environment } from '../environments/environment';
 import { AngularFireStorageModule } from '@angular/fire/storage';
 import { AngularFireDatabaseModule } from '@angular/fire/database';
 import { ChartsModule } from 'ng2-charts';
+<<<<<<< HEAD
 //import {  } from '@NgModule.imports';
+=======
+>>>>>>> 5da99508871368c42d6692f2d61fec8453e8c3e8
 import { NgSelectModule } from '@ng-select/ng-select';
 
 
@@ -59,10 +62,14 @@ import { ProductOrderDetailComponent } from './order/product-order-detail/produc
     AngularFireDatabaseModule,
     ReactiveFormsModule,
     ChartsModule,
+<<<<<<< HEAD
     NgSelectModule,
     
     
   
+=======
+    NgSelectModule
+>>>>>>> 5da99508871368c42d6692f2d61fec8453e8c3e8
   ],
   providers: [AuthenticationService,
     SupplierService,

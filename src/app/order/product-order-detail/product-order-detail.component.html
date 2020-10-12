@@ -19,7 +19,7 @@
         </h4>
         <div class=" row ml-auto mt-3 mt-md-0" >
 
-            <h5 class="mb-0 mr-1  font-weight-bold font-14" > total: </h5>{{totalOrderDetail}}
+            <h5 class="mb-0 mr-1  font-weight-bold font-14"> total: </h5>{{totalOrderDetail}}
 
 
         </div>
@@ -112,20 +112,13 @@
 
                                 </div>
                                 <div class="col-2 form-group ">
-                                    <label for="amount ">Amount</label>
-                                    <input type="number" min="1" pattern="^[0-9 ]+$" ngModel name="amount" class="form-control" required #amount="ngModel">
+                                    <label for="amountAdd ">Amount</label>
+                                    <input type="number" id="amountAdd" min="1" ngModel name="amountAdd" class="form-control" required>
                                     <span class="col-6 validator" *ngIf="amount.errors?.required && amount.touched">
                                         Required</span>
                                     <span class="col-6 validator" *ngIf="amount.errors?.pattern && amount.touched">Invalid</span>
                                 </div>
-                                <!-- <div class="col-3 form-group ">
-                                    <label for="idProduct ">Id Product</label>
-                                    <input type="text" name="idProduct" class="form-control" [(ngModel)]="idProduct">
-                                </div>
-                                <div class="col-2 form-group ">
-                                    <label for="price ">Unit Price</label>
-                                    <input type="text" name="price" class="form-control" [(ngModel)]="price">
-                                </div> -->
+
                             </div>
                         </div>
                         <div class="modal-footer ">
