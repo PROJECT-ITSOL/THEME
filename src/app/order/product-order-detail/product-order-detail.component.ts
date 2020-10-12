@@ -40,13 +40,8 @@ export class ProductOrderDetailComponent implements OnInit {
   //
   page: number = 0;
   pages: Array<number>;
-<<<<<<< HEAD
   pageNo=0;
   GanidOrder: number;
-=======
-  pageNo = 0;
-  GanidOrder: string;
->>>>>>> 5da99508871368c42d6692f2d61fec8453e8c3e8
   idDelete: number;
   nameDelete: string;
   listPage;
@@ -85,10 +80,7 @@ export class ProductOrderDetailComponent implements OnInit {
     this.productService.getAllList().subscribe((data) => {
       // this.listPage = new Array(data['totalPages']);
       this.dataProduct = data as object[];
-<<<<<<< HEAD
       console.log("data"+this.dataProduct);
-=======
->>>>>>> 5da99508871368c42d6692f2d61fec8453e8c3e8
       this.dataProduct.forEach((product) => {
         let productEntity = new Product();
         productEntity.idProduct = product['idProduct'];
@@ -108,7 +100,6 @@ export class ProductOrderDetailComponent implements OnInit {
   }
 
   viewOrderDetail() {
-<<<<<<< HEAD
     this.Tong=0;
    this.listOrderDetail = new Array();
    console.log("GanidOrder ="+this.GanidOrder);
@@ -118,6 +109,7 @@ export class ProductOrderDetailComponent implements OnInit {
       this.dataOrderDetail=res['data'];
       // this.listOrderDetail=[];
       // this.totalOrderDetail=0;
+      console.log("this.dataOrderDetail"+this.dataOrderDetail);
       this.dataOrderDetail.forEach(data=>{
         let entity=new OderDetail();
         entity.idOrderDetail=data['idOrderDetail']
@@ -129,26 +121,6 @@ export class ProductOrderDetailComponent implements OnInit {
         entity.nameProduct=data['productOrderDetail']['name']
         entity.price=data['productOrderDetail']['price']
         this.Tong+=entity.price * entity.amount;
-=======
-    this.Tong = 0;
-    this.listOrderDetail = new Array();
-    this.productOrderDetailService.getByIdProductOrderdetail(this.GanidOrder).subscribe(res => {
-      this.dataOrderDetail = new Array();
-      this.dataOrderDetail = res['data'];
-      this.listOrderDetail = [];
-      this.totalOrderDetail = 0;
-      this.dataOrderDetail.forEach(data => {
-        let entity = new OderDetail();
-        entity.idOrderDetail = data['idOrderDetail']
-        entity.idOrder = data['idOrder']
-        entity.amount = data['amount']
-        //  entity.amountProduct=data['productOrderDetailt']['amount'];
-        entity.totalPrice = data['totalPrice']
-        entity.idProduct = data['productOrderDetail']['idProduct']
-        entity.nameProduct = data['productOrderDetail']['name']
-        entity.price = data['productOrderDetail']['price']
-        this.Tong += entity.price * entity.amount;
->>>>>>> 5da99508871368c42d6692f2d61fec8453e8c3e8
         // console.log(entity);
         this.listOrderDetail.push(entity);
         // console.log(data);
@@ -219,7 +191,6 @@ export class ProductOrderDetailComponent implements OnInit {
   //     this.GanidOrder = message;
   //   });
   // }
-<<<<<<< HEAD
   
   setProduct(){
     this.listProduct.forEach(cus=>{
@@ -227,14 +198,6 @@ export class ProductOrderDetailComponent implements OnInit {
         this.product=cus;
         console.log(this.product);
         this.idProduct=cus.idProduct;
-=======
-
-  setProduct() {
-    this.listProduct.forEach(cus => {
-      if (cus.name === this.nameProduct) {
-        this.product = cus;
-        this.idProduct = cus.idProduct;
->>>>>>> 5da99508871368c42d6692f2d61fec8453e8c3e8
       }
     })
   }
