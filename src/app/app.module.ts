@@ -11,6 +11,7 @@ import { environment } from '../environments/environment';
 import { AngularFireStorageModule } from '@angular/fire/storage';
 import { AngularFireDatabaseModule } from '@angular/fire/database';
 import { ChartsModule } from 'ng2-charts';
+import { NgSelectModule } from '@ng-select/ng-select';
 
 
 import { AppRoutingModule } from './app-routing.module';
@@ -56,7 +57,8 @@ import { ProductOrderDetailComponent } from './order/product-order-detail/produc
     AngularFireStorageModule,
     AngularFireDatabaseModule,
     ReactiveFormsModule,
-    ChartsModule
+    ChartsModule,
+    NgSelectModule
   ],
   providers: [AuthenticationService,
     SupplierService,
