@@ -238,14 +238,12 @@ export class CommentComponent implements OnInit {
     event.preventDefault()
     this.pageNo--
     this.page()
-
     this.getComment()
   }
   setFirstPage(event) {
     event.preventDefault()
     this.pageNo = 0
     this.page()
-
     this.getComment()
   }
   setLastPage(event) {
