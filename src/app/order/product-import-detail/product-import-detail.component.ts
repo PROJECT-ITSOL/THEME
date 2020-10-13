@@ -3,7 +3,7 @@ import { ProductService } from './../../service/product.service';
 import { NgForm } from '@angular/forms';
 import { Product } from './../../ultis/product';
 import { BillImportDetail } from './../../ultis/billImportDetail';
-import { from } from 'rxjs';
+import { from, partition } from 'rxjs';
 
 import { BillImport } from './../../ultis/billImport';
 import { Component, OnInit, Input, OnDestroy } from '@angular/core';
@@ -21,7 +21,8 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./product-import-detail.component.scss']
 })
 export class ProductImportDetailComponent implements OnInit, OnDestroy {
-  id:string;
+  id:number;
+  idCode:string;
   listDetail:BillImportDetail[];
   dataDetail:Array<any>;
   listProduct:Product[];
@@ -65,7 +66,7 @@ export class ProductImportDetailComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.id = this.route.snapshot.paramMap.get('id');
+    this.id = parseInt(this.route.snapshot.paramMap.get('id'));
    this.viewBill();
    this.getBillImport();
   
@@ -75,6 +76,7 @@ export class ProductImportDetailComponent implements OnInit, OnDestroy {
   getBillImport(){
     this.BillImportService.getBillById(this.id).subscribe(res=>{
       this.billImport=res;
+      this.idCode=res['idCode'];
       this.createDate=res['createDate'];
       this.totalMoney=res['totalMoney'];
       this.totalProduct= res['totalProduct'];
@@ -82,6 +84,7 @@ export class ProductImportDetailComponent implements OnInit, OnDestroy {
       this.supplier = res['supplierImport'];
       this.listProduct = res['supplierImport']['productList'];
     });    
+   
   }
 
   getItem(billDetail:BillImportDetail){
@@ -104,6 +107,7 @@ export class ProductImportDetailComponent implements OnInit, OnDestroy {
     this.listDetail = new Array();
     this.BillDetailService.getByIdBill(this.id).subscribe(res=>{ 
       this.dataDetail=res; 
+      console.log(res);
       this.dataDetail.forEach((detail)=>{
         let billDetail = new BillImportDetail();
         billDetail.id = detail['id'];

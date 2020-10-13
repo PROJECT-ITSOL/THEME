@@ -52,7 +52,7 @@
             </thead>
             <tbody>
                 <tr *ngFor="let item of listSupp | paginate: { itemsPerPage: 5, currentPage: p }">
-                    <td class="align-middle">{{item.idSupplier}}</td>
+                    <td class="align-middle">{{item.idCode}}</td>
                     <td class="py-4"><span class="align-middle  font-16">{{item.name}}</span></td>
                     <td><img alt="" class="rounded-circle mr-3 logo" src="{{item.logo}}"></td>
                     <td class="align-middle"><i class="fas fa-phone-alt"></i> {{item.phoneNumber}}
@@ -63,14 +63,11 @@
                         <div *ngIf="item.status==true">Active</div>
                         <div *ngIf="item.status==false">Disable</div>
                     </td>
-                    <td class="align-middle action "><a data-toggle="modal" data-target="#product"><i
-                                class="fas fa-dumbbell" (click)="showEdit(item)"> Product</i></a>
+                    <td class="align-middle action "><a data-toggle="modal" data-target="#product" (click)="showEdit(item)"> Product</a>
                     </td>
-                    <td class="align-middle action"><a data-toggle="modal" data-target="#edit"><i class="fas fa-edit"
-                                (click)="showEdit(item)">Edit</i></a>
+                    <td class="align-middle action"><a data-toggle="modal" data-target="#edit" (click)="showEdit(item)">Edit</a>
 
-                        <a><i data-toggle="modal" data-target="#delete" class="fas fa-trash-alt delete "
-                                (click)="showEdit(item)"></i></a>
+                        <a class="delete" data-toggle="modal" data-target="#delete" (click)="showEdit(item)">Delete</a>
                     </td>
                 </tr>
             </tbody>
@@ -136,6 +133,7 @@
 </div>
 <!-- End modal add supplier -->
 
+
 <!-- Modal delete -->
 <div class="modal fade" id="delete" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -188,7 +186,7 @@
 
                             <div class="form-group col-8">
                                 <label for="file">Select File</label>
-                                <input type="file" accept="image/*" id="file" class="form-control" name="logo" [(ngModel)]="supplier.logo" (change)="showPreviewEdit($event)">
+                                <input type="file" accept="image/*" id="file1" class="form-control" name="logo" [(ngModel)]="supplier.logo" (change)="showPreviewEdit($event)">
                             </div>
                             <div class="text-center col-4">
                                 <img [src]="supplier.logo" width="100px" height="100px">

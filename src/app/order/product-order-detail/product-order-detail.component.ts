@@ -40,11 +40,12 @@ export class ProductOrderDetailComponent implements OnInit {
   //
   page: number = 0;
   pages: Array<number>;
-  pageNo = 0;
-  GanidOrder: string;
+  pageNo=0;
+  GanidOrder: number;
   idDelete: number;
   nameDelete: string;
   listPage;
+  
 
   //
   totalOrderDetail: number;
@@ -60,7 +61,7 @@ export class ProductOrderDetailComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.GanidOrder = this.route.snapshot.paramMap.get('id');
+    this.GanidOrder =parseInt(this.route.snapshot.paramMap.get('id'));
 
 
     this.viewOrderDetail();
@@ -79,6 +80,7 @@ export class ProductOrderDetailComponent implements OnInit {
     this.productService.getAllList().subscribe((data) => {
       // this.listPage = new Array(data['totalPages']);
       this.dataProduct = data as object[];
+      console.log("data"+this.dataProduct);
       this.dataProduct.forEach((product) => {
         let productEntity = new Product();
         productEntity.idProduct = product['idProduct'];
@@ -98,24 +100,27 @@ export class ProductOrderDetailComponent implements OnInit {
   }
 
   viewOrderDetail() {
-    this.Tong = 0;
-    this.listOrderDetail = new Array();
+    this.Tong=0;
+   this.listOrderDetail = new Array();
+   console.log("GanidOrder ="+this.GanidOrder);
     this.productOrderDetailService.getByIdProductOrderdetail(this.GanidOrder).subscribe(res => {
       this.dataOrderDetail = new Array();
-      this.dataOrderDetail = res['data'];
-      this.listOrderDetail = [];
-      this.totalOrderDetail = 0;
-      this.dataOrderDetail.forEach(data => {
-        let entity = new OderDetail();
-        entity.idOrderDetail = data['idOrderDetail']
-        entity.idOrder = data['idOrder']
-        entity.amount = data['amount']
-        //  entity.amountProduct=data['productOrderDetailt']['amount'];
-        entity.totalPrice = data['totalPrice']
-        entity.idProduct = data['productOrderDetail']['idProduct']
-        entity.nameProduct = data['productOrderDetail']['name']
-        entity.price = data['productOrderDetail']['price']
-        this.Tong += entity.price * entity.amount;
+      console.log("res= "+res);
+      this.dataOrderDetail=res['data'];
+      // this.listOrderDetail=[];
+      // this.totalOrderDetail=0;
+      console.log("this.dataOrderDetail"+this.dataOrderDetail);
+      this.dataOrderDetail.forEach(data=>{
+        let entity=new OderDetail();
+        entity.idOrderDetail=data['idOrderDetail']
+        entity.idOrder=data['idOrder']
+        entity.amount=data['amount']
+      //  entity.amountProduct=data['productOrderDetailt']['amount'];
+        entity.totalPrice=data['totalPrice']
+        entity.idProduct=data['productOrderDetail']['idProduct']
+        entity.nameProduct=data['productOrderDetail']['name']
+        entity.price=data['productOrderDetail']['price']
+        this.Tong+=entity.price * entity.amount;
         // console.log(entity);
         this.listOrderDetail.push(entity);
         // console.log(data);
@@ -186,12 +191,13 @@ export class ProductOrderDetailComponent implements OnInit {
   //     this.GanidOrder = message;
   //   });
   // }
-
-  setProduct() {
-    this.listProduct.forEach(cus => {
-      if (cus.name === this.nameProduct) {
-        this.product = cus;
-        this.idProduct = cus.idProduct;
+  
+  setProduct(){
+    this.listProduct.forEach(cus=>{
+      if(cus.name===this.nameProduct){
+        this.product=cus;
+        console.log(this.product);
+        this.idProduct=cus.idProduct;
       }
     })
   }

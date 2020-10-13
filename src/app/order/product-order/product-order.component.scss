@@ -17,3 +17,17 @@
         }
     }
 }
+
+.ng-select{
+    .ng-clear-wrapper{
+        width: 200px !important; 
+    }
+}
+.form-group{
+    // width: 90%;
+    margin-bottom: .5rem !important;
+    ng-select{
+        width: 200px !important;
+    }
+}
+

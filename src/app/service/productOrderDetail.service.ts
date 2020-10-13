@@ -9,11 +9,11 @@ import { Order } from '../ultis/order';
 
     constructor(private http: HttpClient) { }
     
-    getByIdProductOrderdetail(id: string) {
+    getByIdProductOrderdetail(id: number) {
         // return this.http.get(this.apiUrl + '/' + id);
         return this.http.get(this.apiUrl + '/' + id)
     }
-    getOrderById(id: string): Observable<Order[]> {
+    getOrderById(id: number): Observable<Order[]> {
         return this.http.get<Order[]>(this.apiUrl + '/' + id);
     }
 

@@ -10,6 +10,9 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
     providedIn: 'root'
 })
 export class ProductOrderService {
+//   searchIdCustomer(idCustomer: number) {
+//     throw new Error('Method not implemented.');
+ // }
     private apiUrl = "http://localhost:8080/api/order";
 
     // khai bao bien 
@@ -33,7 +36,7 @@ export class ProductOrderService {
 
     }
     // lay gia Order theo id order
-    getById(id:string){
+    getById(id:number){
         return this.http.get(this.apiUrl+'/'+id);
     }
 
@@ -53,14 +56,21 @@ export class ProductOrderService {
     }
 
 // tim kiem theo id customer 
-    search(key: string, page: number): Observable<Order[]> {
-        return this.http.get<Order[]>(this.apiUrl + '/searchCustomer?name=' + key + '&page=' + page);
+    searchIdCustomer(key: number, page: number): Observable<Order[]> {
+        return this.http.get<Order[]>(this.apiUrl + '/seachByIdCustomer?idCustomer=' + key + '&page=' + page);
+    }
+// tim kiem theo Time
+    searchTime(day: number, month: number,year: number,page: number){
+        return this.http.get<Order[]>(this.apiUrl +'/date?page='+page+'&day='+day+'&month='+month+'&year='+year);
     }
 // tim kiem 
-    searchId(key: string): Observable<Order[]> {
+    searchId(key: number): Observable<Order[]> {
         return this.http.get<Order[]>(this.apiUrl + '/serch?keyword=' + key );
     }
-
+// lastOrder
+    getOrderLast(): Observable<Order[]>{
+        return this.http.get<Order[]>(this.apiUrl+'/lastIdOrder');
+    }
 
     searchStatus(status: string,page: number): Observable<Order[]>{
         return this.http.get<Order[]>(this.apiUrl+'/status?status='+status+'&page='+(page-1));

@@ -1,264 +1,278 @@
 <div class="wrapper-product">
-    <div class="header">
-        <div class="title">
-            <h2 class="font-weight-bold text-primary pl-3">Product</h2>
-        </div>
-        <div class="row my-3">
-            <div class="col-sm-6 pl-3">
-                <div class="add">
-                    <!-- Button trigger modal -->
-                    <button class="btn btn-primary btn-circle pt-2 " data-toggle="modal" data-target="#modelAdd">
+  <div class="header">
+    <div class="title">
+      <h2 class="font-weight-bold text-primary pl-3">Product</h2>
+    </div>
+    <div class="row my-3">
+      <div class="col-sm-6 pl-3">
+        <div class="add">
+          <!-- Button trigger modal -->
+          <button class="btn btn-primary btn-circle pt-2 " data-toggle="modal" data-target="#modelAdd">
             <i class="fas fa-plus"></i>
           </button>
 
-                    <!-- Modal -->
-                    <div class="modal fade" id="modelAdd" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
-                        <div class="modal-dialog modal-dialog-centered" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title">Add New Product</h5>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <!-- Modal -->
+          <div class="modal fade" id="modelAdd" tabindex="-1" role="dialog" aria-labelledby="modelTitleId"
+               aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title">Add New Product</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                   </button>
-                                </div>
-                                <div class="modal-body">
-                                    <form #formAdd="ngForm">
-                                        <div class="form-group">
-                                            <label for="idProduct">Id Product</label>
-                                            <input type="text" class="form-control" name="idProduct" ngModel id="idProduct" placeholder="Enter Id">
-                                            <!-- <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> -->
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="nameCategory">Id Category</label>
-                                            <select class="form-control" id="nameCategory" ngModel name="nameCategory" required>
+                </div>
+                <div class="modal-body">
+                  <form #formAdd="ngForm">
+                    <div class="form-group">
+                      <label for="idProduct">Id Product</label>
+                      <input type="text" class="form-control" name="idProduct" ngModel id="idProduct"
+                             placeholder="Enter Id">
+                      <!-- <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> -->
+                    </div>
+                    <div class="form-group">
+                      <label for="nameCategory">Id Category</label>
+                      <select class="form-control" id="nameCategory" ngModel name="nameCategory" required>
                         <option>Choose Category</option>
                         <option *ngFor="let item of listCategory">{{item.name}}</option>
                       </select>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="nameSupplier">Id Supplier</label>
-                                            <select class="form-control" id="nameSupplier" ngModel name="nameSupplier" required>
+                    </div>
+                    <div class="form-group">
+                      <label for="nameSupplier">Id Supplier</label>
+                      <select class="form-control" id="nameSupplier" ngModel name="nameSupplier" required>
                         <option>Choose Supplier</option>
                         <option *ngFor="let item of listSupp">{{item.name}}</option>
                       </select>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="name">Name</label>
-                                            <input type="text" class="form-control" name="name" ngModel id="name" placeholder="Name">
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="price">Price</label>
-                                            <input type="text" class="form-control" name="price" ngModel id="price" placeholder="Price">
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="image">Image</label>
-                                            <input type="text" class="form-control" name="image" ngModel id="image" placeholder="Image">
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="content">Content</label>
-                                            <input type="text" class="form-control" name="content" ngModel id="content" placeholder="Content">
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="favorite">Favorite</label>
-                                            <input type="text" class="form-control" name="favorite" ngModel id="favorite" placeholder="Fovorite">
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="amount">Amount</label>
-                                            <input type="text" class="form-control" name="amount" ngModel id="amount" placeholder="Amount">
-                                        </div>
-                                        <!--                    <div class="form-group">-->
-                                        <!--                      <label for="status">Status</label>-->
-                                        <!--                      <input type="text" class="form-control" name="status" ngModel id="status" placeholder="Status">-->
-                                        <!--                    </div>-->
-                                        <!--                     <button type="submit" class="btn btn-primary">Submit</button>-->
-                                    </form>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                    <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="addSubmit(formAdd)">Save
-                  </button>
-                                </div>
-                            </div>
-                        </div>
                     </div>
-                </div>
-            </div>
-            <div class="col-md-6">
-                <form class="form-inline float-right" (submit)="searchSubmit(formSearch)" #formSearch="ngForm">
                     <div class="form-group">
-                        <label for="search"></label>
-                        <input type="search" name="search" id="search" ngModel class="form-control" placeholder="" aria-describedby="Search">
+                      <label for="name">Name</label>
+                      <input type="text" class="form-control" name="name" ngModel id="name" placeholder="Name">
                     </div>
-                    <button class="btn">
+                    <div class="form-group">
+                      <label for="price">Price</label>
+                      <input type="text" class="form-control" name="price" ngModel id="price" placeholder="Price">
+                    </div>
+                    <div class="form-group">
+                      <label for="image">Image</label>
+                      <input type="text" class="form-control" name="image" ngModel id="image" placeholder="Image">
+                    </div>
+                    <div class="form-group">
+                      <label for="content">Content</label>
+                      <input type="text" class="form-control" name="content" ngModel id="content" placeholder="Content">
+                    </div>
+                    <div class="form-group">
+                      <label for="favorite">Favorite</label>
+                      <input type="text" class="form-control" name="favorite" ngModel id="favorite"
+                             placeholder="Fovorite">
+                    </div>
+                    <div class="form-group">
+                      <label for="amount">Amount</label>
+                      <input type="text" class="form-control" name="amount" ngModel id="amount" placeholder="Amount">
+                    </div>
+                    <!--                    <div class="form-group">-->
+                    <!--                      <label for="status">Status</label>-->
+                    <!--                      <input type="text" class="form-control" name="status" ngModel id="status" placeholder="Status">-->
+                    <!--                    </div>-->
+                    <!--                     <button type="submit" class="btn btn-primary">Submit</button>-->
+                  </form>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                  <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="addSubmit(formAdd)">Save
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <form class="form-inline float-right" (submit)="searchSubmit(formSearch)" #formSearch="ngForm">
+          <div class="form-group">
+            <label for="search"></label>
+            <input type="search" name="search" id="search" ngModel class="form-control" placeholder=""
+                   aria-describedby="Search">
+          </div>
+          <button class="btn">
             <i class="fas fa-search"></i>
           </button>
-                </form>
-            </div>
-        </div>
+        </form>
+      </div>
     </div>
-    <div class=" row ml-auto mt-3 mt-md-0">
-        <h5 class="mb-0 mr-1  font-weight-bold font-14"> Total Product </h5>{{totalProduct}}
-    </div>
-    <table class="table justify-content-center  table-borderless">
-        <thead class="border-bottom">
-            <tr>
-                <th>IdProduct</th>
-                <th>IdCategory</th>
-                <th>IdSupplier</th>
-                <th>Name</th>
-                <th>Price</th>
-                <th>Image</th>
-                <th>Content</th>
-                <th>Favorite</th>
-                <th>Amount</th>
-                <th>Status</th>
-                <th>Action</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr *ngFor="let product of listProduct">
-                <td>{{product.idProduct}}</td>
-                <td>{{product.idCategory}}</td>
-                <td>{{product.idSupplier}}</td>
-                <td>{{product.name}}</td>
-                <td>{{product.price}}</td>
-                <td><img [src]="product.image" style="width: 20%;" alt=""></td>
-                <td>{{product.content}}</td>
-                <td>{{product.favorite}}</td>
-                <td>{{product.amount}}</td>
-                <td>{{product.status}}</td>
-                <td>
-                    <!-- Button delete modal -->
+  </div>
+  <div class=" row ml-auto mt-3 mt-md-0">
+    <h5 class="mb-0 mr-1  font-weight-bold font-14"> Total Product </h5>{{totalProduct}}
+  </div>
+  <table class="table justify-content-center  table-borderless">
+    <thead class="border-bottom">
+    <tr>
+      <th>IdProduct</th>
+      <th>IdCategory</th>
+      <th>IdSupplier</th>
+      <th>Name</th>
+      <th>Price</th>
+      <th>Image</th>
+      <th>Content</th>
+      <th>Favorite</th>
+      <th>Amount</th>
+      <th>Status</th>
+      <th>Action</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let product of listProduct">
+      <td>{{product.idProduct}}</td>
+      <td>{{product.idCategory}}</td>
+      <td>{{product.idSupplier}}</td>
+      <td>{{product.name}}</td>
+      <td>{{product.price}}</td>
+      <td><img [src]="product.image" style="width: 20%;" alt=""></td>
+      <td>{{product.content}}</td>
+      <td>{{product.favorite}}</td>
+      <td>{{product.amount}}</td>
+      <td>{{product.status}}</td>
+      <td>
+        <!-- Button delete modal -->
 
-                    <button type="button" class="btn btn-outline-danger mr-3" data-toggle="modal" data-target="#modelDelete" (click)="showDelete(product.idProduct)">Delete
-          </button>
+        <button type="button" class="btn btn-outline-danger mr-3" data-toggle="modal" data-target="#modelDelete"
+                (click)="showDelete(product.idProduct)">Delete
+        </button>
 
-                    <!-- Modal -->
-                    <div class="modal fade" id="modelDelete" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
-                        <div class="modal-dialog modal-dialog-centered" role="document">
-                            <div class="modal-content">
-                                <div class="modal-body">
-                                    Delete product {{idDelete}}?
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-primary" data-dismiss="modal">Cancel</button>
-                                    <button type="button" class="btn btn-danger" data-dismiss="modal" (click)="delProduct()">Delete</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Button Edit modal -->
-
-                    <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#modelEdit" (click)="showEdit(product)">Edit
-          </button>
-
-
-                    <!-- <button class="btn btn-outline-light ml-3 text-dark border-dark">Disable</button> -->
-                </td>
-            </tr>
-            <!-- <tr></tr> -->
-        </tbody>
-
-    </table>
-    <p *ngIf="isData">Not Found</p>
-    <!-- Modal Edit -->
-    <div class="modal fade" id="modelEdit" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
+        <!-- Modal -->
+        <div class="modal fade" id="modelDelete" tabindex="-1" role="dialog" aria-labelledby="modelTitleId"
+             aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Product</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <div class="modal-body">
+                Delete product {{idDelete}}?
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal" (click)="delProduct()">Delete</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Button Edit modal -->
+
+        <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#modelEdit"
+                (click)="showEdit(product)">Edit
+        </button>
+
+
+        <!-- <button class="btn btn-outline-light ml-3 text-dark border-dark">Disable</button> -->
+      </td>
+    </tr>
+    <!-- <tr></tr> -->
+    </tbody>
+
+  </table>
+  <p *ngIf="isData">Not Found</p>
+  <!-- Modal Edit -->
+  <div class="modal fade" id="modelEdit" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Product</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
-                </div>
-                <div class="modal-body">
+        </div>
+        <div class="modal-body">
 
-                    <form #formSave="ngForm">
-                        <div class="form-group">
-                            <label for="id_save">Id Product</label>
-                            <input type="text" class="form-control" name="idProduct" [ngModel]="productEdit.idProduct" id="id_save" placeholder="Enter Id" [value]="productEdit.idProduct">
-                        </div>
-                        <div class="form-group">
-                            <label for="id">Id Category</label>
-                            <select class="form-control" id="id" name="idCategory" required>
+          <form #formSave="ngForm">
+            <div class="form-group">
+              <label for="id_save">Id Product</label>
+              <input type="text" class="form-control" name="idProduct" [ngModel]="productEdit.idProduct" id="id_save"
+                     placeholder="Enter Id" [value]="productEdit.idProduct">
+            </div>
+            <div class="form-group">
+              <label for="id">Id Category</label>
+              <select class="form-control" id="id" name="idCategory" required>
                 <option>Choose Category</option>
                 <option *ngFor="let item of listCategory">{{item.id}}</option>
               </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="idSupplier">Id Supplier</label>
-                            <select class="form-control" id="idSupplier" name="idSupplier" required>
+            </div>
+            <div class="form-group">
+              <label for="idSupplier">Id Supplier</label>
+              <select class="form-control" id="idSupplier" name="idSupplier" required>
                 <option>Choose Supplier</option>
                 <option *ngFor="let item of listSupp">{{item.idSupplier}}</option>
               </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="nameProduct">Name</label>
-                            <input type="text" class="form-control" name="name" [ngModel]="productEdit.name" id="nameProduct" [value]="productEdit.name" placeholder="Name">
-                        </div>
-                        <div class="form-group">
-                            <label for="priceProduct">Price</label>
-                            <input type="text" class="form-control" name="price" [ngModel]="productEdit.price" id="priceProduct" [value]="productEdit.price" placeholder="Price">
-                        </div>
-                        <div class="form-group">
-                            <label for="imageProduct">Image</label>
-                            <input type="text" class="form-control" name="image" [ngModel]="productEdit.image" id="imageProduct" [value]="productEdit.image" placeholder="Image">
-                        </div>
-                        <div class="form-group">
-                            <label for="contentProduct">Content</label>
-                            <input type="text" class="form-control" name="content" [ngModel]="productEdit.content" id="contentProduct" [value]="productEdit.content" placeholder="Content">
-                        </div>
-                        <div class="form-group">
-                            <label for="favoriteProduct">Favorite</label>
-                            <input type="text" class="form-control" name="favorite" [ngModel]="productEdit.favorite" id="favoriteProduct" [value]="productEdit.favorite" placeholder="Favorite">
-                        </div>
-                        <div class="form-group">
-                            <label for="amountProduct">Amount</label>
-                            <input type="text" class="form-control" name="amount" [ngModel]="productEdit.amount" id="amountProduct" [value]="productEdit.amount" placeholder="Amount">
-                        </div>
-                        <div class="form-group">
-                            <div class="title">Status</div>
-                            <div class="form-check-inline">
-                                <label class="form-check-label">
-                  <input type="radio" class="form-check-input" [value]="true" [ngModel]="productEdit.status"
-                    [checked]="productEdit.status===true" name="status">Active
-                </label>
-                            </div>
-                            <div class="form-check-inline">
-                                <label class="form-check-label">
-                  <input type="radio" class="form-check-input" [value]="false" [ngModel]="productEdit.status"
-                    [checked]="productEdit.status===false" name="status">Disable
-                </label>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="reset" class="btn btn-primary" data-dismiss="modal">Cancel</button>
-                    <button type="button" class="btn btn-info" data-dismiss="modal" (click)="onSubmit(formSave)">Save</button>
-                </div>
             </div>
+            <div class="form-group">
+              <label for="nameProduct">Name</label>
+              <input type="text" class="form-control" name="name" [ngModel]="productEdit.name" id="nameProduct"
+                     [value]="productEdit.name" placeholder="Name">
+            </div>
+            <div class="form-group">
+              <label for="priceProduct">Price</label>
+              <input type="text" class="form-control" name="price" [ngModel]="productEdit.price" id="priceProduct"
+                     [value]="productEdit.price" placeholder="Price">
+            </div>
+            <div class="form-group">
+              <label for="imageProduct">Image</label>
+              <input type="text" class="form-control" name="image" [ngModel]="productEdit.image" id="imageProduct"
+                     [value]="productEdit.image" placeholder="Image">
+            </div>
+            <div class="form-group">
+              <label for="contentProduct">Content</label>
+              <input type="text" class="form-control" name="content" [ngModel]="productEdit.content" id="contentProduct"
+                     [value]="productEdit.content" placeholder="Content">
+            </div>
+            <div class="form-group">
+              <label for="favoriteProduct">Favorite</label>
+              <input type="text" class="form-control" name="favorite" [ngModel]="productEdit.favorite"
+                     id="favoriteProduct" [value]="productEdit.favorite" placeholder="Favorite">
+            </div>
+            <div class="form-group">
+              <label for="amountProduct">Amount</label>
+              <input type="text" class="form-control" name="amount" [ngModel]="productEdit.amount" id="amountProduct"
+                     [value]="productEdit.amount" placeholder="Amount">
+            </div>
+            <div class="form-group">
+              <div class="title">Status</div>
+              <div class="form-check-inline">
+                <label class="form-check-label">
+                  <input type="radio" class="form-check-input" [value]="true" [ngModel]="productEdit.status"
+                         [checked]="productEdit.status===true" name="status">Active
+                </label>
+              </div>
+              <div class="form-check-inline">
+                <label class="form-check-label">
+                  <input type="radio" class="form-check-input" [value]="false" [ngModel]="productEdit.status"
+                         [checked]="productEdit.status===false" name="status">Disable
+                </label>
+              </div>
+            </div>
+          </form>
         </div>
+        <div class="modal-footer">
+          <button type="reset" class="btn btn-primary" data-dismiss="modal">Cancel</button>
+          <button type="button" class="btn btn-info" data-dismiss="modal" (click)="onSubmit(formSave)">Save</button>
+        </div>
+      </div>
     </div>
-    <nav aria-label="Page navigation" *ngIf="!isData">
-        <ul class="pagination justify-content-center">
-            <li class="page-item" [ngClass]="pageNo===0 ? 'disabled':''">
-                <a class=" page-link " href="# " aria-label="Previous " (click)="setLessPage($event) ">
-                    <span aria-hidden="true ">&laquo;</span>
-                    <span class="sr-only ">Previous</span>
-                </a>
-            </li>
-            <li class="page-item " *ngFor="let page of listPage; let i=index " [ngClass]="{active:isActive(i)} ">
-                <a class="page-link " href="# " (click)="setPage(i,$event) ">{{i+1}}</a>
-            </li>
+  </div>
+  <nav aria-label="Page navigation" *ngIf="!isData">
+    <ul class="pagination justify-content-center">
+      <li class="page-item" [ngClass]="pageNo===0 ? 'disabled':''">
+        <a class=" page-link " href="# " aria-label="Previous " (click)="setLessPage($event) ">
+          <span aria-hidden="true ">&laquo;</span>
+          <span class="sr-only ">Previous</span>
+        </a>
+      </li>
+      <li class="page-item " *ngFor="let page of listPage; let i=index " [ngClass]="{active:isActive(i)} ">
+        <a class="page-link " href="# " (click)="setPage(i,$event) ">{{i + 1}}</a>
+      </li>
 
-            <li class="page-item" [ngClass]="pageNo===listPage.length-1 ? 'disabled':''">
-                <a class="page-link" href="#" aria-label="Next" (click)="setPlusPage($event)">
-                    <span aria-hidden="true ">&raquo;</span>
-                    <span class="sr-only ">Next</span>
-                </a>
-            </li>
-        </ul>
-    </nav>
+      <li class="page-item" [ngClass]="pageNo===listPage.length-1 ? 'disabled':''">
+        <a class="page-link" href="#" aria-label="Next" (click)="setPlusPage($event)">
+          <span aria-hidden="true ">&raquo;</span>
+          <span class="sr-only ">Next</span>
+        </a>
+      </li>
+    </ul>
+  </nav>
 </div>

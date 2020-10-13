@@ -61,6 +61,7 @@ export class SupplierComponent implements OnInit {
       this.dataSupp.forEach((supp) => {
         let supplier = new Supplier();
         supplier.idSupplier = supp['idSupplier'];
+        supplier.idCode=supp['idCode'];
         supplier.address = supp['address'];
         supplier.logo = supp['logo'];
         supplier.name = supp['name'];
