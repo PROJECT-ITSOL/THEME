@@ -148,6 +148,7 @@ export class ProductOrderComponent implements OnInit {
         let orderEntity = new Order();
         orderEntity.idOrder = order['idOrder'];
         orderEntity.idCustomer = order['idCustomer'];
+        orderEntity.guid=order['guid'];
         orderEntity.createDate = order['createDate'];
         orderEntity.status = order['status'];
         orderEntity.nameCustomer = order['customerOrder']['name'];
@@ -217,6 +218,7 @@ export class ProductOrderComponent implements OnInit {
         let orderEntity = new Order();
         orderEntity.idOrder = order['idOrder'];
         orderEntity.idCustomer = order['idCustomer'];
+        orderEntity.guid=order['guid'];
         orderEntity.createDate = order['createDate'];
         orderEntity.status = order['status'];
         orderEntity.nameCustomer = order['customerOrder']['name'];
@@ -309,6 +311,7 @@ export class ProductOrderComponent implements OnInit {
         let orderEntity = new Order();
         orderEntity.idOrder = order['idOrder'];
         orderEntity.idCustomer = order['idCustomer'];
+        orderEntity.guid=order['guid'];
         orderEntity.createDate = order['createDate'];
         orderEntity.status = order['status'];
         orderEntity.nameCustomer = order['customerOrder']['name'];
@@ -324,6 +327,10 @@ export class ProductOrderComponent implements OnInit {
     });
   }
   setSearchDate(){
+
+    if(this.day==null) this.day=0;
+    if(this.month==null) this.month=0;
+    if(this.year==null) this.year=2020;
     
     this.listOrder=new Array();
     this.productOrderService.searchTime(this.day,this.month,this.year,0).subscribe(res=>{
@@ -334,6 +341,7 @@ export class ProductOrderComponent implements OnInit {
         let orderEntity = new Order();
         orderEntity.idOrder = order['idOrder'];
         orderEntity.idCustomer = order['idCustomer'];
+        orderEntity.guid=order['guid'];
         orderEntity.createDate = order['createDate'];
         orderEntity.status = order['status'];
         orderEntity.nameCustomer = order['customerOrder']['name'];

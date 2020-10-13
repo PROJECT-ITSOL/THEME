@@ -159,33 +159,32 @@ export class ProductOrderDetailComponent implements OnInit {
     newOrderDetail.amount = form.value.amountAdd;
     newOrderDetail.idProduct = this.idProduct;
     newOrderDetail.idOrder = this.GanidOrder;
-    newOrderDetail.totalPrice = form.value.amount * this.product.price;
+    newOrderDetail.totalPrice = form.value.amountAdd * this.product.price;
+    console.log('price'+newOrderDetail.totalPrice);
     this.productService.getId(newOrderDetail.idProduct).subscribe(res => {
       this.productabc.amount = res['amount'];
       if (newOrderDetail.amount < this.productabc.amount) {
         this.productOrderDetailService.addOrderDetail(newOrderDetail).subscribe(res => {
           this.viewOrderDetail();
-          this.productOrderService.updateMoney(this.GanidOrder).subscribe(odr => { });
+          console.log("gan id order"+this.GanidOrder);
+          this.productOrderService.updateMoney(this.GanidOrder).subscribe(odr => {});
           this.productService.updateAmount(this.idProduct, newOrderDetail).subscribe(odr => {
+            
             this.getProductAll();
           });
-
-          form.reset();
+          
+         form.reset();
         });
       }
       else {
         // console.log("")
         alert("so luong nhap qua lon ");
       }
-
+      
     });
-
-
+    //this.productOrderService.updateMoney(this.GanidOrder).subscribe(odr => {});
     // this.viewOrderDetail();
-
-
   }
-
   // getMessage() {
   //   this.productOrderService.currentMessage.subscribe(message => {
   //     this.GanidOrder = message;
