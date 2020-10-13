@@ -54,7 +54,7 @@ export class ProductImportComponent implements OnInit  {
   supplier:Supplier;
   nameSupplier:string;
   listProduct:Product[];
-  month:number;
+  month:number=0;
   product:Product;
   nameProduct:string;
   p:string='1';
@@ -140,16 +140,17 @@ pageChange(newPage: number) {
     this.billImportService.search(this.keyword).subscribe(res =>{
       this.dataListBill=res;
       console.log(res);
-      this.dataListBill.forEach((bill)=>{
+     
         let billImport = new BillImport();
-        billImport.idBillImport=bill['idBillImport'];
-        billImport.createDate=bill['createDate'];
-        billImport.totalProduct=bill['totalProduct'];
-        billImport.totalMoney=bill['totalMoney'];
-        billImport.billImportDetail=bill['billImportDetail'];
-        billImport.nameSupplier
+        billImport.idBillImport=res['idBillImport'];
+        billImport.idCode=res['idCode'];
+        billImport.createDate=res['createDate'];
+        billImport.totalProduct=res['totalProduct'];
+        billImport.totalMoney=res['totalMoney'];
+        billImport.billImportDetail=res['billImportDetail'];
+        billImport.nameSupplier=res['supplierImport']['name'];
         this.listBillImport.push(billImport);
-      });
+      
      
 
       this.totalBill = this.listBillImport.length;
@@ -161,8 +162,6 @@ pageChange(newPage: number) {
 
   getBillBySupp(){
     if(this.nameSupplier!='0'){
-
-    
     this.listSupp.forEach(supp => {
       if (supp.name===this.nameSupplier) {
         this.supplier=supp;
@@ -173,6 +172,7 @@ pageChange(newPage: number) {
           this.dataListBill.forEach((bill)=>{
             let billImport = new BillImport();
             billImport.idBillImport=bill['idBillImport'];
+            billImport.idCode = bill['idCode'];
             billImport.totalProduct=bill['totalProduct'];
             billImport.totalMoney=bill['totalMoney'];
             billImport.createDate=bill['createDate'];
@@ -263,6 +263,7 @@ pageChange(newPage: number) {
       this.dataListBill.forEach((bill)=>{
         let billImport = new BillImport();
         billImport.idBillImport=bill['idBillImport'];
+        billImport.idCode = bill['idCode'];
         billImport.createDate=bill['createDate'];
         billImport.totalProduct=bill['totalProduct'];
         billImport.totalMoney=bill['totalMoney'];
@@ -277,5 +278,41 @@ pageChange(newPage: number) {
     this.getAllBill();
   }
   }
+
+  getListBillImport(event){
+    if((this.nameSupplier!='0') && (this.month==0)){
+      this.getBillBySupp();
+    }else{
+      if ((this.nameSupplier=='0')&&(this.month!=0)){
+      this.getBillByMonth(event);
+    } else{
+      if ((this.nameSupplier!='0')&&(this.month!=0)){
+      this.listBillImport = new Array();
+      this.month=event.target.value;
+      console.log(this.month);
+      
+     this.billImportService.getBillBySuppAndMonth(this.month,this.idSupplier).subscribe(res =>{
+      this.dataListBill=res;
+      console.log(res);
+      this.dataListBill.forEach((bill)=>{
+        let billImport = new BillImport();
+        billImport.idBillImport=bill['idBillImport'];
+        billImport.idCode = bill['idCode'];
+        billImport.createDate=bill['createDate'];
+        billImport.totalProduct=bill['totalProduct'];
+        billImport.totalMoney=bill['totalMoney'];
+        billImport.billImportDetail=bill['billImportDetail'];
+        billImport.nameSupplier=bill['supplierImport']['name'];
+        this.listBillImport.push(billImport);
+      });
+     
+      this.totalBill = this.listBillImport.length;
+      });
+  } 
+}
+    }
+  }
+    
+  
 
 }

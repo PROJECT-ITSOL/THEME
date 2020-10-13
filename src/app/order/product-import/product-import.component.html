@@ -25,6 +25,7 @@
             </select> -->
             <div class="col-3">
                 <ng-select [(ngModel)]="nameSupplier" placeholder="Choose Supplier" (change)="getBillBySupp()">
+                    <ng-option [value]="0">All</ng-option>
                     <ng-option *ngFor="let item of listSupp" [value]="item.name">{{item.name}}</ng-option>
                 </ng-select>
             </div>
@@ -118,16 +119,11 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-
-
-
-
                 </div>
                 <div class="modal-body">
                     {{message}}
                 </div>
                 <div class="modal-footer">
-
                     <button type="button" class="btn btn-primary" data-dismiss="modal" [routerLink]="['//homeAdmin/order/product-import-detail',idBillImport]" routerLinkActive="active">Next</button>
                 </div>
             </div>

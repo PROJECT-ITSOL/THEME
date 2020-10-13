@@ -45,7 +45,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
         }
 
         search(key:string): Observable<Supplier[]>{
-            return this.http.get<Supplier[]>(this.apiUrl+'/search?name='+key);
+            return this.http.get<Supplier[]>(this.apiUrl+'/search?keyword='+key);
         }
 
         searchByStatus(status:boolean): Observable<Supplier[]>{
