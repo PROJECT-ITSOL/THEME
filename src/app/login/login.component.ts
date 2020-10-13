@@ -1,7 +1,9 @@
+import { error } from '@angular/compiler/src/util';
 import { AuthenticationService } from './../service/authentication.service';
 import { Component, OnInit, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { JsonPipe } from '@angular/common';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-login',
@@ -48,9 +50,17 @@ export class LoginComponent implements OnInit {
     localStorage.removeItem('token');
     this.service.generateToken(this.authReq).subscribe(
       data=>{
-        // console.log(data["jwt"]);
+        console.log(data);
         localStorage.setItem("token",data.toString().substring(8,(data.toString().length-2)));
       this.router.navigate(['/homeAdmin']);
+      },
+      error=>{
+        if(error.status===401){
+          Swal.fire({
+            icon: 'error',
+            text: 'Incorrect username or password',
+          })
+        }
       }
     )
   }

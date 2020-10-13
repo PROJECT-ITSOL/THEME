@@ -60,7 +60,7 @@ import { ProductOrderDetailComponent } from './order/product-order-detail/produc
     ReactiveFormsModule,
     ChartsModule,
     NgSelectModule,
-    
+    NgSelectModule
     
   
   ],
