@@ -34,6 +34,10 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
             return this.http.get<BillImport>(this.apiUrl+'/getLastBill');
         }
 
+        getBillBySuppAndMonth(month:number,id:number): Observable<BillImport[]>{
+            return this.http.get<BillImport[]>(this.apiUrl+'/getByMonthAngSupp?month='+month+'&idSupplier='+id);
+        }
+
         addBill(bill){
             return this.http.post(this.apiUrl+'/addBillImport',bill);
         }
@@ -49,7 +53,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
         }
 
         search(key:string): Observable<BillImport[]>{
-            return this.http.get<BillImport[]>(this.apiUrl+'/search?keyWord='+key);
+            return this.http.get<BillImport[]>(this.apiUrl+'/getByIdCode/'+key);
         }
 
         searchMonth(month:number): Observable<BillImport[]>{
