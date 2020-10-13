@@ -54,7 +54,7 @@ export class ProductImportComponent implements OnInit  {
   supplier:Supplier;
   nameSupplier:string;
   listProduct:Product[];
-  month:number=0;
+  month:number;
   product:Product;
   nameProduct:string;
   p:string='1';
@@ -247,14 +247,13 @@ pageChange(newPage: number) {
         supplier.products=supp['productList'];
         
         this.listSupp.push(supplier);
-       
       });
+      console.log(this.listSupp);
     })
   }
 
-  getBillByMonth(event){
+  getBillByMonth(){
     this.listBillImport = new Array();
-    this.month=event.target.value;
     console.log(this.month);
     if(this.month!=0){
     this.billImportService.searchMonth(this.month).subscribe(res =>{
@@ -279,18 +278,7 @@ pageChange(newPage: number) {
   }
   }
 
-  getListBillImport(event){
-    if((this.nameSupplier!='0') && (this.month==0)){
-      this.getBillBySupp();
-    }else{
-      if ((this.nameSupplier=='0')&&(this.month!=0)){
-      this.getBillByMonth(event);
-    } else{
-      if ((this.nameSupplier!='0')&&(this.month!=0)){
-      this.listBillImport = new Array();
-      this.month=event.target.value;
-      console.log(this.month);
-      
+  getListBillImport(){
      this.billImportService.getBillBySuppAndMonth(this.month,this.idSupplier).subscribe(res =>{
       this.dataListBill=res;
       console.log(res);
@@ -305,13 +293,13 @@ pageChange(newPage: number) {
         billImport.nameSupplier=bill['supplierImport']['name'];
         this.listBillImport.push(billImport);
       });
+      console.log()
      
       this.totalBill = this.listBillImport.length;
       });
   } 
-}
-    }
-  }
+
+   
     
   
 

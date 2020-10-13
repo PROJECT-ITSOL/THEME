@@ -35,7 +35,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
         }
 
         getBillBySuppAndMonth(month:number,id:number): Observable<BillImport[]>{
-            return this.http.get<BillImport[]>(this.apiUrl+'/getByMonthAngSupp?month='+month+'&idSupplier='+id);
+            return this.http.get<BillImport[]>(this.apiUrl+'/getByMonthAndSupp?month='+month+'&idSupplier='+id);
         }
 
         addBill(bill){

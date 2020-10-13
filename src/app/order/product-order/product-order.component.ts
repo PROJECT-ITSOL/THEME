@@ -58,10 +58,10 @@ export class ProductOrderComponent implements OnInit {
 
   // list khoi tao bien (bien thay doi )
   editOrderkey: Order = new Order();
-  keyword: number;  // dung de tim kiem
+  keyword: string;  // dung de tim kiem
   message: string;   // luu thong bao
   idDelete: number; // luu id xoa
-  dataOrder: Array<any>; // lua doi tuong tam thoi
+  dataOrder: Array<Order>; // lua doi tuong tam thoi
   dataOrderDetail: Array<any>;
   totalOrderDetail: number;
   totalOrder: number;
@@ -148,6 +148,7 @@ export class ProductOrderComponent implements OnInit {
         let orderEntity = new Order();
         orderEntity.idOrder = order['idOrder'];
         orderEntity.idCustomer = order['idCustomer'];
+        orderEntity.guid=order['guid'];
         orderEntity.createDate = order['createDate'];
         orderEntity.status = order['status'];
         orderEntity.nameCustomer = order['customerOrder']['name'];
@@ -211,21 +212,24 @@ export class ProductOrderComponent implements OnInit {
   // ham tim kiem
   search() {
     this.listOrder = new Array();
-    this.productOrderService.searchId(this.keyword).subscribe(res => {
-      this.dataOrder = res['content']; // lay tat ca
-      this.dataOrder.forEach((order) => {
+    this.productOrderService.getByIdcode(this.keyword).subscribe(res => {
+      this.dataOrder=new Array();
+      this.dataOrder = res as Order[] // lay tat ca
+      console.log("dataorder"+this.dataOrder);
+      //this.dataOrder.forEach((order) => {
         let orderEntity = new Order();
-        orderEntity.idOrder = order['idOrder'];
-        orderEntity.idCustomer = order['idCustomer'];
-        orderEntity.createDate = order['createDate'];
-        orderEntity.status = order['status'];
-        orderEntity.nameCustomer = order['customerOrder']['name'];
-        orderEntity.phoneCustomer = order['customerOrder']['phoneNumber'];
-        orderEntity.emailSuctomer = order['customerOrder']['email'];
-        orderEntity.totalMoney = order['totalMoney'];
-        orderEntity.orderDetail = order['listOrderDetail'];
+        orderEntity.idOrder = res['idOrder'];
+        orderEntity.idCustomer = res['idCustomer'];
+        orderEntity.guid=res['guid'];
+        orderEntity.createDate = res['createDate'];
+        orderEntity.status = res['status'];
+        orderEntity.nameCustomer = res['customerOrder']['name'];
+        orderEntity.phoneCustomer = res['customerOrder']['phoneNumber'];
+        orderEntity.emailSuctomer = res['customerOrder']['email'];
+        orderEntity.totalMoney = res['totalMoney'];
+        orderEntity.orderDetail = res['listOrderDetail'];
         this.listOrder.push(orderEntity);
-      });
+     // });
       this.pages = new Array(res['totalElement']);
     });
   }
@@ -283,6 +287,7 @@ export class ProductOrderComponent implements OnInit {
         orderEntity.idCustomer = order['idCustomer'];
         orderEntity.createDate = order['createDate'];
         orderEntity.status = order['status'];
+        orderEntity.guid=order['guid'];
         orderEntity.nameCustomer = order['customerOrder']['name'];
         orderEntity.phoneCustomer = order['customerOrder']['phoneNumber'];
         orderEntity.emailSuctomer = order['customerOrder']['email'];
@@ -309,6 +314,7 @@ export class ProductOrderComponent implements OnInit {
         let orderEntity = new Order();
         orderEntity.idOrder = order['idOrder'];
         orderEntity.idCustomer = order['idCustomer'];
+        orderEntity.guid=order['guid'];
         orderEntity.createDate = order['createDate'];
         orderEntity.status = order['status'];
         orderEntity.nameCustomer = order['customerOrder']['name'];
@@ -324,6 +330,10 @@ export class ProductOrderComponent implements OnInit {
     });
   }
   setSearchDate(){
+
+    if(this.day==null) this.day=0;
+    if(this.month==null) this.month=0;
+    if(this.year==null) this.year=2020;
     
     this.listOrder=new Array();
     this.productOrderService.searchTime(this.day,this.month,this.year,0).subscribe(res=>{
@@ -334,6 +344,7 @@ export class ProductOrderComponent implements OnInit {
         let orderEntity = new Order();
         orderEntity.idOrder = order['idOrder'];
         orderEntity.idCustomer = order['idCustomer'];
+        orderEntity.guid=order['guid'];
         orderEntity.createDate = order['createDate'];
         orderEntity.status = order['status'];
         orderEntity.nameCustomer = order['customerOrder']['name'];

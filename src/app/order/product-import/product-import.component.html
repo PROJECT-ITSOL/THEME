@@ -18,23 +18,19 @@
             <div><input class="search py-1" type="search" placeholder="Search.." [(ngModel)]="keyword" name="keyword">
                 <button class="btn" type="submit" (click)="searchBill()"><i class="fas fa-search"></i></button>
             </div>
-            <!-- <select class=" form-control col-3 py-1" [(ngModel)]="nameSupplier" name="nameSupplier" (change)="getBillBySupp()">
-                <option selected hidden> Choose Supplier</option>
-                <option [value]="0">Tất cả</option>
-                <option *ngFor="let item of listSupp">{{item.name}}</option>
-            </select> -->
+
             <div class="col-3">
                 <ng-select [(ngModel)]="nameSupplier" placeholder="Choose Supplier" (change)="getBillBySupp()">
                     <ng-option [value]="0">All</ng-option>
                     <ng-option *ngFor="let item of listSupp" [value]="item.name">{{item.name}}</ng-option>
                 </ng-select>
             </div>
-            <select class=" form-control col-2 py-1" name="month" (change)="getBillByMonth($event)">
-                <option selected  hidden> Choose Month</option>
-                <option [value]="0">All</option>
-                <option *ngFor="let item of listMonth" [value]="item.value"> {{item.name}}</option>
-            </select>
-
+            <div class="col-3">
+                <ng-select [(ngModel)]="month" placeholder="Choose Month" (change)="getBillByMonth()">
+                    <ng-option [value]="0">All</ng-option>
+                    <ng-option *ngFor="let item of listMonth" [value]="item.value">{{item.name}}</ng-option>
+                </ng-select>
+            </div>
             <div class=" row ml-auto mt-3 mt-md-0">
                 <h5 class="mb-0 mr-1  font-weight-bold font-14"> Total Bill </h5>{{totalBill}}
             </div>
