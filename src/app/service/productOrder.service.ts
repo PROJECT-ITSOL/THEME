@@ -36,8 +36,12 @@ export class ProductOrderService {
 
     }
     // lay gia Order theo id order
-    getById(id:number){
-        return this.http.get(this.apiUrl+'/'+id);
+    // getById(id:number){
+    //     return this.http.get(this.apiUrl+'/'+id);
+    // }
+    // theo ma code
+    getByIdcode(guid:string){
+        return this.http.get(this.apiUrl+'/searchByIdcode/'+guid);
     }
 
     addOrder(order) {
