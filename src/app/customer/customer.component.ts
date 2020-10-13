@@ -58,6 +58,8 @@ export class CustomerComponent implements OnInit {
       });
       // this.totalCustomer = this.listCustomer.length;
     });
+    // localStorage.setItem("listCust",this.listCustomer);
+    // console.log("####",JSON.stringify(this.listCustomer));
     console.log("this.listCustomer", this.listCustomer);
   }
   setPage(i: number) {
@@ -104,7 +106,6 @@ export class CustomerComponent implements OnInit {
   }
   addSubmit(form) {
     let url = this.urlCustomer + "/addNew";
-
     let customer = new Customer();
     customer.id = form.value.id;
     customer.name = form.value.name;
@@ -114,18 +115,27 @@ export class CustomerComponent implements OnInit {
     customer.email = form.value.email;
     customer.amountBoom = form.value.amountBoom;
     customer.status = form.value.status;
-    console.log(customer);
-    this.service.postAddNew(url, customer).subscribe(
-      data => {
-        console.log(data['success']);
-        if (data['success']){
-          this.getCustomer();
-        }else{
-          alert(data['message']);
-        }
+    console.log("customer.email",customer.email);
+    var a = this.listCustomer.findIndex(function(x, i) {
+      if (x.email == customer.email){
+        return true;
       }
-    );
-
+    });
+    if (a >= 0){
+      alert("Email da ton tai!");
+      return false;
+    }
+      this.service.postAddNew(url, customer).subscribe(
+        data => {
+          console.log(data['success']);
+          if (data['success']){
+            this.getCustomer();
+            this.listCustomer.push(customer);
+          }else{
+            alert(data['message']);
+          }
+        }
+      );
   }
   searchSubmit(form) {
     let url = this.urlCustomer + '/search';
@@ -143,6 +153,7 @@ export class CustomerComponent implements OnInit {
             customerEntity.id = customer['id'];
             customerEntity.name = customer['name'];
             customerEntity.address = customer['address'];
+            customerEntity.email = customer['email'];
             customerEntity.amountBoom = customer['amountBoom'];
             customerEntity.phoneNumber = customer['phoneNumber'];
             customerEntity.status = customer['status'];

@@ -8,55 +8,93 @@
 
 <div id="header">
     <div class="d-md-flex align-items-center bg-white p-3">
-        <h3 class="mb-0" style="color: blue;">Oder List</h3>
+        <h3 class="mb-0" style="color:black">Oder List</h3>
         <div class="ml-auto mt-3 mt-md-0">
 
-            <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#addOrder">
+            <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#addOrder">
             <i  class="fas fa-edit" >Add+</i></button>
         </div>
 
     </div>
 
 
-    <div class="d-md-flex align-items-center border-top bg-white p-3">
+    <div class="d-md-flex align-items-center border-top">
         <th>
-            <!-- <label for="keyStatus">Select list (select one):</label>  -->
-            <select class="form-control btn-outline-primary" [(ngModel)]="keyStatus" page="0" (change)="searchStatus()">
-            <option value="">xem tat ca</option>
-            <option  value="Đang chờ" >Đang chờ</option>
-            <option  value="Thành công">Thành công </option>
-            <option  value="Thất bại">Thất bại</option>
+
+            <select class="form-control" [(ngModel)]="keyStatus" page="0" (change)="searchStatus()">
+                <!-- <option label="--select something --"></option> -->
+                <option value="Xem tất cả">Xem tất cả</option>
+                <option  value="Đang chờ" >Đang chờ</option>
+                <option  value="Thành công">Thành công </option>
+                <option  value="Thất bại">Thất bại</option>
         
-        </select>
+             </select>
+
 
         </th>
-        <div class="search " style="color: blue;">
-            <input type="text" placeholder="Search.." [(ngModel)]="keyword" name="keyword" class="btn btn-outline-primary">
-            <button class="btn" type="submit" (click)="search()"><i class="fas fa-search" style="color: blue;" ></i></button>
+        <div class="search ">
+            <th>
+                <input type="text" placeholder="Search.." [(ngModel)]="keyword" name="keyword" class="btn btn-outline-info">
+            </th>
+            <th>
+                <button class="btn" type="submit" (click)="search()"><i class="fas fa-search"></i></button>
+            </th>
         </div>
-        <!-- <form class="form-inline float-right" (submit)="search(formSearch)" #formSearch="ngForm">
-            <div class="form-group">
-              <label for="search"></label>
-              <input type="search" name="search" id="search" ngModel class="form-control" placeholder="" aria-describedby="Search">
-            </div>
-            <button class="btn">
-              <i class="fas fa-search"></i>
-            </button>
-          </form> -->
+
+        <div class="col-3 form-group d-flex flex-row align-items-center mt-2 w-100">
+            <!-- <label for="Choosesupplier">Choose name Customer</label>                               -->
+
+            <ng-select placeholder="Name&sdt..." id="Choosesupplier" [(ngModel)]="nameSDTCustomer" name="nameSDTCustomer" (change)=" setNameAndPhoneCustomer()" required>
+
+                <ng-option *ngFor="let item of listCustomer" [value]="item.name+item.phoneNumber">
+                    {{item.name}} {{item.phoneNumber}}
+
+                    <!-- <p style="background-color: aqua; margin: auto; width: 400px;">{{item.name}}</p> -->
+
+                </ng-option>
+            </ng-select>
+            <button class="btn" type="submit" (click)="searchIdCustomer()"><i class="fas fa-search"></i></button>
+
+        </div>
+
+        <div>
+
+            <th>
+                <ng-select placeholder="day.." [(ngModel)]="day" name="day">
+                    <ng-option *ngFor="let item of listDay" [value]="item">{{item}}</ng-option>
+                </ng-select>
+            </th>
+            <th>
+                <ng-select placeholder="month.." [(ngModel)]="month" name="month">
+                    <ng-option *ngFor="let item of listMonth" [value]="item">{{item}}</ng-option>
+                </ng-select>
+            </th>
+            <th>
+                <ng-select placeholder="year.." [(ngModel)]="year" name="year">
+                    <ng-option *ngFor="let item of listYear" [value]="item">{{item}}</ng-option>
+                </ng-select>
+            </th>
+            <th>
+                <button class="btn" type="submit" (click)="setSearchDate()"><i class="fas fa-search col-2"></i></button>
+            </th>
+
+
+        </div>
         <div class=" row ml-auto mt-3 mt-md-0">
 
-            <h5 class="mb-0 mr-1  font-weight-bold font-14" style="color: blue;"> Total Order: {{totalOrder}} </h5>
+            <h5 class="mb-0 mr-1  font-weight-bold font-14" style="color:black"> Total Order: {{totalOrder}} </h5>
 
 
         </div>
     </div>
+
     <!-- Table Order -->
 
 
-    <th>
-    </th>
+
+
     <table class="table table-light table-data" style="text-align:center; ">
-        <thead class="bg-primary text-white ">
+        <thead class=" text-dark ">
             <tr>
                 <th>Id_Order</th>
                 <th>Id_Customer</th>
@@ -72,7 +110,7 @@
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let item of listOrder" style="color: rgb(55, 0, 255);">
+            <tr *ngFor="let item of listOrder" style="color:black">
                 <td>{{item.idOrder}}</td>
                 <td>{{item.idCustomer}}</td>
                 <td>{{item.nameCustomer}}</td>
@@ -86,11 +124,11 @@
                     <a [routerLink]="['//homeAdmin/order/list-order-detail',item.idOrder]" routerLinkActive="active" (click)="show(item.idOrder)"><i class="fas fa-clipboard  fa-2x"></i></a>
                 </td>
                 <td>
-                    <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#editOrder" (click)="showEdit(item)">
-                    Edit</button>
+                    <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#editOrder" (click)="showEdit(item)">
+                        <i class="fas fa-edit"></i></button>
                 </td>
                 <td>
-                    <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#delete" (click)="showEdit(item)">
+                    <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#delete" (click)="showEdit(item)">
                     <i class="far fa-trash-alt" ></i></button>
                 </td>
             </tr>
@@ -107,7 +145,7 @@
 
         <table class="nav nav-pills justify-content-center table-light ">
 
-            <a class="nav-link " [routerLink]="['//homeAdmin/order/list-order',i-5]" (click)="setPage(i-5,$event)" *ngIf="i-5>=0+1"><i class="fas fa-angle-double-left"></i></a>
+            <a class="nav-link " [routerLink]="['//homeAdmin/order/list-order',i-5]" (click)="setPage(i-5,$event)" *ngIf="i-5>5"><i class="fas fa-angle-double-left"></i></a>
             <a class="nav-link " [routerLink]="['//homeAdmin/order/list-order',i-1]" (click)="setPage(i-1,$event)" *ngIf="i-1>=0+1"><i class="fas fa-angle-left"></i></a>
 
             <li>
@@ -120,16 +158,16 @@
                 <a class="nav-link " [routerLink]="['//homeAdmin/order/list-order',i]" (click)="setPage(i,$event)" [ngClass]="{'active':true}" *ngIf="i>=1">{{i}}</a>
             </li>
             <li>
-                <a class="nav-link " [routerLink]="['//homeAdmin/order/list-order',i+1]" (click)="setPage(i+1,$event)" *ngIf="i+1>=0+1">{{i+1}}</a>
+                <a class="nav-link " [routerLink]="['//homeAdmin/order/list-order',i+1]" (click)="setPage(i+1,$event)" *ngIf="i+1<=20">{{i+1}}</a>
             </li>
             <li>
-                <a class="nav-link " [routerLink]="['//homeAdmin/order/list-order',i+2]" (click)="setPage(i+2,$event)" *ngIf="i+2>=0+1">{{i+2}}</a>
+                <a class="nav-link " [routerLink]="['//homeAdmin/order/list-order',i+2]" (click)="setPage(i+2,$event)" *ngIf="i+1<=20">{{i+2}}</a>
             </li>
             <li>
                 <h1> </h1>
             </li>
-            <a class="nav-link " [routerLink]="['//homeAdmin/order/list-order',i+1]" (click)="setPage(i+1,$event)" *ngIf="i+5<40"><i class="fas fa-angle-right"></i></a>
-            <a class="nav-link " [routerLink]="['//homeAdmin/order/list-order',i+5]" (click)="setPage(i+5,$event)" *ngIf="i+2<40"><i class="fas fa-angle-double-right"></i></a>
+            <a class="nav-link " [routerLink]="['//homeAdmin/order/list-order',i+1]" (click)="setPage(i+1,$event)" *ngIf="i+1<=20"><i class="fas fa-angle-right"></i></a>
+            <a class="nav-link " [routerLink]="['//homeAdmin/order/list-order',i+5]" (click)="setPage(i+5,$event)" *ngIf="i+1<=15"><i class="fas fa-angle-double-right"></i></a>
         </table>
     </div>
     <!-- Modal delete -->
@@ -168,30 +206,57 @@
 
 
                             <div class="row">
-                                <div class="col-12 form-group">Id Order
+                                <!-- <div class="col-12 form-group">Id Order
                                     <input type="text" [(ngModel)]="idOrder" name="idOrder" class="form-control" required #id="ngModel">
                                     <span class="col-12 validator" *ngIf="id.errors?.required && id.touched">Id is required</span></div>
-                                <div class="col-12 form-group">
-                                    <label for="Choosesupplier">Choose name Customer</label>
-                                    <select class="form-control" id="Choosesupplier" [(ngModel)]="nameCustomer" name="nameCustomer" (change)="setCustomer()" required>
-                                <option>Choose Customer</option>
-                              <option *ngFor="let item of listCustomer" [value]="item.name">{{item.name}}</option>
-                        </select>
-                                </div>
-
+                                 -->
 
                                 <div class="form-group col-12">Date
                                     <input type="date" class="form-control" ngModel required name="createDate" #dateCreate="ngModel">
                                     <span class="col-12 validator" *ngIf="dateCreate.errors?.required && dateCreate.touched">Date is required</span>
                                 </div>
+
+                                <div class="col-12 form-group">
+                                    <label for="Choosesupplier">Choose name Customer</label>
+                                    <ng-select id="Choosesupplier" [(ngModel)]="nameCustomer" name="nameCustomer" (change)="setNameCustomer()" required>
+                                        <table>
+                                            <ng-option *ngFor="let item of listCustomer" [value]="item.name">
+
+                                                <!-- <p style="background-color: aqua; margin: auto; width: 400px;">{{item.name}}</p> -->
+                                                {{item.name}}
+                                            </ng-option>
+                                        </table>
+                                    </ng-select>
+
+
+                                </div>
+
                             </div>
                         </div>
                         <div class="modal-footer  ">
                             <button type="button" class="btn btn-outline-danger " data-dismiss="modal">Cancel</button>
-                            <button [disabled]="formAdd.invalid" type="submit" class="btn btn-outline-primary " 
-                                    data-dismiss="modal" (click)="(addOrder(formAdd))" [routerLink]="['//homeAdmin/order/list-order-detail',idOrder]" routerLinkActive="active">Add+</button>
+                            <button [disabled]="formAdd.invalid" type="submit" class="btn btn-outline-primary " data-dismiss="modal" (click)="(addOrder(formAdd))" data-toggle="modal" data-target="#addOrder2">Add+</button>
                         </div>
                     </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Modall add2 -->
+    <div class="modal fade" id="addOrder2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+                </div>
+                <div class="modal-body">
+                    ... tạo mới danh sách
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal" [routerLink]="['//homeAdmin/order/list-order-detail',idOrder]" routerLinkActive="active">Thêm ds</button>
                 </div>
             </div>
         </div>
@@ -223,7 +288,7 @@
                             <p>{{editOrderkey.createDate | date}}</p>
                         </div> -->
                         <div class="form-group col-12">Date old: {{editOrderkey.createDate|date}}
-                            <input type="date" class="form-control" [(ngModel)] ="editOrderkey.createDate" required name="createDate" #dateCreate="ngModel">
+                            <input type="date" class="form-control" [(ngModel)]="editOrderkey.createDate" required name="createDate" #dateCreate="ngModel">
                             <span class="col-12 validator" *ngIf="dateCreate.errors?.required && dateCreate.touched">Date is
                                 required</span>
                         </div>
