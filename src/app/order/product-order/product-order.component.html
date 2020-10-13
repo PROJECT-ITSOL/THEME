@@ -41,17 +41,6 @@
 
         <div class="col-3 form-group d-flex flex-row align-items-center mt-2 w-100">
             <!-- <label for="Choosesupplier">Choose name Customer</label>                               -->
-<<<<<<< HEAD
-            
-                <ng-select  placeholder="Name&sdt..."   id="Choosesupplier" [(ngModel)]="nameSDTCustomer" name="nameSDTCustomer" (change)=" setNameAndPhoneCustomer()" required>
-                    
-                        <ng-option  *ngFor="let item of listCustomer" [value]="item.name+item.phoneNumber"  >
-                            <span class="font-weight-bold">{{item.name}}</span> {{item.phoneNumber}}  
-                            
-                                <!-- <p style="background-color: aqua; margin: auto; width: 400px;">{{item.name}}</p> -->
-                                
-                        </ng-option>                   
-=======
 
             <ng-select placeholder="Name&sdt..." id="Choosesupplier" [(ngModel)]="nameSDTCustomer" name="nameSDTCustomer" (change)=" setNameAndPhoneCustomer()" required>
 
@@ -61,35 +50,12 @@
                     <!-- <p style="background-color: aqua; margin: auto; width: 400px;">{{item.name}}</p> -->
 
                 </ng-option>
->>>>>>> 1d520fbb4a6a6477e3fe31e1dde36656185617b8
             </ng-select>
             <button class="btn" type="submit" (click)="searchIdCustomer()"><i class="fas fa-search"></i></button>
 
         </div>
 
         <div>
-<<<<<<< HEAD
-            
-               <th>
-                <ng-select placeholder="day.." [(ngModel)]="day" name="day"  >
-                    <ng-option *ngFor="let item of listDay" [value]="item">{{item}}</ng-option>  
-                </ng-select>
-               </th>             
-                <th>
-                    <ng-select placeholder="month.." [(ngModel)]="month" name="month" >  
-                        <ng-option *ngFor="let item of listMonth" [value]="item">{{item}}</ng-option>   
-                    </ng-select>  
-                </th>
-                <th>
-                    <ng-select placeholder="year...." [(ngModel)]="year" name="year" > 
-                        <ng-option *ngFor="let item of listYear" [value]="item">{{item}}</ng-option>
-                            </ng-select>
-                </th>
-                <th>
-                    <button class="btn" type="submit" (click)="setSearchDate()"><i class="fas fa-search col-2"></i></button>
-                </th>
-             
-=======
 
             <th>
                 <ng-select placeholder="day.." [(ngModel)]="day" name="day">
@@ -110,7 +76,6 @@
                 <button class="btn" type="submit" (click)="setSearchDate()"><i class="fas fa-search col-2"></i></button>
             </th>
 
->>>>>>> 1d520fbb4a6a6477e3fe31e1dde36656185617b8
 
         </div>
         <div class=" row ml-auto mt-3 mt-md-0">
@@ -121,7 +86,6 @@
         </div>
     </div>
     <!-- Table Order -->
-<<<<<<< HEAD
     <table class="table table-light table-data" style="text-align:center; ">
         <thead class=" text-dark " >
             <tr> 
@@ -130,19 +94,6 @@
                 <!-- <th>Id_Customer</th> -->
                 <th>customer</th>
                 <th>createDay</th>
-=======
-
-
-
-
-    <table class="table table-light table-data" style="text-align:center; ">
-        <thead class=" text-dark ">
-            <tr>
-                <th>Id_Order</th>
-                <th>Id_Customer</th>
-                <th>Customer</th>
-                <th>Create_day</th>
->>>>>>> 1d520fbb4a6a6477e3fe31e1dde36656185617b8
                 <th>status</th>
                 <th>totalMoney</th>
                 <th></th>
@@ -255,7 +206,6 @@
                                     <input type="date" class="form-control" ngModel required name="createDate" #dateCreate="ngModel">
                                     <span class="col-12 validator" *ngIf="dateCreate.errors?.required && dateCreate.touched">Date is required</span>
                                 </div>
-<<<<<<< HEAD
                                 <div class="col-12 form-group" >
                                     <label for="Choosesupplier">Choose name Customer</label>                              
                                     <ng-select    id="Choosesupplier" [(ngModel)]="nameCustomer" name="nameCustomer" (change)="setNameCustomer()" required>
@@ -268,22 +218,6 @@
                                             </table>
                                     </ng-select>                                   
                         
-=======
-
-                                <div class="col-12 form-group">
-                                    <label for="Choosesupplier">Choose name Customer</label>
-                                    <ng-select id="Choosesupplier" [(ngModel)]="nameCustomer" name="nameCustomer" (change)="setNameCustomer()" required>
-                                        <table>
-                                            <ng-option *ngFor="let item of listCustomer" [value]="item.name">
-
-                                                <!-- <p style="background-color: aqua; margin: auto; width: 400px;">{{item.name}}</p> -->
-                                                {{item.name}}
-                                            </ng-option>
-                                        </table>
-                                    </ng-select>
-
-
->>>>>>> 1d520fbb4a6a6477e3fe31e1dde36656185617b8
                                 </div>
 
                             </div>
