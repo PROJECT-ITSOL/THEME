@@ -152,7 +152,7 @@
                 <a class="nav-link " [routerLink]="['//homeAdmin/order/list-order',i]" (click)="setPage(i,$event)" [ngClass]="{'active':true}" *ngIf="i>=1">{{i}}</a>
             </li>
             <li>
-                <a class="nav-link " [routerLink]="['//homeAdmin/order/list-order',i+1]" (click)="setPage(i+1,$event)" *ngIf="i+1<(totalOrder/8)">{{i+1}}</a>
+                <a class="nav-link " [routerLink]="['//homeAdmin/order/list-order',i+1]" (click)="setPage(i+1,$event)" *ngIf="i+1<=(totalOrder/8)+1">{{i+1}}</a>
             </li>
             <li>
                 <a class="nav-link " [routerLink]="['//homeAdmin/order/list-order',i+2]" (click)="setPage(i+2,$event)" *ngIf="i+1<=(totalOrder/8)">{{i+2}}</a>
@@ -160,8 +160,8 @@
             <li>
                 <h1> </h1>
             </li>
-            <a class="nav-link " [routerLink]="['//homeAdmin/order/list-order',i+1]" (click)="setPage(i+1,$event)" *ngIf="i+1<=(totalOrder/8)"><i class="fas fa-angle-right"></i></a>
-            <a class="nav-link " [routerLink]="['//homeAdmin/order/list-order',i+5]" (click)="setPage(i+5,$event)" *ngIf="i+1<=(totalOrder/8)"><i class="fas fa-angle-double-right"></i></a>
+            <a class="nav-link " [routerLink]="['//homeAdmin/order/list-order',i+1]" (click)="setPage(i+1,$event)" *ngIf="i+1<=(totalOrder/8)+1"><i class="fas fa-angle-right"></i></a>
+            <a class="nav-link " [routerLink]="['//homeAdmin/order/list-order',i+5]" (click)="setPage(i+5,$event)" *ngIf="i+1<=(totalOrder/8)+1-5"><i class="fas fa-angle-double-right"></i></a>
         </table>
     </div>
     <!-- Modal delete -->
