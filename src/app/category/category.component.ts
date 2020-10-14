@@ -46,8 +46,6 @@ export class CategoryComponent implements OnInit {
     } else {
       if (this.pageNo > (this.total - this.range / 2)) {
         this.min = (this.total - this.range) + 1
-        // console.log(this.min)
-        // console.log(this.total-this.range)
         this.max = this.total
       } else if (this.pageNo < this.range / 2) {
         this.min = 1
@@ -79,9 +77,8 @@ export class CategoryComponent implements OnInit {
         categoryEntity.products = category['listProduct'];
         this.listCategory.push(categoryEntity);
       });
-      // console.log(this.total)
+    this.page()
     });
-    this.configListPage()
   }
   setPage(i: number, event) {
     event.preventDefault();

@@ -6,7 +6,7 @@
             <span class="breadcrumb-item active" href="#">Bill Import</span>
         </nav>
         <div class="d-md-flex align-items-center bg-white p-3">
-            <h3 class="mb-0">Bill Import </h3>
+            <h3 class="mb-0 font-weight-bold text-primary">Bill Import </h3>
             <div class="ml-auto mt-3 mt-md-0">
                 <button type="button" class="btn btn-primary " data-toggle="modal" data-target="#addBill" (click)="getSupplier()">
                     <i class="fas fa-plus font-14 mr-1 text-light"></i>
@@ -57,10 +57,19 @@
                     <td class="align-middle ">{{item.createDate | date }}</td>
                     <td class="align-middle">{{item.nameSupplier}}</td>
                     <td class="align-middle action">
-                        <a [routerLink]="['//homeAdmin/order/product-import-detail', item.idBillImport]" routerLinkActive="active">View</a>
-                        <a class="action" data-toggle="modal" data-target="#editBill" (click)="getBillImport(item)">
+                        <button class="btn btn-outline-info">
+                            <a [routerLink]="['//homeAdmin/order/product-import-detail', item.idBillImport]"
+                                routerLinkActive="active">View</a>
+                        </button>
+                        <button class="btn btn-outline-primary ml-1">
+                            <a  data-toggle="modal" data-target="#editBill" (click)="getBillImport(item)">
                                 Edit</a>
-                        <a class="action" [routerLink]="['//homeAdmin/order/product-import-detail', item.idBillImport]" routerLinkActive="active">Delete</a>
+                        </button>
+                        <button class="btn btn-outline-danger ml-1">
+                            <a 
+                                [routerLink]="['//homeAdmin/order/product-import-detail', item.idBillImport]"
+                                routerLinkActive="active">Delete</a>
+                        </button>
                     </td>
                 </tr>
                 <pagination-controls (pageChange)="pageChange($event)" previousLabel="" nextLabel="" class="my-pagination"></pagination-controls>
@@ -83,7 +92,8 @@
                             <div class="row">
                                 <div class="col-12 form-group">
                                     <ng-select id="Choosesupplier" [(ngModel)]="nameSupplier" placeholder="Choose Supplier" name="nameSupplier" (change)="setSupplier()" required>
-                                        <ng-option *ngFor="let item of listSupp" [value]="item.name">{{item.name}}</ng-option>
+                                        <ng-option *ngFor="let item of listSupp" [value]="item.name">{{item.name}}
+                                        </ng-option>
                                     </ng-select>
                                 </div>
 
