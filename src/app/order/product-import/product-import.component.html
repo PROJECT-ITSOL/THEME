@@ -59,16 +59,18 @@
                     <td class="align-middle action">
                         <button class="btn btn-outline-info">
                             <a [routerLink]="['//homeAdmin/order/product-import-detail', item.idBillImport]"
-                                routerLinkActive="active">View</a>
+                                routerLinkActive="active">View
+                            </a>
                         </button>
                         <button class="btn btn-outline-primary ml-1">
-                            <a  data-toggle="modal" data-target="#editBill" (click)="getBillImport(item)">
-                                Edit</a>
+                            <a data-toggle="modal" data-target="#editBill" (click)="getBillImport(item)">
+                                Edit
+                            </a>
                         </button>
                         <button class="btn btn-outline-danger ml-1">
-                            <a 
-                                [routerLink]="['//homeAdmin/order/product-import-detail', item.idBillImport]"
-                                routerLinkActive="active">Delete</a>
+                            <a [routerLink]="['//homeAdmin/order/product-import-detail', item.idBillImport]"
+                                routerLinkActive="active">Delete
+                            </a>
                         </button>
                     </td>
                 </tr>

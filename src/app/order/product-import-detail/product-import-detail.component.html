@@ -1,14 +1,15 @@
 <div class="wrapper-billImport-detail">
-    <div class="header">
+    <div class="header text-primary">
         <nav class="breadcrumb">
             <a class="breadcrumb-item" href="#">Home</a>
-            <span class="breadcrumb-item " routerLink="/homeAdmin/order/product-import" routerLinkActive="active">Bill Import</span>
+            <span class="breadcrumb-item " routerLink="/homeAdmin/order/product-import" routerLinkActive="active">Bill
+                Import</span>
             <span class="breadcrumb-item active" routerLink="/homeAdmin/order/product-import-detail" routerLinkActive="active">Bill Import Detail</span>
         </nav>
         <div class="d-md-flex align-items-center bg-white p-3">
             <h3 class="mb-0">Bill Import : ID={{idCode}} </h3>
             <div class=" row ml-auto mt-3 mt-md-0 action">
-                <a data-toggle="modal" data-target="#delete"><i  class="fas fa-trash-alt delete" ></i></a>
+                <a data-toggle="modal" data-target="#delete"><i class="fas fa-trash-alt delete"></i></a>
             </div>
         </div>
     </div>
@@ -44,8 +45,12 @@
                 <td class="align-middle">{{item.totalPrice | currency:"VND"}}</td>
                 <td class="align-middle">{{nameSupplier}}</td>
                 <td class="align-middle action">
-                    <a data-toggle="modal" data-target="#editBill" (click)="getItem(item)">Edit</a>
-                    <a class="delete" data-toggle="modal" data-target="#deleteBillDetail" (click)="getItem(item)">Delete</a>
+                    <button class="btn btn-outline-primary mr-2" data-toggle="modal" data-target="#editBill" (click)="getItem(item)">
+                        Edit
+                    </button>
+                    <button class="btn btn-outline-danger" data-toggle="modal" data-target="#deleteBillDetail" (click)="getItem(item)">
+                        Delete
+                    </button>
                 </td>
             </tr>
         </tbody>
@@ -81,14 +86,15 @@
                                 <div class=" col-4 form-group">
                                     <label for="ChooseProduct">Choose Product</label>
                                     <select class="form-control " id="ChooseProduct" name="Product" [(ngModel)]="nameProduct" (change)="setProduct()">
-                                    <option>Choose Product</option>
-                                    <option *ngFor="let item of listProduct">{{item.name}}</option>                               
-                                </select>
+                                        <option>Choose Product</option>
+                                        <option *ngFor="let item of listProduct">{{item.name}}</option>
+                                    </select>
                                 </div>
                                 <div class="col-2 form-group ">
                                     <label for="amount ">Amount</label>
                                     <input type="number" min="1" pattern="^[0-9 ]+$" ngModel name="amount" class="form-control" required #amount="ngModel">
-                                    <span class="col-6 validator" *ngIf="amount.errors?.required && amount.touched"> Required</span>
+                                    <span class="col-6 validator" *ngIf="amount.errors?.required && amount.touched">
+                                        Required</span>
                                     <span class="col-6 validator" *ngIf="amount.errors?.pattern && amount.touched">Invalid</span>
                                 </div>
                                 <div class="col-3 form-group ">
@@ -130,14 +136,15 @@
                                 <div class=" col-4 form-group">
                                     <label>Choose Product</label>
                                     <select class="form-control " name="product" [(ngModel)]="nameProduct" (change)="setProduct()">
-                                    <option>Choose Product</option>
-                                    <option *ngFor="let item of listProduct">{{item.name}}</option>                               
-                                </select>
+                                        <option>Choose Product</option>
+                                        <option *ngFor="let item of listProduct">{{item.name}}</option>
+                                    </select>
                                 </div>
                                 <div class="col-2 form-group ">
                                     <label for="amount ">Amount</label>
                                     <input type="number" min="1" pattern="^[0-9 ]+$" [ngModel]="billDetail.amount" name="amount" class="form-control" required #amount="ngModel">
-                                    <span class="col-6 validator" *ngIf="amount.errors?.required && amount.touched"> Required</span>
+                                    <span class="col-6 validator" *ngIf="amount.errors?.required && amount.touched">
+                                        Required</span>
                                     <span class="col-6 validator" *ngIf="amount.errors?.pattern && amount.touched">Invalid</span>
 
                                 </div>

@@ -7,17 +7,17 @@
 </div>
 
 <div id="header">
-    <div class="d-md-flex align-items-center bg-white p-3">
-        <h3 class="mb-0" >OderDetail List</h3>
+    <div class="d-md-flex align-items-center text-primary bg-white p-3">
+        <h3 class="mb-0">OderDetail List</h3>
         <div class="ml-auto mt-3 mt-md-0">
-            <a class="btn btn-warning" data-toggle="modal" data-target="#addOrderDetail" ><i  class="fas fa-edit" >Add+</i></a>
+            <a class="btn btn-outline-primary" data-toggle="modal" data-target="#addOrderDetail">Add</a>
         </div>
     </div>
 
     <div class="d-md-flex align-items-center border-top bg-white p-3">
         <h4 class="text-secondary "><a [routerLink]="['/homeAdmin/order/list-order',1]" routerLinkActive="active"><i class="fas fa-long-arrow-alt-left fa-2x"></i></a>
         </h4>
-        <div class=" row ml-auto mt-3 mt-md-0" >
+        <div class=" row ml-auto mt-3 mt-md-0">
 
             <h5 class="mb-0 mr-1  font-weight-bold font-14"> total: </h5>{{totalOrderDetail}}
 
@@ -41,7 +41,7 @@
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let item of listOrderDetail" >
+            <tr *ngFor="let item of listOrderDetail">
                 <td>{{item.idOrderDetail}}</td>
                 <td>{{item.idProduct}}</td>
                 <td>{{item.idOrder}}</td>
@@ -51,12 +51,14 @@
                 <td>{{item.totalPrice | currency:"VND"}}</td>
 
                 <td>
-                    <a  class="btn btn-warning" data-toggle="modal" data-target="#editOrderDetail" (click)="setProductEdit(item)"><i
-                            class="fas fa-edit"></i></a>
+                    <a class="btn btn-outline-primary" data-toggle="modal" data-target="#editOrderDetail" (click)="setProductEdit(item)">
+                        Edit
+                    </a>
                 </td>
                 <td>
-                    <a class="btn btn-danger" data-toggle="modal" data-target="#deleteOrderDetail" (click)="getDelete(item)"><i
-                            class="fas fa-trash-alt delete"></i></a>
+                    <a class="btn btn-outline-danger" data-toggle="modal" data-target="#deleteOrderDetail" (click)="getDelete(item)">
+                        Delete
+                    </a>
                     <!-- <td>
                     <a data-toggle="modal" data-target="#editOrderDetail" (click)="setProduct(item)"><i  class="fas fa-edit" >Edit</i></a>
                 </td> -->
@@ -73,7 +75,7 @@
         </tfoot>
     </table>
     <!-- end table -->
-    <h5 class="mb-0 mr-1  font-weight-bold font-14" > Tong tien: {{Tong |currency:"VND" }}</h5>
+    <h5 class="mb-0 mr-1  font-weight-bold font-14"> Tong tien: {{Tong |currency:"VND" }}</h5>
 
 
     <!-- Modal add -->
@@ -88,27 +90,27 @@
                         <div class="p-4 formAdd">
                             <div class="col-12 form-group">
                                 <th>
-                                    <label >product</label>
-                                <input disabled type="text"  disabled [(ngModel)]="product.name" name="nameProduct" class="form-control">
+                                    <label>product</label>
+                                    <input disabled type="text" disabled [(ngModel)]="product.name" name="nameProduct" class="form-control">
                                 </th>
                                 <th>
-                                    <label >Tong du</label>
-                                    <input disabled type="text"  disabled [(ngModel)]="product.amount" name="amountProduct" class="form-control">
+                                    <label>Tong du</label>
+                                    <input disabled type="text" disabled [(ngModel)]="product.amount" name="amountProduct" class="form-control">
                                 </th>
                                 <th>
-                                    <label >Price</label>
-                                    <input disabled type="text"  disabled [(ngModel)]="product.price" name="priceProduct" class="form-control">
+                                    <label>Price</label>
+                                    <input disabled type="text" disabled [(ngModel)]="product.price" name="priceProduct" class="form-control">
                                 </th>
                             </div>
                             <div class="row">
                                 <div class=" col-4 form-group " style="width: 300px; margin-bottom: 20px;">
                                     <label>Name Product</label>
                                     <ng-select id="ChooseProduct" [(ngModel)]="nameProduct" name="Product" (change)="setProduct()">
-                                       
+
                                         <ng-option label="Camping" *ngFor="let item of listProduct" [value]="item.name">{{item.name}}</ng-option>
                                     </ng-select>
 
-                                  
+
 
                                 </div>
                                 <div class="col-2 form-group ">
@@ -144,16 +146,16 @@
                         <div class="p-4 formAdd">
                             <div class="col-12 form-group">
                                 <th>
-                                    <label >product</label>
-                                <input disabled type="text"  disabled [(ngModel)]="productabc.name" name="nameProduct" class="form-control">
+                                    <label>product</label>
+                                    <input disabled type="text" disabled [(ngModel)]="productabc.name" name="nameProduct" class="form-control">
                                 </th>
                                 <th>
-                                    <label >Tong du</label>
-                                    <input disabled type="text"  disabled [(ngModel)]="productabc.amount" name="amountProduct" class="form-control">
+                                    <label>Tong du</label>
+                                    <input disabled type="text" disabled [(ngModel)]="productabc.amount" name="amountProduct" class="form-control">
                                 </th>
                                 <th>
                                     <label>Price</label>
-                                    <input disabled type="text"  disabled [(ngModel)]="productabc.price" name="priceProduct" class="form-control">
+                                    <input disabled type="text" disabled [(ngModel)]="productabc.price" name="priceProduct" class="form-control">
                                 </th>
                             </div>
                             <!-- <div class="col-12 form-group">
