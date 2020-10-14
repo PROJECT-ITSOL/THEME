@@ -8,13 +8,13 @@
 
         <div class="d-md-flex align-items-center bg-white p-3">
             <a routerLink="/homeAdmin/supplier" routerLinkActive="active">
-                <h3 class="mb-0">Supplier List</h3>
+                <h3 class="mb-0 font-weight-bold">Supplier List</h3>
             </a>
             <div class="ml-auto mt-3 mt-md-0">
                 <button type="button" class="btn btn-primary " data-toggle="modal" data-target="#addSupp">
-                <i class="fas fa-plus font-14 mr-1 text-light"></i>
-                <span class="ml-1 text-white font-weight-bold">Add Supplier</span>
-            </button>
+                    <i class="fas fa-plus font-14 mr-1 text-light"></i>
+                    <span class="ml-1 text-white font-weight-bold">Add Supplier</span>
+                </button>
             </div>
         </div>
         <div class=" d-md-flex align-items-center border-top bg-white p-3">
@@ -23,9 +23,9 @@
             </div>
 
             <select class="form-control col-3 py-1" name="status" id="status" (change)="getSuppByStatus($event)">
-                    <option selected  hidden value="">Select status</option>
-                    <option [value]="0">Tất cả</option>
-                     <option *ngFor="let item of listStatus" [value]="item">{{item}}</option>    
+                <option selected hidden value="">Select status</option>
+                <option [value]="0">Tất cả</option>
+                <option *ngFor="let item of listStatus" [value]="item">{{item}}</option>
             </select>
 
 
@@ -65,14 +65,20 @@
                     </td>
                     <td class="align-middle action "><a data-toggle="modal" data-target="#product" (click)="showEdit(item)"> Product</a>
                     </td>
-                    <td class="align-middle action"><a data-toggle="modal" data-target="#edit" (click)="showEdit(item)">Edit</a>
-
-                        <a class="delete" data-toggle="modal" data-target="#delete" (click)="showEdit(item)">Delete</a>
+                    <td class="align-middle action">
+                        <button class="btn btn-outline-primary">
+                            <a data-toggle="modal" data-target="#edit" (click)="showEdit(item)">Edit</a>
+                        </button>
+                        <button class="btn btn-outline-danger ml-1">
+                            <a data-toggle="modal" data-target="#delete"
+                                (click)="showEdit(item)">Delete</a>
+                        </button>
                     </td>
                 </tr>
             </tbody>
         </table>
-        <pagination-controls (pageChange)="pageChange($event)" previousLabel="" nextLabel="" class="my-pagination"></pagination-controls>
+        <pagination-controls (pageChange)="pageChange($event)" previousLabel="" nextLabel="" class="my-pagination">
+        </pagination-controls>
     </div>
 </div>
 <!-- End table Supplier -->

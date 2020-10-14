@@ -8,11 +8,11 @@
 
 <div id="header">
     <div class="d-md-flex align-items-center bg-white p-3">
-        <h3 class="mb-0" style="color:black">Oder List</h3>
+        <h3 class="mb-0 font-weight-bold text-primary">Oder List</h3>
         <div class="ml-auto mt-3 mt-md-0">
 
-            <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#addOrder">
-            <i  class="fas fa-edit" >Add+</i></button>
+            <button type="button" class="btn btn-primary font-weight-bold" data-toggle="modal" data-target="#addOrder">
+                Add</button>
         </div>
 
     </div>
@@ -22,17 +22,17 @@
             <select class="form-control" [(ngModel)]="keyStatus" page="0" (change)="searchStatus()">
                 <!-- <option label="--select something --"></option> -->
                 <option value="Xem tất cả">Xem tất cả</option>
-                <option  value="Đang chờ" >Đang chờ</option>
-                <option  value="Thành công">Thành công </option>
-                <option  value="Thất bại">Thất bại</option>
-        
-             </select>
+                <option value="Đang chờ">Đang chờ</option>
+                <option value="Thành công">Thành công </option>
+                <option value="Thất bại">Thất bại</option>
+
+            </select>
 
 
         </th>
         <div class="search ">
             <th>
-                <input type="text" placeholder="Search.." [(ngModel)]="keyword" name="keyword" class="btn btn-outline-info">
+                <input type="text" placeholder="Search.." [(ngModel)]="keyword" name="keyword" class="btn border bg-white">
             </th>
             <th>
                 <button class="btn" type="submit" (click)="search()"><i class="fas fa-search"></i></button>
@@ -87,11 +87,9 @@
     </div>
     <!-- Table Order -->
     <table class="table table-light table-data" style="text-align:center; ">
-        <thead class=" text-dark " >
-            <tr> 
-                <th>codeOrder</th>       
-                <!-- <th>Id_Order</th> -->
-                <!-- <th>Id_Customer</th> -->
+        <thead class=" text-dark ">
+            <tr>
+                <th>codeOrder</th>
                 <th>customer</th>
                 <th>createDay</th>
                 <th>status</th>
@@ -116,15 +114,19 @@
 
                 <!--  -->
                 <td>
-                    <a [routerLink]="['//homeAdmin/order/list-order-detail',item.idOrder]" routerLinkActive="active" (click)="show(item.idOrder)"><i class="fas fa-clipboard  fa-2x"></i></a>
+                    <button class="btn btn-outline-info">
+                        <a [routerLink]="['//homeAdmin/order/list-order-detail',item.idOrder]" routerLinkActive="active"
+                            (click)="show(item.idOrder)">Detail</a>
+                    </button>
                 </td>
                 <td>
-                    <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#editOrder" (click)="showEdit(item)">
-                        <i class="fas fa-edit"></i></button>
+                    <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#editOrder" (click)="showEdit(item)">
+                        Edit
+                    </button>
                 </td>
                 <td>
-                    <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#delete" (click)="showEdit(item)">
-                    <i class="far fa-trash-alt" ></i></button>
+                    <button type="button" class="btn btn-outline-danger" data-toggle="modal" data-target="#delete" (click)="showEdit(item)">
+                        Delete</button>
                 </td>
             </tr>
         </tbody>
@@ -171,8 +173,8 @@
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">Xoá</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
+                        <span aria-hidden="true">&times;</span>
+                    </button>
                 </div>
                 <div class="modal-body">
                     ... ban thực sự muốn xoá
@@ -204,20 +206,21 @@
 
                                 <div class="form-group col-12">Date
                                     <input type="date" class="form-control" ngModel required name="createDate" #dateCreate="ngModel">
-                                    <span class="col-12 validator" *ngIf="dateCreate.errors?.required && dateCreate.touched">Date is required</span>
+                                    <span class="col-12 validator" *ngIf="dateCreate.errors?.required && dateCreate.touched">Date is
+                                        required</span>
                                 </div>
-                                <div class="col-12 form-group" >
-                                    <label for="Choosesupplier">Choose name Customer</label>                              
-                                    <ng-select    id="Choosesupplier" [(ngModel)]="nameCustomer" name="nameCustomer" (change)="setNameCustomer()" required>
-                                            <table  >
-                                                <ng-option *ngFor="let item of listCustomer" [value]="item.name"  >
-                                                   
-                                                        <!-- <p style="background-color: aqua; margin: auto; width: 400px;">{{item.name}}</p> -->
-                                                        {{item.name}} 
-                                                </ng-option>
-                                            </table>
-                                    </ng-select>                                   
-                        
+                                <div class="col-12 form-group">
+                                    <label for="Choosesupplier">Choose name Customer</label>
+                                    <ng-select id="Choosesupplier" [(ngModel)]="nameCustomer" name="nameCustomer" (change)="setNameCustomer()" required>
+                                        <table>
+                                            <ng-option *ngFor="let item of listCustomer" [value]="item.name">
+
+                                                <!-- <p style="background-color: aqua; margin: auto; width: 400px;">{{item.name}}</p> -->
+                                                {{item.name}}
+                                            </ng-option>
+                                        </table>
+                                    </ng-select>
+
                                 </div>
 
                             </div>
@@ -238,14 +241,15 @@
                 <div class="modal-header">
 
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
+                        <span aria-hidden="true">&times;</span>
+                    </button>
                 </div>
                 <div class="modal-body">
                     ... tạo mới danh sách
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" data-dismiss="modal" [routerLink]="['//homeAdmin/order/list-order-detail',idOrder]" routerLinkActive="active">Thêm ds</button>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal" [routerLink]="['//homeAdmin/order/list-order-detail',idOrder]" routerLinkActive="active">Thêm
+                        ds</button>
                 </div>
             </div>
         </div>
@@ -261,14 +265,15 @@
                 <div class="modal-body">
                     <form #formEdit="ngForm" novalidate>
                         status
-                        <select class="form-control" [(ngModel)]="editOrderkey.status" name="status"> 
-                        <!-- <option  value="">xem tat ca</option> -->
-                        <option [selected]="editOrderkey.status==='đang chờ'" value="đang chờ" >Đang chờ</option>
-                        <option [selected]="editOrderkey.status==='Thành công'" value="Thành công">Thành công </option>
-                        <option [selected]="editOrderkey.status==='Thất bại'" value="Thất bại">Thất bại</option>
-                        <!-- <option [selected]="editOrderkey.status==='Thất bại'" value="Thất bại">Thất bại</option> -->
-                    
-                    </select>
+                        <select class="form-control" [(ngModel)]="editOrderkey.status" name="status">
+                            <!-- <option  value="">xem tat ca</option> -->
+                            <option [selected]="editOrderkey.status==='đang chờ'" value="đang chờ">Đang chờ</option>
+                            <option [selected]="editOrderkey.status==='Thành công'" value="Thành công">Thành công
+                            </option>
+                            <option [selected]="editOrderkey.status==='Thất bại'" value="Thất bại">Thất bại</option>
+                            <!-- <option [selected]="editOrderkey.status==='Thất bại'" value="Thất bại">Thất bại</option> -->
+
+                        </select>
 
                         <!-- <div class="form-group col-12">Date
                                 <p></p>
